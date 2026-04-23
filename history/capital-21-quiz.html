@@ -8,6 +8,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="../quiz-engine.css">
     <style>
         *,
         *::before,
@@ -31,6 +32,31 @@
             --wrong: #e05c5c;
             --correct-bg: rgba(62, 207, 142, 0.08);
             --wrong-bg: rgba(224, 92, 92, 0.08);
+
+            --qe-font-serif: 'DM Serif Display', Georgia, serif;
+            --qe-font-body: 'DM Sans', system-ui, sans-serif;
+            --qe-font-label: 'DM Sans', system-ui, sans-serif;
+            --qe-surface: var(--surface2);
+            --qe-border: var(--border);
+            --qe-border-hi: var(--accent);
+            --qe-text: var(--text);
+            --qe-text-muted: var(--muted);
+            --qe-accent: var(--accent);
+            --qe-accent-lo: rgba(79, 142, 247, 0.07);
+            --qe-btn-bg: var(--accent);
+            --qe-btn-text: #ffffff;
+            --qe-btn-hover-bg: #3a7de8;
+            --qe-btn-hover-text: #ffffff;
+            --qe-correct: var(--correct);
+            --qe-correct-bg: var(--correct-bg);
+            --qe-wrong: var(--wrong);
+            --qe-wrong-bg: var(--wrong-bg);
+            --qe-hero-bg: var(--surface);
+            --qe-hero-text: var(--text);
+            --qe-score-color: var(--gold);
+            --qe-denom-color: var(--muted);
+            --qe-bd-bg: var(--surface);
+            --qe-bd-border: var(--border);
         }
 
         body {
@@ -96,357 +122,6 @@
             font-weight: 500;
         }
 
-        /* Progress */
-        .progress-label {
-            font-size: 0.75rem;
-            color: var(--muted);
-            margin-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .progress-bar-wrap {
-            background: var(--border);
-            height: 3px;
-            border-radius: 2px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--gold));
-            border-radius: 2px;
-            transition: width 0.5s ease;
-        }
-
-        /* Card */
-        .question-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 1rem;
-            animation: fadeUp 0.3s ease both;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .q-meta {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .q-num {
-            font-size: 0.68rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--accent);
-            font-weight: 500;
-        }
-
-        .q-tag {
-            font-size: 0.65rem;
-            padding: 0.15rem 0.55rem;
-            border-radius: 999px;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            border: 1px solid;
-        }
-
-        .tag-theory {
-            color: #a78bfa;
-            border-color: rgba(167, 139, 250, 0.3);
-            background: rgba(167, 139, 250, 0.08);
-        }
-
-        .tag-data {
-            color: #34d399;
-            border-color: rgba(52, 211, 153, 0.3);
-            background: rgba(52, 211, 153, 0.08);
-        }
-
-        .tag-history {
-            color: #f59e0b;
-            border-color: rgba(245, 158, 11, 0.3);
-            background: rgba(245, 158, 11, 0.08);
-        }
-
-        .tag-policy {
-            color: #60a5fa;
-            border-color: rgba(96, 165, 250, 0.3);
-            background: rgba(96, 165, 250, 0.08);
-        }
-
-        .q-text {
-            font-size: 1rem;
-            line-height: 1.65;
-            color: var(--text);
-            margin-bottom: 1.5rem;
-            font-weight: 300;
-        }
-
-        .q-text strong {
-            color: var(--gold);
-            font-weight: 500;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .option-btn {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
-            background: var(--surface2);
-            border: 1.5px solid var(--border);
-            border-radius: 6px;
-            padding: 0.8rem 1rem;
-            cursor: pointer;
-            font-family: 'DM Sans', system-ui, sans-serif;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: var(--text);
-            text-align: left;
-            transition: border-color 0.15s, background 0.15s;
-            font-weight: 300;
-        }
-
-        .option-btn:hover:not(:disabled) {
-            border-color: var(--accent);
-            background: rgba(79, 142, 247, 0.07);
-        }
-
-        .option-btn:disabled {
-            cursor: default;
-        }
-
-        .option-btn.correct {
-            background: var(--correct-bg);
-            border-color: var(--correct);
-            color: var(--correct);
-        }
-
-        .option-btn.wrong {
-            background: var(--wrong-bg);
-            border-color: var(--wrong);
-            color: var(--wrong);
-        }
-
-        .option-btn.reveal {
-            background: var(--correct-bg);
-            border-color: var(--correct);
-            color: var(--correct);
-            opacity: 0.6;
-        }
-
-        .opt-key {
-            min-width: 1.4rem;
-            font-family: 'DM Serif Display', serif;
-            font-size: 0.95rem;
-            color: var(--muted);
-            padding-top: 0.05rem;
-        }
-
-        .option-btn.correct .opt-key,
-        .option-btn.reveal .opt-key {
-            color: var(--correct);
-        }
-
-        .option-btn.wrong .opt-key {
-            color: var(--wrong);
-        }
-
-        /* Explanation */
-        .explanation {
-            margin-top: 1.2rem;
-            padding: 1rem 1.1rem;
-            background: rgba(79, 142, 247, 0.06);
-            border-left: 2px solid var(--accent);
-            border-radius: 0 6px 6px 0;
-            font-size: 0.85rem;
-            line-height: 1.7;
-            color: var(--muted);
-            animation: fadeUp 0.3s ease both;
-        }
-
-        .explanation .verdict {
-            font-weight: 500;
-            margin-bottom: 0.3rem;
-        }
-
-        .verdict.ok {
-            color: var(--correct);
-        }
-
-        .verdict.no {
-            color: var(--wrong);
-        }
-
-        /* Nav */
-        .nav {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 0.75rem;
-        }
-
-        .btn-next {
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            padding: 0.6rem 1.5rem;
-            font-family: 'DM Sans', system-ui, sans-serif;
-            font-size: 0.88rem;
-            font-weight: 500;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: opacity 0.15s, transform 0.1s;
-        }
-
-        .btn-next:hover {
-            opacity: 0.88;
-            transform: translateY(-1px);
-        }
-
-        .btn-next:disabled {
-            background: var(--border);
-            color: var(--muted);
-            cursor: default;
-            transform: none;
-            opacity: 1;
-        }
-
-        /* Score tracker */
-        .score-tracker {
-            display: flex;
-            gap: 0.35rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .score-pip {
-            width: 28px;
-            height: 6px;
-            border-radius: 3px;
-            background: var(--border);
-            transition: background 0.3s;
-        }
-
-        .score-pip.c {
-            background: var(--correct);
-        }
-
-        .score-pip.w {
-            background: var(--wrong);
-        }
-
-        .score-pip.curr {
-            background: var(--accent);
-            opacity: 0.5;
-        }
-
-        /* Results */
-        .results {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 3rem 2rem;
-            text-align: center;
-            animation: fadeUp 0.4s ease both;
-        }
-
-        .results-score {
-            font-family: 'DM Serif Display', serif;
-            font-size: 5rem;
-            line-height: 1;
-            margin: 0.75rem 0 0.2rem;
-        }
-
-        .results-label {
-            font-size: 0.75rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .results-verdict {
-            font-size: 0.97rem;
-            line-height: 1.7;
-            color: var(--muted);
-            max-width: 460px;
-            margin: 0 auto 2rem;
-            font-weight: 300;
-        }
-
-        .breakdown {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
-
-        .breakdown span {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .dot.c {
-            background: var(--correct);
-        }
-
-        .dot.w {
-            background: var(--wrong);
-        }
-
-        .btn-restart {
-            background: transparent;
-            border: 1.5px solid var(--accent);
-            color: var(--accent);
-            padding: 0.65rem 1.8rem;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.88rem;
-            font-weight: 500;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .btn-restart:hover {
-            background: var(--accent);
-            color: #fff;
-        }
-
-        @media (max-width: 480px) {
-            .question-card {
-                padding: 1.3rem 1rem;
-            }
-        }
     </style>
 </head>
 
@@ -457,11 +132,12 @@
             <h1><em>Capital in the Twenty-First Century</em></h1>
             <p class="subtitle">Thomas Piketty - translated by Arthur Goldhammer</p>
         </header>
-        <div id="quiz-area"></div>
+        <div id="quiz-root"></div>
     </div>
 
     <script>
-        const questions = [
+        window.QUIZ = {
+            questions: [
             {
                 tag: "theory", tagLabel: "Theory",
                 q: "Piketty's central inequality is expressed as <strong>r > g</strong>. What do <em>r</em> and <em>g</em> precisely represent, and what does the inequality predict?",
@@ -606,123 +282,34 @@
                 answer: 1,
                 explain: "Piketty and Saez's data show the top 10% income share in the US approaching or exceeding 50% of national income by the early 2010s, roughly matching the 1920s peak. This is a key empirical anchor of the book: the mid-century compression has been almost entirely reversed, and the US now resembles the inequality levels of the Gilded Age."
             }
-        ];
-
-        let current = 0;
-        let score = 0;
-        let results = []; // 'c', 'w', or null
-
-        function render() {
-            const area = document.getElementById('quiz-area');
-            if (current >= questions.length) {renderResults(area); return;}
-
-            const q = questions[current];
-            const letters = ['A', 'B', 'C', 'D'];
-            const pct = (current / questions.length) * 100;
-            results = results.slice(0, current); // trim if restarting mid-way
-
-            area.innerHTML = `
-    <div class="score-tracker" id="pips">
-      ${questions.map((_, i) => {
-                let cls = i < current ? (results[i] === 'c' ? 'c' : 'w') : (i === current ? 'curr' : '');
-                return `<div class="score-pip ${cls}"></div>`;
-            }).join('')}
-    </div>
-    <div class="progress-label">
-      <span>Question ${current + 1} of ${questions.length}</span>
-      <span>${score} correct</span>
-    </div>
-    <div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>
-    <div class="question-card">
-      <div class="q-meta">
-        <span class="q-num">Q${current + 1}</span>
-        <span class="q-tag tag-${q.tag}">${q.tagLabel}</span>
-      </div>
-      <div class="q-text">${q.q}</div>
-      <div class="options" id="options">
-        ${q.options.map((o, i) => `
-          <button class="option-btn" id="opt${i}" onclick="choose(${i})">
-            <span class="opt-key">${letters[i]}</span>
-            <span>${o}</span>
-          </button>
-        `).join('')}
-      </div>
-      <div id="explanation"></div>
-    </div>
-    <div class="nav">
-      <button class="btn-next" id="btn-next" disabled onclick="nextQ()">
-        ${current < questions.length - 1 ? 'Next →' : 'See Results →'}
-      </button>
-    </div>
-  `;
-        }
-
-        function choose(idx) {
-            const q = questions[current];
-            const correct = q.answer;
-            const btns = document.querySelectorAll('.option-btn');
-            btns.forEach(b => b.disabled = true);
-
-            btns[idx].classList.add(idx === correct ? 'correct' : 'wrong');
-            if (idx !== correct) btns[correct].classList.add('reveal');
-
-            const isCorrect = idx === correct;
-            if (isCorrect) score++;
-            results[current] = isCorrect ? 'c' : 'w';
-
-            document.getElementById('explanation').innerHTML = `
-    <div class="explanation">
-      <div class="verdict ${isCorrect ? 'ok' : 'no'}">${isCorrect ? '✓ Correct.' : '✗ Incorrect.'}</div>
-      ${q.explain}
-    </div>
-  `;
-
-            document.getElementById('btn-next').disabled = false;
-
-            // update pip
-            const pips = document.querySelectorAll('.score-pip');
-            if (pips[current]) pips[current].classList.add(isCorrect ? 'c' : 'w');
-        }
-
-        function nextQ() {
-            current++;
-            render();
-        }
-
-        function renderResults(area) {
-            const pct = Math.round((score / questions.length) * 100);
-            const color = pct >= 80 ? 'var(--correct)' : pct >= 55 ? 'var(--gold)' : 'var(--wrong)';
-            let verdict;
-            if (pct >= 90) verdict = "Excellent command of the material - the mechanics of r > g, the empirical architecture, the policy arguments. Piketty would approve of the rigor.";
-            else if (pct >= 70) verdict = "Solid grasp of the core framework. A few of the finer empirical or theoretical details escaped you, but the thesis is firmly in hand.";
-            else if (pct >= 50) verdict = "You have the broad argument but some of the technical machinery - the fundamental laws, the elasticity argument, the Kuznets critique - needs another pass.";
-            else verdict = "The capital-to-income ratio of your comprehension needs some accumulation. Worth a re-read of Parts I and II in particular.";
-
-            area.innerHTML = `
-    <div class="score-tracker">
-      ${results.map(r => `<div class="score-pip ${r}"></div>`).join('')}
-    </div>
-    <div class="results">
-      <div class="eyebrow">Quiz Complete</div>
-      <div class="results-score" style="color:${color}">${score}/${questions.length}</div>
-      <div class="results-label">${pct}% - ${questions.length} questions</div>
-      <p class="results-verdict">${verdict}</p>
-      <div class="breakdown">
-        <span><span class="dot c"></span> ${score} correct</span>
-        <span><span class="dot w"></span> ${questions.length - score} incorrect</span>
-      </div>
-      <button class="btn-restart" onclick="restart()">Retake Quiz</button>
-    </div>
-  `;
-        }
-
-        function restart() {
-            current = 0; score = 0; results = [];
-            render();
-        }
-
-        render();
+        ],
+            verdicts: [
+                {   
+                    min: 1.0,
+                    v: "Magnifique",
+                    n: "Excellent command of the material. Piketty would approve of the rigor.",
+                },
+                {   
+                    min: 0.75,
+                    v: "Petit à petit, l'oiseau fait son nid.",
+                    n: "Rather good. A solid understanding of this tome of inequality and graphs.",
+                },
+                {   
+                    min: 0.5,
+                    v: "Tabarnak!",
+                    n: "You seem to have a general grasp of the material. Solidfying your understanding of Picketty's equations may help.",
+                },
+                {   
+                    min: 0,
+                    v: "Non bien.",
+                    n: "It's a tough book, if you didn't read it all I understand.",
+                },
+            ],
+        };
     </script>
+
+    <script src="../quiz-engine.js"></script>
+
 </body>
 
 </html>

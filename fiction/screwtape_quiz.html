@@ -1,325 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Screwtape Letters</title>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1a1008;
-    --parchment: #f5edd8;
-    --parchment-dark: #e8d9b8;
-    --parchment-deep: #d4c090;
-    --blood: #8b1a1a;
-    --ember: #c44a1a;
-    --gold: #b8962e;
-    --ash: #6b5a40;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: #0d0804;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 16px 80px;
-    font-family: 'EB Garamond', serif;
-    color: var(--ink);
-    position: relative;
-    overflow-x: hidden;
-  }
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 100%, rgba(160,40,0,0.18) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 100%, rgba(120,20,0,0.15) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .page { position: relative; z-index: 1; width: 100%; max-width: 720px; }
-  .parchment {
-    background: linear-gradient(160deg, #f7f0d8 0%, #f0e4c0 40%, #e8d8a8 70%, #f2e8cc 100%);
-    border: 1px solid var(--parchment-deep);
-    border-radius: 2px;
-    box-shadow: 0 0 0 4px rgba(184,150,46,0.12), 0 4px 40px rgba(0,0,0,0.6);
-    padding: 52px 52px 60px;
-    position: relative;
-    overflow: hidden;
-  }
-  .parchment::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 0% 0%, rgba(200,170,100,0.3) 0%, transparent 40%),
-      radial-gradient(ellipse at 100% 100%, rgba(180,140,70,0.2) 0%, transparent 40%);
-    pointer-events: none;
-  }
-  .ornament { position: absolute; font-size: 28px; color: var(--gold); opacity: 0.5; line-height: 1; }
-  .ornament.tl { top: 14px; left: 18px; }
-  .ornament.tr { top: 14px; right: 18px; transform: scaleX(-1); }
-  .ornament.bl { bottom: 14px; left: 18px; transform: scaleY(-1); }
-  .ornament.br { bottom: 14px; right: 18px; transform: scale(-1,-1); }
-  header { text-align: center; margin-bottom: 44px; position: relative; }
-  .eyebrow { font-family: 'EB Garamond', serif; font-style: italic; font-size: 13px; letter-spacing: 0.22em; color: var(--ash); text-transform: uppercase; margin-bottom: 12px; }
-  h1 { font-family: 'Cinzel Decorative', serif; font-size: clamp(18px, 4vw, 26px); font-weight: 700; color: var(--blood); line-height: 1.2; letter-spacing: 0.04em; margin-bottom: 8px; }
-  h1 span { display: block; font-size: 0.58em; color: var(--ash); font-weight: 400; letter-spacing: 0.12em; margin-top: 6px; }
-  .divider { display: flex; align-items: center; gap: 12px; margin: 18px auto 0; justify-content: center; }
-  .divider-line { flex: 1; max-width: 80px; height: 1px; background: linear-gradient(to right, transparent, var(--gold)); }
-  .divider-line.r { background: linear-gradient(to left, transparent, var(--gold)); }
-  .divider-sym { color: var(--gold); font-size: 18px; }
-  #score-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(139,26,26,0.07); border: 1px solid rgba(139,26,26,0.18); border-radius: 2px; padding: 10px 18px; margin-bottom: 28px; font-family: 'IM Fell English', serif; font-style: italic; font-size: 14px; color: var(--ash); }
-  #score-bar strong { color: var(--blood); font-style: normal; font-size: 16px; }
-  .progress-dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 28px; flex-wrap: wrap; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--parchment-deep); transition: background 0.3s; }
-  .dot.active { background: var(--blood); }
-  .dot.correct-dot { background: #4a7a3a; }
-  .dot.wrong-dot { background: var(--blood); opacity: 0.5; }
-  .question-block { animation: fadeIn 0.35s ease both; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-  .q-number { font-family: 'Cinzel Decorative', serif; font-size: 10px; letter-spacing: 0.18em; color: var(--gold); margin-bottom: 6px; }
-  .q-text { font-family: 'IM Fell English', serif; font-size: 17px; line-height: 1.55; color: var(--ink); margin-bottom: 16px; }
-  .q-text em { font-style: italic; color: var(--blood); }
-  .options { display: flex; flex-direction: column; gap: 8px; }
-  .option { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border: 1px solid var(--parchment-deep); border-radius: 2px; background: rgba(255,255,255,0.25); cursor: pointer; transition: all 0.2s; font-family: 'EB Garamond', serif; font-size: 15.5px; line-height: 1.45; color: var(--ink); text-align: left; }
-  .option:hover:not(:disabled) { border-color: var(--gold); background: rgba(255,255,255,0.45); }
-  .option:disabled { cursor: default; }
-  .opt-letter { font-family: 'Cinzel Decorative', serif; font-size: 11px; color: var(--ash); min-width: 18px; padding-top: 2px; transition: color 0.2s; }
-  .option.correct { border-color: #4a7a3a; background: rgba(74,122,58,0.1); }
-  .option.correct .opt-letter { color: #4a7a3a; }
-  .option.wrong { border-color: var(--blood); background: rgba(139,26,26,0.09); }
-  .option.wrong .opt-letter { color: var(--blood); }
-  .option.reveal-correct { border-color: #4a7a3a; background: rgba(74,122,58,0.06); opacity: 0.7; }
-  .explanation { margin-top: 14px; padding: 12px 16px; background: rgba(139,26,26,0.05); border-left: 3px solid var(--blood); font-family: 'EB Garamond', serif; font-style: italic; font-size: 14.5px; line-height: 1.55; color: var(--ash); animation: fadeIn 0.3s ease; }
-  .explanation strong { font-style: normal; font-weight: 500; color: var(--blood); }
-  .clearfix::after { content: ''; display: table; clear: both; }
-  .btn-next { margin-top: 20px; display: none; font-family: 'Cinzel Decorative', serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ash); background: transparent; border: 1px solid var(--parchment-deep); padding: 10px 22px; cursor: pointer; border-radius: 2px; transition: border-color 0.2s, color 0.2s; float: right; }
-  .btn-next:hover { border-color: var(--gold); color: var(--blood); }
-  .btn-next.visible { display: inline-block; }
-  #results { display: none; text-align: center; padding: 8px 0 12px; animation: fadeIn 0.5s ease; }
-  .result-verdict { font-family: 'Cinzel Decorative', serif; font-size: clamp(14px, 3.5vw, 20px); color: var(--blood); margin-bottom: 10px; }
-  .result-score { font-family: 'IM Fell English', serif; font-size: 52px; font-style: italic; color: var(--ink); line-height: 1; margin: 10px 0 6px; }
-  .result-score span { font-size: 24px; color: var(--ash); }
-  .result-msg { font-family: 'EB Garamond', serif; font-size: 16px; font-style: italic; color: var(--ash); max-width: 440px; margin: 12px auto 28px; line-height: 1.6; }
-  .btn-restart { font-family: 'Cinzel Decorative', serif; font-size: 11px; letter-spacing: 0.12em; color: var(--parchment); background: var(--blood); border: none; padding: 13px 30px; cursor: pointer; border-radius: 2px; transition: background 0.2s, transform 0.15s; text-transform: uppercase; }
-  .btn-restart:hover { background: #6e1010; transform: translateY(-1px); }
-  @media (max-width: 540px) { .parchment { padding: 36px 24px 44px; } }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Screwtape Letters</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../quiz-engine.css">
+    <style>
+        :root {
+            --ink: #1a1008;
+            --parchment: #f5edd8;
+            --parchment-dark: #e8d9b8;
+            --parchment-deep: #d4c090;
+            --blood: #8b1a1a;
+            --ember: #c44a1a;
+            --gold: #b8962e;
+            --ash: #6b5a40;
+            --qe-font-serif: 'IM Fell English', serif;
+            --qe-font-body: 'EB Garamond', serif;
+            --qe-font-label: 'Cinzel Decorative', serif;
+            --qe-surface: #f7f0d8;
+            --qe-border: var(--parchment-deep);
+            --qe-border-hi: var(--gold);
+            --qe-text: var(--ink);
+            --qe-text-muted: var(--ash);
+            --qe-accent: var(--blood);
+            --qe-accent-lo: rgba(139, 26, 26, 0.06);
+            --qe-btn-bg: var(--blood);
+            --qe-btn-text: var(--parchment);
+            --qe-btn-hover-bg: #6e1010;
+            --qe-btn-hover-text: var(--parchment);
+            --qe-correct: #4a7a3a;
+            --qe-correct-bg: rgba(74, 122, 58, 0.1);
+            --qe-wrong: var(--blood);
+            --qe-wrong-bg: rgba(139, 26, 26, 0.09);
+            --qe-hero-bg: var(--ink);
+            --qe-hero-text: var(--parchment);
+            --qe-score-color: var(--gold);
+            --qe-denom-color: rgba(245, 237, 216, 0.7);
+            --qe-bd-bg: var(--parchment);
+            --qe-bd-border: var(--parchment-deep);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #0d0804;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 16px 80px;
+            font-family: 'EB Garamond', serif;
+            color: var(--ink);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 100%, rgba(160, 40, 0, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 100%, rgba(120, 20, 0, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 720px;
+        }
+
+        .parchment {
+            background: linear-gradient(160deg, #f7f0d8 0%, #f0e4c0 40%, #e8d8a8 70%, #f2e8cc 100%);
+            border: 1px solid var(--parchment-deep);
+            border-radius: 2px;
+            box-shadow: 0 0 0 4px rgba(184, 150, 46, 0.12), 0 4px 40px rgba(0, 0, 0, 0.6);
+            padding: 52px 52px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parchment::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 0% 0%, rgba(200, 170, 100, 0.3) 0%, transparent 40%),
+                radial-gradient(ellipse at 100% 100%, rgba(180, 140, 70, 0.2) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .ornament {
+            position: absolute;
+            font-size: 28px;
+            color: var(--gold);
+            opacity: 0.5;
+            line-height: 1;
+        }
+
+        .ornament.tl {
+            top: 14px;
+            left: 18px;
+        }
+
+        .ornament.tr {
+            top: 14px;
+            right: 18px;
+            transform: scaleX(-1);
+        }
+
+        .ornament.bl {
+            bottom: 14px;
+            left: 18px;
+            transform: scaleY(-1);
+        }
+
+        .ornament.br {
+            bottom: 14px;
+            right: 18px;
+            transform: scale(-1, -1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 44px;
+            position: relative;
+        }
+
+        .eyebrow {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: 13px;
+            letter-spacing: 0.22em;
+            color: var(--ash);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(18px, 4vw, 26px);
+            font-weight: 700;
+            color: var(--blood);
+            line-height: 1.2;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+        }
+
+        h1 span {
+            display: block;
+            font-size: 0.58em;
+            color: var(--ash);
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            margin-top: 6px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 18px auto 0;
+            justify-content: center;
+        }
+
+        .divider-line {
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+
+        .divider-line.r {
+            background: linear-gradient(to left, transparent, var(--gold));
+        }
+
+        .divider-sym {
+            color: var(--gold);
+            font-size: 18px;
+        }
+
+        @media (max-width: 540px) {
+            .parchment {
+                padding: 36px 24px 44px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<div class="page">
-  <div class="parchment">
-    <div class="ornament tl">❧</div>
-    <div class="ornament tr">❧</div>
-    <div class="ornament bl">❧</div>
-    <div class="ornament br">❧</div>
-    <header>
-      <div class="eyebrow">C. S. Lewis</div>
-      <h1>The Screwtape Letters<span>&amp; Screwtape Proposes a Toast</span></h1>
-      <div class="divider">
-        <div class="divider-line"></div>
-        <div class="divider-sym">✦</div>
-        <div class="divider-line r"></div>
-      </div>
-    </header>
-    <div id="score-bar">
-      <span>Question <strong id="q-counter">1</strong> of <strong>15</strong></span>
-      <span>Score: <strong id="score-display">0</strong></span>
+    <div class="page">
+        <div class="parchment">
+            <div class="ornament tl">❧</div>
+            <div class="ornament tr">❧</div>
+            <div class="ornament bl">❧</div>
+            <div class="ornament br">❧</div>
+            <header>
+                <div class="eyebrow">C. S. Lewis</div>
+                <h1>The Screwtape Letters<span>&amp; Screwtape Proposes a Toast</span></h1>
+                <div class="divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-sym">✦</div>
+                    <div class="divider-line r"></div>
+                </div>
+            </header>
+            <div id="quiz-root"></div>
+        </div>
     </div>
-    <div class="progress-dots" id="progress-dots"></div>
-    <div id="quiz-area"></div>
-    <div id="results">
-      <div class="result-verdict" id="result-verdict"></div>
-      <div class="result-score"><span id="score-num">0</span><span> / 15</span></div>
-      <div class="result-msg" id="result-msg"></div>
-      <button class="btn-restart" onclick="init()">Attempt Again</button>
-    </div>
-  </div>
-</div>
-<script>
-const questions = [
-  {
-    q: "What is Screwtape's relationship to Wormwood?",
-    opts: ["His human patient", "His junior colleague in Hell", "His uncle and senior mentor", "His supervisor at the Lowerarchy"],
-    ans: 2,
-    exp: "Screwtape is Wormwood's <strong>uncle</strong> and a senior devil writing letters of professional advice to his inexperienced nephew."
-  },
-  {
-    q: "What does Screwtape consistently call God throughout the letters?",
-    opts: ["The Almighty", "The Enemy", "The Adversary", "The Light"],
-    ans: 1,
-    exp: "From Hell's perspective, God is simply <strong>\"the Enemy\"</strong> - Lewis's central satirical inversion, where the opposing labels of good and evil are reversed."
-  },
-  {
-    q: "What term does Screwtape use for the humans being tempted, revealing Hell's clinical view of them?",
-    opts: ["Patients", "Souls", "Subjects", "Prey"],
-    ans: 0,
-    exp: "<strong>\"Patients\"</strong> is the term - each junior devil is assigned a human patient to tempt, treating people as medical cases to be managed rather than souls to be valued."
-  },
-  {
-    q: "When Wormwood's patient becomes a Christian early in the letters, what is Screwtape's chief advice for undermining the new faith?",
-    opts: ["Encourage outright atheism immediately", "Focus on petty irritations and the gap between his ideals and the actual church", "Tempt him with sexual sin right away", "Make him read materialist philosophy"],
-    ans: 1,
-    exp: "Screwtape counsels patience: exploit everyday annoyances, the drabness of actual church life, and the <strong>gap between lofty spiritual feeling and mundane reality</strong>."
-  },
-  {
-    q: "Screwtape describes Hell's fundamental nature in contrast to God's. What does he say characterizes Hell's mode of being?",
-    opts: ["A drive to rule and dominate", "A cannibalistic desire to devour and absorb others", "A desire to prove God is unjust", "An achieved state of perfect emptiness"],
-    ans: 1,
-    exp: "Screwtape explains that Hell's nature is <strong>cannibalistic</strong> - to consume, absorb, and possess others completely. Love gives freely; Hell only takes. This is Lewis's key contrast between the two ontologies."
-  },
-  {
-    q: "What does Screwtape say about genuine human laughter and joy as obstacles to the devils' work?",
-    opts: ["Joy is irrelevant - only intellectual beliefs matter", "Genuine joy is near-impregnable and tends to draw humans toward God", "Laughter always leads to pride and is therefore useful", "Joy only matters during prayer, not ordinary life"],
-    ans: 1,
-    exp: "Screwtape laments that genuine fun and joy - as opposed to flippancy or malice - are <strong>difficult for devils to exploit</strong>. Real mirth tends to draw humans toward the Enemy rather than away."
-  },
-  {
-    q: "What does Screwtape call the natural rhythmic pattern of spiritual highs and lows in a Christian's life?",
-    opts: ["The Alternation", "The Undulation", "The Dry Spell", "The Trough Cycle"],
-    ans: 1,
-    exp: "Screwtape instructs Wormwood to exploit <strong>\"the Law of Undulation\"</strong> - the natural cycle of peaks and troughs in spiritual feeling. Trough periods, when feeling is dry, are the best moments to introduce despair."
-  },
-  {
-    q: "What kind of church does Screwtape want Wormwood's patient to become attached to?",
-    opts: ["A theologically liberal church with no firm doctrine", "A church where Christianity becomes a historical movement rather than devotion to Christ himself", "A high-church parish with elaborate, distracting ritual", "Any church at all, as attendance itself is the danger"],
-    ans: 1,
-    exp: "Screwtape wants the patient absorbed in a church where <strong>Christianity becomes an 'ism'</strong> - a historical or political movement - so that devotion is to the cause rather than to Christ as a living person."
-  },
-  {
-    q: "Screwtape praises the 'Historical Point of View' taught in academia. What makes it diabolically useful?",
-    opts: ["It makes humans too skeptical of all religious claims", "It trains students to ask what a text meant historically rather than whether it is true", "It encourages too much dangerous independent thinking", "It causes students to admire pagan virtue over Christian virtue"],
-    ans: 1,
-    exp: "Screwtape praises this approach because it trains scholars to ask <strong>'what did it mean then?'</strong> rather than 'is it true?' - neutralizing dangerous texts by reducing them to mere historical artifacts."
-  },
-  {
-    q: "How does Wormwood's patient die, and what is the result for his soul?",
-    opts: ["He dies in despair after apostasy - claimed by Hell", "He dies in a WWII air raid in a state of grace - lost to Heaven", "He survives the war and lives out a long, ordinary Christian life", "He dies of illness and his ultimate fate is left ambiguous"],
-    ans: 1,
-    exp: "The patient dies during a <strong>WWII bombing</strong>, in a moment of genuine faith and love. Screwtape's final letter is one of pure fury - the patient's soul has escaped them entirely."
-  },
-  {
-    q: "In <em>Screwtape Proposes a Toast</em>, what occasion is Screwtape addressing?",
-    opts: ["A graduation ceremony for new tempters", "The annual dinner of the Tempters' Training College", "A retirement banquet for senior devils", "An initiation rite for promoted tempters"],
-    ans: 1,
-    exp: "The Toast is a speech at the <strong>annual dinner of the Tempters' Training College</strong>, where Screwtape, as a distinguished guest, evaluates the quality of the 'vintage' - the souls being consumed."
-  },
-  {
-    q: "In the Toast, what does Screwtape say about the quality of souls arriving in Hell in the modern era?",
-    opts: ["Bold, heroic sinners of tragic grandeur", "Grey, mediocre, undistinguished souls - drab failures rather than magnificent villains", "Intellectual apostates who nobly rejected faith for reason", "Political tyrants and war criminals of impressive scale"],
-    ans: 1,
-    exp: "Screwtape mourns a poor vintage: the souls are <strong>insipid, mediocre, and grey</strong>. Lewis's point is that Hell's greatest success is not producing Hitlers but producing nothing - people who simply dwindle away."
-  },
-  {
-    q: "What modern democratic ideal does Screwtape celebrate as one of Hell's greatest weapons in the Toast?",
-    opts: ["Nationalism and tribalism", "Scientific materialism and atheism", "Egalitarian envy disguised as fairness - the hatred of excellence", "Sexual permissiveness and the collapse of the family"],
-    ans: 2,
-    exp: "Screwtape praises the weaponization of <strong>democratic resentment</strong> - not genuine equality, but the leveling impulse: hatred of anyone 'better,' the insistence no one should excel, dragging everything downward."
-  },
-  {
-    q: "What does Screwtape say Hell most wants the modern educational system to produce?",
-    opts: ["Committed atheists who publicly reject God", "Students who cannot think clearly but believe they are thinking very well", "Obedient conformists who follow state ideology without question", "Hedonists who abandon intellectual life for pleasure"],
-    ans: 1,
-    exp: "Screwtape celebrates an education producing the <strong>illusion of thought without its substance</strong> - students convinced of their own critical-mindedness while unable to reason, making them impervious to genuine truth."
-  },
-  {
-    q: "What is the final toast Screwtape proposes at the end of the essay?",
-    opts: ["To the proliferation of wars and catastrophes", "To the confusion of our enemies - to humanity and to God", "To the patient, unseen work of every tempter in the field", "To the health of the Master Below"],
-    ans: 3,
-    exp: "Screwtape closes by toasting <strong>\"the health of the Master Below\"</strong> - a darkly ironic flourish, since in Hell even a health toast is absurd. It underscores the total inversion of values that governs infernal existence."
-  }
-];
+    <script>
+        window.QUIZ = {
+            questions: [
+                {
+                    q: "What is Screwtape's relationship to Wormwood?",
+                    opts: ["His human patient", "His junior colleague in Hell", "His uncle and senior mentor", "His supervisor at the Lowerarchy"],
+                    ans: 2,
+                    exp: "Screwtape is Wormwood's <strong>uncle</strong> and a senior devil writing letters of professional advice to his inexperienced nephew."
+                },
+                {
+                    q: "What does Screwtape consistently call God throughout the letters?",
+                    opts: ["The Almighty", "The Enemy", "The Adversary", "The Light"],
+                    ans: 1,
+                    exp: "From Hell's perspective, God is simply <strong>\"the Enemy\"</strong> - Lewis's central satirical inversion, where the opposing labels of good and evil are reversed."
+                },
+                {
+                    q: "What term does Screwtape use for the humans being tempted, revealing Hell's clinical view of them?",
+                    opts: ["Patients", "Souls", "Subjects", "Prey"],
+                    ans: 0,
+                    exp: "<strong>\"Patients\"</strong> is the term - each junior devil is assigned a human patient to tempt, treating people as medical cases to be managed rather than souls to be valued."
+                },
+                {
+                    q: "When Wormwood's patient becomes a Christian early in the letters, what is Screwtape's chief advice for undermining the new faith?",
+                    opts: ["Encourage outright atheism immediately", "Focus on petty irritations and the gap between his ideals and the actual church", "Tempt him with sexual sin right away", "Make him read materialist philosophy"],
+                    ans: 1,
+                    exp: "Screwtape counsels patience: exploit everyday annoyances, the drabness of actual church life, and the <strong>gap between lofty spiritual feeling and mundane reality</strong>."
+                },
+                {
+                    q: "Screwtape describes Hell's fundamental nature in contrast to God's. What does he say characterizes Hell's mode of being?",
+                    opts: ["A drive to rule and dominate", "A cannibalistic desire to devour and absorb others", "A desire to prove God is unjust", "An achieved state of perfect emptiness"],
+                    ans: 1,
+                    exp: "Screwtape explains that Hell's nature is <strong>cannibalistic</strong> - to consume, absorb, and possess others completely. Love gives freely; Hell only takes. This is Lewis's key contrast between the two ontologies."
+                },
+                {
+                    q: "What does Screwtape say about genuine human laughter and joy as obstacles to the devils' work?",
+                    opts: ["Joy is irrelevant - only intellectual beliefs matter", "Genuine joy is near-impregnable and tends to draw humans toward God", "Laughter always leads to pride and is therefore useful", "Joy only matters during prayer, not ordinary life"],
+                    ans: 1,
+                    exp: "Screwtape laments that genuine fun and joy - as opposed to flippancy or malice - are <strong>difficult for devils to exploit</strong>. Real mirth tends to draw humans toward the Enemy rather than away."
+                },
+                {
+                    q: "What does Screwtape call the natural rhythmic pattern of spiritual highs and lows in a Christian's life?",
+                    opts: ["The Alternation", "The Undulation", "The Dry Spell", "The Trough Cycle"],
+                    ans: 1,
+                    exp: "Screwtape instructs Wormwood to exploit <strong>\"the Law of Undulation\"</strong> - the natural cycle of peaks and troughs in spiritual feeling. Trough periods, when feeling is dry, are the best moments to introduce despair."
+                },
+                {
+                    q: "What kind of church does Screwtape want Wormwood's patient to become attached to?",
+                    opts: ["A theologically liberal church with no firm doctrine", "A church where Christianity becomes a historical movement rather than devotion to Christ himself", "A high-church parish with elaborate, distracting ritual", "Any church at all, as attendance itself is the danger"],
+                    ans: 1,
+                    exp: "Screwtape wants the patient absorbed in a church where <strong>Christianity becomes an 'ism'</strong> - a historical or political movement - so that devotion is to the cause rather than to Christ as a living person."
+                },
+                {
+                    q: "Screwtape praises the 'Historical Point of View' taught in academia. What makes it diabolically useful?",
+                    opts: ["It makes humans too skeptical of all religious claims", "It trains students to ask what a text meant historically rather than whether it is true", "It encourages too much dangerous independent thinking", "It causes students to admire pagan virtue over Christian virtue"],
+                    ans: 1,
+                    exp: "Screwtape praises this approach because it trains scholars to ask <strong>'what did it mean then?'</strong> rather than 'is it true?' - neutralizing dangerous texts by reducing them to mere historical artifacts."
+                },
+                {
+                    q: "How does Wormwood's patient die, and what is the result for his soul?",
+                    opts: ["He dies in despair after apostasy - claimed by Hell", "He dies in a WWII air raid in a state of grace - lost to Heaven", "He survives the war and lives out a long, ordinary Christian life", "He dies of illness and his ultimate fate is left ambiguous"],
+                    ans: 1,
+                    exp: "The patient dies during a <strong>WWII bombing</strong>, in a moment of genuine faith and love. Screwtape's final letter is one of pure fury - the patient's soul has escaped them entirely."
+                },
+                {
+                    q: "In <em>Screwtape Proposes a Toast</em>, what occasion is Screwtape addressing?",
+                    opts: ["A graduation ceremony for new tempters", "The annual dinner of the Tempters' Training College", "A retirement banquet for senior devils", "An initiation rite for promoted tempters"],
+                    ans: 1,
+                    exp: "The Toast is a speech at the <strong>annual dinner of the Tempters' Training College</strong>, where Screwtape, as a distinguished guest, evaluates the quality of the 'vintage' - the souls being consumed."
+                },
+                {
+                    q: "In the Toast, what does Screwtape say about the quality of souls arriving in Hell in the modern era?",
+                    opts: ["Bold, heroic sinners of tragic grandeur", "Grey, mediocre, undistinguished souls - drab failures rather than magnificent villains", "Intellectual apostates who nobly rejected faith for reason", "Political tyrants and war criminals of impressive scale"],
+                    ans: 1,
+                    exp: "Screwtape mourns a poor vintage: the souls are <strong>insipid, mediocre, and grey</strong>. Lewis's point is that Hell's greatest success is not producing Hitlers but producing nothing, people who simply dwindle away."
+                },
+                {
+                    q: "What modern democratic ideal does Screwtape celebrate as one of Hell's greatest weapons in the Toast?",
+                    opts: ["Nationalism and tribalism", "Scientific materialism and atheism", "Egalitarian envy disguised as fairness - the hatred of excellence", "Sexual permissiveness and the collapse of the family"],
+                    ans: 2,
+                    exp: "Screwtape praises the weaponization of <strong>democratic resentment</strong>, not genuine equality, but the leveling impulse: hatred of anyone 'better,' the insistence no one should excel, dragging everything downward."
+                },
+                {
+                    q: "What does Screwtape say Hell most wants the modern educational system to produce?",
+                    opts: ["Committed atheists who publicly reject God", "Students who cannot think clearly but believe they are thinking very well", "Obedient conformists who follow state ideology without question", "Hedonists who abandon intellectual life for pleasure"],
+                    ans: 1,
+                    exp: "Screwtape celebrates an education producing the <strong>illusion of thought without its substance</strong>, students convinced of their own critical-mindedness while unable to reason, making them impervious to genuine truth."
+                },
+                {
+                    q: "What is the final toast Screwtape proposes at the end of the essay?",
+                    opts: ["To the proliferation of wars and catastrophes", "To the confusion of our enemies - to humanity and to God", "To the patient, unseen work of every tempter in the field", "To the health of the Master Below"],
+                    ans: 3,
+                    exp: "Screwtape closes by toasting <strong>\"the health of the Master Below\"</strong>. It underscores the total inversion of values that governs infernal existence."
+                }
+            ],
+            verdicts: [
+                {min: 1.0, v: "A thorough student indeed.", n: "Screwtape would fear you."},
+                {min: 0.75, v: "Creditable reading.", n: "A solid grasp of Lewis' main arguments. Screwtape would struggle to capture your soul."},
+                {min: 0.5, v: "Patience is rewarded.", n: "The Enemy may still be able to save you."},
+                {min: 0, v: "Wormwood's promotion material.", n: "The junior tempter found a nice catch it seems."},
+            ],
+        };
 
-let current = 0, score = 0, answered = [], dotStates = [];
-
-function init() {
-  current = 0; score = 0;
-  answered = new Array(questions.length).fill(null);
-  dotStates = new Array(questions.length).fill('pending');
-  document.getElementById('results').style.display = 'none';
-  document.getElementById('quiz-area').style.display = 'block';
-  document.getElementById('score-bar').style.display = 'flex';
-  document.getElementById('progress-dots').style.display = 'flex';
-  renderDots(); renderQuestion();
-}
-
-function renderDots() {
-  const c = document.getElementById('progress-dots');
-  c.innerHTML = '';
-  questions.forEach((_, i) => {
-    const d = document.createElement('div');
-    d.className = 'dot';
-    if (i === current) d.classList.add('active');
-    else if (dotStates[i] === 'correct') d.classList.add('correct-dot');
-    else if (dotStates[i] === 'wrong') d.classList.add('wrong-dot');
-    c.appendChild(d);
-  });
-}
-
-function renderQuestion() {
-  document.getElementById('q-counter').textContent = current + 1;
-  document.getElementById('score-display').textContent = score;
-  const q = questions[current];
-  const letters = ['A','B','C','D'];
-  document.getElementById('quiz-area').innerHTML = `
-    <div class="question-block">
-      <div class="q-number">Question ${current + 1} of ${questions.length}</div>
-      <div class="q-text">${q.q}</div>
-      <div class="options" id="opts">
-        ${q.opts.map((o,i) => `<button class="option" onclick="choose(${i})" id="opt-${i}">
-          <span class="opt-letter">${letters[i]}</span><span>${o}</span>
-        </button>`).join('')}
-      </div>
-      <div id="explanation" style="display:none" class="explanation"></div>
-      <div class="clearfix">
-        <button class="btn-next" id="btn-next" onclick="advance()">
-          ${current < questions.length - 1 ? 'Continue \u2192' : 'See Results \u2192'}
-        </button>
-      </div>
-    </div>`;
-}
-
-function choose(idx) {
-  if (answered[current] !== null) return;
-  answered[current] = idx;
-  const q = questions[current];
-  const opts = document.querySelectorAll('.option');
-  opts.forEach(o => o.disabled = true);
-  if (idx === q.ans) { score++; dotStates[current] = 'correct'; opts[idx].classList.add('correct'); }
-  else { dotStates[current] = 'wrong'; opts[idx].classList.add('wrong'); opts[q.ans].classList.add('reveal-correct'); }
-  document.getElementById('score-display').textContent = score;
-  const exp = document.getElementById('explanation');
-  exp.innerHTML = (idx === q.ans ? '<strong>Correct.</strong> ' : '<strong>Not quite.</strong> ') + q.exp;
-  exp.style.display = 'block';
-  document.getElementById('btn-next').classList.add('visible');
-  renderDots();
-}
-
-function advance() {
-  if (current < questions.length - 1) { current++; renderDots(); renderQuestion(); window.scrollTo({top:0,behavior:'smooth'}); }
-  else { showResults(); }
-}
-
-function showResults() {
-  document.getElementById('quiz-area').style.display = 'none';
-  document.getElementById('score-bar').style.display = 'none';
-  document.getElementById('progress-dots').style.display = 'none';
-  const pct = score / questions.length;
-  let verdict, msg;
-  if (pct >= 0.93) { verdict = "A Thorough Student of Screwtape"; msg = "You read carefully and thought carefully. Lewis would be pleased - and Screwtape would consider you a dangerous patient indeed."; }
-  else if (pct >= 0.73) { verdict = "A Creditable Reading"; msg = "You grasped the main arguments and the satirical machinery. Perhaps revisit a letter or two - Lewis rewards close attention."; }
-  else if (pct >= 0.5) { verdict = "Some Passages Bear Re-reading"; msg = "You caught the broad outline but missed some of the finer diabolical subtleties. The undulating principle applies to comprehension as well."; }
-  else { verdict = "Wormwood Would Be Pleased"; msg = "Your inattention would delight the junior tempter. Fear not - the text awaits, and the Enemy is patient."; }
-  document.getElementById('result-verdict').textContent = verdict;
-  document.getElementById('score-num').textContent = score;
-  document.getElementById('result-msg').textContent = msg;
-  document.getElementById('results').style.display = 'block';
-}
-
-init();
-</script>
+    </script>
+    <script src="../quiz-engine.js"></script>
 </body>
+
 </html>

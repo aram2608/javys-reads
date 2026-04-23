@@ -7,7 +7,9 @@
     <title>The Myth of Sisyphus</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
-
+    </style>
+    <link rel="stylesheet" href="../quiz-engine.css">
+    <style>
         :root {
             --limestone: #f2ede2;
             --surface: #faf8f2;
@@ -24,6 +26,31 @@
             --wrong-bg: rgba(138, 40, 40, 0.06);
             --border: rgba(160, 130, 90, 0.18);
             --border-hi: rgba(160, 130, 90, 0.35);
+
+            --qe-font-serif: 'IM Fell English', serif;
+            --qe-font-body: 'Courier Prime', monospace;
+            --qe-font-label: 'Courier Prime', monospace;
+            --qe-surface: var(--surface);
+            --qe-border: var(--border);
+            --qe-border-hi: var(--ember-border);
+            --qe-text: var(--ink);
+            --qe-text-muted: var(--mid);
+            --qe-accent: var(--ember);
+            --qe-accent-lo: var(--ember-lo);
+            --qe-btn-bg: var(--ember);
+            --qe-btn-text: #faf8f2;
+            --qe-btn-hover-bg: #7a2c12;
+            --qe-btn-hover-text: #faf8f2;
+            --qe-correct: var(--correct);
+            --qe-correct-bg: var(--correct-bg);
+            --qe-wrong: var(--wrong);
+            --qe-wrong-bg: var(--wrong-bg);
+            --qe-hero-bg: var(--ember);
+            --qe-hero-text: #faf8f2;
+            --qe-score-color: #faf8f2;
+            --qe-denom-color: rgba(250, 248, 242, 0.7);
+            --qe-bd-bg: var(--surface);
+            --qe-bd-border: var(--border);
         }
 
         * {
@@ -124,347 +151,9 @@
             opacity: 0.4;
         }
 
-        /* ── Progress ── */
-        .progress-label {
-            font-size: 10px;
-            letter-spacing: 0.22em;
-            color: var(--dim);
-            text-align: right;
-            margin-bottom: 6px;
-            animation: fadeIn 1s 0.5s both;
-        }
-
-        .progress-bar {
-            background: rgba(160, 130, 90, 0.15);
-            height: 2px;
-            border-radius: 1px;
-            margin-bottom: 48px;
-            overflow: hidden;
-            animation: fadeIn 1s 0.5s both;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--ember);
-            border-radius: 1px;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 0%;
-        }
-
-        /* ── Question card ── */
-        .question-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 2px;
-            padding: 36px 40px;
-            margin-bottom: 24px;
-            animation: slideUp 0.4s ease both;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 2px 20px rgba(100, 70, 30, 0.07);
-        }
-
-        .question-card::before {
-            content: attr(data-num);
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            font-family: 'IM Fell English', serif;
-            font-size: 80px;
-            color: rgba(160, 130, 90, 0.07);
-            font-weight: 700;
-            line-height: 1;
-            pointer-events: none;
-        }
-
-        .q-category {
-            font-size: 9px;
-            letter-spacing: 0.28em;
-            text-transform: uppercase;
-            color: var(--ember);
-            margin-bottom: 16px;
-            opacity: 0.85;
-        }
-
-        .q-text {
-            font-family: 'IM Fell English', serif;
-            font-size: 1.15rem;
-            line-height: 1.6;
-            color: var(--ink);
-            margin-bottom: 28px;
-        }
-
-        /* ── Options ── */
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 9px;
-        }
-
-        .option {
-            background: var(--limestone);
-            border: 1px solid var(--border);
-            border-radius: 2px;
-            padding: 13px 16px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            font-family: 'Courier Prime', monospace;
-            font-size: 0.87rem;
-            color: var(--mid);
-            text-align: left;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
-        .option:hover:not(.disabled) {
-            border-color: var(--ember-border);
-            background: var(--ember-lo);
-            color: var(--ink);
-            transform: translateX(3px);
-        }
-
-        .option-letter {
-            font-size: 10px;
-            letter-spacing: 0.1em;
-            color: var(--stone);
-            min-width: 18px;
-            padding-top: 1px;
-            flex-shrink: 0;
-        }
-
-        .option-text {
-            line-height: 1.5;
-        }
-
-        .option.correct {
-            border-color: rgba(58, 112, 64, 0.45);
-            background: var(--correct-bg);
-            color: var(--correct);
-        }
-
-        .option.correct .option-letter {
-            color: var(--correct);
-        }
-
-        .option.wrong {
-            border-color: rgba(138, 40, 40, 0.35);
-            background: var(--wrong-bg);
-            color: rgba(100, 70, 50, 0.45);
-            text-decoration: line-through;
-            text-decoration-color: rgba(138, 40, 40, 0.35);
-        }
-
-        .option.disabled {
-            cursor: default;
-            pointer-events: none;
-        }
-
-        /* ── Explanation ── */
-        .explanation {
-            margin-top: 20px;
-            padding: 14px 18px;
-            border-left: 2px solid var(--ember-border);
-            background: var(--ember-lo);
-            font-size: 0.85rem;
-            line-height: 1.7;
-            color: var(--mid);
-            display: none;
-            animation: fadeIn 0.3s ease both;
-            border-radius: 0 2px 2px 0;
-        }
-
-        .explanation.show {
-            display: block;
-        }
-
-        .explanation strong {
-            color: var(--ink);
-            font-weight: 700;
-        }
-
-        /* ── Navigation ── */
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 32px;
-            animation: fadeIn 0.5s 0.3s both;
-        }
-
-        #score-display {
-            font-size: 11px;
-            color: var(--dim);
-            letter-spacing: 0.18em;
-            font-family: 'Courier Prime', monospace;
-        }
-
-        .btn {
-            background: transparent;
-            border: 1px solid var(--border-hi);
-            color: var(--mid);
-            font-family: 'Courier Prime', monospace;
-            font-size: 11px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            padding: 12px 24px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-radius: 1px;
-        }
-
-        .btn:hover {
-            border-color: var(--ember-border);
-            color: var(--ink);
-        }
-
-        .btn.primary {
-            background: var(--ember);
-            border-color: var(--ember);
-            color: #faf8f2;
-        }
-
-        .btn.primary:hover {
-            background: #7a2c12;
-            border-color: #7a2c12;
-        }
-
-        .btn:disabled {
-            opacity: 0.3;
-            cursor: default;
-            pointer-events: none;
-        }
-
-        /* ── Score screen ── */
-        .score-screen {
-            text-align: center;
-            padding: 40px 20px;
-            animation: slideUp 0.6s ease both;
-            display: none;
-        }
-
-        .score-screen.show {
-            display: block;
-        }
-
-        .score-big {
-            font-family: 'IM Fell English', serif;
-            font-size: clamp(3rem, 12vw, 6rem);
-            color: var(--ember);
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-
-        .score-label {
-            font-size: 10px;
-            letter-spacing: 0.35em;
-            color: var(--dim);
-            margin-bottom: 40px;
-            text-transform: uppercase;
-        }
-
-        .score-verdict {
-            font-family: 'IM Fell English', serif;
-            font-size: 1.3rem;
-            color: var(--ink);
-            margin-bottom: 16px;
-            font-style: italic;
-        }
-
-        .score-note {
-            font-size: 0.85rem;
-            color: var(--mid);
-            line-height: 1.8;
-            max-width: 460px;
-            margin: 0 auto 40px;
-        }
-
-        .results-breakdown {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 2px;
-            padding: 24px;
-            margin-bottom: 32px;
-            text-align: left;
-            box-shadow: 0 2px 12px rgba(100, 70, 30, 0.05);
-        }
-
-        .breakdown-title {
-            font-size: 9px;
-            letter-spacing: 0.28em;
-            color: var(--dim);
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .breakdown-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(160, 130, 90, 0.1);
-            font-size: 0.82rem;
-        }
-
-        .breakdown-item:last-child {
-            border-bottom: none;
-        }
-
-        .breakdown-q {
-            color: var(--mid);
-            max-width: 80%;
-            line-height: 1.4;
-        }
-
-        .tick {
-            color: var(--correct);
-            font-size: 14px;
-        }
-
-        .cross {
-            color: var(--wrong);
-            font-size: 14px;
-        }
-
-        /* ── Animations ── */
         @keyframes fadeDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .question-card {
-                padding: 24px 20px;
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -480,185 +169,187 @@
 
         <div id="quiz-root"> </div>
 
-        <script>
-            window.QUIZ = {
-                questions: [
-                    {
-                        category: "Core Concept",
-                        text: "What does Camus identify as the central, most urgent philosophical question in the essay?",
-                        options: [
-                            "Whether God exists",
-                            "Whether life is worth living - the question of suicide",
-                            "Whether free will is possible",
-                            "Whether meaning can be found through reason"
-                        ],
-                        answer: 1,
-                        explanation: "<strong>Correct.</strong> Camus opens with the provocative claim that there is only one truly serious philosophical problem: suicide. All other questions are secondary to whether life deserves to be lived."
-                    },
-                    {
-                        category: "The Absurd",
-                        text: "For Camus, the absurd arises from the confrontation between two things. Which pair?",
-                        options: [
-                            "Reason and faith",
-                            "Freedom and determinism",
-                            "The human longing for clarity/meaning and the world's irrational silence",
-                            "Individual will and social constraint"
-                        ],
-                        answer: 2,
-                        explanation: "<strong>Correct.</strong> The absurd is not a property of the world alone or of humans alone - it lives in the gap between our desperate need for meaning and the universe's complete indifference to that need."
-                    },
-                    {
-                        category: "Philosophical Leap",
-                        text: "Camus coins a term for the move made by thinkers like Kierkegaard, who respond to the absurd by turning to religious faith or transcendence. What does he call this?",
-                        options: [
-                            "The existential pivot",
-                            "The philosophical suicide / philosophical leap",
-                            "The transcendent escape",
-                            "The Kierkegaard fallacy"
-                        ],
-                        answer: 1,
-                        explanation: "<strong>Correct.</strong> Camus calls this 'philosophical suicide' - the act of leaping beyond reason into faith or some transcendent hope. He views it as an evasion: trading in the tension of the absurd for false comfort."
-                    },
-                    {
-                        category: "Revolt",
-                        text: "Camus argues that the proper response to the absurd is neither suicide nor the philosophical leap. What is his prescribed response?",
-                        options: [
-                            "Stoic acceptance and withdrawal from life",
-                            "Passionate revolt - embracing the absurd and living fully in spite of it",
-                            "Finding meaning through human solidarity and political action",
-                            "Cultivating indifference to existence"
-                        ],
-                        answer: 1,
-                        explanation: "<strong>Correct.</strong> Revolt means refusing to give up on life and refusing to escape through faith, while simultaneously refusing to pretend that meaning exists. One must live with the absurd, in full consciousness of it."
-                    },
-                    {
-                        category: "Absurd Freedom",
-                        text: "Camus describes a particular kind of freedom that emerges once one accepts the absurd. What is its basis?",
-                        options: [
-                            "Freedom from moral rules, since values are constructed by society",
-                            "Freedom gained because divine judgment is no longer feared",
-                            "Freedom rooted in the removal of hope - one lives without appeal to any future justification",
-                            "Freedom through authentic self-creation in Sartrean terms"
-                        ],
-                        answer: 2,
-                        explanation: "<strong>Correct.</strong> When we abandon hope for an afterlife or cosmic meaning, a particular freedom opens up: we are released from deferring life to a future reward. Everything must be lived now, on its own terms."
-                    },
-                    {
-                        category: "Absurd Figures",
-                        text: "Camus profiles several 'absurd men' to illustrate his philosophy. Which of these is NOT presented as one of them?",
-                        options: [
-                            "Don Juan",
-                            "The Actor",
-                            "The Conqueror",
-                            "The Saint"
-                        ],
-                        answer: 3,
-                        explanation: "<strong>Correct.</strong> Camus examines Don Juan, the Actor, and the Conqueror (among others) as figures who embody quantity over quality, multiplying experiences rather than seeking transcendence. The Saint is not his model - the saint seeks to transcend the human condition rather than inhabit it."
-                    },
-                    {
-                        category: "Sisyphus",
-                        text: "Why does Camus choose Sisyphus specifically as the symbol of the absurd hero?",
-                        options: [
-                            "Because Sisyphus defied the gods and was punished, yet continues his futile labor with full consciousness",
-                            "Because Sisyphus was the wisest of mortals and invented philosophy",
-                            "Because Sisyphus's punishment mirrors human mortality - we all die eventually",
-                            "Because Sisyphus found a way to escape his boulder and represents hope"
-                        ],
-                        answer: 0,
-                        explanation: "<strong>Correct.</strong> Sisyphus is condemned to endless, pointless toil. What matters to Camus is that Sisyphus knows his fate is absurd - and yet he continues. That conscious, defiant continuation in the face of futility is the absurd heroism Camus celebrates."
-                    },
-                    {
-                        category: "Famous Claim",
-                        text: "The essay ends with one of philosophy's most famous lines. What is Camus's conclusion about Sisyphus?",
-                        options: [
-                            "Sisyphus is a symbol of human suffering that must be overcome",
-                            "One must imagine Sisyphus happy",
-                            "Sisyphus represents the futility of all human striving",
-                            "Sisyphus achieves meaning through his eternal labor"
-                        ],
-                        answer: 1,
-                        explanation: "<strong>Correct.</strong> 'One must imagine Sisyphus happy.' This is Camus's climactic move: happiness is not contingent on success, meaning, or divine grace - it comes from the revolt itself, the passionate engagement with one's fate."
-                    },
-                    {
-                        category: "Critique of Others",
-                        text: "How does Camus treat Husserl and phenomenology in the essay?",
-                        options: [
-                            "He praises phenomenology as the best framework for understanding the absurd",
-                            "He accepts Husserl's method but rejects his conclusions about intentionality",
-                            "He accuses phenomenological thinkers of ultimately committing the philosophical leap",
-                            "He ignores continental philosophy entirely in favor of literary examples"
-                        ],
-                        answer: 2,
-                        explanation: "<strong>Correct.</strong> Camus credits phenomenological thinkers for beginning honestly with human experience, but argues that many (including Husserl) ultimately evade the absurd by positing essences, intentionality, or a reason that grounds the world - a subtle form of the philosophical leap."
-                    },
-                    {
-                        category: "The Absurd",
-                        text: "Camus insists the absurd must be 'maintained' rather than resolved. What does maintaining the absurd require?",
-                        options: [
-                            "Constant philosophical analysis of one's situation",
-                            "Keeping alive all three of its elements: revolt, freedom, and passion - without eliminating the tension",
-                            "Accepting suffering as the price of authenticity",
-                            "Refusing all relationships that might distract from awareness of meaninglessness"
-                        ],
-                        answer: 1,
-                        explanation: "<strong>Correct.</strong> To resolve the absurd - either by finding transcendent meaning or by choosing death - is to destroy it. Camus wants us to live inside the tension: revolt against meaninglessness, freedom from false hopes, and passionate engagement with life."
-                    },
-                    {
-                        category: "Appendix / Kafka",
-                        text: "Camus adds an appendix on Kafka. What is his central claim about Kafka's work in relation to the absurd?",
-                        options: [
-                            "Kafka is the purest absurdist writer because he never offers any resolution",
-                            "Kafka expresses the absurd but then undermines it with faint hope - making his work ambiguous rather than fully absurdist",
-                            "Kafka's work is nihilistic, not absurdist, and therefore irrelevant to Camus's project",
-                            "Kafka depicts the absurd but ultimately recommends the philosophical leap"
-                        ],
-                        answer: 1,
-                        explanation: "<strong>Correct.</strong> Camus admires Kafka deeply but argues that the persistence of hope in Kafka - that ambiguous, flickering possibility of grace - keeps his work from being purely absurdist. It hovers between the absurd and the leap, which is why Camus treats it as a fascinating borderline case."
-                    },
-                    {
-                        category: "Synthesis",
-                        text: "Which statement best captures Camus's distinction between existentialism (as he sees it) and absurdism?",
-                        options: [
-                            "Existentialism accepts meaninglessness; absurdism seeks to overcome it through authentic self-creation",
-                            "Absurdism finds meaning through relationships; existentialism finds it through solitary choice",
-                            "Existentialists (like Sartre) ultimately ground meaning in human freedom; Camus refuses any such grounding and insists on living without resolution",
-                            "There is no meaningful difference - Camus was an existentialist"
-                        ],
-                        answer: 2,
-                        explanation: "<strong>Correct.</strong> Camus explicitly distanced himself from existentialism. Thinkers like Sartre ground authenticity and meaning in radical freedom. For Camus, even this is a subtle escape - the absurd must remain unresolved. Living with the question, not answering it, is the point."
-                    }
-                ],
-                verdicts: [
-                    {
-                        min: 1.0,
-                        v: "One must imagine you happy.",
-                        n: "A perfect score. You've absorbed Camus. Now go live it."
-                    },
-                    {
-                        min: 0.75,
-                        v: "A solid grasp of the abyss.",
-                        n: "You understand the absurd rather well."
-                    },
-                    {
-                        min: 0.5,
-                        v: "Halfway up the mountain.",
-                        n: "You've got the core ideas but some finer distinctions remain."
-                    },
-                    {
-                        min: 0.0,
-                        v: "The boulder rolled back down.",
-                        n: "A re-read might help."
-                    }
-                ],
-                config: {
-                    shuffle: true,
-                    nextLabel: "->",
+    </div>
+
+    <script>
+        window.QUIZ = {
+            questions: [
+                {
+                    category: "Core Concept",
+                    text: "What does Camus identify as the central, most urgent philosophical question in the essay?",
+                    options: [
+                        "Whether God exists",
+                        "Whether life is worth living - the question of suicide",
+                        "Whether free will is possible",
+                        "Whether meaning can be found through reason"
+                    ],
+                    answer: 1,
+                    explanation: "<strong>Correct.</strong> Camus opens with the provocative claim that there is only one truly serious philosophical problem: suicide. All other questions are secondary to whether life deserves to be lived."
+                },
+                {
+                    category: "The Absurd",
+                    text: "For Camus, the absurd arises from the confrontation between two things. Which pair?",
+                    options: [
+                        "Reason and faith",
+                        "Freedom and determinism",
+                        "The human longing for clarity/meaning and the world's irrational silence",
+                        "Individual will and social constraint"
+                    ],
+                    answer: 2,
+                    explanation: "<strong>Correct.</strong> The absurd is not a property of the world alone or of humans alone - it lives in the gap between our desperate need for meaning and the universe's complete indifference to that need."
+                },
+                {
+                    category: "Philosophical Leap",
+                    text: "Camus coins a term for the move made by thinkers like Kierkegaard, who respond to the absurd by turning to religious faith or transcendence. What does he call this?",
+                    options: [
+                        "The existential pivot",
+                        "The philosophical suicide / philosophical leap",
+                        "The transcendent escape",
+                        "The Kierkegaard fallacy"
+                    ],
+                    answer: 1,
+                    explanation: "<strong>Correct.</strong> Camus calls this 'philosophical suicide' - the act of leaping beyond reason into faith or some transcendent hope. He views it as an evasion: trading in the tension of the absurd for false comfort."
+                },
+                {
+                    category: "Revolt",
+                    text: "Camus argues that the proper response to the absurd is neither suicide nor the philosophical leap. What is his prescribed response?",
+                    options: [
+                        "Stoic acceptance and withdrawal from life",
+                        "Passionate revolt - embracing the absurd and living fully in spite of it",
+                        "Finding meaning through human solidarity and political action",
+                        "Cultivating indifference to existence"
+                    ],
+                    answer: 1,
+                    explanation: "<strong>Correct.</strong> Revolt means refusing to give up on life and refusing to escape through faith, while simultaneously refusing to pretend that meaning exists. One must live with the absurd, in full consciousness of it."
+                },
+                {
+                    category: "Absurd Freedom",
+                    text: "Camus describes a particular kind of freedom that emerges once one accepts the absurd. What is its basis?",
+                    options: [
+                        "Freedom from moral rules, since values are constructed by society",
+                        "Freedom gained because divine judgment is no longer feared",
+                        "Freedom rooted in the removal of hope - one lives without appeal to any future justification",
+                        "Freedom through authentic self-creation in Sartrean terms"
+                    ],
+                    answer: 2,
+                    explanation: "<strong>Correct.</strong> When we abandon hope for an afterlife or cosmic meaning, a particular freedom opens up: we are released from deferring life to a future reward. Everything must be lived now, on its own terms."
+                },
+                {
+                    category: "Absurd Figures",
+                    text: "Camus profiles several 'absurd men' to illustrate his philosophy. Which of these is NOT presented as one of them?",
+                    options: [
+                        "Don Juan",
+                        "The Actor",
+                        "The Conqueror",
+                        "The Saint"
+                    ],
+                    answer: 3,
+                    explanation: "<strong>Correct.</strong> Camus examines Don Juan, the Actor, and the Conqueror (among others) as figures who embody quantity over quality, multiplying experiences rather than seeking transcendence. The Saint is not his model - the saint seeks to transcend the human condition rather than inhabit it."
+                },
+                {
+                    category: "Sisyphus",
+                    text: "Why does Camus choose Sisyphus specifically as the symbol of the absurd hero?",
+                    options: [
+                        "Because Sisyphus defied the gods and was punished, yet continues his futile labor with full consciousness",
+                        "Because Sisyphus was the wisest of mortals and invented philosophy",
+                        "Because Sisyphus's punishment mirrors human mortality - we all die eventually",
+                        "Because Sisyphus found a way to escape his boulder and represents hope"
+                    ],
+                    answer: 0,
+                    explanation: "<strong>Correct.</strong> Sisyphus is condemned to endless, pointless toil. What matters to Camus is that Sisyphus knows his fate is absurd - and yet he continues. That conscious, defiant continuation in the face of futility is the absurd heroism Camus celebrates."
+                },
+                {
+                    category: "Famous Claim",
+                    text: "The essay ends with one of philosophy's most famous lines. What is Camus's conclusion about Sisyphus?",
+                    options: [
+                        "Sisyphus is a symbol of human suffering that must be overcome",
+                        "One must imagine Sisyphus happy",
+                        "Sisyphus represents the futility of all human striving",
+                        "Sisyphus achieves meaning through his eternal labor"
+                    ],
+                    answer: 1,
+                    explanation: "<strong>Correct.</strong> 'One must imagine Sisyphus happy.' This is Camus's climactic move: happiness is not contingent on success, meaning, or divine grace - it comes from the revolt itself, the passionate engagement with one's fate."
+                },
+                {
+                    category: "Critique of Others",
+                    text: "How does Camus treat Husserl and phenomenology in the essay?",
+                    options: [
+                        "He praises phenomenology as the best framework for understanding the absurd",
+                        "He accepts Husserl's method but rejects his conclusions about intentionality",
+                        "He accuses phenomenological thinkers of ultimately committing the philosophical leap",
+                        "He ignores continental philosophy entirely in favor of literary examples"
+                    ],
+                    answer: 2,
+                    explanation: "<strong>Correct.</strong> Camus credits phenomenological thinkers for beginning honestly with human experience, but argues that many (including Husserl) ultimately evade the absurd by positing essences, intentionality, or a reason that grounds the world - a subtle form of the philosophical leap."
+                },
+                {
+                    category: "The Absurd",
+                    text: "Camus insists the absurd must be 'maintained' rather than resolved. What does maintaining the absurd require?",
+                    options: [
+                        "Constant philosophical analysis of one's situation",
+                        "Keeping alive all three of its elements: revolt, freedom, and passion - without eliminating the tension",
+                        "Accepting suffering as the price of authenticity",
+                        "Refusing all relationships that might distract from awareness of meaninglessness"
+                    ],
+                    answer: 1,
+                    explanation: "<strong>Correct.</strong> To resolve the absurd - either by finding transcendent meaning or by choosing death - is to destroy it. Camus wants us to live inside the tension: revolt against meaninglessness, freedom from false hopes, and passionate engagement with life."
+                },
+                {
+                    category: "Appendix / Kafka",
+                    text: "Camus adds an appendix on Kafka. What is his central claim about Kafka's work in relation to the absurd?",
+                    options: [
+                        "Kafka is the purest absurdist writer because he never offers any resolution",
+                        "Kafka expresses the absurd but then undermines it with faint hope - making his work ambiguous rather than fully absurdist",
+                        "Kafka's work is nihilistic, not absurdist, and therefore irrelevant to Camus's project",
+                        "Kafka depicts the absurd but ultimately recommends the philosophical leap"
+                    ],
+                    answer: 1,
+                    explanation: "<strong>Correct.</strong> Camus admires Kafka deeply but argues that the persistence of hope in Kafka - that ambiguous, flickering possibility of grace - keeps his work from being purely absurdist. It hovers between the absurd and the leap, which is why Camus treats it as a fascinating borderline case."
+                },
+                {
+                    category: "Synthesis",
+                    text: "Which statement best captures Camus's distinction between existentialism (as he sees it) and absurdism?",
+                    options: [
+                        "Existentialism accepts meaninglessness; absurdism seeks to overcome it through authentic self-creation",
+                        "Absurdism finds meaning through relationships; existentialism finds it through solitary choice",
+                        "Existentialists (like Sartre) ultimately ground meaning in human freedom; Camus refuses any such grounding and insists on living without resolution",
+                        "There is no meaningful difference - Camus was an existentialist"
+                    ],
+                    answer: 2,
+                    explanation: "<strong>Correct.</strong> Camus explicitly distanced himself from existentialism. Thinkers like Sartre ground authenticity and meaning in radical freedom. For Camus, even this is a subtle escape - the absurd must remain unresolved. Living with the question, not answering it, is the point."
                 }
-            };
+            ],
+            verdicts: [
+                {
+                    min: 1.0,
+                    v: "One must imagine you happy.",
+                    n: "A perfect score. You've absorbed Camus. Now go live it."
+                },
+                {
+                    min: 0.75,
+                    v: "A solid grasp of the abyss.",
+                    n: "You understand the absurd rather well."
+                },
+                {
+                    min: 0.5,
+                    v: "Halfway up the mountain.",
+                    n: "You've got the core ideas but some finer distinctions remain."
+                },
+                {
+                    min: 0.0,
+                    v: "The boulder rolled back down.",
+                    n: "A re-read might help."
+                }
+            ],
+            config: {
+                shuffle: true,
+                nextLabel: "->",
+            }
+        };
 
-        </script>
+    </script>
 
-        <script src="../quiz-engine.js"></script>
+    <script src="../quiz-engine.js"></script>
 </body>
 
 </html>

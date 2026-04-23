@@ -1,0 +1,382 @@
+/**
+ * quiz-engine.css
+ *
+ * Structural styles for all quiz pages. Colours and fonts are driven
+ * entirely by --qe-* custom properties that each page defines in :root.
+ *
+ * Required variables (with their fallback defaults):
+ *
+ *   --qe-font-serif   : Georgia, serif
+ *   --qe-font-body    : inherit
+ *   --qe-font-label   : inherit
+ *
+ *   --qe-surface      : #ffffff        card / option background
+ *   --qe-border       : rgba(0,0,0,.12) default border
+ *   --qe-border-hi    : rgba(0,0,0,.4)  hover / accent border
+ *   --qe-text         : #1a1a1a        primary text
+ *   --qe-text-muted   : #666           labels, secondary text
+ *   --qe-accent       : #9a7a3a        accent (progress, letters, tags)
+ *   --qe-accent-lo    : rgba(154,122,58,.06)  low-opacity accent bg
+ *
+ *   --qe-btn-bg       : #1a1a1a
+ *   --qe-btn-text     : #ffffff
+ *   --qe-btn-hover-bg : #444
+ *   --qe-btn-hover-text: #ffffff
+ *
+ *   --qe-correct      : #2d7a27
+ *   --qe-correct-bg   : rgba(45,122,39,.08)
+ *   --qe-wrong        : #8a1f1f
+ *   --qe-wrong-bg     : rgba(138,31,31,.07)
+ *
+ *   --qe-hero-bg      : #111           score-screen hero panel bg
+ *   --qe-hero-text    : #f5f0e8        hero text
+ *   --qe-score-color  : #d4a636        big score number
+ *   --qe-denom-color  : rgba(245,240,232,.55)  "N correct out of M" text
+ *
+ *   --qe-bd-bg        : #ffffff        breakdown container bg
+ *   --qe-bd-border    : rgba(0,0,0,.1) breakdown container border
+ */
+
+/* ── Progress bar ── */
+.meta-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--qe-font-label, inherit);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--qe-text-muted, #666);
+    margin-bottom: 0.5rem;
+}
+
+.progress-track {
+    height: 2px;
+    background: var(--qe-border, rgba(0,0,0,.12));
+    border-radius: 1px;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--qe-accent, #9a7a3a);
+    border-radius: 1px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+}
+
+/* ── Question card ── */
+.question-card {
+    background: var(--qe-surface, #fff);
+    border: 1px solid var(--qe-border, rgba(0,0,0,.12));
+    padding: 2rem 2.25rem;
+    margin-bottom: 1rem;
+    animation: qe-slide-up 0.35s ease both;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ghost question number rendered via data-num attribute */
+.question-card::before {
+    content: attr(data-num);
+    position: absolute;
+    bottom: -12px;
+    right: 16px;
+    font-family: var(--qe-font-serif, Georgia, serif);
+    font-size: 80px;
+    color: var(--qe-border, rgba(0,0,0,.12));
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+.q-tag {
+    font-family: var(--qe-font-label, inherit);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--qe-accent, #9a7a3a);
+    margin-bottom: 0.9rem;
+    opacity: 0.9;
+}
+
+.q-text {
+    font-family: var(--qe-font-serif, Georgia, serif);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--qe-text, #1a1a1a);
+    margin-bottom: 1.5rem;
+}
+
+/* ── Options ── */
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--qe-border, rgba(0,0,0,.12));
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    font-family: var(--qe-font-body, inherit);
+    font-size: 0.93rem;
+    line-height: 1.5;
+    color: var(--qe-text, #1a1a1a);
+    text-align: left;
+    transition: border-color 0.15s, background 0.15s;
+    width: 100%;
+}
+
+.option:hover:not(.disabled) {
+    border-color: var(--qe-border-hi, rgba(0,0,0,.4));
+    background: var(--qe-accent-lo, rgba(154,122,58,.06));
+}
+
+.option.disabled {
+    cursor: default;
+    pointer-events: none;
+}
+
+.opt-letter {
+    font-family: var(--qe-font-label, inherit);
+    font-size: 0.72rem;
+    color: var(--qe-accent, #9a7a3a);
+    min-width: 18px;
+    flex-shrink: 0;
+    padding-top: 2px;
+    letter-spacing: 0.05em;
+}
+
+.opt-text {
+    line-height: 1.5;
+}
+
+.option.correct {
+    border-color: var(--qe-correct, #2d7a27);
+    background: var(--qe-correct-bg, rgba(45,122,39,.08));
+    color: var(--qe-correct, #2d7a27);
+}
+
+.option.correct .opt-letter {
+    color: var(--qe-correct, #2d7a27);
+}
+
+.option.wrong {
+    border-color: var(--qe-wrong, #8a1f1f);
+    background: var(--qe-wrong-bg, rgba(138,31,31,.07));
+    color: var(--qe-wrong, #8a1f1f);
+    text-decoration: line-through;
+    text-decoration-color: var(--qe-wrong, #8a1f1f);
+    opacity: 0.7;
+}
+
+.option.wrong .opt-letter {
+    color: var(--qe-wrong, #8a1f1f);
+}
+
+/* ── Explanation ── */
+.explanation {
+    display: none;
+    margin-top: 1.1rem;
+    padding: 0.85rem 1.1rem;
+    background: var(--qe-accent-lo, rgba(154,122,58,.06));
+    border-left: 2px solid var(--qe-border-hi, rgba(0,0,0,.4));
+    font-family: var(--qe-font-body, inherit);
+    font-size: 0.87rem;
+    line-height: 1.7;
+    color: var(--qe-text-muted, #666);
+    font-style: italic;
+    animation: qe-fade-in 0.3s ease;
+}
+
+.explanation.show {
+    display: block;
+}
+
+.explanation strong {
+    font-style: normal;
+    color: var(--qe-text, #1a1a1a);
+}
+
+/* ── Navigation ── */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.running-score {
+    font-family: var(--qe-font-label, inherit);
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--qe-text-muted, #666);
+}
+
+.btn {
+    font-family: var(--qe-font-label, inherit);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.6rem;
+    border: 1px solid var(--qe-border-hi, rgba(0,0,0,.4));
+    background: transparent;
+    color: var(--qe-text, #1a1a1a);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.btn:hover:not(:disabled) {
+    border-color: var(--qe-accent, #9a7a3a);
+    color: var(--qe-accent, #9a7a3a);
+}
+
+.btn.primary {
+    background: var(--qe-btn-bg, #1a1a1a);
+    border-color: var(--qe-btn-bg, #1a1a1a);
+    color: var(--qe-btn-text, #fff);
+}
+
+.btn.primary:hover:not(:disabled) {
+    background: var(--qe-btn-hover-bg, #444);
+    border-color: var(--qe-btn-hover-bg, #444);
+    color: var(--qe-btn-hover-text, #fff);
+}
+
+.btn:disabled {
+    opacity: 0.28;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* ── Score screen ── */
+.score-screen {
+    display: none;
+    animation: qe-slide-up 0.5s ease both;
+}
+
+.score-screen.show {
+    display: block;
+}
+
+.score-hero {
+    background: var(--qe-hero-bg, #111);
+    color: var(--qe-hero-text, #f5f0e8);
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.score-pre {
+    font-family: var(--qe-font-label, inherit);
+    font-size: 0.63rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--qe-denom-color, rgba(245,240,232,.55));
+    margin-bottom: 1rem;
+}
+
+.score-num {
+    font-family: var(--qe-font-serif, Georgia, serif);
+    font-size: clamp(3.5rem, 14vw, 6rem);
+    color: var(--qe-score-color, #d4a636);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+}
+
+.score-denom {
+    font-family: var(--qe-font-label, inherit);
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--qe-denom-color, rgba(245,240,232,.55));
+    margin-bottom: 2rem;
+}
+
+.verdict {
+    font-family: var(--qe-font-serif, Georgia, serif);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--qe-hero-text, #f5f0e8);
+    margin-bottom: 0.6rem;
+}
+
+.verdict-note {
+    font-family: var(--qe-font-body, inherit);
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--qe-denom-color, rgba(245,240,232,.55));
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ── Breakdown ── */
+.breakdown {
+    background: var(--qe-bd-bg, #fff);
+    border: 1px solid var(--qe-bd-border, rgba(0,0,0,.1));
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.bd-title {
+    font-family: var(--qe-font-label, inherit);
+    font-size: 0.63rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--qe-accent, #9a7a3a);
+    margin-bottom: 1rem;
+}
+
+.bd-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--qe-border, rgba(0,0,0,.12));
+    font-family: var(--qe-font-body, inherit);
+    font-size: 0.85rem;
+    gap: 1rem;
+}
+
+.bd-row:last-child {
+    border-bottom: none;
+}
+
+.bd-q {
+    color: var(--qe-text-muted, #666);
+    flex: 1;
+    line-height: 1.4;
+}
+
+.bd-mark {
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+.tick { color: var(--qe-correct, #2d7a27); }
+.cross { color: var(--qe-wrong, #8a1f1f); }
+
+/* ── Animations ── */
+@keyframes qe-slide-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes qe-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 580px) {
+    .question-card { padding: 1.4rem 1.2rem; }
+    .score-hero    { padding: 2rem 1.25rem; }
+    .breakdown     { padding: 1.1rem 1rem; }
+}

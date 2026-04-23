@@ -8,6 +8,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="../quiz-engine.css">
     <style>
         *,
         *::before,
@@ -30,6 +31,30 @@
             --wrong: #7A1F1F;
             --correct-bg: #E8F0E6;
             --wrong-bg: #F0E6E6;
+            --qe-font-serif: 'Playfair Display', serif;
+            --qe-font-body: 'Courier Prime', monospace;
+            --qe-font-label: 'Courier Prime', monospace;
+            --qe-surface: var(--paper);
+            --qe-border: var(--paper-dark);
+            --qe-border-hi: var(--rust);
+            --qe-text: var(--ink);
+            --qe-text-muted: var(--faded);
+            --qe-accent: var(--rust);
+            --qe-accent-lo: rgba(139, 58, 31, 0.07);
+            --qe-btn-bg: var(--rust);
+            --qe-btn-text: var(--cream);
+            --qe-btn-hover-bg: #6e2e14;
+            --qe-btn-hover-text: var(--cream);
+            --qe-correct: var(--correct);
+            --qe-correct-bg: var(--correct-bg);
+            --qe-wrong: var(--wrong);
+            --qe-wrong-bg: var(--wrong-bg);
+            --qe-hero-bg: var(--ink);
+            --qe-hero-text: var(--cream);
+            --qe-score-color: var(--rust);
+            --qe-denom-color: rgba(26, 22, 18, 0.5);
+            --qe-bd-bg: var(--paper);
+            --qe-bd-border: var(--paper-dark);
         }
 
         body {
@@ -105,351 +130,6 @@
             opacity: 0.18;
             width: 48px;
         }
-
-        /* Progress */
-        .progress-track {
-            height: 2px;
-            background: var(--paper-dark);
-            border-radius: 1px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--rust);
-            border-radius: 1px;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--faded);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Question card */
-        .q-card {
-            background: var(--paper);
-            border: 1px solid var(--paper-dark);
-            border-radius: 2px;
-            padding: 2rem 2rem 1.75rem;
-            margin-bottom: 1.25rem;
-            position: relative;
-            animation: slideIn 0.35s ease;
-        }
-
-        .q-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
-            background: var(--rust);
-            border-radius: 2px 0 0 2px;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .q-number {
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--rust);
-            margin-bottom: 0.75rem;
-        }
-
-        .q-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 19px;
-            line-height: 1.5;
-            color: var(--ink);
-            margin-bottom: 1.75rem;
-        }
-
-        /* Options */
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .opt {
-            background: var(--cream);
-            border: 1px solid var(--paper-dark);
-            border-radius: 2px;
-            padding: 13px 16px;
-            font-family: 'Courier Prime', monospace;
-            font-size: 14px;
-            color: var(--ink);
-            text-align: left;
-            cursor: pointer;
-            transition: border-color 0.15s, background 0.15s, transform 0.1s;
-            line-height: 1.45;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
-        .opt-letter {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--rust);
-            letter-spacing: 0.1em;
-            flex-shrink: 0;
-            margin-top: 2px;
-            min-width: 16px;
-        }
-
-        .opt:hover:not(:disabled) {
-            border-color: var(--rust-light);
-            background: #F9F4EC;
-            transform: translateX(2px);
-        }
-
-        .opt:disabled {
-            cursor: default;
-            transform: none;
-        }
-
-        .opt.correct {
-            background: var(--correct-bg);
-            border-color: var(--correct);
-            color: var(--correct);
-        }
-
-        .opt.correct .opt-letter {
-            color: var(--correct);
-        }
-
-        .opt.wrong {
-            background: var(--wrong-bg);
-            border-color: var(--wrong);
-            color: var(--wrong);
-        }
-
-        .opt.wrong .opt-letter {
-            color: var(--wrong);
-        }
-
-        .opt.reveal {
-            background: var(--correct-bg);
-            border-color: var(--correct);
-            color: var(--correct);
-        }
-
-        .opt.reveal .opt-letter {
-            color: var(--correct);
-        }
-
-        /* Feedback */
-        .feedback {
-            margin-top: 1.25rem;
-            padding: 14px 16px;
-            background: white;
-            border-left: 3px solid var(--gold);
-            font-size: 13px;
-            color: var(--faded);
-            line-height: 1.65;
-            font-style: italic;
-            animation: fadeIn 0.3s ease;
-            display: none;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Nav */
-        .nav {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 1.5rem;
-        }
-
-        .next-btn {
-            font-family: 'Courier Prime', monospace;
-            font-size: 13px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--rust);
-            background: transparent;
-            border: 1px solid var(--rust);
-            border-radius: 2px;
-            padding: 10px 22px;
-            cursor: pointer;
-            transition: background 0.15s, color 0.15s;
-            display: none;
-        }
-
-        .next-btn:hover {
-            background: var(--rust);
-            color: var(--cream);
-        }
-
-        .next-btn.show {
-            display: block;
-        }
-
-        /* Score screen */
-        .score-screen {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: var(--paper);
-            border: 1px solid var(--paper-dark);
-            border-radius: 2px;
-            animation: slideIn 0.4s ease;
-            display: none;
-        }
-
-        .score-screen.show {
-            display: block;
-        }
-
-        .score-fraction {
-            font-family: 'Playfair Display', serif;
-            font-size: 72px;
-            font-weight: 700;
-            color: var(--ink);
-            line-height: 1;
-            margin-bottom: 0.25rem;
-        }
-
-        .score-fraction span {
-            color: var(--rust);
-        }
-
-        .score-pct {
-            font-size: 13px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--faded);
-            margin-bottom: 1.75rem;
-        }
-
-        .score-divider {
-            width: 48px;
-            height: 1px;
-            background: var(--paper-dark);
-            margin: 0 auto 1.75rem;
-        }
-
-        .score-msg {
-            font-family: 'Playfair Display', serif;
-            font-size: 17px;
-            font-style: italic;
-            line-height: 1.65;
-            color: var(--faded);
-            max-width: 400px;
-            margin: 0 auto 2rem;
-        }
-
-        .restart-btn {
-            font-family: 'Courier Prime', monospace;
-            font-size: 12px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--rust);
-            background: transparent;
-            border: 1px solid var(--rust);
-            border-radius: 2px;
-            padding: 11px 28px;
-            cursor: pointer;
-            transition: background 0.15s, color 0.15s;
-        }
-
-        .restart-btn:hover {
-            background: var(--rust);
-            color: var(--cream);
-        }
-
-        /* Summary table */
-        .summary {
-            margin-top: 2rem;
-            border-top: 1px solid var(--paper-dark);
-            padding-top: 1.5rem;
-            text-align: left;
-        }
-
-        .summary-title {
-            font-size: 11px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--faded);
-            margin-bottom: 1rem;
-        }
-
-        .summary-row {
-            display: flex;
-            gap: 10px;
-            font-size: 12px;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--paper-dark);
-            line-height: 1.4;
-            align-items: flex-start;
-        }
-
-        .summary-row:last-child {
-            border-bottom: none;
-        }
-
-        .s-num {
-            color: var(--faded);
-            flex-shrink: 0;
-            width: 20px;
-        }
-
-        .s-result {
-            flex-shrink: 0;
-            width: 14px;
-        }
-
-        .s-q {
-            color: var(--ink);
-            flex: 1;
-        }
-
-        .check {
-            color: var(--correct);
-        }
-
-        .cross {
-            color: var(--wrong);
-        }
-
-        footer-note {
-            display: block;
-            text-align: center;
-            font-size: 11px;
-            color: var(--faded);
-            margin-top: 2.5rem;
-            letter-spacing: 0.08em;
-        }
     </style>
 </head>
 
@@ -471,7 +151,6 @@
     </div>
 
     <script>
-        const LETTERS = ['A', 'B', 'C', 'D'];
         window.QUIZ = {
             questions: [
                 {
