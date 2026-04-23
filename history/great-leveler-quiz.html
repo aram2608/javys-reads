@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Great Leveler - Comprehension Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1510;
+    --parchment: #f5f0e8;
+    --aged: #e8e0cc;
+    --rust: #8b3a2a;
+    --gold: #c9952a;
+    --muted: #6b5f4e;
+    --correct: #2d6a4f;
+    --wrong: #8b2a2a;
+    --correct-bg: #e8f5ee;
+    --wrong-bg: #f5e8e8;
+  }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(201,149,42,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 90%, rgba(139,58,42,0.06) 0%, transparent 60%);
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    padding: 2.5rem 0 2rem;
+    border-bottom: 1px solid var(--aged);
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  h1 em {
+    color: var(--rust);
+    font-style: italic;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .ornament {
+    display: block;
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin: 1rem 0 0;
+    letter-spacing: 0.5em;
+    opacity: 0.7;
+  }
+
+  /* Progress */
+  .progress-bar-wrap {
+    background: var(--aged);
+    height: 4px;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--rust), var(--gold));
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+  .progress-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-align: right;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Question card */
+  .question-card {
+    background: #fff;
+    border: 1px solid var(--aged);
+    border-radius: 3px;
+    padding: 2rem 2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 12px rgba(26,21,16,0.06);
+    animation: fadeUp 0.35s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-number {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+
+  .q-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 1.4rem;
+    font-weight: 400;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .option-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: var(--parchment);
+    border: 1.5px solid var(--aged);
+    border-radius: 2px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 0.93rem;
+    line-height: 1.5;
+    color: var(--ink);
+    text-align: left;
+    transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--rust);
+    background: #fff;
+    transform: translateX(3px);
+  }
+
+  .option-btn:disabled { cursor: default; transform: none; }
+
+  .option-btn.correct {
+    background: var(--correct-bg);
+    border-color: var(--correct);
+    color: var(--correct);
+  }
+  .option-btn.wrong {
+    background: var(--wrong-bg);
+    border-color: var(--wrong);
+    color: var(--wrong);
+  }
+  .option-btn.reveal {
+    background: var(--correct-bg);
+    border-color: var(--correct);
+    color: var(--correct);
+    opacity: 0.7;
+  }
+
+  .opt-letter {
+    min-width: 1.5rem;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+  }
+
+  /* Explanation */
+  .explanation {
+    margin-top: 1rem;
+    padding: 0.9rem 1rem;
+    border-left: 3px solid var(--gold);
+    background: #fdf9f2;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--muted);
+    border-radius: 0 2px 2px 0;
+    animation: fadeUp 0.3s ease both;
+  }
+  .explanation strong { color: var(--rust); }
+
+  /* Nav */
+  .nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+
+  .btn-next {
+    background: var(--rust);
+    color: #fff;
+    border: none;
+    padding: 0.65rem 1.6rem;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .btn-next:hover { background: #6e2e20; transform: translateY(-1px); }
+  .btn-next:disabled { background: var(--aged); color: var(--muted); cursor: default; transform: none; }
+
+  /* Results */
+  .results {
+    background: #fff;
+    border: 1px solid var(--aged);
+    border-radius: 3px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(26,21,16,0.06);
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .results-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--rust);
+    line-height: 1;
+    margin: 1rem 0 0.25rem;
+  }
+
+  .results-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .results-verdict {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    font-style: italic;
+  }
+
+  .result-breakdown {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .result-breakdown span { display: flex; align-items: center; gap: 0.4rem; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .dot.c { background: var(--correct); }
+  .dot.w { background: var(--wrong); }
+
+  .btn-restart {
+    background: transparent;
+    border: 1.5px solid var(--rust);
+    color: var(--rust);
+    padding: 0.65rem 1.8rem;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-restart:hover { background: var(--rust); color: #fff; }
+
+  @media (max-width: 480px) {
+    .question-card { padding: 1.4rem 1.2rem 1rem; }
+    h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <p class="eyebrow">Comprehension Quiz</p>
+    <h1><em>The Great Leveler</em></h1>
+    <p class="subtitle">Violence and the History of Inequality - Walter Scheidel</p>
+    <span class="ornament">- ✦ -</span>
+  </header>
+
+  <div id="quiz-area"></div>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "What is Scheidel's central thesis in The Great Leveler?",
+    options: [
+      "Economic growth naturally reduces inequality over time.",
+      "Only government redistribution policies can effectively reduce inequality.",
+      "Throughout history, large-scale reductions in inequality have required violent, catastrophic \"Four Horsemen\" events.",
+      "Inequality is primarily driven by technological change rather than political structures."
+    ],
+    answer: 2,
+    explain: "Scheidel's core argument is that peaceful, durable reductions in inequality are historically rare. The \"Four Horsemen\" - mass mobilization warfare, transformative revolution, state collapse, and lethal pandemics - are the primary mechanisms that have leveled wealth and income distributions."
+  },
+  {
+    q: "Which of the following does Scheidel NOT identify as one of his \"Four Horsemen\" of leveling?",
+    options: [
+      "Mass mobilization warfare",
+      "Transformative revolution",
+      "Democratic reform movements",
+      "State collapse and systems disruption"
+    ],
+    answer: 2,
+    explain: "The Four Horsemen are: mass mobilization warfare, transformative revolution, state collapse, and lethal pandemics. Democratic reform and peaceful redistribution are notably absent - a key point of Scheidel's argument about the limits of gradualist approaches."
+  },
+  {
+    q: "How does Scheidel characterize the compression of inequality that occurred after World War II in many Western nations?",
+    options: [
+      "As the result of progressive taxation and labor union strength alone.",
+      "As a rare outcome driven primarily by total war mobilization and its fiscal demands, not sustainable policy.",
+      "As evidence that market economies naturally self-correct toward equality.",
+      "As the product of Marshall Plan foreign aid redistributing wealth internationally."
+    ],
+    answer: 1,
+    explain: "Scheidel argues that the mid-20th-century compression was largely a product of total war - mass mobilization destroyed capital, compressed wages, and demanded progressive taxation. He is skeptical that the policy environment alone could have produced or can reproduce this leveling."
+  },
+  {
+    q: "What does Scheidel's analysis of ancient Rome and other pre-modern empires primarily illustrate?",
+    options: [
+      "That inequality was lower in ancient societies because of communal land ownership.",
+      "That extreme wealth concentration is an ancient pattern, not a modern invention.",
+      "That Roman fiscal policy was a model of progressive redistribution.",
+      "That pre-modern states lacked the capability to measure inequality."
+    ],
+    answer: 1,
+    explain: "Using proxies like skeletal health data, wealth distributions in Roman Egypt, and literary evidence, Scheidel shows that extreme inequality - comparable to modern levels - existed in ancient empires. High inequality is the historical norm, not an anomaly of capitalism."
+  },
+  {
+    q: "How does Scheidel treat the Black Death in his argument about leveling mechanisms?",
+    options: [
+      "As irrelevant, since it affected rich and poor equally.",
+      "As a case of pandemic-driven leveling: labor scarcity drove up wages and eroded elite land wealth.",
+      "As proof that environmental shocks increase inequality by disrupting peasant agriculture.",
+      "As an outlier that contradicts his general thesis."
+    ],
+    answer: 1,
+    explain: "The Black Death is one of Scheidel's key historical cases. By killing roughly a third of Europe's population, it created acute labor scarcity, which gave surviving peasants bargaining power and drove up real wages - one of the clearest examples of pandemic-driven leveling in the historical record."
+  },
+  {
+    q: "What is Scheidel's view on the potential for peaceful, reform-driven reductions of inequality in modern democracies?",
+    options: [
+      "He is optimistic that technological progress will enable unprecedented redistribution.",
+      "He believes strong international institutions can replace the need for violent leveling.",
+      "He is deeply skeptical, arguing historical evidence offers little precedent for durable peaceful leveling.",
+      "He argues that proportional representation electoral systems reliably produce sustained redistribution."
+    ],
+    answer: 2,
+    explain: "This is among the book's most sobering conclusions. Scheidel reviews efforts at reform and finds them modest and reversible. Without a catastrophic shock, entrenched elites tend to successfully resist structural redistribution - a pessimistic verdict on the limits of democratic gradualism."
+  },
+  {
+    q: "Which of the following best describes Scheidel's use of \"inequality\" throughout the book?",
+    options: [
+      "He focuses exclusively on income inequality as measured by the Gini coefficient.",
+      "He examines both wealth and income inequality across a wide range of societies using diverse historical evidence.",
+      "He defines inequality solely in terms of land ownership patterns.",
+      "He restricts his analysis to societies with written tax records."
+    ],
+    answer: 1,
+    explain: "Scheidel is methodologically broad: he uses Gini coefficients where available but also draws on skeletal anthropometry, archaeological evidence, literary sources, and papyri. His goal is a long-run comparative history of both wealth and income inequality."
+  },
+  {
+    q: "How does Scheidel's treatment of communist revolutions fit into his framework?",
+    options: [
+      "He argues they failed to reduce inequality because they were peaceful.",
+      "He treats them as examples of transformative revolution - violent leveling that reduced inequality, though often at enormous human cost.",
+      "He excludes them as ideologically driven outliers irrelevant to economic analysis.",
+      "He shows they increased inequality by concentrating power in a new elite."
+    ],
+    answer: 1,
+    explain: "Communist revolutions - in Russia, China, and elsewhere - are Scheidel's examples of the \"transformative revolution\" horseman. They dramatically compressed wealth distributions, but the leveling came through expropriation, mass violence, and terror. The cost was catastrophic, illustrating his broader point that leveling historically requires upheaval."
+  },
+  {
+    q: "What does Scheidel suggest about the relationship between state capacity and inequality?",
+    options: [
+      "Strong states always reduce inequality through superior fiscal capacity.",
+      "State collapse tends to increase inequality by allowing elites to consolidate power.",
+      "State collapse and systems disruption can level inequality by destroying elite wealth and power structures.",
+      "State capacity is irrelevant to long-run inequality trends."
+    ],
+    answer: 2,
+    explain: "State collapse is one of the Four Horsemen precisely because it can destroy the institutions and property structures that underpin elite wealth. When states disintegrate, the existing hierarchy of wealth often collapses with them - a brutal but historically recurrent form of leveling."
+  },
+  {
+    q: "What is the broader implication Scheidel draws about the future of inequality in stable, peaceful societies?",
+    options: [
+      "Automation will eventually flatten wealth distributions without political intervention.",
+      "Climate change will function as a new leveling force comparable to the Black Death.",
+      "Without a catastrophic shock, there is little historical basis to expect meaningful reductions in inequality.",
+      "Global financial regulation is likely to produce a new era of Kuznets-curve convergence."
+    ],
+    answer: 2,
+    explain: "Scheidel ends on a deliberately uncomfortable note: the historical record suggests that absent catastrophic violence, pandemic, or collapse, inequality tends to persist or worsen. For those who hope to reduce inequality through peaceful means, he offers no easy comfort - only a frank account of what the evidence shows."
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = new Array(questions.length).fill(false);
+let correctArr = new Array(questions.length).fill(false);
+
+function render() {
+  const area = document.getElementById('quiz-area');
+  if (current >= questions.length) {
+    renderResults(area);
+    return;
+  }
+  const q = questions[current];
+  const letters = ['A','B','C','D'];
+  const pct = (current / questions.length) * 100;
+
+  area.innerHTML = `
+    <div class="progress-label">Question ${current + 1} of ${questions.length}</div>
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>
+    <div class="question-card" id="qcard">
+      <div class="q-number">Question ${current + 1}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options" id="options">
+        ${q.options.map((o, i) => `
+          <button class="option-btn" id="opt${i}" onclick="choose(${i})">
+            <span class="opt-letter">${letters[i]}.</span>
+            <span>${o}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div id="explanation"></div>
+    </div>
+    <div class="nav">
+      <button class="btn-next" id="btn-next" disabled onclick="nextQ()">Next →</button>
+    </div>
+  `;
+}
+
+function choose(idx) {
+  if (answered[current]) return;
+  answered[current] = true;
+  const q = questions[current];
+  const correct = q.answer;
+  const btns = document.querySelectorAll('.option-btn');
+
+  btns.forEach(b => b.disabled = true);
+
+  btns[idx].classList.add(idx === correct ? 'correct' : 'wrong');
+  if (idx !== correct) btns[correct].classList.add('reveal');
+
+  if (idx === correct) {
+    score++;
+    correctArr[current] = true;
+  }
+
+  document.getElementById('explanation').innerHTML = `
+    <div class="explanation">
+      <strong>${idx === correct ? '✓ Correct.' : '✗ Not quite.'}</strong> ${q.explain}
+    </div>
+  `;
+
+  document.getElementById('btn-next').disabled = false;
+}
+
+function nextQ() {
+  current++;
+  render();
+}
+
+function renderResults(area) {
+  const pct = Math.round((score / questions.length) * 100);
+  let verdict;
+  if (pct >= 90) verdict = "An exceptional reading. You've absorbed Scheidel's argument with the rigor it deserves.";
+  else if (pct >= 70) verdict = "A solid grasp of the thesis and its historical scaffolding. A few details remain to revisit.";
+  else if (pct >= 50) verdict = "You have the broad strokes, but some of the finer arguments slipped by. Worth a careful re-read.";
+  else verdict = "The Four Horsemen left some gaps. Scheidel rewards a close second pass.";
+
+  area.innerHTML = `
+    <div class="results">
+      <div class="eyebrow">Quiz Complete</div>
+      <div class="results-score">${score}/${questions.length}</div>
+      <div class="results-label">${pct}% correct</div>
+      <p class="results-verdict">${verdict}</p>
+      <div class="result-breakdown">
+        <span><span class="dot c"></span> ${score} correct</span>
+        <span><span class="dot w"></span> ${questions.length - score} incorrect</span>
+      </div>
+      <button class="btn-restart" onclick="restart()">Retake Quiz</button>
+    </div>
+  `;
+}
+
+function restart() {
+  current = 0; score = 0;
+  answered = new Array(questions.length).fill(false);
+  correctArr = new Array(questions.length).fill(false);
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

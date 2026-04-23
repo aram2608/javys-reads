@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capital in the Twenty-First Century - Quiz</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0e1117;
+            --surface: #161b27;
+            --surface2: #1e2535;
+            --border: #2a3347;
+            --accent: #4f8ef7;
+            --accent2: #e05c5c;
+            --gold: #f0c060;
+            --text: #e8eaf0;
+            --muted: #7a8499;
+            --correct: #3ecf8e;
+            --wrong: #e05c5c;
+            --correct-bg: rgba(62, 207, 142, 0.08);
+            --wrong-bg: rgba(224, 92, 92, 0.08);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', system-ui, sans-serif;
+            min-height: 100vh;
+            padding: 2rem 1rem 5rem;
+            background-image:
+                radial-gradient(ellipse at 15% 0%, rgba(79, 142, 247, 0.07) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 100%, rgba(240, 192, 96, 0.05) 0%, transparent 55%);
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        header {
+            padding: 2rem 0 2.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+        }
+
+        .eyebrow {
+            font-size: 0.68rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        h1 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: clamp(1.7rem, 5vw, 2.4rem);
+            line-height: 1.15;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+
+        h1 em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(224, 92, 92, 0.15);
+            border: 1px solid rgba(224, 92, 92, 0.3);
+            color: var(--wrong);
+            border-radius: 999px;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Progress */
+        .progress-label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progress-bar-wrap {
+            background: var(--border);
+            height: 3px;
+            border-radius: 2px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+
+        /* Card */
+        .question-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            animation: fadeUp 0.3s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .q-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .q-num {
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .q-tag {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.55rem;
+            border-radius: 999px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border: 1px solid;
+        }
+
+        .tag-theory {
+            color: #a78bfa;
+            border-color: rgba(167, 139, 250, 0.3);
+            background: rgba(167, 139, 250, 0.08);
+        }
+
+        .tag-data {
+            color: #34d399;
+            border-color: rgba(52, 211, 153, 0.3);
+            background: rgba(52, 211, 153, 0.08);
+        }
+
+        .tag-history {
+            color: #f59e0b;
+            border-color: rgba(245, 158, 11, 0.3);
+            background: rgba(245, 158, 11, 0.08);
+        }
+
+        .tag-policy {
+            color: #60a5fa;
+            border-color: rgba(96, 165, 250, 0.3);
+            background: rgba(96, 165, 250, 0.08);
+        }
+
+        .q-text {
+            font-size: 1rem;
+            line-height: 1.65;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .q-text strong {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            background: var(--surface2);
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            font-family: 'DM Sans', system-ui, sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text);
+            text-align: left;
+            transition: border-color 0.15s, background 0.15s;
+            font-weight: 300;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            background: rgba(79, 142, 247, 0.07);
+        }
+
+        .option-btn:disabled {
+            cursor: default;
+        }
+
+        .option-btn.correct {
+            background: var(--correct-bg);
+            border-color: var(--correct);
+            color: var(--correct);
+        }
+
+        .option-btn.wrong {
+            background: var(--wrong-bg);
+            border-color: var(--wrong);
+            color: var(--wrong);
+        }
+
+        .option-btn.reveal {
+            background: var(--correct-bg);
+            border-color: var(--correct);
+            color: var(--correct);
+            opacity: 0.6;
+        }
+
+        .opt-key {
+            min-width: 1.4rem;
+            font-family: 'DM Serif Display', serif;
+            font-size: 0.95rem;
+            color: var(--muted);
+            padding-top: 0.05rem;
+        }
+
+        .option-btn.correct .opt-key,
+        .option-btn.reveal .opt-key {
+            color: var(--correct);
+        }
+
+        .option-btn.wrong .opt-key {
+            color: var(--wrong);
+        }
+
+        /* Explanation */
+        .explanation {
+            margin-top: 1.2rem;
+            padding: 1rem 1.1rem;
+            background: rgba(79, 142, 247, 0.06);
+            border-left: 2px solid var(--accent);
+            border-radius: 0 6px 6px 0;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: var(--muted);
+            animation: fadeUp 0.3s ease both;
+        }
+
+        .explanation .verdict {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .verdict.ok {
+            color: var(--correct);
+        }
+
+        .verdict.no {
+            color: var(--wrong);
+        }
+
+        /* Nav */
+        .nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 0.75rem;
+        }
+
+        .btn-next {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-family: 'DM Sans', system-ui, sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: opacity 0.15s, transform 0.1s;
+        }
+
+        .btn-next:hover {
+            opacity: 0.88;
+            transform: translateY(-1px);
+        }
+
+        .btn-next:disabled {
+            background: var(--border);
+            color: var(--muted);
+            cursor: default;
+            transform: none;
+            opacity: 1;
+        }
+
+        /* Score tracker */
+        .score-tracker {
+            display: flex;
+            gap: 0.35rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .score-pip {
+            width: 28px;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
+            transition: background 0.3s;
+        }
+
+        .score-pip.c {
+            background: var(--correct);
+        }
+
+        .score-pip.w {
+            background: var(--wrong);
+        }
+
+        .score-pip.curr {
+            background: var(--accent);
+            opacity: 0.5;
+        }
+
+        /* Results */
+        .results {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            animation: fadeUp 0.4s ease both;
+        }
+
+        .results-score {
+            font-family: 'DM Serif Display', serif;
+            font-size: 5rem;
+            line-height: 1;
+            margin: 0.75rem 0 0.2rem;
+        }
+
+        .results-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .results-verdict {
+            font-size: 0.97rem;
+            line-height: 1.7;
+            color: var(--muted);
+            max-width: 460px;
+            margin: 0 auto 2rem;
+            font-weight: 300;
+        }
+
+        .breakdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .breakdown span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot.c {
+            background: var(--correct);
+        }
+
+        .dot.w {
+            background: var(--wrong);
+        }
+
+        .btn-restart {
+            background: transparent;
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            padding: 0.65rem 1.8rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-restart:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        @media (max-width: 480px) {
+            .question-card {
+                padding: 1.3rem 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <p class="eyebrow">Comprehension Quiz</p>
+            <h1><em>Capital in the Twenty-First Century</em></h1>
+            <p class="subtitle">Thomas Piketty - translated by Arthur Goldhammer</p>
+        </header>
+        <div id="quiz-area"></div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                tag: "theory", tagLabel: "Theory",
+                q: "Piketty's central inequality is expressed as <strong>r > g</strong>. What do <em>r</em> and <em>g</em> precisely represent, and what does the inequality predict?",
+                options: [
+                    "r = GDP growth rate; g = wage growth rate. When GDP grows faster than wages, inequality rises.",
+                    "r = rate of return on capital; g = rate of economic growth. When capital returns exceed growth, wealth concentrates among owners of capital.",
+                    "r = return on financial assets only; g = real wage growth. The inequality explains the stagnation of middle-class incomes.",
+                    "r = rate of capital accumulation; g = population growth. When capital accumulates faster than population grows, per capita inequality rises."
+                ],
+                answer: 1,
+                explain: "r is the average rate of return on all forms of capital (real estate, financial assets, business capital) and g is the overall rate of economic growth (output and income). When r > g, capital income compounds faster than the economy grows, causing those who own capital to accumulate a rising share of total wealth over time."
+            },
+            {
+                tag: "data", tagLabel: "Data & Evidence",
+                q: "Piketty's empirical dataset - the backbone of the book - was constructed primarily from which sources?",
+                options: [
+                    "World Bank national accounts and IMF balance of payments data.",
+                    "Tax records (estate and income tax returns) from France, Britain, the US, and other countries, compiled over many years.",
+                    "Corporate filings and stock exchange records going back to the 19th century.",
+                    "Household survey data (like the Survey of Consumer Finances) extended backward using econometric backcasting."
+                ],
+                answer: 1,
+                explain: "The World Inequality Database (then WTID) assembled by Piketty, Saez, Atkinson and others relies centrally on fiscal records - income tax returns and especially estate/inheritance tax records - which provide long historical series. Surveys are too recent and too subject to top-coding to capture long-run wealth dynamics."
+            },
+            {
+                tag: "theory", tagLabel: "Theory",
+                q: "Piketty introduces the \"First Fundamental Law of Capitalism\": <strong>α = r × β</strong>. What does this express?",
+                options: [
+                    "The capital share of income (α) equals the rate of return on capital (r) times the capital-to-income ratio (β). It is an accounting identity, not a behavioral law.",
+                    "The growth rate of capital (α) equals the profit rate (r) divided by the savings rate (β), predicting capital accumulation speed.",
+                    "Income inequality (α) is a function of returns to capital (r) and the wage-to-profit ratio (β).",
+                    "National savings (α) equal the return on capital (r) times the investment-to-GDP ratio (β), determining steady-state growth."
+                ],
+                answer: 0,
+                explain: "This is a pure accounting identity: if the capital/income ratio is β and capital earns a return r, then capital's share of national income α must equal r × β. Piketty stresses it is definitional, not causal - but it allows him to link trends in capital accumulation to factor shares of income."
+            },
+            {
+                tag: "data", tagLabel: "Data & Evidence",
+                q: "According to Piketty's data, what happened to the capital-to-income ratio in Western Europe between roughly 1914 and 1950, and what primarily explains this?",
+                options: [
+                    "It rose sharply, driven by wartime industrial investment and post-war reconstruction.",
+                    "It remained roughly stable at around 5–6 times national income throughout the period.",
+                    "It fell dramatically - from around 6–7 times national income to around 2–3 times - due to physical destruction, inflation, capital controls, and depressed asset prices.",
+                    "It declined modestly from 4 to 3 times national income, mainly due to redistributive taxation."
+                ],
+                answer: 2,
+                explain: "This is one of the book's key empirical findings. The capital/income ratio in France and Britain plunged from roughly 6–7× in 1910 to around 2–3× by 1950. Physical destruction of capital in WWI and WWII was one factor, but Piketty emphasizes inflation, nationalization, capital controls, and depressed asset prices as equally or more important in compressing wealth."
+            },
+            {
+                tag: "history", tagLabel: "Historical",
+                q: "Piketty describes the period 1914–1970 as historically anomalous. What term does he use, and why does he argue this period should not be taken as a baseline for thinking about capitalism?",
+                options: [
+                    "He calls it the \"Golden Age of Labor\" and argues it was produced by uniquely strong union movements that cannot be replicated.",
+                    "He calls it the \"Great Compression\" and argues it resulted from specific shocks - wars, the Depression, capital destruction - not from a natural tendency of capitalism.",
+                    "He calls it the \"Kuznets Phase\" and argues it reflects the temporary inequality-reducing effect of industrialization, not a permanent structural change.",
+                    "He calls it the \"Social Democratic Exception\" and attributes it entirely to the expansion of the welfare state."
+                ],
+                answer: 1,
+                explain: "Piketty explicitly argues against treating the mid-20th century as the natural state of capitalism. The compression of inequality in this period was a product of catastrophic shocks (wars, depression) and the exceptional g > r conditions they created. As growth slows and r > g reasserts itself, patrimonial capitalism tends to return to Belle Époque levels of concentration."
+            },
+            {
+                tag: "theory", tagLabel: "Theory",
+                q: "Piketty's \"Second Fundamental Law of Capitalism\" states β = s/g. What is the implication when economic growth g is very low?",
+                options: [
+                    "Low growth forces savings rates down, which stabilizes the capital-to-income ratio.",
+                    "Low growth causes the capital-to-income ratio to rise toward very high levels (since β = s/g, a small g with any positive savings rate produces a large β).",
+                    "Low growth reduces the return on capital r, offsetting the rise in β and preventing further inequality.",
+                    "Low growth pushes the economy toward a steady-state where capital and labor shares equalize."
+                ],
+                answer: 1,
+                explain: "This is one of Piketty's most important structural points. β = s/g is a long-run equilibrium condition. With, say, a savings rate of 10% and growth of 1%, the capital/income ratio converges to 10 - far above historical averages. Slow-growth economies naturally accumulate vast capital stocks relative to income, intensifying the logic of r > g."
+            },
+            {
+                tag: "policy", tagLabel: "Policy",
+                q: "Piketty's signature policy proposal is a progressive global wealth tax. What is his primary argument for why it must be <em>global</em>, and what does he acknowledge about its feasibility?",
+                options: [
+                    "It must be global to prevent capital flight to tax havens; Piketty calls it a \"useful utopia\" and acknowledges it is politically very difficult but not economically incoherent.",
+                    "It must be global because wealth inequality is fundamentally a global phenomenon driven by trade imbalances between rich and poor countries.",
+                    "It must be global to ensure that developing nations receive transfers from wealthy ones; he believes it is achievable through existing international institutions.",
+                    "It must be global because domestic wealth taxes would distort investment; he presents it as an immediately actionable proposal for the EU."
+                ],
+                answer: 0,
+                explain: "Piketty's argument for a global wealth tax rests on capital mobility: a national wealth tax would drive capital offshore. He explicitly calls it a \"utopie utile\" - a useful utopia - acknowledging it requires international cooperation that doesn't currently exist, while arguing it is economically coherent and worth orienting policy toward."
+            },
+            {
+                tag: "data", tagLabel: "Data & Evidence",
+                q: "When Piketty analyzes the United States, what distinctive feature does he identify about American inequality compared to European inequality?",
+                options: [
+                    "American wealth inequality is lower than European because of higher social mobility and broader asset ownership.",
+                    "American inequality is driven more by extreme labor income concentration at the top (\"supermanager\" salaries) than by inherited wealth, unlike in Europe where inherited wealth dominates.",
+                    "American inequality is primarily driven by racial wealth gaps that have no European parallel.",
+                    "American capital-to-income ratios are consistently higher than European ones, making r > g more acute."
+                ],
+                answer: 1,
+                explain: "Piketty notes that the US has developed a novel form of inequality partly driven by extreme divergence in labor income - the rise of \"supermanagers\" earning extraordinary compensation. He contrasts this with the European tradition of rentier inequality based in inherited wealth, while arguing both mechanisms lead to problematic concentration. He does predict inherited wealth will grow in importance in the US as well."
+            },
+            {
+                tag: "theory", tagLabel: "Theory",
+                q: "Piketty discusses the elasticity of substitution between capital and labor. What value of this elasticity is critical to his argument, and why?",
+                options: [
+                    "An elasticity equal to exactly 1 (Cobb-Douglas), which ensures capital and labor shares remain constant regardless of the capital stock.",
+                    "An elasticity greater than 1, which means capital and labor are highly substitutable - so as capital accumulates, its marginal product doesn't fall fast enough to prevent r from staying high, allowing the capital share α to rise.",
+                    "An elasticity less than 1, which means capital quickly becomes less productive as it accumulates, ensuring returns fall and inequality self-corrects.",
+                    "An elasticity of 0 (Leontief), meaning capital and labor must be combined in fixed proportions, making substitution irrelevant."
+                ],
+                answer: 1,
+                explain: "Standard theory might suggest capital abundance would drive r down (diminishing returns), automatically correcting inequality. But Piketty argues the long-run elasticity of substitution is likely above 1, meaning capital and labor substitute easily enough that even as capital/income ratios rise, the return r stays relatively high - allowing the capital share α to increase. This is what makes r > g a durable tendency rather than a self-correcting one."
+            },
+            {
+                tag: "history", tagLabel: "Historical",
+                q: "Piketty uses the example of \"Père Goriot\" and other 19th-century novels to make a methodological point. What is that point?",
+                options: [
+                    "That literary sources are unreliable for economic history and should be discarded in favor of archival data.",
+                    "That novelists like Balzac and Austen depicted the capital-income ratios and return-on-wealth of their era with remarkable accuracy - illustrating that contemporaries understood inherited wealth as the only viable path to comfort, not labor.",
+                    "That 19th-century fiction exaggerated inequality for dramatic purposes, and real wealth distributions were more equal than portrayed.",
+                    "That the rentier class in 19th-century France was less dominant than commonly believed, since most wealth was held by the state."
+                ],
+                answer: 1,
+                explain: "Piketty uses Balzac and Austen deliberately - not just as color but as evidence that the logic of patrimonial society was widely understood. In Père Goriot, Vautrin's famous speech to Rastignac lays out the math explicitly: a career in law will never match a wealthy marriage. Piketty treats this as confirmation that r > g in the 19th century was not obscure - it was lived reality, encoded in culture."
+            },
+            {
+                tag: "policy", tagLabel: "Policy",
+                q: "Piketty is critical of the \"Kuznets curve\" hypothesis. What does the Kuznets curve predict, and why does Piketty reject it as a general law?",
+                options: [
+                    "The Kuznets curve predicts inequality rises with industrialization then falls; Piketty rejects it because it ignores the role of capital returns.",
+                    "The Kuznets curve predicts that inequality first rises then falls as countries develop economically. Piketty argues the mid-20th century data that seemed to confirm it were a product of specific historical shocks, not a general developmental law.",
+                    "The Kuznets curve predicts that free trade reduces inequality globally; Piketty rejects it on the grounds that capital mobility offsets trade gains.",
+                    "The Kuznets curve predicts a stable long-run capital share; Piketty shows capital shares have trended upward since 1980."
+                ],
+                answer: 1,
+                explain: "Kuznets formulated his inverted-U hypothesis in the 1950s, largely based on data from the post-war compression. Piketty argues this was a case of misleading historical coincidence: the decline in inequality during that period was caused by wars and the Depression, not by a natural developmental process. The subsequent rise of inequality since the 1980s has largely falsified the Kuznets curve as a general prediction."
+            },
+            {
+                tag: "data", tagLabel: "Data & Evidence",
+                q: "According to Piketty's data, the top 10% income share in the United States reached what approximate level by the 2010s, and how does this compare to the early 20th century?",
+                options: [
+                    "Around 35%, similar to the levels seen in the 1920s peak.",
+                    "Around 50%, roughly matching or slightly exceeding the 1920s peak - reversing the entire mid-century compression.",
+                    "Around 60%, significantly above the 1920s and representing an all-time high in the historical record.",
+                    "Around 40%, modestly below the 1920s peak, suggesting incomplete but meaningful reconcentration."
+                ],
+                answer: 1,
+                explain: "Piketty and Saez's data show the top 10% income share in the US approaching or exceeding 50% of national income by the early 2010s, roughly matching the 1920s peak. This is a key empirical anchor of the book: the mid-century compression has been almost entirely reversed, and the US now resembles the inequality levels of the Gilded Age."
+            }
+        ];
+
+        let current = 0;
+        let score = 0;
+        let results = []; // 'c', 'w', or null
+
+        function render() {
+            const area = document.getElementById('quiz-area');
+            if (current >= questions.length) {renderResults(area); return;}
+
+            const q = questions[current];
+            const letters = ['A', 'B', 'C', 'D'];
+            const pct = (current / questions.length) * 100;
+            results = results.slice(0, current); // trim if restarting mid-way
+
+            area.innerHTML = `
+    <div class="score-tracker" id="pips">
+      ${questions.map((_, i) => {
+                let cls = i < current ? (results[i] === 'c' ? 'c' : 'w') : (i === current ? 'curr' : '');
+                return `<div class="score-pip ${cls}"></div>`;
+            }).join('')}
+    </div>
+    <div class="progress-label">
+      <span>Question ${current + 1} of ${questions.length}</span>
+      <span>${score} correct</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>
+    <div class="question-card">
+      <div class="q-meta">
+        <span class="q-num">Q${current + 1}</span>
+        <span class="q-tag tag-${q.tag}">${q.tagLabel}</span>
+      </div>
+      <div class="q-text">${q.q}</div>
+      <div class="options" id="options">
+        ${q.options.map((o, i) => `
+          <button class="option-btn" id="opt${i}" onclick="choose(${i})">
+            <span class="opt-key">${letters[i]}</span>
+            <span>${o}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div id="explanation"></div>
+    </div>
+    <div class="nav">
+      <button class="btn-next" id="btn-next" disabled onclick="nextQ()">
+        ${current < questions.length - 1 ? 'Next →' : 'See Results →'}
+      </button>
+    </div>
+  `;
+        }
+
+        function choose(idx) {
+            const q = questions[current];
+            const correct = q.answer;
+            const btns = document.querySelectorAll('.option-btn');
+            btns.forEach(b => b.disabled = true);
+
+            btns[idx].classList.add(idx === correct ? 'correct' : 'wrong');
+            if (idx !== correct) btns[correct].classList.add('reveal');
+
+            const isCorrect = idx === correct;
+            if (isCorrect) score++;
+            results[current] = isCorrect ? 'c' : 'w';
+
+            document.getElementById('explanation').innerHTML = `
+    <div class="explanation">
+      <div class="verdict ${isCorrect ? 'ok' : 'no'}">${isCorrect ? '✓ Correct.' : '✗ Incorrect.'}</div>
+      ${q.explain}
+    </div>
+  `;
+
+            document.getElementById('btn-next').disabled = false;
+
+            // update pip
+            const pips = document.querySelectorAll('.score-pip');
+            if (pips[current]) pips[current].classList.add(isCorrect ? 'c' : 'w');
+        }
+
+        function nextQ() {
+            current++;
+            render();
+        }
+
+        function renderResults(area) {
+            const pct = Math.round((score / questions.length) * 100);
+            const color = pct >= 80 ? 'var(--correct)' : pct >= 55 ? 'var(--gold)' : 'var(--wrong)';
+            let verdict;
+            if (pct >= 90) verdict = "Excellent command of the material - the mechanics of r > g, the empirical architecture, the policy arguments. Piketty would approve of the rigor.";
+            else if (pct >= 70) verdict = "Solid grasp of the core framework. A few of the finer empirical or theoretical details escaped you, but the thesis is firmly in hand.";
+            else if (pct >= 50) verdict = "You have the broad argument but some of the technical machinery - the fundamental laws, the elasticity argument, the Kuznets critique - needs another pass.";
+            else verdict = "The capital-to-income ratio of your comprehension needs some accumulation. Worth a re-read of Parts I and II in particular.";
+
+            area.innerHTML = `
+    <div class="score-tracker">
+      ${results.map(r => `<div class="score-pip ${r}"></div>`).join('')}
+    </div>
+    <div class="results">
+      <div class="eyebrow">Quiz Complete</div>
+      <div class="results-score" style="color:${color}">${score}/${questions.length}</div>
+      <div class="results-label">${pct}% - ${questions.length} questions</div>
+      <p class="results-verdict">${verdict}</p>
+      <div class="breakdown">
+        <span><span class="dot c"></span> ${score} correct</span>
+        <span><span class="dot w"></span> ${questions.length - score} incorrect</span>
+      </div>
+      <button class="btn-restart" onclick="restart()">Retake Quiz</button>
+    </div>
+  `;
+        }
+
+        function restart() {
+            current = 0; score = 0; results = [];
+            render();
+        }
+
+        render();
+    </script>
+</body>
+
+</html>

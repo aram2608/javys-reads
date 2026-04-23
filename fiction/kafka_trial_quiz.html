@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Trial - Quiz</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Vollkorn:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --bg: #0d0f0e;
+    --fog: #b8c4b4;
+    --pale: #d8e4d2;
+    --dim: #576457;
+    --mute: #343c35;
+    --file: #3d6050;
+    --file-hi: #4e7a62;
+    --stamp: #8b2222;
+    --border: rgba(155,180,160,0.12);
+    --border-hi: rgba(155,180,160,0.28);
+    --surface: rgba(155,180,160,0.025);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fog);
+    font-family: 'Special Elite', 'Courier New', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Bureaucratic dot-grid - graph paper / official forms */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(130,160,140,0.14) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Faint left-margin rule, like a legal pad */
+  body::after {
+    content: '';
+    position: fixed;
+    left: max(24px, calc(50% - 390px));
+    top: 0; bottom: 0;
+    width: 1px;
+    background: rgba(139,34,34,0.07);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+
+  /* ── Header ── */
+  header {
+    margin-bottom: 60px;
+    padding-left: 24px;
+    border-left: 2px solid var(--file);
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .case-ref {
+    font-size: 8px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Special Elite', monospace;
+    font-size: clamp(2.6rem, 9vw, 4.2rem);
+    color: var(--pale);
+    line-height: 1;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  .title-de {
+    font-family: 'Vollkorn', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--dim);
+    margin-bottom: 18px;
+  }
+
+  .subtitle {
+    font-size: 8px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+
+  /* ── Progress ── */
+  .meta-bar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 8px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 8px;
+    animation: fadeIn 0.8s 0.3s both;
+  }
+
+  .progress-track {
+    height: 1px;
+    background: rgba(155,180,160,0.1);
+    margin-bottom: 48px;
+    animation: fadeIn 0.8s 0.3s both;
+    overflow: visible;
+    position: relative;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--file);
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    width: 0%;
+  }
+
+  /* ── Question card ── */
+  .question-card {
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--file);
+    background: var(--surface);
+    padding: 32px 36px;
+    margin-bottom: 16px;
+    animation: slideUp 0.35s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Ghost case number */
+  .question-card::before {
+    content: attr(data-num);
+    position: absolute;
+    bottom: -20px;
+    right: 12px;
+    font-family: 'Special Elite', monospace;
+    font-size: 110px;
+    color: rgba(155,180,160,0.03);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -0.04em;
+  }
+
+  .q-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .q-exhibit {
+    font-size: 7px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--file-hi);
+    border: 1px solid rgba(61,96,80,0.35);
+    padding: 3px 8px;
+  }
+
+  .diff-badge {
+    font-size: 7px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border: 1px solid;
+  }
+
+  .diff-easy  { color: #70b070; border-color: rgba(100,180,100,0.3); }
+  .diff-medium { color: #c0a060; border-color: rgba(200,160,80,0.3); }
+  .diff-hard  { color: #b85858; border-color: rgba(180,80,80,0.3); }
+
+  .q-text {
+    font-family: 'Vollkorn', serif;
+    font-size: 1.12rem;
+    line-height: 1.65;
+    color: var(--pale);
+    margin-bottom: 28px;
+  }
+
+  /* ── Options ── */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .option {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.82rem;
+    color: rgba(184,196,180,0.7);
+    text-align: left;
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 8px;
+    align-items: start;
+  }
+
+  .option:hover:not(.disabled) {
+    border-color: var(--file);
+    background: rgba(61,96,80,0.07);
+    color: var(--pale);
+  }
+
+  .opt-letter {
+    font-size: 8px;
+    letter-spacing: 0.06em;
+    color: var(--dim);
+    padding-top: 3px;
+    font-family: 'Special Elite', monospace;
+  }
+
+  .opt-text { line-height: 1.55; }
+
+  .option.correct {
+    border-color: rgba(61,96,80,0.6);
+    background: rgba(61,96,80,0.07);
+    color: #92c0a0;
+  }
+  .option.correct .opt-letter { color: #92c0a0; }
+
+  .option.wrong {
+    border-color: rgba(139,34,34,0.4);
+    background: rgba(139,34,34,0.05);
+    color: rgba(184,196,180,0.3);
+    text-decoration: line-through;
+    text-decoration-color: rgba(139,34,34,0.45);
+  }
+
+  .option.disabled { cursor: default; pointer-events: none; }
+
+  /* ── Explanation ── */
+  .explanation {
+    display: none;
+    margin-top: 20px;
+    padding: 14px 18px;
+    border-left: 2px solid var(--file);
+    background: rgba(61,96,80,0.05);
+    font-family: 'Vollkorn', serif;
+    font-size: 0.85rem;
+    line-height: 1.75;
+    color: rgba(184,196,180,0.8);
+    animation: fadeIn 0.3s ease both;
+  }
+
+  .explanation.show { display: block; }
+  .explanation strong { color: var(--pale); }
+
+  /* ── Nav ── */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+    animation: fadeIn 0.5s 0.2s both;
+  }
+
+  .live-score {
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  .btn {
+    background: transparent;
+    border: 1px solid var(--border-hi);
+    color: var(--fog);
+    font-family: 'Special Elite', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 11px 22px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+
+  .btn:hover { border-color: var(--file-hi); color: var(--pale); }
+
+  .btn.primary {
+    background: var(--file);
+    border-color: var(--file);
+    color: var(--pale);
+  }
+
+  .btn.primary:hover { background: var(--file-hi); border-color: var(--file-hi); }
+  .btn:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+
+  /* ── Score screen ── */
+  .score-screen { display: none; animation: slideUp 0.6s ease both; }
+  .score-screen.show { display: block; }
+
+  .verdict-header {
+    border-left: 2px solid var(--file);
+    padding-left: 24px;
+    margin-bottom: 48px;
+  }
+
+  .verdict-pre {
+    font-size: 8px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 14px;
+  }
+
+  .verdict-score {
+    font-family: 'Special Elite', monospace;
+    font-size: clamp(3.5rem, 14vw, 6rem);
+    color: var(--pale);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .verdict-class {
+    font-family: 'Vollkorn', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--file-hi);
+    margin-bottom: 10px;
+  }
+
+  .verdict-note {
+    font-family: 'Vollkorn', serif;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: rgba(184,196,180,0.7);
+    max-width: 500px;
+    margin-top: 10px;
+  }
+
+  .breakdown {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin: 40px 0 32px;
+  }
+
+  .bd-title {
+    font-size: 8px;
+    letter-spacing: 0.4em;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .bd-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(155,180,160,0.06);
+    font-size: 0.78rem;
+    gap: 12px;
+    font-family: 'Vollkorn', serif;
+  }
+
+  .bd-row:last-child { border-bottom: none; }
+  .bd-q { color: rgba(184,196,180,0.6); flex: 1; line-height: 1.4; }
+  .tick { color: #92c0a0; font-size: 13px; flex-shrink: 0; }
+  .cross { color: #bb7070; font-size: 13px; flex-shrink: 0; }
+
+  /* ── Animations ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @media (max-width: 580px) {
+    .question-card { padding: 22px 18px; }
+    header { padding-left: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="case-ref">Franz Kafka · Unfinished 1914–15 · Published Posthumously 1925</div>
+    <h1>The Trial</h1>
+    <div class="title-de">Der Proceß</div>
+    <div class="subtitle">A comprehension quiz · 10 questions</div>
+  </header>
+
+  <div id="quiz-section">
+    <div class="meta-bar">
+      <span id="q-label">Inquiry 1 of 10</span>
+      <span id="score-tally">- / -</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
+    <div id="q-area"></div>
+    <div class="nav">
+      <span class="live-score" id="live-score"></span>
+      <button class="btn primary" id="next-btn" disabled onclick="advance()">Continue →</button>
+    </div>
+  </div>
+
+  <div class="score-screen" id="score-screen">
+    <div class="verdict-header">
+      <div class="verdict-pre">Proceedings concluded · Final determination</div>
+      <div class="verdict-score" id="final-num"></div>
+      <div class="verdict-class" id="verdict-class"></div>
+      <div class="verdict-note" id="verdict-note"></div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">Case summary - question log</div>
+      <div id="bd-list"></div>
+    </div>
+    <button class="btn primary" onclick="restart()">Retry proceedings ↺</button>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    q: "How does the novel begin?",
+    opts: [
+      "Josef K. receives a letter summoning him to court",
+      "Josef K. is arrested on the morning of his thirtieth birthday without explanation",
+      "Josef K. wakes up to find strangers in his apartment who inform him he is being watched",
+      "Josef K. is fired from his job at the bank"
+    ],
+    ans: 1,
+    diff: "easy",
+    fb: "The novel opens famously: 'Someone must have slandered Josef K., for one morning, without having done anything wrong, he was arrested.' The arrest happens in his boarding house on his 30th birthday, with no charge explained."
+  },
+  {
+    q: "What is Josef K.'s profession?",
+    opts: [
+      "Lawyer",
+      "Schoolteacher",
+      "Bank clerk - a senior official at a bank",
+      "Government bureaucrat"
+    ],
+    ans: 2,
+    diff: "easy",
+    fb: "K. is a senior bank official (Prokurist). His respectable professional life contrasts sharply with his incomprehensible entanglement with the court."
+  },
+  {
+    q: "Although K. is 'arrested,' what strange aspect defines his situation throughout the novel?",
+    opts: [
+      "He is kept in a cell at all times",
+      "He is free to continue his normal life and work while the proceedings against him go on",
+      "He is forced to wear a mark identifying him as an accused",
+      "He must report to the court every morning"
+    ],
+    ans: 1,
+    diff: "medium",
+    fb: "K.'s arrest is paradoxical - he is never imprisoned. He continues working at the bank and going about his life. The court operates invisibly, burdening him psychologically without physically confining him."
+  },
+  {
+    q: "Where is K.'s first court hearing held?",
+    opts: [
+      "In a grand government building in the city center",
+      "In a cramped, stuffy room in a tenement building in a poor part of the city",
+      "In the basement of the bank where he works",
+      "In his own boarding house"
+    ],
+    ans: 1,
+    diff: "medium",
+    fb: "The court is located in a rundown tenement building, in a district K. is unfamiliar with. The hearing room is small, crowded, and suffocating - an ironic setting for a powerful judicial process."
+  },
+  {
+    q: "What is the role of the painter Titorelli in the novel?",
+    opts: [
+      "He is K.'s closest friend who helps him escape",
+      "He is an official court artist who explains the court's workings and offers three types of possible 'acquittal'",
+      "He paints a portrait of K. that is used as evidence against him",
+      "He is a witness to K.'s alleged crime"
+    ],
+    ans: 1,
+    diff: "medium",
+    fb: "Titorelli paints portraits of judges and is familiar with the court's inner workings. He describes three forms of acquittal: definite acquittal (essentially impossible), ostensible acquittal (temporary, case can be reopened), and indefinite postponement. None are reassuring."
+  },
+  {
+    q: "What is the significance of the 'whipper' scene K. discovers in a storage room at the bank?",
+    opts: [
+      "It reveals that K. is secretly employed by the court to punish others",
+      "Two guards who arrested K. are being flogged as punishment for complaints K. made against them, illustrating the court's brutal internal discipline",
+      "K. is flogged himself as a warning to drop his case",
+      "It shows that K.'s colleagues are conspiring against him"
+    ],
+    ans: 1,
+    diff: "hard",
+    fb: "K. discovers Franz and Willem (his original warders) being whipped in a bank storeroom. He had complained about them to the court. This scene demonstrates the court's cruel internal logic and implicates K.'s own actions in others' suffering - a source of guilt that K. tries to ignore by pretending it didn't happen."
+  },
+  {
+    q: "What is K.'s uncle's reaction when he learns about the trial?",
+    opts: [
+      "He is calm and indifferent",
+      "He is alarmed and insists K. take the proceedings seriously, arranging for K. to meet the lawyer Huld",
+      "He bribes the court officials to have the case dismissed",
+      "He disowns K. out of shame"
+    ],
+    ans: 1,
+    diff: "medium",
+    fb: "K.'s uncle Karl comes to the city in a panic. He considers the trial a major disgrace that could harm the family name and drags K. off to visit the lawyer Huld, who turns out to be of dubious effectiveness."
+  },
+  {
+    q: "What does the parable 'Before the Law' (told by the priest) suggest?",
+    opts: [
+      "The Law is fundamentally just, but humans are too flawed to reach it",
+      "A man waits his entire life for admission to the Law, which is guarded by a doorkeeper; the door was meant only for him but he never enters",
+      "The Law can be bribed, and the man simply did not pay enough",
+      "The Law does not exist - the doorkeeper was deceiving the man"
+    ],
+    ans: 1,
+    diff: "hard",
+    fb: "'Before the Law' is the novel's philosophical core. A man from the country seeks entry to the Law but is perpetually deferred by a doorkeeper. He spends his whole life waiting and dies without entering. The priest and K. debate whether the doorkeeper deceived the man or not - the parable resists a single interpretation, suggesting the Law's inaccessibility is built into its nature."
+  },
+  {
+    q: "How does the novel end?",
+    opts: [
+      "K. is acquitted at a dramatic final trial",
+      "K. is executed by two men who stab him in the heart - he dies 'like a dog'",
+      "K. escapes and flees the country",
+      "K. discovers he was never really accused of anything and the whole trial was a misunderstanding"
+    ],
+    ans: 1,
+    diff: "easy",
+    fb: "On the eve of his thirty-first birthday - exactly one year after his arrest - two men in frock coats take K. to a quarry and stab him. K.'s last words reflect his own shame and capitulation: he dies feeling like the 'shame of it' will outlive him. He never learns the charge, and justice never arrives."
+  },
+  {
+    q: "Which of the following best captures the novel's central thematic concern?",
+    opts: [
+      "A detective mystery about uncovering a real crime",
+      "The dehumanizing nature of modern bureaucracy and the impossibility of achieving justice or even understanding one's own guilt within an opaque, all-powerful system",
+      "A political allegory specifically about Nazi Germany",
+      "A realist critique of the Austrian legal system of Kafka's time"
+    ],
+    ans: 1,
+    diff: "hard",
+    fb: "The Trial is an existential and philosophical novel. The court represents an incomprehensible, self-validating system of power and guilt that cannot be questioned from within. K.'s struggle is not about a specific crime but about humanity's relationship to authority, guilt, and meaning. Kafka wrote it in 1914–15; it was published posthumously in 1925."
+  }
+];
+
+let cur = 0, score = 0, answered = [], userAns = [];
+
+function render() {
+  const q = questions[cur];
+  const total = questions.length;
+  document.getElementById('q-label').textContent = `Inquiry ${cur + 1} of ${total}`;
+  document.getElementById('score-tally').textContent = cur > 0 ? `${score} / ${cur}` : '- / -';
+  document.getElementById('prog').style.width = (cur / total * 100) + '%';
+  document.getElementById('next-btn').disabled = true;
+  document.getElementById('next-btn').textContent = cur === total - 1 ? 'See verdict →' : 'Continue →';
+  document.getElementById('live-score').textContent = '';
+
+  document.getElementById('q-area').innerHTML = `
+    <div class="question-card" data-num="${cur + 1}">
+      <div class="q-meta">
+        <span class="q-exhibit">Exhibit ${cur + 1}</span>
+        <span class="diff-badge diff-${q.diff}">${q.diff}</span>
+      </div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">
+        ${q.opts.map((o, i) => `
+          <button class="option" onclick="pick(${i})" data-i="${i}">
+            <span class="opt-letter">${String.fromCharCode(65 + i)}.</span>
+            <span class="opt-text">${o}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="explanation" id="exp"></div>
+    </div>
+  `;
+}
+
+function pick(idx) {
+  if (document.querySelector('.option.correct')) return;
+  const q = questions[cur];
+  const opts = document.querySelectorAll('.option');
+  opts.forEach(o => o.classList.add('disabled'));
+
+  if (idx === q.ans) {
+    opts[idx].classList.add('correct');
+    score++;
+  } else {
+    opts[idx].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+  }
+
+  userAns[cur] = idx;
+  answered[cur] = idx === q.ans;
+
+  const exp = document.getElementById('exp');
+  exp.textContent = q.fb;
+  exp.classList.add('show');
+
+  document.getElementById('next-btn').disabled = false;
+  document.getElementById('score-tally').textContent = `${score} / ${cur + 1}`;
+  document.getElementById('live-score').textContent = `${score} correct so far`;
+}
+
+function advance() {
+  cur++;
+  if (cur >= questions.length) {
+    finish();
+  } else {
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function finish() {
+  document.getElementById('quiz-section').style.display = 'none';
+  const ss = document.getElementById('score-screen');
+  ss.classList.add('show');
+
+  const pct = score / questions.length;
+  document.getElementById('final-num').textContent = `${score}/${questions.length}`;
+
+  let cls, note;
+  if (pct === 1) {
+    cls = "Case dismissed. You knew too much.";
+    note = "A perfect score. You've absorbed not just the plot but the novel's deeper philosophical dimensions - the paradox of guilt without charge, the parable's unanswerable question, the bureaucratic sublime. Kafka would find this suspicious.";
+  } else if (pct >= 0.8) {
+    cls = "Charges reduced. A credible defense.";
+    note = "Strong command of the text. A few of the subtler scenes - the whipper, the painter, the priest's exegesis of the parable - are worth revisiting. The law is always more intricate than it first appears.";
+  } else if (pct >= 0.6) {
+    cls = "Proceedings continue. Further inquiry required.";
+    note = "Decent grasp of the major events, but some of the novel's stranger, darker corners slipped by. Return to the parable 'Before the Law' and Titorelli's description of acquittal. The case is not yet closed.";
+  } else {
+    cls = "Verdict: guilty of not reading carefully.";
+    note = "The Trial can be disorienting - intentionally so. Consider rereading with attention to K.'s relationships with the court officials and what the parable 'Before the Law' refuses to resolve. The shame of it will outlive the quiz.";
+  }
+
+  document.getElementById('verdict-class').textContent = cls;
+  document.getElementById('verdict-note').textContent = note;
+
+  document.getElementById('bd-list').innerHTML = questions.map((q, i) => `
+    <div class="bd-row">
+      <span class="bd-q">${i + 1}. ${q.q.length > 72 ? q.q.slice(0, 72) + '…' : q.q}</span>
+      <span class="${answered[i] ? 'tick' : 'cross'}">${answered[i] ? '✓' : '✗'}</span>
+    </div>
+  `).join('');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+  cur = 0; score = 0; answered = []; userAns = [];
+  document.getElementById('score-screen').classList.remove('show');
+  document.getElementById('quiz-section').style.display = 'block';
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+render();
+</script>
+</body>
+</html>

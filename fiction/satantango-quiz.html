@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sátántangó — Quiz</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    --bg:      #0c0a07;
+    --mud:     #1a1510;
+    --paper:   #c4bfb0;
+    --pale:    #ddd8cc;
+    --dim:     #6b6358;
+    --mid:     #8a7d6e;
+    --rust:    #7a4f2a;
+    --rust-hi: #a06838;
+    --amber:   #c8904a;
+    --border:  rgba(196,191,176,0.09);
+    --border-hi: rgba(196,191,176,0.22);
+    --surf:    rgba(196,191,176,0.022);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--paper);
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Vertical rain streaks */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 38px,
+      rgba(196,191,176,0.018) 38px,
+      rgba(196,191,176,0.018) 39px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Top mud stripe */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--rust), var(--amber), var(--rust));
+    z-index: 10;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+  }
+
+  /* Header */
+  header {
+    margin-bottom: 60px;
+    animation: fadeIn 0.9s ease both;
+  }
+
+  .hun-label {
+    font-size: 8px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'IM Fell English', serif;
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--pale);
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+
+  h1 em {
+    color: var(--amber);
+    font-style: italic;
+  }
+
+  .hu-title {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--dim);
+    margin-bottom: 18px;
+  }
+
+  .byline {
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  /* Horizontal rule */
+  .rule {
+    height: 1px;
+    background: linear-gradient(90deg, var(--rust), transparent);
+    margin: 24px 0 0;
+    opacity: 0.4;
+  }
+
+  /* Progress */
+  .status-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    animation: fadeIn 0.8s 0.3s both;
+  }
+
+  .prog-track {
+    height: 1px;
+    background: rgba(196,191,176,0.07);
+    margin-bottom: 44px;
+    animation: fadeIn 0.8s 0.3s both;
+  }
+
+  .prog-fill {
+    height: 100%;
+    background: var(--rust);
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    width: 0%;
+  }
+
+  /* Card */
+  .q-card {
+    background: var(--surf);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--rust);
+    padding: 30px 32px 28px;
+    margin-bottom: 16px;
+    animation: slideUp 0.35s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Ghost chapter number */
+  .q-card::before {
+    content: attr(data-num);
+    position: absolute;
+    bottom: -28px;
+    right: 10px;
+    font-family: 'IM Fell English', serif;
+    font-size: 130px;
+    color: rgba(196,191,176,0.025);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .q-tag {
+    font-size: 7px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--rust-hi);
+    margin-bottom: 18px;
+    border: 1px solid rgba(122,79,42,0.3);
+    display: inline-block;
+    padding: 3px 8px;
+  }
+
+  .q-text {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--pale);
+    margin-bottom: 26px;
+  }
+
+  /* Options */
+  .opts { display: flex; flex-direction: column; gap: 8px; }
+
+  .opt {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    cursor: pointer;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.82rem;
+    color: rgba(196,191,176,0.6);
+    text-align: left;
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 8px;
+    align-items: start;
+    transition: all 0.15s ease;
+    position: relative;
+  }
+
+  .opt:hover:not(.disabled) {
+    border-color: var(--rust);
+    color: var(--pale);
+    background: rgba(122,79,42,0.07);
+  }
+
+  .opt-ltr {
+    font-size: 8px;
+    color: var(--dim);
+    padding-top: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .opt-txt { line-height: 1.55; }
+
+  .opt.correct {
+    border-color: rgba(196,191,176,0.4);
+    background: rgba(196,191,176,0.04);
+    color: var(--pale);
+  }
+  .opt.correct .opt-ltr { color: var(--amber); }
+
+  .opt.wrong {
+    border-color: rgba(122,79,42,0.35);
+    background: rgba(122,79,42,0.05);
+    color: rgba(196,191,176,0.25);
+    text-decoration: line-through;
+    text-decoration-color: rgba(122,79,42,0.4);
+  }
+
+  .opt.disabled { cursor: default; pointer-events: none; }
+
+  /* Explanation */
+  .expl {
+    display: none;
+    margin-top: 18px;
+    padding: 14px 16px 14px 18px;
+    border-left: 2px solid var(--rust);
+    background: rgba(122,79,42,0.05);
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: rgba(196,191,176,0.7);
+    animation: fadeIn 0.3s ease both;
+  }
+
+  .expl.show { display: block; }
+  .expl strong { color: var(--pale); font-style: normal; }
+
+  /* Nav */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+    animation: fadeIn 0.6s 0.2s both;
+  }
+
+  .live {
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  .btn {
+    background: transparent;
+    border: 1px solid var(--border-hi);
+    color: rgba(196,191,176,0.55);
+    font-family: 'Courier Prime', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 11px 22px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn:hover { border-color: var(--rust-hi); color: var(--pale); }
+  .btn.p { background: var(--rust); border-color: var(--rust); color: var(--pale); }
+  .btn.p:hover { background: var(--rust-hi); border-color: var(--rust-hi); }
+  .btn:disabled { opacity: 0.2; pointer-events: none; }
+
+  /* Results */
+  .results { display: none; animation: slideUp 0.5s ease both; }
+  .results.show { display: block; }
+
+  .res-head {
+    padding-left: 24px;
+    border-left: 2px solid var(--rust);
+    margin-bottom: 44px;
+  }
+
+  .res-pre {
+    font-size: 8px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 14px;
+  }
+
+  .score-big {
+    font-family: 'IM Fell English', serif;
+    font-size: clamp(3.5rem, 14vw, 6rem);
+    color: var(--pale);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .score-big em { color: var(--amber); font-style: italic; }
+
+  .score-sub {
+    font-size: 8px;
+    letter-spacing: 0.28em;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .verdict {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--pale);
+    margin-bottom: 10px;
+  }
+
+  .v-note {
+    font-family: 'IM Fell English', serif;
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: var(--mid);
+    max-width: 480px;
+    margin-bottom: 40px;
+  }
+
+  .breakdown {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    margin-bottom: 32px;
+  }
+
+  .bd-head {
+    font-size: 8px;
+    letter-spacing: 0.38em;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .bd-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(196,191,176,0.04);
+    font-size: 0.78rem;
+    font-family: 'IM Fell English', serif;
+  }
+
+  .bd-row:last-child { border-bottom: none; }
+  .bd-q { color: var(--dim); flex: 1; line-height: 1.5; }
+  .bd-m { flex-shrink: 0; font-size: 13px; }
+  .tick { color: var(--amber); }
+  .cross { color: var(--rust-hi); }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 580px) {
+    .q-card { padding: 22px 18px; }
+    h1 { font-size: 2.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="hun-label">László Krasznahorkai · 1985 · tr. George Szirtes</div>
+    <h1>Sátán<em>tangó</em></h1>
+    <div class="hu-title">Шестнадцать крюков на спине дьявола</div>
+    <div class="byline">A comprehension quiz · 12 questions</div>
+    <div class="rule"></div>
+  </header>
+
+  <div id="quiz">
+    <div class="status-row">
+      <span id="qlabel">Chapter I of XII</span>
+      <span id="tally">— / —</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="prog"></div></div>
+    <div id="qarea"></div>
+    <div class="nav">
+      <span class="live" id="live"></span>
+      <button class="btn p" id="nbtn" disabled onclick="advance()">Continue →</button>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="res-head">
+      <div class="res-pre">Proceedings concluded · the tango is complete</div>
+      <div class="score-big" id="fscore"></div>
+      <div class="score-sub">correct out of 12</div>
+      <div class="verdict" id="verdict"></div>
+      <div class="v-note" id="vnote"></div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-head">Question breakdown</div>
+      <div id="bdlist"></div>
+    </div>
+    <button class="btn p" onclick="restart()">Retake ↺</button>
+  </div>
+
+</div>
+
+<script>
+const qs = [
+  {
+    tag: "The Opening",
+    text: "On what sound does the novel begin — the very first thing Futaki registers as he wakes in the dark?",
+    opts: [
+      "The howling of wind across the puszta",
+      "The sound of bells, distant and unexpected, though the church tower has been in ruins for years",
+      "Footsteps approaching across the mud outside his window",
+      "The voice of Irimiás calling his name"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> The novel's celebrated opening describes Futaki waking to the sound of bells — impossible bells, since everyone knows the church has been ruined for years. This impossible sound immediately establishes the novel's dreamlike, circular logic. It will return at the end."
+  },
+  {
+    tag: "Setting",
+    text: "Where is the novel set, and what is the social/economic context of the community we meet at its outset?",
+    opts: [
+      "A Budapest apartment block during the 1956 uprising",
+      "A remote decaying agricultural collective (kolkhoz) in the Hungarian plain, whose residents are on the verge of abandoning it",
+      "A provincial Hungarian town preparing for its annual harvest festival",
+      "A border village in wartime, occupied by Soviet forces"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> The setting is a crumbling state collective farm somewhere on the flat, rain-soaked Hungarian plain. The cooperative has effectively collapsed. The small group of remaining residents have pooled their money and are planning to scatter — until Irimiás's return changes everything."
+  },
+  {
+    tag: "Irimiás",
+    text: "Before Irimiás appears in the novel, what had the colonists believed about him?",
+    opts: [
+      "That he had emigrated to the West",
+      "That he had been imprisoned for theft",
+      "That he was dead",
+      "That he had become a party functionary in Budapest"
+    ],
+    ans: 2,
+    exp: "<strong>Correct.</strong> The colonists had received word that Irimiás was dead. His return from apparent death gives him a messianic aura — he arrives like a resurrection, and the community immediately falls under his charismatic spell, abandoning their own plans."
+  },
+  {
+    tag: "Irimiás's True Role",
+    text: "What is Irimiás's actual relationship to the authorities — revealed in chapters showing him in town before he reaches the farm?",
+    opts: [
+      "He is a former party member who has defected and is on the run",
+      "He is an undercover police informant who reports on the colonists to a captain",
+      "He is an architect hired to assess the farm for demolition",
+      "He is a wanted criminal using the farm as a hiding place"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> Chapters set in an unnamed town show Irimiás and Petrina being summoned to meet with a police captain. Irimiás is an informant. He has been tasked with gathering information. The grand 'salvation' he offers the colonists is, in part, a manipulation serving the state apparatus — though the novel keeps the full nature of his mission deliberately murky."
+  },
+  {
+    tag: "The Doctor",
+    text: "What does the Doctor — the obese, alcoholic physician — do throughout the novel, and what is his symbolic role?",
+    opts: [
+      "He travels between farmhouses treating the sick, the only figure who moves freely",
+      "He sits at his window drinking pálinka, watching the others through binoculars, and compiles a written chronicle of everything he observes",
+      "He acts as Irimiás's second-in-command, relaying his instructions to the colonists",
+      "He attempts to warn the colonists against Irimiás and is ignored"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> The Doctor is the novel's embedded witness and scribe. Sedentary, bloated, barely able to walk, he watches the world through his window and drinks. He also writes — obsessively recording what he sees. He is in some sense the novel's own narrator-figure, the one who makes the text, yet he is helpless to intervene in events. His chronicle and the novel we are reading begin to blur."
+  },
+  {
+    tag: "Estike",
+    text: "What happens to Estike, the young girl, in the chapter devoted to her?",
+    opts: [
+      "She runs away from the farm and reaches the city",
+      "She drowns trying to cross the flooded road",
+      "She kills her cat with rat poison and then, in despair, consumes the poison herself",
+      "She is taken in by Irimiás and becomes his ward"
+    ],
+    ans: 2,
+    exp: "<strong>Correct.</strong> Estike's chapter is among the most harrowing in the novel. Tormented by her brother, isolated, she poisons her cat — then, in the same bleak logic of helpless cruelty and despair, she consumes the rat poison herself and dies. Her death goes largely unremarked by the adult world around her. The novel refuses to soften it."
+  },
+  {
+    tag: "Petrina",
+    text: "What is Petrina's relationship to Irimiás, and how does he function in the narrative?",
+    opts: [
+      "He is Irimiás's brother, who frequently argues with and challenges him",
+      "He is Irimiás's long-suffering companion and sidekick — loyal, skeptical, often grumbling, but always following",
+      "He is an informant sent to spy on Irimiás by the captain",
+      "He is the only colonist who had known Irimiás was not truly dead"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> Petrina accompanies Irimiás everywhere, functioning as a kind of comic-tragic shadow. He is worldly-wise and mutters dissent, but his loyalty is absolute. Together they form a kind of double act — the visionary and his doubting, dependent companion."
+  },
+  {
+    tag: "The Great Speech",
+    text: "When Irimiás addresses the assembled colonists in his long speech, what does he essentially promise them?",
+    opts: [
+      "That the collective farm will be restored to its former prosperity under new management",
+      "That he has arranged for them to emigrate legally to Austria",
+      "A new beginning — a communal project at a new location that will redeem their failed lives and give them purpose",
+      "That he will expose the party officials who allowed the farm to collapse"
+    ],
+    ans: 2,
+    exp: "<strong>Correct.</strong> Irimiás's speech is a masterpiece of manipulation — messianic, vague, intoxicating. He offers the colonists a new communal life at a new place, a chance to begin again. They are desperate enough to believe him. The speech is the novel's great set-piece of charisma and self-delusion, a secular sermon to a congregation that has nothing left to lose."
+  },
+  {
+    tag: "The Journey",
+    text: "Where do the colonists end up after following Irimiás away from the farm?",
+    opts: [
+      "A functioning village where they find work and housing",
+      "A derelict former estate (the Almássy manor) that proves as ruined and uninhabitable as the place they left",
+      "Budapest, where they are processed by state authorities",
+      "A working farm owned by Irimiás's relative"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> The colonists follow Irimiás in the rain to the Almássy estate — and find ruin. There is no redemption, no fresh start. The place is desolate. The journey that seemed like an exodus toward salvation leads back into decay. Irimiás subsequently disperses the colonists on various errands, scattering the group he assembled."
+  },
+  {
+    tag: "The Weather",
+    text: "The novel is famous for its treatment of one element of its environment. What weather condition pervades Sátántangó almost without interruption?",
+    opts: [
+      "Snow and bitter frost",
+      "Drought — cracked earth and merciless sun",
+      "Rain — incessant, heavy, turning everything to mud",
+      "Thick fog that never fully lifts"
+    ],
+    ans: 2,
+    exp: "<strong>Correct.</strong> Rain falls throughout Sátántangó with barely a pause — soaking the puszta, churning the mud, streaking the windows through which the Doctor watches. It is not merely atmospheric; it is ontological. The rain is the novel's steady tempo, its background hum, an indifferent world that will not relent."
+  },
+  {
+    tag: "Structure",
+    text: "The novel's title refers to its formal structure. How are the twelve chapters arranged in relation to the tango metaphor?",
+    opts: [
+      "Six chapters told forward, six told in reverse — moving forward then backward like the steps of a tango",
+      "Alternating chapters told from opposite perspectives, like two dancers facing each other",
+      "Twelve chapters all told from the same day, each from a different character's point of view",
+      "The chapters are numbered I–VI twice, representing the repeated steps of a round dance"
+    ],
+    ans: 0,
+    exp: "<strong>Correct.</strong> The novel is structured in twelve chapters: six steps forward, six steps back — just as the tango alternates direction. Crucially, this is not strictly chronological: chapters loop back in time, covering the same events from different vantages. Krasznahorkai called the structure 'oda-vissza' — back and forth — creating a narrative that circles and overlaps rather than proceeding cleanly."
+  },
+  {
+    tag: "The Ending",
+    text: "How does the novel's final chapter return to its beginning, and what does the Doctor do?",
+    opts: [
+      "The Doctor leaves the farm and the novel ends with him arriving in the city",
+      "The Doctor finally reads Irimiás's full report to the captain, revealing everything",
+      "The Doctor, alone and snowbound, nails his window shut to block out the bells he hears — the same bells that opened the novel",
+      "Irimiás returns to the farm a second time; the colonists must decide again whether to follow him"
+    ],
+    ans: 2,
+    exp: "<strong>Correct.</strong> In the final chapter, the Doctor — alone, having outlasted the others — hears the impossible bells. He boards up his window to shut them out. Then he begins to write: 'I stepped to the window and began to close the shutters...' The novel's last line circles back toward its first. The bells that woke Futaki at the start ring again at the end. Time in Sátántangó does not progress — it revolves."
+  }
+];
+
+let cur = 0, score = 0;
+const answers = new Array(qs.length).fill(null);
+
+function render() {
+  const q = qs[cur];
+  const total = qs.length;
+  document.getElementById('qlabel').textContent = `Chapter ${toRoman(cur+1)} of ${toRoman(total)}`;
+  document.getElementById('tally').textContent = answers[cur] !== null
+    ? `${score} / ${cur + 1}`
+    : `${score} / ${cur}`;
+  document.getElementById('prog').style.width = `${(cur / total) * 100}%`;
+
+  const chosen = answers[cur];
+  const locked = chosen !== null;
+
+  const html = `
+    <div class="q-card" data-num="${cur+1}">
+      <div class="q-tag">${q.tag}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="opts">
+        ${q.opts.map((o, i) => {
+          let cls = 'opt';
+          if (locked) {
+            cls += ' disabled';
+            if (i === q.ans) cls += ' correct';
+            else if (i === chosen) cls += ' wrong';
+          }
+          return `<button class="${cls}" onclick="pick(${i})">
+            <span class="opt-ltr">${'ABCD'[i]}.</span>
+            <span class="opt-txt">${o}</span>
+          </button>`;
+        }).join('')}
+      </div>
+      <div class="expl ${locked ? 'show' : ''}">${q.exp}</div>
+    </div>`;
+
+  document.getElementById('qarea').innerHTML = html;
+  document.getElementById('nbtn').disabled = !locked;
+
+  const live = document.getElementById('live');
+  if (locked) {
+    live.textContent = `Score: ${score} correct`;
+  } else {
+    live.textContent = '';
+  }
+}
+
+function toRoman(n) {
+  const vals = [10,9,5,4,1];
+  const syms = ['X','IX','V','IV','I'];
+  let out = '';
+  for (let i = 0; i < vals.length; i++) {
+    while (n >= vals[i]) { out += syms[i]; n -= vals[i]; }
+  }
+  return out;
+}
+
+function pick(i) {
+  if (answers[cur] !== null) return;
+  answers[cur] = i;
+  if (i === qs[cur].ans) score++;
+  document.getElementById('tally').textContent = `${score} / ${cur + 1}`;
+  render();
+}
+
+function advance() {
+  cur++;
+  if (cur >= qs.length) {
+    showResults();
+  } else {
+    render();
+  }
+}
+
+function showResults() {
+  document.getElementById('quiz').style.display = 'none';
+  const res = document.getElementById('results');
+  res.classList.add('show');
+
+  const pct = score / qs.length;
+  document.getElementById('fscore').innerHTML = `${score}<em>/${qs.length}</em>`;
+
+  let verdict, note;
+  if (pct === 1) {
+    verdict = "The chronicle is complete.";
+    note = "You have followed Krasznahorkai's tango without a misstep — forward and back, all twelve chapters. You know the mud, the rain, the bells, and the ruin of Irimiás's beautiful lie.";
+  } else if (pct >= 0.75) {
+    verdict = "You heard the bells.";
+    note = "You know the shape of the novel's long spiralling sentences, its landscape of futility and almost-hope. A few chapters slipped past you, but the pattern is clear.";
+  } else if (pct >= 0.5) {
+    verdict = "Somewhere in the puszta.";
+    note = "You have some feel for the rain and the colonists, but several of the novel's finer movements eluded you. Consider revisiting the chapters — they reward re-reading, as all good tangos do.";
+  } else {
+    verdict = "The window is still open.";
+    note = "The bells ring, the rain falls, and Irimiás is still speaking. Much of the novel's structure and detail remains in the dark. There is no shame in beginning again — in Sátántangó, beginning and ending are the same.";
+  }
+
+  document.getElementById('verdict').textContent = verdict;
+  document.getElementById('vnote').textContent = note;
+
+  const bdlist = document.getElementById('bdlist');
+  bdlist.innerHTML = qs.map((q, i) => `
+    <div class="bd-row">
+      <span class="bd-q">${q.tag} — ${q.text.slice(0, 60)}${q.text.length > 60 ? '…' : ''}</span>
+      <span class="bd-m ${answers[i] === q.ans ? 'tick' : 'cross'}">${answers[i] === q.ans ? '✓' : '✗'}</span>
+    </div>`).join('');
+}
+
+function restart() {
+  cur = 0; score = 0;
+  answers.fill(null);
+  document.getElementById('quiz').style.display = '';
+  document.getElementById('results').classList.remove('show');
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

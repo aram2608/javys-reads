@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brave New World - Comprehension Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --parchment: #e8dfc8;
+    --ink: #1a1209;
+    --sepia: #6b4f2a;
+    --gold: #c9973a;
+    --rust: #8b3a2a;
+    --sage: #4a5e4a;
+    --muted: #8a7a65;
+    --correct: #2d5a27;
+    --wrong: #7a1f1f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--ink);
+    font-family: 'Courier Prime', monospace;
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+    background-image: 
+      repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(201,151,58,0.04) 24px, rgba(201,151,58,0.04) 25px);
+  }
+
+  .page {
+    max-width: 780px;
+    width: 100%;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 52px;
+    animation: fadeIn 1.2s ease both;
+  }
+
+  .header-rule {
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin-bottom: 28px;
+  }
+
+  .subtitle {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 7vw, 68px);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .header-byline {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 14px;
+  }
+
+  .header-rule-bottom {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--muted), transparent);
+    margin-top: 28px;
+  }
+
+  /* PROGRESS */
+  .progress-bar-wrap {
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+    height: 4px;
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--sepia), var(--gold));
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+  }
+
+  /* QUESTION CARD */
+  .card {
+    background: var(--cream);
+    border-radius: 2px;
+    padding: 36px 40px 32px;
+    margin-bottom: 24px;
+    position: relative;
+    animation: slideUp 0.5s ease both;
+    border-top: 3px solid var(--gold);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.35), 0 0 0 1px rgba(201,151,58,0.15);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.6;
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .q-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+
+  .q-number {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .q-category {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201,151,58,0.1);
+    padding: 3px 8px;
+    border: 1px solid rgba(201,151,58,0.3);
+  }
+
+  .q-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+
+  /* OPTIONS */
+  .options {
+    display: grid;
+    gap: 10px;
+  }
+
+  .option-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: transparent;
+    border: 1px solid rgba(107,79,42,0.25);
+    padding: 14px 18px;
+    cursor: pointer;
+    font-family: 'Courier Prime', monospace;
+    font-size: 13.5px;
+    color: var(--ink);
+    text-align: left;
+    transition: all 0.2s ease;
+    border-radius: 1px;
+    position: relative;
+    line-height: 1.45;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    background: rgba(201,151,58,0.08);
+    border-color: var(--gold);
+    transform: translateX(3px);
+  }
+
+  .option-letter {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 15px;
+    min-width: 18px;
+    margin-top: 1px;
+  }
+
+  .option-btn.correct {
+    background: rgba(45,90,39,0.1);
+    border-color: var(--correct);
+    border-width: 1.5px;
+  }
+  .option-btn.correct .option-letter { color: var(--correct); }
+
+  .option-btn.wrong {
+    background: rgba(122,31,31,0.08);
+    border-color: var(--wrong);
+    border-width: 1.5px;
+  }
+  .option-btn.wrong .option-letter { color: var(--wrong); }
+
+  .option-btn:disabled { cursor: default; }
+
+  /* EXPLANATION */
+  .explanation {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: rgba(107,79,42,0.08);
+    border-left: 3px solid var(--gold);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--sepia);
+    font-style: italic;
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+  .explanation.show { display: block; }
+  .explanation strong { font-style: normal; color: var(--ink); font-weight: 700; }
+
+  /* NAV */
+  .nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 28px;
+  }
+
+  .btn-next {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: none;
+  }
+  .btn-next:hover { background: var(--gold); color: var(--ink); }
+  .btn-next.visible { display: block; }
+
+  /* RESULTS */
+  #results-screen {
+    display: none;
+    animation: fadeIn 0.8s ease both;
+  }
+
+  .results-card {
+    background: var(--cream);
+    border-top: 3px solid var(--gold);
+    box-shadow: 8px 8px 0 rgba(0,0,0,0.4);
+    padding: 52px 48px;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .results-label {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .results-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 96px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .results-score span {
+    font-size: 36px;
+    color: var(--muted);
+    vertical-align: super;
+  }
+
+  .results-verdict {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--sepia);
+    margin-bottom: 20px;
+  }
+
+  .results-rule {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--muted), transparent);
+    margin: 24px 0;
+  }
+
+  .results-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto 28px;
+  }
+
+  .btn-restart {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    padding: 14px 36px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-restart:hover { background: var(--ink); color: var(--cream); }
+
+  .results-breakdown {
+    margin-top: 8px;
+  }
+
+  .breakdown-item {
+    background: var(--cream);
+    border: 1px solid rgba(107,79,42,0.2);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    text-align: left;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+  }
+
+  .breakdown-item.got-right { border-left-color: var(--correct); }
+  .breakdown-item.got-wrong { border-left-color: var(--wrong); }
+
+  .breakdown-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .breakdown-answer {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .breakdown-answer strong { color: var(--correct); }
+  .breakdown-answer .was-wrong { color: var(--wrong); text-decoration: line-through; margin-right: 6px; }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 560px) {
+    .card { padding: 24px 20px 20px; }
+    .q-text { font-size: 16px; }
+    .results-card { padding: 36px 24px; }
+    .results-score { font-size: 72px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-rule"></div>
+    <div class="subtitle">Comprehension Quiz</div>
+    <h1>Brave <em>New</em> World</h1>
+    <div class="header-byline">Aldous Huxley · 1932 · 20 Questions</div>
+    <div class="header-rule-bottom"></div>
+  </div>
+
+  <!-- QUIZ SECTION -->
+  <div id="quiz-screen">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+    <div id="question-container"></div>
+  </div>
+
+  <!-- RESULTS SECTION -->
+  <div id="results-screen">
+    <div class="results-card">
+      <div class="results-label">Final Score</div>
+      <div class="results-score" id="score-display"></div>
+      <div class="results-verdict" id="verdict-display"></div>
+      <div class="results-rule"></div>
+      <div class="results-quote" id="quote-display"></div>
+      <button class="btn-restart" onclick="restartQuiz()">↺ Retake Quiz</button>
+    </div>
+    <div class="results-breakdown" id="breakdown-container"></div>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    category: "World-Building",
+    text: "What is the motto of the World State in Brave New World?",
+    options: ["Order, Stability, Peace", "Community, Identity, Stability", "Progress, Unity, Freedom", "Science, Happiness, Order"],
+    answer: 1,
+    explanation: "\"Community, Identity, Stability\" is the World State's motto - a dark inversion of the French Republic's ideals. Huxley uses it to signal that individual identity is subordinated to collective conformity."
+  },
+  {
+    category: "Characters",
+    text: "What is the name of the 'savage' who was born on the Reservation but is the son of a World State citizen?",
+    options: ["Helmholtz Watson", "Bernard Marx", "John the Savage", "Benito Hoover"],
+    answer: 2,
+    explanation: "John the Savage - raised on the New Mexico Savage Reservation - is the son of Linda and the Director. He has been educated on Shakespeare rather than conditioning, making him an outsider in both worlds."
+  },
+  {
+    category: "Science & Society",
+    text: "In the Bokanovsky Process, a single fertilized egg can produce how many identical human beings?",
+    options: ["Up to 12", "Up to 72", "Up to 96", "Up to 120"],
+    answer: 2,
+    explanation: "The Bokanovsky Process can bud one egg into up to 96 identical humans. This industrial mass-production of people is a cornerstone of the World State's social stability - identical workers who cannot feel unique resentment."
+  },
+  {
+    category: "Caste System",
+    text: "Which caste, color-coded in black, performs the most menial labor in the World State?",
+    options: ["Deltas", "Gammas", "Epsilons", "Betas"],
+    answer: 2,
+    explanation: "Epsilons are the lowest caste, deliberately stunted intellectually during development. They are conditioned to be content with simple, repetitive work - a biological and psychological guarantee of social order."
+  },
+  {
+    category: "Themes",
+    text: "What drug do citizens of the World State routinely take to feel euphoric and avoid negative emotions?",
+    options: ["Mescaline", "Soma", "Prozium", "Ambrosia"],
+    answer: 1,
+    explanation: "Soma is described as \"all the advantages of Christianity and alcohol; none of their defects.\" It is the government's ultimate tool of control - voluntary, pleasurable, and utterly effective at preventing dissent."
+  },
+  {
+    category: "Characters",
+    text: "What is Bernard Marx's social caste?",
+    options: ["Gamma", "Delta", "Beta", "Alpha"],
+    answer: 3,
+    explanation: "Bernard Marx is an Alpha - the highest caste - but he is physically smaller than expected for an Alpha, which fuels his sense of alienation and his critical perspective on the World State."
+  },
+  {
+    category: "Plot",
+    text: "Where does Bernard take Lenina on their unconventional date, foreshadowing his outsider status?",
+    options: ["The top of St. Paul's Cathedral", "A Solidarity Service", "The New Mexico Savage Reservation", "A lighthouse on the coast"],
+    answer: 2,
+    explanation: "Bernard takes Lenina to the Savage Reservation in New Mexico, an unusual choice that reveals his attraction to the forbidden and his discomfort with the World State's shallow pleasures."
+  },
+  {
+    category: "Characters",
+    text: "Who is the Director of Hatcheries and Conditioning, whose personal secret Bernard uses to avoid exile?",
+    options: ["Mustapha Mond", "Thomas (Tomakin)", "Henry Foster", "Helmholtz Watson"],
+    answer: 1,
+    explanation: "Thomas - known to students as the D.H.C. or Tomakin - had left Linda at the Reservation years earlier, accidentally fathering John. Bernard's revelation that John is his son publicly humiliates him into resignation."
+  },
+  {
+    category: "Themes",
+    text: "Which of Shakespeare's plays does John most identify with, and which character does he see himself as?",
+    options: ["Hamlet - Hamlet", "The Tempest - Caliban", "Othello - Othello", "Romeo and Juliet - Romeo"],
+    answer: 1,
+    explanation: "John compares himself to Caliban from The Tempest - the monster who seeks beauty and is rejected. His famous cry \"O brave new world\" is itself taken from Miranda's line in that play, used by Huxley with devastating irony."
+  },
+  {
+    category: "World-Building",
+    text: "Who are the \"World Controllers,\" and how many govern the entire world?",
+    options: ["Seven", "Ten", "Twelve", "Five"],
+    answer: 1,
+    explanation: "Ten World Controllers govern the planet. Mustapha Mond is the Controller for Western Europe and the only one who appears significantly in the novel - he represents the intellectual face of totalitarianism."
+  },
+  {
+    category: "Characters",
+    text: "Helmholtz Watson is dissatisfied because he feels his talents as a writer are being wasted. What is his official profession?",
+    options: ["Propaganda composer", "Emotional engineer", "Hypnopaedia lecturer", "Feelies scriptwriter"],
+    answer: 1,
+    explanation: "Helmholtz Watson is an Emotional Engineer - he writes hypnopaedic phrases and synthetic music. He senses he is capable of something more powerful and true, which draws him toward John and eventually earns him exile."
+  },
+  {
+    category: "Society & Control",
+    text: "What are 'feelies'?",
+    options: ["Soma-enhanced group therapy sessions", "Synthetic emotion pills", "Immersive films where audiences physically feel the sensations on screen", "Conditioning programs for infants"],
+    answer: 2,
+    explanation: "Feelies are the World State's version of cinema - audiences hold handles that transmit tactile sensations to match what is seen on screen. They are deliberately shallow and sexual, designed purely for pleasure with no artistic depth."
+  },
+  {
+    category: "Philosophy",
+    text: "In his debate with Mustapha Mond, John demands the right to all of the following EXCEPT:",
+    options: ["The right to be unhappy", "The right to grow old and ugly", "The right to have bad art", "The right to have religion and God"],
+    answer: 2,
+    explanation: "John claims the rights to unhappiness, old age, ugliness, disease, and God. \"Bad art\" is not specifically listed. Mond grants these are John's rights - he just says the World State has chosen not to exercise them."
+  },
+  {
+    category: "Characters",
+    text: "What happens to Linda after she returns to the World State from the Reservation?",
+    options: ["She is exiled to an island", "She takes enormous amounts of soma and dies", "She is reconditioned as a Beta", "She becomes a celebrity and writes a memoir"],
+    answer: 1,
+    explanation: "Linda, shamed and physically deteriorated, is given an unlimited soma ration. She enters a permanent, blissful stupor and dies from its effects - a grotesque mercy killing by a society that cannot tolerate the sight of age or ugliness."
+  },
+  {
+    category: "Themes",
+    text: "Mustapha Mond argues that true art and science are incompatible with stability. What does he say must be sacrificed for happiness?",
+    options: ["Religion and family", "Truth and beauty", "Freedom and love", "Nature and solitude"],
+    answer: 1,
+    explanation: "Mond argues that \"you can't have a great art without instability.\" He frames the World State's bargain starkly: happiness and stability require the sacrifice of truth and beauty. This is the novel's central philosophical confrontation."
+  },
+  {
+    category: "World-Building",
+    text: "The World State's calendar replaces the Christian era with dates measured from which historical event?",
+    options: ["The founding of the United Nations", "The invention of the atomic bomb", "The introduction of the Model T Ford", "The discovery of DNA"],
+    answer: 2,
+    explanation: "Years are measured \"A.F.\" - After Ford. Henry Ford, inventor of the assembly line and the Model T, is the World State's god figure. His name replaces \"Lord\" in common speech (\"Ford's in his flivver, all's well with the world\")."
+  },
+  {
+    category: "Plot",
+    text: "Where do Bernard Marx and Helmholtz Watson ultimately get exiled?",
+    options: ["Bernard to Iceland, Helmholtz to the Falkland Islands", "Both to the Falkland Islands", "Bernard to the Falkland Islands, Helmholtz to an island of his choosing", "Both to New Mexico"],
+    answer: 0,
+    explanation: "Bernard is sent to Iceland - an ironic punishment since he had always wanted to go there. Helmholtz, who Mond acknowledges as genuinely talented, gets to choose from several islands and picks the Falklands, attracted by the harsh climate as a writing stimulus."
+  },
+  {
+    category: "Symbols",
+    text: "What book does John carry throughout the novel that most shapes his understanding of the world?",
+    options: ["The Bible", "The Complete Works of Shakespeare", "Hamlet alone", "The Koran"],
+    answer: 1,
+    explanation: "The Complete Works of Shakespeare is John's sacred text - his only real education. His speech, values, and emotional vocabulary are entirely Shakespearean, making him both profound and utterly incomprehensible to World State citizens."
+  },
+  {
+    category: "Ending",
+    text: "How does John the Savage die?",
+    options: ["He is executed by the World State", "He dies from soma poisoning", "He hangs himself", "He is killed by a mob during a riot"],
+    answer: 2,
+    explanation: "John hangs himself in the lighthouse where he had retreated to live ascetically. After a savage, drug-fueled orgy with the crowd that gathered to watch him flog himself, he awakes in horror and takes his own life - the World State's final, accidental victory over him."
+  },
+  {
+    category: "Broader Themes",
+    text: "Huxley wrote Brave New World partly as a response to which other utopian novel, which he considered naively optimistic?",
+    options: ["We by Yevgeny Zamyatin", "Men Like Gods by H.G. Wells", "Utopia by Thomas More", "Looking Backward by Edward Bellamy"],
+    answer: 1,
+    explanation: "Huxley was directly responding to H.G. Wells' Men Like Gods (1923), which presented a future society of scientific progress and freedom as wholly desirable. Brave New World asks: what if that perfect society required you to give up everything that makes life meaningful?"
+  }
+];
+
+let current = 0;
+let score = 0;
+let userAnswers = [];
+let answered = false;
+
+function shuffle(arr) {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Shuffle questions on load
+const shuffled = shuffle(questions);
+
+function renderQuestion() {
+  answered = false;
+  const q = shuffled[current];
+  const total = shuffled.length;
+  document.getElementById('progress-fill').style.width = ((current / total) * 100) + '%';
+
+  const letters = ['A', 'B', 'C', 'D'];
+  const optionsHTML = q.options.map((opt, i) => `
+    <button class="option-btn" onclick="selectAnswer(${i})" id="opt-${i}">
+      <span class="option-letter">${letters[i]}.</span>
+      <span>${opt}</span>
+    </button>
+  `).join('');
+
+  document.getElementById('question-container').innerHTML = `
+    <div class="card">
+      <div class="q-meta">
+        <span class="q-number">Question ${current + 1} of ${total}</span>
+        <span class="q-category">${q.category}</span>
+      </div>
+      <div class="q-text">${q.text}</div>
+      <div class="options">${optionsHTML}</div>
+      <div class="explanation" id="explanation">${q.explanation}</div>
+    </div>
+    <div class="nav">
+      <button class="btn-next" id="btn-next" onclick="nextQuestion()">
+        ${current < total - 1 ? 'Next Question →' : 'See Results →'}
+      </button>
+    </div>
+  `;
+}
+
+function selectAnswer(chosen) {
+  if (answered) return;
+  answered = true;
+  const q = shuffled[current];
+  const correct = q.answer;
+  const isRight = chosen === correct;
+  if (isRight) score++;
+  userAnswers.push({ question: q, chosen, correct, isRight });
+
+  // Style buttons
+  document.querySelectorAll('.option-btn').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct) btn.classList.add('correct');
+    if (i === chosen && !isRight) btn.classList.add('wrong');
+  });
+
+  document.getElementById('explanation').classList.add('show');
+  document.getElementById('btn-next').classList.add('visible');
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= shuffled.length) {
+    showResults();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showResults() {
+  document.getElementById('quiz-screen').classList.add('hidden');
+  const resultsEl = document.getElementById('results-screen');
+  resultsEl.style.display = 'block';
+
+  const total = shuffled.length;
+  const pct = Math.round((score / total) * 100);
+
+  document.getElementById('score-display').innerHTML = `${score}<span>/${total}</span>`;
+
+  let verdict, quote;
+  if (pct >= 90) {
+    verdict = "Exceptional Comprehension";
+    quote = "\"Words can be like X-rays if you use them properly - they'll go through anything. You read and you're pierced.\" You have read well.";
+  } else if (pct >= 70) {
+    verdict = "Strong Understanding";
+    quote = "\"One believes things because one has been conditioned to believe them.\" You, however, have thought for yourself.";
+  } else if (pct >= 50) {
+    verdict = "A Citizen of the World State";
+    quote = "\"A love of nature keeps no factories busy.\" Perhaps a re-read is in order - the details deserve your attention.";
+  } else {
+    verdict = "Time for Another Dose of Soma";
+    quote = "\"Never put off till tomorrow the fun you can have today.\" But perhaps put off the quiz until you revisit the text.";
+  }
+
+  document.getElementById('verdict-display').textContent = verdict;
+  document.getElementById('quote-display').textContent = quote;
+
+  const breakdown = userAnswers.map((ua, i) => {
+    const letters = ['A', 'B', 'C', 'D'];
+    const cls = ua.isRight ? 'got-right' : 'got-wrong';
+    const answerLine = ua.isRight
+      ? `<span class="breakdown-answer">✓ <strong>${ua.question.options[ua.correct]}</strong></span>`
+      : `<span class="breakdown-answer"><span class="was-wrong">${ua.question.options[ua.chosen]}</span> → <strong>${ua.question.options[ua.correct]}</strong></span>`;
+    return `
+      <div class="breakdown-item ${cls}">
+        <div class="breakdown-q">Q${i + 1}. ${ua.question.text}</div>
+        ${answerLine}
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('breakdown-container').innerHTML = breakdown;
+  document.getElementById('progress-fill').style.width = '100%';
+}
+
+function restartQuiz() {
+  current = 0;
+  score = 0;
+  userAnswers = [];
+  // Re-shuffle
+  shuffled.sort(() => Math.random() - 0.5);
+  document.getElementById('results-screen').style.display = 'none';
+  document.getElementById('quiz-screen').classList.remove('hidden');
+  document.getElementById('progress-fill').style.width = '0%';
+  renderQuestion();
+}
+
+// Init
+renderQuestion();
+</script>
+</body>
+</html>

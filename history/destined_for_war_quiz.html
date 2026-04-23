@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destined for War - Comprehension Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #f5f0e8;
+    --parchment: #ede5d0;
+    --gold: #b8860b;
+    --gold-light: #d4a017;
+    --crimson: #8b1a1a;
+    --slate: #4a4a5a;
+    --correct: #2d6a3f;
+    --incorrect: #8b1a1a;
+    --correct-bg: #e8f5ec;
+    --incorrect-bg: #fbeaea;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(0,0,0,0.04) 28px),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(184,134,11,0.05) 10px,
+      rgba(184,134,11,0.05) 11px
+    );
+  }
+
+  .header-inner { position: relative; z-index: 1; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(245,240,232,0.5);
+    margin-top: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 1.5rem auto;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  /* Progress bar */
+  .meta-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--slate);
+    margin-bottom: 0.6rem;
+  }
+
+  #score-tally { color: var(--gold); }
+
+  .progress-track {
+    height: 3px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* Question card */
+  .question-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 2px;
+    padding: 1.75rem 2rem;
+    box-shadow: 2px 3px 12px rgba(0,0,0,0.05);
+    position: relative;
+    animation: slideUp 0.35s ease both;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-ghost {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 4rem;
+    color: rgba(184,134,11,0.1);
+    position: absolute;
+    top: 0.25rem;
+    right: 1rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .q-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-left: 3px solid var(--gold);
+    padding-left: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .q-text {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+    color: var(--ink);
+  }
+
+  .options { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.65rem 0.9rem;
+    border: 1.5px solid rgba(0,0,0,0.12);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    text-align: left;
+    background: transparent;
+    color: var(--ink);
+    width: 100%;
+  }
+
+  .option:hover:not(.disabled) {
+    border-color: var(--gold);
+    background: rgba(184,134,11,0.04);
+  }
+
+  .option.disabled { cursor: default; }
+
+  .opt-letter {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--gold);
+    min-width: 18px;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+
+  .option.correct {
+    border-color: var(--correct);
+    background: var(--correct-bg);
+    color: var(--correct);
+  }
+  .option.correct .opt-letter { color: var(--correct); }
+
+  .option.wrong {
+    border-color: var(--incorrect);
+    background: var(--incorrect-bg);
+    color: var(--incorrect);
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+
+  /* Explanation */
+  .explanation {
+    margin-top: 1rem;
+    padding: 0.9rem 1rem;
+    background: var(--parchment);
+    border-left: 3px solid var(--gold);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--slate);
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .explanation.show { display: block; }
+
+  .explanation strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  /* Nav */
+  .nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 1.5rem;
+    gap: 1rem;
+  }
+
+  .running-score {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--slate);
+    letter-spacing: 0.08em;
+  }
+
+  .btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.75rem;
+    border: 2px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    cursor: pointer;
+    transition: all 0.15s;
+    border-radius: 1px;
+  }
+
+  .btn:hover:not(:disabled) { background: var(--gold); border-color: var(--gold); }
+  .btn:disabled { opacity: 0.35; cursor: default; }
+
+  /* Score screen */
+  .score-screen {
+    display: none;
+    animation: fadeIn 0.4s ease both;
+  }
+
+  .score-screen.show { display: block; }
+
+  .score-hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.5rem;
+    border-radius: 2px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .score-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 14vw, 5.5rem);
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .score-denom {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: rgba(245,240,232,0.5);
+    text-transform: uppercase;
+  }
+
+  .score-bar-wrap {
+    background: rgba(255,255,255,0.1);
+    height: 4px;
+    border-radius: 2px;
+    margin: 1.25rem auto;
+    max-width: 320px;
+    overflow: hidden;
+  }
+
+  .score-bar-fill {
+    height: 100%;
+    background: var(--gold-light);
+    border-radius: 2px;
+    transition: width 1s ease;
+    width: 0%;
+  }
+
+  .verdict {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--paper);
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .verdict-note {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.7);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Breakdown */
+  .breakdown {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 2px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 2px 3px 12px rgba(0,0,0,0.05);
+  }
+
+  .bd-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-left: 3px solid var(--gold);
+    padding-left: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .bd-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    font-size: 0.82rem;
+    gap: 1rem;
+  }
+
+  .bd-row:last-child { border-bottom: none; }
+  .bd-q { color: var(--slate); flex: 1; line-height: 1.4; }
+  .bd-mark { font-size: 1rem; flex-shrink: 0; }
+  .tick { color: var(--correct); }
+  .cross { color: var(--incorrect); }
+
+  @media (max-width: 580px) {
+    .question-card { padding: 1.25rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">Book Comprehension Quiz</div>
+    <h1><em>Destined for War</em></h1>
+    <div class="divider"></div>
+    <div class="subtitle">Graham Allison - Can America and China Escape Thucydides's Trap?</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div id="quiz-section">
+    <div class="meta-bar">
+      <span id="q-label">Question 1 of 20</span>
+      <span id="score-tally">- / -</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
+
+    <div id="q-area"></div>
+
+    <div class="nav">
+      <span class="running-score" id="live-score"></span>
+      <button class="btn" id="next-btn" disabled onclick="next()">Next</button>
+    </div>
+  </div>
+
+  <div class="score-screen" id="score-screen">
+    <div class="score-hero">
+      <div class="score-num" id="final-num"></div>
+      <div class="score-denom">correct answers out of 20</div>
+      <div class="score-bar-wrap"><div class="score-bar-fill" id="score-bar"></div></div>
+      <div class="verdict" id="verdict"></div>
+      <div class="verdict-note" id="verdict-note"></div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">Question Breakdown</div>
+      <div id="bd-list"></div>
+    </div>
+    <button class="btn" onclick="restart()">Retake Quiz</button>
+  </div>
+
+</div>
+
+<script>
+const qs = [
+  {
+    tag: "Part I - The Thucydides Trap",
+    text: "The concept of the \"Thucydides Trap\" is drawn from which ancient conflict, as analyzed in the book's central framework?",
+    opts: [
+      "The Persian Wars, in which Athens and Persia clashed over control of the Aegean",
+      "The Peloponnesian War, in which Sparta's fear of a rising Athens led to catastrophic conflict",
+      "The Punic Wars, in which Rome and Carthage fought for Mediterranean dominance",
+      "The Macedonian Wars, in which Philip II destabilized the Greek city-states"
+    ],
+    ans: 1,
+    exp: "<strong>Explanation</strong> Allison borrows directly from Thucydides' account of the Peloponnesian War: \"It was the rise of Athens and the fear that this instilled in Sparta that made war inevitable.\" This dynamic - a ruling power fearful of a rising challenger - is the trap's definition."
+  },
+  {
+    tag: "Part I - The Thucydides Trap",
+    text: "Of the sixteen historical cases Allison's research team examined where a rising power threatened a ruling power, how many resulted in war?",
+    opts: [
+      "Eight out of sixteen",
+      "Ten out of sixteen",
+      "Twelve out of sixteen",
+      "Fourteen out of sixteen"
+    ],
+    ans: 2,
+    exp: "<strong>Explanation</strong> Allison's Harvard Belfer Center project found that twelve of sixteen past cases ended in war - a sobering 75% rate that underpins the book's urgency about the U.S.-China rivalry."
+  },
+  {
+    tag: "Part I - The Thucydides Trap",
+    text: "Which of the following best captures Allison's core claim about the U.S.-China relationship?",
+    opts: [
+      "War is not inevitable, but structural forces make it far more likely than most policymakers appreciate",
+      "War between the U.S. and China is virtually certain within two decades",
+      "Economic interdependence guarantees that military conflict will be avoided",
+      "China's internal political instability will prevent it from becoming a true peer competitor"
+    ],
+    ans: 0,
+    exp: "<strong>Explanation</strong> Allison is a cautious realist, not a fatalist. He stresses that the trap is not a \"death sentence\" - but he argues strongly that leaders systematically underestimate the structural forces pushing toward conflict, just as pre-WWI statesmen did."
+  },
+  {
+    tag: "Part I - The Thucydides Trap",
+    text: "According to Allison, what is the key psychological mechanism that makes the Thucydides Trap so dangerous for the ruling power?",
+    opts: [
+      "Overconfidence in its own military superiority",
+      "Ideological hatred of the rising power's political system",
+      "Domestic public opinion demanding a preventive war",
+      "Fear - an almost primal anxiety that the established order is slipping away"
+    ],
+    ans: 3,
+    exp: "<strong>Explanation</strong> Fear is the animating emotion in Thucydides' original text and in Allison's framework. It is the ruling power's fear - not just economic rivalry or ideological difference - that distorts judgment and turns manageable tensions into existential confrontations."
+  },
+  {
+    tag: "Part II - China's Rise",
+    text: "Allison uses a striking analogy to convey the speed and scale of China's economic ascent. Which comparison does he emphasize most?",
+    opts: [
+      "China completed in ten years what took the Soviet Union fifty years during the Cold War",
+      "China accomplished in decades what took the United States a century - becoming the world's largest economy by purchasing power parity",
+      "China's military buildup is the fastest in history, surpassing even Nazi Germany's rearmament",
+      "China lifted more people out of poverty in five years than Europe did in five centuries"
+    ],
+    ans: 1,
+    exp: "<strong>Explanation</strong> Allison highlights that China, by purchasing power parity, has already surpassed the U.S. as the world's largest economy - compressing into roughly 30 years a transformation that took the U.S. over a century. This speed is central to understanding why the trap feels so acute now."
+  },
+  {
+    tag: "Part II - China's Rise",
+    text: "How does Allison characterize Xi Jinping's overarching national vision, often called the \"China Dream\"?",
+    opts: [
+      "A desire to export communist ideology to developing nations",
+      "Achieving military parity with the United States by 2035",
+      "Restoring China's greatness and reclaiming what the Chinese see as their rightful central place in the world order",
+      "Creating a Sino-centric trading bloc to replace the WTO"
+    ],
+    ans: 2,
+    exp: "<strong>Explanation</strong> Allison frames the China Dream not primarily as aggression but as restoration - China returning to what it views as its natural position after two centuries of humiliation at the hands of Western powers and Japan."
+  },
+  {
+    tag: "Part II - China's Rise",
+    text: "Allison argues that China's leaders draw deeply on a specific historical memory to justify territorial assertiveness. What is this period called?",
+    opts: [
+      "The \"Century of Humiliation,\" roughly 1839-1949",
+      "The \"Great Leap Forward\" failure of the 1950s and 60s",
+      "The Qing Dynasty's territorial losses to Russia in 1860",
+      "The Boxer Rebellion and subsequent foreign occupation of Beijing"
+    ],
+    ans: 0,
+    exp: "<strong>Explanation</strong> The \"Century of Humiliation\" - from the First Opium War (1839) through the founding of the PRC (1949) - is a foundational narrative in Chinese political culture. Allison shows how Xi weaponizes this memory to legitimize assertive foreign policy as merely righting historical wrongs."
+  },
+  {
+    tag: "Part II - China's Rise",
+    text: "Which of the following best reflects Allison's view of how American leaders have tended to misread China's ambitions?",
+    opts: [
+      "They have consistently overestimated China's economic growth potential",
+      "They have correctly identified China as a revisionist state but failed to fund adequate military responses",
+      "They assumed China would democratize as it grew wealthier, and have been surprised it has not",
+      "Both C and the tendency to project American values and assumptions onto Chinese decision-making"
+    ],
+    ans: 3,
+    exp: "<strong>Explanation</strong> Allison critiques two related blind spots: the \"democratic peace\" assumption (prosperity leads to liberalization) and a deeper failure of strategic empathy - understanding China on its own terms rather than through an American lens."
+  },
+  {
+    tag: "Part III - Historical Case Studies",
+    text: "Which historical case does Allison present as the most instructive cautionary tale - a rivalry that led to catastrophic war that neither side truly wanted?",
+    opts: [
+      "France vs. Habsburg Spain in the Thirty Years' War",
+      "Britain vs. Germany leading to World War I",
+      "The United States vs. Japan in World War II",
+      "The United States vs. the Soviet Union during the Cuban Missile Crisis"
+    ],
+    ans: 1,
+    exp: "<strong>Explanation</strong> The Anglo-German rivalry is Allison's primary cautionary analog. Britain and Germany were deeply economically intertwined (just as the U.S. and China are today), yet stumbled into WWI. Allison uses Norman Angell's pre-war argument that interdependence made conflict \"impossible\" as a warning against complacency."
+  },
+  {
+    tag: "Part III - Historical Case Studies",
+    text: "Among the four cases Allison examines where the Thucydides Trap was successfully avoided, which U.S.-British dynamic stands out as a potential positive model?",
+    opts: [
+      "Britain ceding naval supremacy to the U.S. after the War of 1812",
+      "The U.S. and Britain forming NATO immediately after WWII",
+      "Britain's graceful accommodation of American power in the late 19th and early 20th centuries through a series of strategic concessions",
+      "Britain and the U.S. jointly managing the transition away from the gold standard"
+    ],
+    ans: 2,
+    exp: "<strong>Explanation</strong> Britain's deliberate accommodation of the rising U.S. - resolving the Venezuela crisis (1895), the Hay-Pauncefote Treaty (1901), and withdrawing forces from the Western Hemisphere - shows that a dominant power can manage a transition without war when it makes clear-eyed strategic adjustments."
+  },
+  {
+    tag: "Part III - Historical Case Studies",
+    text: "Allison uses the U.S.-Japan rivalry culminating in WWII to illustrate which specific danger in Thucydidean dynamics?",
+    opts: [
+      "How economic sanctions and containment can push a rising power toward desperate, miscalculated military action",
+      "How ideological incompatibility alone can make war inevitable",
+      "How alliance commitments drag reluctant great powers into conflicts they wish to avoid",
+      "How domestic nationalism in the ruling power is the decisive trigger for war"
+    ],
+    ans: 0,
+    exp: "<strong>Explanation</strong> Japan's attack on Pearl Harbor was, in Allison's telling, partly a product of the U.S. oil embargo and economic strangulation - a rising power cornered into a high-risk gamble. This is a direct warning for U.S. policymakers considering aggressive economic decoupling from China."
+  },
+  {
+    tag: "Part IV - Flashpoints and Strategy",
+    text: "Allison identifies several specific geographic flashpoints where U.S.-China conflict could ignite. Which does he highlight as the single most dangerous?",
+    opts: [
+      "The Korean Peninsula, where North Korea could miscalculate and draw in both powers",
+      "The South China Sea, where Chinese island-building challenges freedom of navigation",
+      "Taiwan, where a Chinese military action would almost certainly trigger a U.S. response",
+      "The Indian Ocean, where China's \"string of pearls\" bases encircle India"
+    ],
+    ans: 2,
+    exp: "<strong>Explanation</strong> Taiwan is Allison's foremost flashpoint: China has never renounced force to achieve reunification, the U.S. has strategic ambiguity commitments, and any kinetic move would involve the most powerful militaries on earth with no clear off-ramp."
+  },
+  {
+    tag: "Part IV - Flashpoints and Strategy",
+    text: "What does Allison mean by the \"Kindleberger Trap,\" and how does it relate to the Thucydides Trap?",
+    opts: [
+      "The danger that a rising power will use economic aid to build a rival alliance system",
+      "The risk that currency manipulation by a rising power destabilizes global trade",
+      "The temptation for a ruling power to pre-emptively sanction a rising rival",
+      "The danger that a rising power refuses to take on global governance responsibilities, creating a leadership vacuum"
+    ],
+    ans: 3,
+    exp: "<strong>Explanation</strong> Economist Charles Kindleberger argued that the Great Depression worsened because no power was willing to provide global public goods after Britain's decline. Allison uses this to argue that even if the U.S.-China rivalry avoids hot war, China's unwillingness to shoulder international responsibilities could destabilize the global order."
+  },
+  {
+    tag: "Part IV - Flashpoints and Strategy",
+    text: "How does Allison characterize the role of third-party nations and allies in escalating Thucydidean conflicts?",
+    opts: [
+      "They are largely irrelevant - great-power conflicts are determined by the two principal rivals alone",
+      "Allies and third parties often act as \"sparks\" - their provocations or miscalculations can trigger conflict the great powers themselves sought to avoid",
+      "Multilateral institutions reliably prevent allies from dragging great powers into unwanted wars",
+      "Smaller nations always bandwagon with the rising power, gradually isolating the ruling power"
+    ],
+    ans: 1,
+    exp: "<strong>Explanation</strong> Allison draws the parallel to WWI, where a Serbian nationalist's assassination set off a chain of alliance obligations. He warns that Taiwan, Japan, or the Philippines could act in ways that drag the U.S. and China into conflict neither headquarters wanted."
+  },
+  {
+    tag: "Part V - Pathways to Peace",
+    text: "What is Allison's primary prescription for how the United States should approach China to reduce the risk of war?",
+    opts: [
+      "Rapid military buildup in the Pacific to convince China that war would be unwinnable",
+      "Formal diplomatic recognition of China's sphere of influence in Asia in exchange for security guarantees",
+      "A grand strategic reorientation - accepting that accommodating some Chinese interests is necessary while maintaining core U.S. commitments",
+      "Partnering with Russia to balance against China as the greater long-term threat"
+    ],
+    ans: 2,
+    exp: "<strong>Explanation</strong> Allison resists easy prescriptions but calls for the hardest of tasks: \"strategic empathy\" - understanding what China actually wants - combined with a willingness to renegotiate the post-WWII order in ways that give China more legitimate stake, without surrendering core principles."
+  },
+  {
+    tag: "Part V - Pathways to Peace",
+    text: "Which Cold War-era concept does Allison draw on as a model for managing great-power rivalry short of war?",
+    opts: [
+      "Detente and the practice of negotiated arms control, as pursued by Nixon and Kissinger with the Soviet Union",
+      "Containment, as articulated by George Kennan in the Long Telegram",
+      "Massive retaliation, which threatened overwhelming nuclear response to any Soviet aggression",
+      "Flexible response, which calibrated military options across the escalation ladder"
+    ],
+    ans: 0,
+    exp: "<strong>Explanation</strong> Allison highlights Nixon's opening to China itself - a radical reframing of what was possible - and the broader Cold War management toolkit (hotlines, treaties, summits) as evidence that adversaries can build guardrails even amid profound hostility."
+  },
+  {
+    tag: "Part V - Pathways to Peace",
+    text: "Allison concludes the book by offering twelve clues from history on avoiding the Trap. Which theme runs through most of them?",
+    opts: [
+      "The decisive importance of nuclear deterrence in preventing great-power war",
+      "The primacy of economic interdependence as a peace-enforcing mechanism",
+      "The need for U.S. domestic renewal before any foreign policy strategy can succeed",
+      "The necessity of statecraft - imagination, political courage, and creativity - to forge new frameworks beyond conventional options"
+    ],
+    ans: 3,
+    exp: "<strong>Explanation</strong> Allison's \"clues\" consistently emphasize that avoiding war requires extraordinary leadership willing to transcend conventional wisdom - as Nixon did by going to China, or as Kennedy did by finding a diplomatic off-ramp in the Cuban Missile Crisis."
+  },
+  {
+    tag: "Part VI - Deep Understanding",
+    text: "Allison is critical of what he calls \"strategic narcissism.\" Which of the following best defines this term as he uses it?",
+    opts: [
+      "The tendency of great powers to overinvest in prestige projects at the expense of economic strength",
+      "The tendency to see the world only through one's own interests and assumptions, failing to model how rivals actually think",
+      "The belief that one's own political system is inherently superior and destined to prevail",
+      "The habit of overestimating the transformative effect of one's own foreign policy initiatives"
+    ],
+    ans: 1,
+    exp: "<strong>Explanation</strong> Strategic narcissism, in Allison's framework, is the assumption that the world revolves around U.S. choices and values - that adversaries will respond as Americans would. He argues it is one of the most dangerous cognitive errors in U.S. foreign policy."
+  },
+  {
+    tag: "Part VI - Deep Understanding",
+    text: "How does Allison address the counterargument that nuclear weapons make the Thucydides Trap obsolete because great powers can no longer fight each other directly?",
+    opts: [
+      "He agrees - nuclear deterrence has fundamentally broken the historical pattern and makes his sixteen cases largely irrelevant",
+      "He argues that nuclear parity between the U.S. and China does not yet exist, leaving a dangerous window of U.S. advantage",
+      "He acknowledges deterrence reduces some risks but warns that nuclear weapons also create new pathways to accidental or miscalculated escalation",
+      "He argues that cyber weapons have replaced nuclear weapons as the primary deterrent, reintroducing instability"
+    ],
+    ans: 2,
+    exp: "<strong>Explanation</strong> Allison takes nuclear deterrence seriously but not as a cure-all. He points to incidents like the 1983 Able Archer exercise (when the Soviets nearly launched a preemptive strike) to show how escalation dynamics can override rational deterrence calculus in crisis conditions."
+  },
+  {
+    tag: "Part VI - Deep Understanding",
+    text: "Which statement most accurately captures Allison's overall tone and purpose in writing the book?",
+    opts: [
+      "A hawkish call for military preparation, arguing that conflict is inevitable and the U.S. must win decisively",
+      "A pacifist argument for unilateral disarmament and diplomatic recognition of Chinese hegemony in Asia",
+      "A purely academic historical survey with no policy recommendations",
+      "A clarion warning that the structural forces are real and dangerous, paired with cautious optimism that exceptional statecraft can navigate them"
+    ],
+    ans: 3,
+    exp: "<strong>Explanation</strong> Allison writes as a realist who refuses fatalism. He wants to shock policymakers out of complacency (hence the dire historical statistics) while insisting that human agency - creative, courageous leadership - has historically been sufficient to escape the trap in four out of sixteen cases."
+  }
+];
+
+let cur = 0, score = 0, answered = [], userAns = [];
+
+function render() {
+  const q = qs[cur];
+  const total = qs.length;
+  document.getElementById('q-label').textContent = `Question ${cur + 1} of ${total}`;
+  document.getElementById('score-tally').textContent = cur > 0 ? `${score} / ${cur}` : '- / -';
+  document.getElementById('prog').style.width = (cur / total * 100) + '%';
+  document.getElementById('next-btn').disabled = true;
+  document.getElementById('next-btn').textContent = cur === total - 1 ? 'See Results' : 'Next';
+
+  document.getElementById('q-area').innerHTML = `
+    <div class="question-card">
+      <div class="q-ghost">${cur + 1}</div>
+      <div class="q-tag">${q.tag}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="options">
+        ${q.opts.map((o, i) => `
+          <button class="option" onclick="pick(${i})" data-i="${i}">
+            <span class="opt-letter">${String.fromCharCode(65+i)}.</span>
+            <span class="opt-text">${o}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="explanation" id="exp"></div>
+    </div>
+  `;
+}
+
+function pick(idx) {
+  if (document.querySelector('.option.correct')) return;
+  const q = qs[cur];
+  const opts = document.querySelectorAll('.option');
+  opts.forEach(o => o.classList.add('disabled'));
+
+  if (idx === q.ans) {
+    opts[idx].classList.add('correct');
+    score++;
+  } else {
+    opts[idx].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+  }
+
+  userAns[cur] = idx;
+  answered[cur] = idx === q.ans;
+
+  const exp = document.getElementById('exp');
+  exp.innerHTML = q.exp;
+  exp.classList.add('show');
+
+  document.getElementById('next-btn').disabled = false;
+  document.getElementById('score-tally').textContent = `${score} / ${cur + 1}`;
+}
+
+function next() {
+  cur++;
+  if (cur >= qs.length) {
+    finish();
+  } else {
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function finish() {
+  document.getElementById('quiz-section').style.display = 'none';
+  const ss = document.getElementById('score-screen');
+  ss.classList.add('show');
+
+  const total = qs.length;
+  const pct = score / total;
+  document.getElementById('final-num').textContent = `${score}/${total}`;
+
+  setTimeout(() => {
+    document.getElementById('score-bar').style.width = (pct * 100) + '%';
+  }, 100);
+
+  let v, n;
+  if (pct === 1) {
+    v = "Exceptional. A perfect score.";
+    n = "You've internalized Allison's argument at the level of nuance - the kind of strategic literacy that Destined for War was written to cultivate.";
+  } else if (pct >= 0.85) {
+    v = "Strong comprehension.";
+    n = "You understand both the theoretical framework and most of its historical applications. You're thinking like a strategic analyst.";
+  } else if (pct >= 0.65) {
+    v = "A solid foundation.";
+    n = "You've grasped the Thucydides Trap's core mechanics. Sharpening the historical case studies will strengthen your command of Allison's argument.";
+  } else {
+    v = "A revisit is worthwhile.";
+    n = "The structural dynamics Allison maps are subtle and reward careful attention. The historical cases in particular are worth rereading.";
+  }
+
+  document.getElementById('verdict').textContent = v;
+  document.getElementById('verdict-note').textContent = n;
+
+  document.getElementById('bd-list').innerHTML = qs.map((q, i) => `
+    <div class="bd-row">
+      <span class="bd-q">${i+1}. ${q.text.length > 75 ? q.text.slice(0,75) + '...' : q.text}</span>
+      <span class="bd-mark ${answered[i] ? 'tick' : 'cross'}">${answered[i] ? '&#10003;' : '&#10007;'}</span>
+    </div>
+  `).join('');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+  cur = 0; score = 0; answered = []; userAns = [];
+  document.getElementById('score-screen').classList.remove('show');
+  document.getElementById('quiz-section').style.display = 'block';
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+render();
+</script>
+</body>
+</html>

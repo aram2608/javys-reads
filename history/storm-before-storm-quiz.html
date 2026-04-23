@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Storm Before the Storm - Quiz</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+  :root {
+    --bg: #0a0906;
+    --fog: #c4baa8;
+    --pale: #ddd5c4;
+    --dim: #6a6050;
+    --mute: #3a3428;
+    --gold: #c4922a;
+    --gold-lo: rgba(196,146,42,0.07);
+    --gold-border: rgba(196,146,42,0.28);
+    --crimson: #8a1818;
+    --crimson-lo: rgba(138,24,24,0.07);
+    --surface: rgba(210,195,168,0.028);
+    --border: rgba(200,180,140,0.12);
+    --border-hi: rgba(200,180,140,0.28);
+    --correct: #5a8a4a;
+    --correct-bg: rgba(90,138,74,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fog);
+    font-family: 'EB Garamond', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Marble veining - CSS-simulated */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      linear-gradient(32deg, transparent 38%, rgba(200,175,120,0.018) 44%, transparent 50%),
+      linear-gradient(152deg, transparent 28%, rgba(180,155,100,0.012) 36%, transparent 44%),
+      linear-gradient(200deg, transparent 50%, rgba(220,195,140,0.014) 56%, transparent 62%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Top gold rule - Senate chamber door */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold), transparent);
+    opacity: 0.5;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+  }
+
+  /* ── Header ── */
+  header {
+    margin-bottom: 60px;
+    text-align: center;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .spqr {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.6em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--dim);
+    margin-bottom: 20px;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+  }
+
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6rem, 5vw, 2.6rem);
+    font-weight: 600;
+    color: var(--pale);
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  h1 span {
+    display: block;
+    font-size: 0.62em;
+    font-weight: 400;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+  }
+
+  .subtitle {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--mute);
+    margin-top: 18px;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+  }
+
+  .header-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .rule-line {
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(to right, transparent, var(--gold-border));
+  }
+
+  .rule-line.r {
+    background: linear-gradient(to left, transparent, var(--gold-border));
+  }
+
+  .rule-diamond {
+    width: 5px;
+    height: 5px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    opacity: 0.4;
+  }
+
+  /* ── Progress ── */
+  .meta-bar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 8px;
+    font-family: 'Cinzel', serif;
+    animation: fadeIn 0.8s 0.4s both;
+  }
+
+  .progress-track {
+    height: 1px;
+    background: rgba(200,180,140,0.1);
+    margin-bottom: 48px;
+    animation: fadeIn 0.8s 0.4s both;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--crimson), var(--gold));
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    width: 0%;
+  }
+
+  /* ── Question card ── */
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold-border);
+    padding: 32px 36px;
+    margin-bottom: 16px;
+    animation: slideUp 0.4s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Ghost numeral */
+  .question-card::before {
+    content: attr(data-num);
+    position: absolute;
+    bottom: -18px;
+    right: 14px;
+    font-family: 'Cinzel', serif;
+    font-size: 100px;
+    color: rgba(200,175,130,0.03);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+  }
+
+  .q-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+    margin-bottom: 18px;
+  }
+
+  .q-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--pale);
+    margin-bottom: 26px;
+  }
+
+  /* ── Options ── */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .option {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: rgba(196,186,168,0.72);
+    text-align: left;
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 8px;
+    align-items: start;
+  }
+
+  .option:hover:not(.disabled) {
+    border-color: var(--gold-border);
+    background: var(--gold-lo);
+    color: var(--pale);
+  }
+
+  .opt-letter {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    color: var(--dim);
+    padding-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .opt-text { line-height: 1.5; }
+
+  .option.correct {
+    border-color: rgba(90,138,74,0.5);
+    background: var(--correct-bg);
+    color: #8aba7a;
+  }
+  .option.correct .opt-letter { color: #8aba7a; }
+
+  .option.wrong {
+    border-color: rgba(138,24,24,0.4);
+    background: var(--crimson-lo);
+    color: rgba(196,186,168,0.3);
+    text-decoration: line-through;
+    text-decoration-color: rgba(138,24,24,0.4);
+  }
+
+  .option.disabled { cursor: default; pointer-events: none; }
+
+  /* ── Explanation ── */
+  .explanation {
+    display: none;
+    margin-top: 20px;
+    padding: 14px 18px;
+    border-left: 2px solid var(--gold-border);
+    background: var(--gold-lo);
+    font-family: 'EB Garamond', serif;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(196,186,168,0.82);
+    animation: fadeIn 0.3s ease both;
+    font-style: italic;
+  }
+
+  .explanation.show { display: block; }
+  .explanation strong { color: var(--pale); font-style: normal; }
+
+  /* ── Nav ── */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+    animation: fadeIn 0.5s 0.2s both;
+  }
+
+  .live-score {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  .btn {
+    background: transparent;
+    border: 1px solid var(--border-hi);
+    color: var(--fog);
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 11px 22px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+
+  .btn:hover { border-color: var(--gold); color: var(--pale); }
+
+  .btn.primary {
+    background: var(--crimson);
+    border-color: var(--crimson);
+    color: var(--pale);
+  }
+
+  .btn.primary:hover { background: #6a1010; border-color: #6a1010; }
+  .btn:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+
+  /* ── Score screen ── */
+  .score-screen { display: none; animation: slideUp 0.6s ease both; }
+  .score-screen.show { display: block; }
+
+  .score-hero {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 48px 24px;
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold-border);
+    background: var(--surface);
+    position: relative;
+  }
+
+  .score-pre {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 16px;
+  }
+
+  .score-big {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3.5rem, 14vw, 6.5rem);
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .score-denom {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--dim);
+    text-transform: uppercase;
+    font-family: 'Cinzel', serif;
+    margin-bottom: 32px;
+  }
+
+  .score-verdict {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--pale);
+    margin-bottom: 12px;
+  }
+
+  .score-note {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(196,186,168,0.7);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .breakdown {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+
+  .bd-title {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.4em;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .bd-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(200,180,140,0.06);
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+    gap: 12px;
+  }
+
+  .bd-row:last-child { border-bottom: none; }
+  .bd-q { color: rgba(196,186,168,0.6); flex: 1; line-height: 1.4; }
+  .tick { color: #8aba7a; font-size: 13px; flex-shrink: 0; }
+  .cross { color: #c07070; font-size: 13px; flex-shrink: 0; }
+
+  /* ── Animations ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @media (max-width: 580px) {
+    .question-card { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="spqr">S · P · Q · R</div>
+    <div class="eyebrow">Mike Duncan · 2017 · Rome, 133–78 BC</div>
+    <h1>
+      The Storm Before the Storm
+      <span>The Beginning of the End of the Roman Republic</span>
+    </h1>
+    <div class="subtitle">A comprehension quiz · 12 questions</div>
+    <div class="header-rule">
+      <div class="rule-line"></div>
+      <div class="rule-diamond"></div>
+      <div class="rule-line r"></div>
+    </div>
+  </header>
+
+  <div id="quiz-section">
+    <div class="meta-bar">
+      <span id="q-label">Question I of XII</span>
+      <span id="score-tally">- / -</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
+    <div id="q-area"></div>
+    <div class="nav">
+      <span class="live-score" id="live-score"></span>
+      <button class="btn primary" id="next-btn" disabled onclick="advance()">Next →</button>
+    </div>
+  </div>
+
+  <div class="score-screen" id="score-screen">
+    <div class="score-hero">
+      <div class="score-pre">The Verdict of History</div>
+      <div class="score-big" id="final-num"></div>
+      <div class="score-denom">correct answers out of 12</div>
+      <div class="score-verdict" id="verdict"></div>
+      <div class="score-note" id="verdict-note"></div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-title">Question log</div>
+      <div id="bd-list"></div>
+    </div>
+    <button class="btn primary" onclick="restart()">Retake Quiz</button>
+  </div>
+
+</div>
+
+<script>
+const ROMANS = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
+
+const questions = [
+  {
+    tag: "Core Concept",
+    text: "What is the 'mos maiorum,' and why is it the central concept of Duncan's book?",
+    opts: [
+      "The formal Roman constitution specifying how elections should be run",
+      "The unwritten ancestral customs and traditions that governed acceptable political behavior - its gradual erosion is Duncan's explanation for the Republic's fall",
+      "The code of military discipline that Marius reformed",
+      "The Senate's right to veto popular legislation"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> The mos maiorum - 'the way of the ancestors' - was never written down. It was a shared understanding of what Romans simply did not do: you did not use violence against fellow citizens, you did not march armies on Rome, you did not hold the same office consecutively. Once the first generation of politicians broke these norms, they became impossible to enforce against the next."
+  },
+  {
+    tag: "The Gracchi",
+    text: "When the tribune Marcus Octavius repeatedly blocked Tiberius Gracchus's agrarian bill in 133 BC, Tiberius did something unprecedented. What?",
+    opts: [
+      "He had Octavius arrested and tried for treason",
+      "He appealed directly to the Roman people in the assembly to vote Octavius out of office",
+      "He bypassed the assembly entirely and put the bill before the Senate",
+      "He physically attacked Octavius on the Rostra"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> Tiberius brought a motion before the Tribal Assembly to depose Octavius - a tribune - by popular vote. This was constitutionally explosive: the sacrosanctity of a tribune was foundational Roman law. Tiberius argued that a tribune who acted against the people forfeited his protection. His enemies argued he had shattered the constitution to pass a land bill."
+  },
+  {
+    tag: "The Gracchi",
+    text: "How did Tiberius Gracchus die?",
+    opts: [
+      "He was sentenced to exile by the Senate and died abroad",
+      "He was beaten to death by a mob of senators and their clients on the Capitoline Hill, led by the Pontifex Maximus Scipio Nasica",
+      "He was stabbed by a political rival in the Forum",
+      "He died of illness before he could be prosecuted"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> In 133 BC, Tiberius and his supporters were clubbed to death with the legs of benches and chairs by a senatorial mob led by Publius Cornelius Scipio Nasica Serapio. Over 300 of his followers were also killed. This was the first use of large-scale political violence in Rome in living memory - a precedent Duncan treats as catastrophic."
+  },
+  {
+    tag: "Gaius Gracchus",
+    text: "The Senate deployed a new constitutional weapon against Gaius Gracchus in 121 BC - the first major use of what instrument?",
+    opts: [
+      "The dictatura - appointing a dictator with emergency powers",
+      "The senatus consultum ultimum - a 'final decree' instructing the consuls to take all measures necessary to defend the state",
+      "An interdict permanently banning Gaius from holding further office",
+      "A formal vote of censure stripping Gaius of his tribunate mid-term"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> The <em>senatus consultum ultimum</em> was a new and constitutionally murky instrument authorizing the consuls (and willing citizens) to use lethal force to restore order. The consul Lucius Opimius used it as license to hunt down Gaius and his followers. Around 3,000 people were killed. The SCU became the standard Senate response to popular movements - used again against Saturninus in 100 BC, and famously against Catiline in 63 BC."
+  },
+  {
+    tag: "The Road to Marius",
+    text: "The catastrophic Battle of Arausio (105 BC) opened the door for Marius's rise. What made the defeat so devastating?",
+    opts: [
+      "The Roman armies were ambushed at night and had no time to form battle lines",
+      "The two Roman commanders - Caepio and Mallius - refused to cooperate due to class rivalry, and their separate armies were destroyed piecemeal by the Cimbri and Teutones",
+      "A traitorous cavalry commander switched sides mid-battle",
+      "The Roman legions were suffering from plague and barely able to fight"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> Quintus Servilius Caepio, a patrician, refused to coordinate with the 'new man' Gnaeus Mallius Maximus. Fighting separately, both Roman armies were annihilated - perhaps 80,000 soldiers killed in a single day. It was the worst Roman defeat since Cannae. The disaster discredited the old nobility and created the opening for Marius, who had already proven himself in Africa."
+  },
+  {
+    tag: "Marius",
+    text: "What was the core transformation Gaius Marius made to the Roman military, and why did it have such far-reaching political consequences?",
+    opts: [
+      "He standardized armor and weapons across all legions, making the army more efficient",
+      "He eliminated property requirements for military service, creating professional soldiers who owed their livelihood - and loyalty - to their commander rather than to the Republic",
+      "He introduced cavalry tactics from Numidia that revolutionized battlefield strategy",
+      "He built a permanent standing navy to project Roman power beyond Italy"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> Before Marius, soldiers had to own property to serve - the army was a citizens' militia. Marius enrolled the <em>capite censi</em> (those counted only by head, with no property). These men depended entirely on their general for equipment, pay, and - crucially - the land grants they hoped to receive on discharge. This transferred military loyalty from Rome to individual commanders, making the armies of Sulla, Caesar, and Augustus possible."
+  },
+  {
+    tag: "Marius",
+    text: "Gaius Marius served as consul how many times, and why was this so constitutionally extraordinary?",
+    opts: [
+      "Five times - unusual but not unprecedented",
+      "Seven times - the consulship was the highest annual magistracy, and Roman custom (mos maiorum) required a ten-year gap between terms",
+      "Six times - he was technically legal since the Senate kept granting him special exemptions",
+      "Four times - the first three were for the Jugurthine War, the fourth for the Germanic invasions"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> Seven consulships, with five consecutive terms during the crisis of the Cimbric and Teutonic invasions. Roman custom was clear: the consulship rotated among the elite, and holding it repeatedly - especially consecutively - was antithetical to the Republican principle of shared power and annual turnover. Marius's domination of the office made him both a hero and, to his enemies, a proto-tyrant."
+  },
+  {
+    tag: "The Social War",
+    text: "What event in 91 BC directly triggered the Social War?",
+    opts: [
+      "The Senate refused to grant emergency grain distributions to Italian communities during a famine",
+      "The tribune Marcus Livius Drusus the Younger was assassinated after his reform package - including Italian citizenship - was annulled by the Senate",
+      "A Roman census team publicly humiliated Italian leaders by enforcing ager publicus reclamations",
+      "Consul Lucius Marcius Philippus gave a speech in the Forum denouncing Italians as unworthy of citizenship"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> Drusus had proposed a sweeping package including citizenship for Italian allies, land redistribution, and Senate reform. The Senate annulled his entire legislation on a technicality, and Drusus was then stabbed to death in mysterious circumstances. Italian communities who had staked their hopes on his reforms erupted in revolt. They formed a rival state they called Italia, with its own capital (Corfinium, renamed Italica) and its own Senate."
+  },
+  {
+    tag: "The Social War",
+    text: "How did the Social War effectively end, despite Rome winning most of the military engagements?",
+    opts: [
+      "Rome agreed to pay large reparations to the Italian communities that had rebelled",
+      "Rome granted Roman citizenship to Italian communities - first the loyal ones, then gradually the rebels too - giving the allies what they had fought for",
+      "The Italian coalition collapsed when its two main leaders were killed in the same battle",
+      "A peace treaty formally divided Italy into Roman and allied zones of administration"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> Rome won militarily but conceded politically. The <em>lex Iulia</em> (90 BC) and <em>lex Plautia Papiria</em> (89 BC) extended citizenship to loyal Italian communities and then to those who laid down arms. By the war's end, nearly all free Italians were Roman citizens - exactly what the socii had demanded. The Social War thus transformed the nature of what 'being Roman' meant, massively expanding the citizen body."
+  },
+  {
+    tag: "Sulla",
+    text: "What unprecedented action did Lucius Cornelius Sulla take in 88 BC that redefined the limits of Roman politics?",
+    opts: [
+      "He bribed the entire college of tribunes to pass emergency legislation giving him sole command of the army",
+      "He marched his legions on Rome itself - the first Roman general to do so - to reverse the popular assembly's transfer of his command to Marius",
+      "He declared himself dictator without Senate authorization, the first to do so in over a century",
+      "He ordered the assassination of the consuls and seized the treasury to fund his own campaign"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> When the popular assembly, at Marius's instigation, transferred the command against Mithridates from Sulla to Marius, Sulla turned his legions around and marched on Rome. His officers deserted in horror - this was simply not done. But Sulla's soldiers followed him, because their livelihoods depended on him. He captured the city, drove Marius out, passed legislation, and then left for the east. The psychological barrier had been broken."
+  },
+  {
+    tag: "Sulla's Dictatorship",
+    text: "Sulla's 'proscriptions' after his victory in the civil war (82 BC) were a political innovation of lasting infamy. What were they?",
+    opts: [
+      "A list of banned books and speeches that critics of Sulla were forbidden to circulate",
+      "Posted lists of enemies of the state - any Roman on the list could be killed by anyone, with the killer rewarded and the victim's property confiscated; the lists could be expanded at will",
+      "Formal exile orders banishing political enemies from Rome and Italy",
+      "A register of debts that Sulla canceled to win popular support after taking power"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> The proscriptions were systemic, state-sanctioned murder and property seizure on a scale Rome had never seen. Approximately 80 senators and 1,600 equestrians were proscribed. Killers received cash rewards; informers received portions of the seized estates. The terror served multiple purposes: eliminating enemies, rewarding allies, and funding Sulla's veterans. The young Julius Caesar was briefly on a list and only narrowly survived."
+  },
+  {
+    tag: "Synthesis",
+    text: "What was the most astonishing thing Sulla did after his dictatorship - and what does Duncan argue it reveals about the Republic's true condition?",
+    opts: [
+      "He converted to philosophy and wrote a treatise arguing dictatorship was justified by Roman law",
+      "He voluntarily resigned his dictatorship, held elections, and retired to private life - suggesting he wanted to restore the Republic, but that the norms he had shattered could not be unshattered",
+      "He arranged for his son to succeed him, creating Rome's first dynastic arrangement",
+      "He proposed a constitutional monarchy and was only stopped by a Senate vote"
+    ],
+    ans: 1,
+    exp: "<strong>Correct.</strong> Sulla's voluntary abdication in 79 BC astonished antiquity - and Duncan treats it as the book's defining paradox. Sulla genuinely seems to have wanted to restore the Republic and the Senate's authority. His reforms rolled back the tribunate, reinforced the Senate's control. But the methods he used to 'restore' the Republic - civil war, proscriptions, marching on Rome - demonstrated exactly that those norms were gone. The storm had passed. But the damage was done, and men like Pompey, Crassus, and Caesar had watched and learned."
+  }
+];
+
+let cur = 0, score = 0, answered = [], userAns = [];
+
+function render() {
+  const q = questions[cur];
+  const total = questions.length;
+  document.getElementById('q-label').textContent = `Question ${ROMANS[cur]} of ${ROMANS[total - 1]}`;
+  document.getElementById('score-tally').textContent = cur > 0 ? `${score} / ${cur}` : '- / -';
+  document.getElementById('prog').style.width = (cur / total * 100) + '%';
+  document.getElementById('next-btn').disabled = true;
+  document.getElementById('next-btn').textContent = cur === total - 1 ? 'See results →' : 'Next →';
+  document.getElementById('live-score').textContent = '';
+
+  document.getElementById('q-area').innerHTML = `
+    <div class="question-card" data-num="${ROMANS[cur]}">
+      <div class="q-tag">${q.tag}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="options">
+        ${q.opts.map((o, i) => `
+          <button class="option" onclick="pick(${i})" data-i="${i}">
+            <span class="opt-letter">${String.fromCharCode(65 + i)}.</span>
+            <span class="opt-text">${o}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="explanation" id="exp"></div>
+    </div>
+  `;
+}
+
+function pick(idx) {
+  if (document.querySelector('.option.correct')) return;
+  const q = questions[cur];
+  const opts = document.querySelectorAll('.option');
+  opts.forEach(o => o.classList.add('disabled'));
+
+  if (idx === q.ans) {
+    opts[idx].classList.add('correct');
+    score++;
+  } else {
+    opts[idx].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+  }
+
+  userAns[cur] = idx;
+  answered[cur] = idx === q.ans;
+
+  const exp = document.getElementById('exp');
+  exp.innerHTML = q.exp;
+  exp.classList.add('show');
+
+  document.getElementById('next-btn').disabled = false;
+  document.getElementById('score-tally').textContent = `${score} / ${cur + 1}`;
+  document.getElementById('live-score').textContent = `${score} correct so far`;
+}
+
+function advance() {
+  cur++;
+  if (cur >= questions.length) {
+    finish();
+  } else {
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function finish() {
+  document.getElementById('quiz-section').style.display = 'none';
+  const ss = document.getElementById('score-screen');
+  ss.classList.add('show');
+
+  const pct = score / questions.length;
+  document.getElementById('final-num').textContent = `${score}/${questions.length}`;
+
+  let v, n;
+  if (pct === 1) {
+    v = "The Senate would have feared you.";
+    n = "A perfect score. You understand not just the events but the mechanisms: how norms collapse, how precedents compound, how men who shatter rules to 'save' institutions can destroy them in the saving. History's lesson, rarely learned.";
+  } else if (pct >= 0.75) {
+    v = "A credible senator.";
+    n = "Strong grasp of the period. A few of the finer points - the constitutional mechanics of the proscriptions, the Social War's resolution, the paradox of Sulla's retirement - are worth revisiting. The details are where the argument lives.";
+  } else if (pct >= 0.5) {
+    v = "A man of the equestrian class.";
+    n = "You know the main characters and events but some of the book's deeper arguments about norm erosion and institutional fragility didn't fully register. The Gracchi chapters and the Sulla chapters are the heart of Duncan's case.";
+  } else {
+    v = "A new man from the Italian countryside.";
+    n = "Rome's late Republic is genuinely complex - the cast is huge and the constitutional mechanics subtle. Start with the Gracchi brothers, then trace the line from their innovations to Marius's, to Sulla's. The whole story is one long chain of precedents.";
+  }
+
+  document.getElementById('verdict').textContent = v;
+  document.getElementById('verdict-note').textContent = n;
+
+  document.getElementById('bd-list').innerHTML = questions.map((q, i) => `
+    <div class="bd-row">
+      <span class="bd-q">${ROMANS[i]}. ${q.text.length > 70 ? q.text.slice(0, 70) + '…' : q.text}</span>
+      <span class="${answered[i] ? 'tick' : 'cross'}">${answered[i] ? '✓' : '✗'}</span>
+    </div>
+  `).join('');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+  cur = 0; score = 0; answered = []; userAns = [];
+  document.getElementById('score-screen').classList.remove('show');
+  document.getElementById('quiz-section').style.display = 'block';
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+render();
+</script>
+</body>
+</html>
