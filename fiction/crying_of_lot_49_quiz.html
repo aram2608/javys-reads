@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Crying of Lot 49 - Comprehension Quiz</title>
+    <title>The Crying of Lot 49</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
@@ -459,7 +459,6 @@
         <header>
             <div class="eyebrow">Thomas Pynchon · 1966</div>
             <h1>The Crying of <em>Lot 49</em></h1>
-            <div class="subtitle">A comprehension quiz · 10 questions</div>
             <svg class="horn-decoration" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true">
                 <path d="M2 12 Q8 4 20 8 L40 6 L46 12 L40 18 L20 16 Q8 20 2 12Z" stroke="#1A1612" stroke-width="1.5"
@@ -468,191 +467,100 @@
                 <line x1="40" y1="6" x2="46" y2="3" stroke="#1A1612" stroke-width="1.5" />
             </svg>
         </header>
-
-        <div class="progress-label">
-            <span id="prog-text">Question 1 of 10</span>
-            <span id="score-running">Score: 0</span>
-        </div>
-        <div class="progress-track">
-            <div class="progress-fill" id="prog-fill" style="width: 10%"></div>
-        </div>
-
-        <div id="quiz-area"></div>
-        <div class="score-screen" id="score-screen"></div>
+        <div id="quiz-root"> </div>
     </div>
 
     <script>
         const LETTERS = ['A', 'B', 'C', 'D'];
-        const questions = [
-            {
-                q: "What is Oedipa Maas doing when the novel opens?",
-                opts: ["Sorting through her late husband's belongings", "Being named executor of Pierce Inverarity's estate", "Attending a Tupperware party with suburban neighbors", "Reading a letter delivered through a secret postal system"],
-                ans: 1,
-                exp: "Oedipa Maas receives word that she has been named executor of the will of Pierce Inverarity, her former lover - an act that propels her into the novel's labyrinthine mystery."
-            },
-            {
-                q: "What does the acronym W.A.S.T.E. stand for?",
-                opts: ["Western American Secret Transmission Exchange", "We Await Silent Tristero's Empire", "Worldwide Anarchist Society for Total Entropy", "We Are Sending Transmissions Everywhere"],
-                ans: 1,
-                exp: "'We Await Silent Tristero's Empire' is the full name of the underground mail system Oedipa believes she has uncovered - a shadow network rivaling the official postal service."
-            },
-            {
-                q: "What is Mucho Maas's occupation during the novel?",
-                opts: ["A used car salesman wracked with guilt", "A stamp collector and philatelist", "A radio disc jockey", "A theater director in San Narciso"],
-                ans: 2,
-                exp: "Mucho works as a radio DJ. He had previously sold used cars - a job that tormented him - and by the novel's end he has been altered by LSD given to him by Dr. Hilarius."
-            },
-            {
-                q: "What is the name of the Jacobean revenge play that provides Oedipa with clues about the Tristero?",
-                opts: ["'The Revenger's Tragedy' by Middleton", "'The Courier's Tragedy' by Richard Wharfinger", "'The Crying of Lot 49' by Bortz", "'The Paranoids' - a musical"],
-                ans: 1,
-                exp: "'The Courier's Tragedy,' attributed to the fictitious Jacobean playwright Richard Wharfinger, contains a subplot that Oedipa believes encodes the historical origins of the Tristero underground."
-            },
-            {
-                q: "What recurring symbol does Oedipa encounter associated with the Tristero?",
-                opts: ["A weeping eye dripping black ink", "A muted post horn", "A black butterfly on a burning letter", "An hourglass stamped on envelopes"],
-                ans: 1,
-                exp: "The muted post horn - a horn with its bell covered - is the emblem of W.A.S.T.E. and the Tristero. Oedipa finds it graffitied in bathroom stalls, worn as jewelry, and drawn on walls throughout her investigation."
-            },
-            {
-                q: "Who is Metzger, and what role does he play in the story?",
-                opts: ["A stamp dealer who identifies the Tristero's origins", "A co-executor of Inverarity's estate who becomes Oedipa's lover", "The director of the Wharfinger play Oedipa attends", "A former member of the Tristero underground"],
-                ans: 1,
-                exp: "Metzger is a lawyer - and a former child actor - assigned as co-executor of Inverarity's will alongside Oedipa. He seduces her early in the novel and helps draw her further into the estate's mysteries."
-            },
-            {
-                q: "What is the Nefastis Machine purported to accomplish?",
-                opts: ["Decode intercepted messages from the Tristero network", "Harness Maxwell's Demon to produce work from information", "Sort stamps by their cancellation marks and routes", "Broadcast pirate radio signals bypassing federal oversight"],
-                ans: 1,
-                exp: "John Nefastis claims his machine can use a 'Demon' - referencing physicist James Clerk Maxwell's thought experiment - to convert information into thermodynamic work, requiring a 'sensitive' person to communicate with it mentally."
-            },
-            {
-                q: "Which of the following is NOT one of Oedipa's four possible explanations for everything she has experienced?",
-                opts: ["The Tristero conspiracy is genuinely real", "Inverarity engineered the whole thing as a posthumous joke", "She has been hallucinating or projecting meaning onto coincidence", "A government agency is using her to expose the Tristero"],
-                ans: 3,
-                exp: "Oedipa distills her situation into four possibilities: the Tristero is real; she is mentally ill; Inverarity staged it all as an elaborate prank; or she has unconsciously imposed patterns onto random events. A government conspiracy is not among them."
-            },
-            {
-                q: "What is the significance of the Thurn und Taxis postal system in the novel?",
-                opts: ["It is Pynchon's name for the American postal service Inverarity owned", "It is the official European mail monopoly that the Tristero allegedly opposed for centuries", "It is the cover name the Tristero used while operating in San Narciso", "It is a fictional postal system invented by the character Genghis Cohen"],
-                ans: 1,
-                exp: "Thurn und Taxis was a real historical European postal monopoly. In the novel, the Tristero is said to have been a rival underground system persecuted by Thurn und Taxis - a history Oedipa pieces together through the Wharfinger play and academic sources."
-            },
-            {
-                q: "Why does the novel end at the auction of Lot 49?",
-                opts: ["Oedipa is arrested before the auction can begin", "The novel ends just as the lot is about to be called, withholding the revelation", "The stamps are revealed to be forgeries, collapsing the mystery", "Metzger outbids the mysterious figure, ending the conspiracy"],
-                ans: 1,
-                exp: "Pynchon ends the novel at the moment of potential revelation - Oedipa waits for Lot 49 (a collection of stamps linked to the Tristero) to be cried at auction, hoping the bidder will confirm the conspiracy. The novel ends before we learn the answer, leaving ambiguity intact."
-            }
-        ];
-
-        let current = 0, score = 0, results = [];
-
-        function render() {
-            const area = document.getElementById('quiz-area');
-            const ss = document.getElementById('score-screen');
-
-            if (current >= questions.length) {
-                area.innerHTML = '';
-                ss.classList.add('show');
-                showScore();
-                return;
-            }
-
-            const q = questions[current];
-            area.innerHTML = `
-    <div class="q-card">
-      <div class="q-number">Question ${current + 1} of ${questions.length}</div>
-      <div class="q-text">${q.q}</div>
-      <div class="options" id="opts">
-        ${q.opts.map((o, i) => `
-          <button class="opt" onclick="choose(${i})" id="opt-${i}">
-            <span class="opt-letter">${LETTERS[i]}</span>
-            <span>${o}</span>
-          </button>`).join('')}
-      </div>
-      <div class="feedback" id="feedback">${q.exp}</div>
-    </div>
-    <div class="nav">
-      <button class="next-btn" id="next-btn" onclick="next()">
-        ${current + 1 < questions.length ? 'Continue →' : 'See results →'}
-      </button>
-    </div>
-  `;
-        }
-
-        function choose(i) {
-            const q = questions[current];
-            document.querySelectorAll('.opt').forEach(b => b.disabled = true);
-            const chosen = document.getElementById('opt-' + i);
-            if (i === q.ans) {
-                chosen.classList.add('correct');
-                score++;
-                results.push(true);
-            } else {
-                chosen.classList.add('wrong');
-                document.getElementById('opt-' + q.ans).classList.add('reveal');
-                results.push(false);
-            }
-            document.getElementById('feedback').classList.add('show');
-            document.getElementById('next-btn').classList.add('show');
-
-            document.getElementById('score-running').textContent = 'Score: ' + score;
-            document.getElementById('prog-text').textContent = 'Question ' + (current + 1) + ' of ' + questions.length;
-        }
-
-        function next() {
-            current++;
-            const pct = (current / questions.length) * 100;
-            document.getElementById('prog-fill').style.width = Math.max(pct, 10) + '%';
-            if (current < questions.length) {
-                document.getElementById('prog-text').textContent = 'Question ' + (current + 1) + ' of ' + questions.length;
-            }
-            render();
-        }
-
-        function showScore() {
-            document.getElementById('prog-fill').style.width = '100%';
-            document.getElementById('prog-text').textContent = 'Complete';
-            const pct = Math.round(score / questions.length * 100);
-            let msg = '';
-            if (pct === 100) msg = "A perfect score. You have followed every thread of the Tristero's labyrinth to its end - or its apparent end.";
-            else if (pct >= 80) msg = "You've navigated the paranoid maze with considerable skill. Pynchon's entropy hasn't claimed you yet.";
-            else if (pct >= 60) msg = "A partial revelation. Some threads remain tangled - perhaps another read through San Narciso is in order.";
-            else if (pct >= 40) msg = "Like Oedipa herself, meaning is still assembling at the edges. The muted horn plays on.";
-            else msg = "The Tristero remains elusive. As Oedipa learned, some labyrinths resist even our most earnest investigation.";
-
-            const summaryRows = questions.map((q, i) => `
-    <div class="summary-row">
-      <span class="s-num">${i + 1}.</span>
-      <span class="s-result ${results[i] ? 'check' : 'cross'}">${results[i] ? '✓' : '✗'}</span>
-      <span class="s-q">${q.q}</span>
-    </div>`).join('');
-
-            document.getElementById('score-screen').innerHTML = `
-    <div class="score-fraction">${score}<span>/${questions.length}</span></div>
-    <div class="score-pct">${pct}% correct</div>
-    <div class="score-divider"></div>
-    <div class="score-msg">${msg}</div>
-    <button class="restart-btn" onclick="restart()">Try again</button>
-    <div class="summary">
-      <div class="summary-title">Question breakdown</div>
-      ${summaryRows}
-    </div>
-  `;
-        }
-
-        function restart() {
-            current = 0; score = 0; results = [];
-            document.getElementById('score-screen').classList.remove('show');
-            document.getElementById('score-running').textContent = 'Score: 0';
-            document.getElementById('prog-fill').style.width = '10%';
-            document.getElementById('prog-text').textContent = 'Question 1 of 10';
-            render();
-        }
-
-        render();
+        window.QUIZ = {
+            questions: [
+                {
+                    q: "What is Oedipa Maas doing when the novel opens?",
+                    opts: ["Sorting through her late husband's belongings", "Being named executor of Pierce Inverarity's estate", "Attending a Tupperware party with suburban neighbors", "Reading a letter delivered through a secret postal system"],
+                    ans: 1,
+                    exp: "Oedipa Maas receives word that she has been named executor of the will of Pierce Inverarity, her former lover - an act that propels her into the novel's labyrinthine mystery."
+                },
+                {
+                    q: "What does the acronym W.A.S.T.E. stand for?",
+                    opts: ["Western American Secret Transmission Exchange", "We Await Silent Tristero's Empire", "Worldwide Anarchist Society for Total Entropy", "We Are Sending Transmissions Everywhere"],
+                    ans: 1,
+                    exp: "'We Await Silent Tristero's Empire' is the full name of the underground mail system Oedipa believes she has uncovered - a shadow network rivaling the official postal service."
+                },
+                {
+                    q: "What is Mucho Maas's occupation during the novel?",
+                    opts: ["A used car salesman wracked with guilt", "A stamp collector and philatelist", "A radio disc jockey", "A theater director in San Narciso"],
+                    ans: 2,
+                    exp: "Mucho works as a radio DJ. He had previously sold used cars - a job that tormented him - and by the novel's end he has been altered by LSD given to him by Dr. Hilarius."
+                },
+                {
+                    q: "What is the name of the Jacobean revenge play that provides Oedipa with clues about the Tristero?",
+                    opts: ["'The Revenger's Tragedy' by Middleton", "'The Courier's Tragedy' by Richard Wharfinger", "'The Crying of Lot 49' by Bortz", "'The Paranoids' - a musical"],
+                    ans: 1,
+                    exp: "'The Courier's Tragedy,' attributed to the fictitious Jacobean playwright Richard Wharfinger, contains a subplot that Oedipa believes encodes the historical origins of the Tristero underground."
+                },
+                {
+                    q: "What recurring symbol does Oedipa encounter associated with the Tristero?",
+                    opts: ["A weeping eye dripping black ink", "A muted post horn", "A black butterfly on a burning letter", "An hourglass stamped on envelopes"],
+                    ans: 1,
+                    exp: "The muted post horn - a horn with its bell covered - is the emblem of W.A.S.T.E. and the Tristero. Oedipa finds it graffitied in bathroom stalls, worn as jewelry, and drawn on walls throughout her investigation."
+                },
+                {
+                    q: "Who is Metzger, and what role does he play in the story?",
+                    opts: ["A stamp dealer who identifies the Tristero's origins", "A co-executor of Inverarity's estate who becomes Oedipa's lover", "The director of the Wharfinger play Oedipa attends", "A former member of the Tristero underground"],
+                    ans: 1,
+                    exp: "Metzger is a lawyer - and a former child actor - assigned as co-executor of Inverarity's will alongside Oedipa. He seduces her early in the novel and helps draw her further into the estate's mysteries."
+                },
+                {
+                    q: "What is the Nefastis Machine purported to accomplish?",
+                    opts: ["Decode intercepted messages from the Tristero network", "Harness Maxwell's Demon to produce work from information", "Sort stamps by their cancellation marks and routes", "Broadcast pirate radio signals bypassing federal oversight"],
+                    ans: 1,
+                    exp: "John Nefastis claims his machine can use a 'Demon' - referencing physicist James Clerk Maxwell's thought experiment - to convert information into thermodynamic work, requiring a 'sensitive' person to communicate with it mentally."
+                },
+                {
+                    q: "Which of the following is NOT one of Oedipa's four possible explanations for everything she has experienced?",
+                    opts: ["The Tristero conspiracy is genuinely real", "Inverarity engineered the whole thing as a posthumous joke", "She has been hallucinating or projecting meaning onto coincidence", "A government agency is using her to expose the Tristero"],
+                    ans: 3,
+                    exp: "Oedipa distills her situation into four possibilities: the Tristero is real; she is mentally ill; Inverarity staged it all as an elaborate prank; or she has unconsciously imposed patterns onto random events. A government conspiracy is not among them."
+                },
+                {
+                    q: "What is the significance of the Thurn und Taxis postal system in the novel?",
+                    opts: ["It is Pynchon's name for the American postal service Inverarity owned", "It is the official European mail monopoly that the Tristero allegedly opposed for centuries", "It is the cover name the Tristero used while operating in San Narciso", "It is a fictional postal system invented by the character Genghis Cohen"],
+                    ans: 1,
+                    exp: "Thurn und Taxis was a real historical European postal monopoly. In the novel, the Tristero is said to have been a rival underground system persecuted by Thurn und Taxis - a history Oedipa pieces together through the Wharfinger play and academic sources."
+                },
+                {
+                    q: "Why does the novel end at the auction of Lot 49?",
+                    opts: ["Oedipa is arrested before the auction can begin", "The novel ends just as the lot is about to be called, withholding the revelation", "The stamps are revealed to be forgeries, collapsing the mystery", "Metzger outbids the mysterious figure, ending the conspiracy"],
+                    ans: 1,
+                    exp: "Pynchon ends the novel at the moment of potential revelation - Oedipa waits for Lot 49 (a collection of stamps linked to the Tristero) to be cried at auction, hoping the bidder will confirm the conspiracy. The novel ends before we learn the answer, leaving ambiguity intact."
+                }
+            ],
+            verdicts: [
+                {
+                    min: 1.0,
+                    v: "Perfect score!",
+                    n: "You untangled Trystero's secret to its supposed end.",
+                },
+                {
+                    min: 0.75,
+                    v: "Pynchon's puns were not lost on you.",
+                    n: "You only stubbed your toe in the maze once or twice.",
+                },
+                {
+                    min: 0.5,
+                    v: "Did you get into the Mucho's LSD?",
+                    n: "Was the meaning real or did you want it to be? Have a re-read and make your choice.",
+                },
+                {
+                    min: 0.0,
+                    v: "Lost in the WASTE.",
+                    n: "Trystero seems to have eluded you. A second investigation is needed.",
+                },
+            ],
+        };
     </script>
+
+    <script src="../quiz-engine.js"></script>
 </body>
 
 </html>
