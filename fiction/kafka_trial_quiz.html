@@ -9,6 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Vollkorn:ital,wght@0,400;0,600;1,400&display=swap');
 
         :root {
+            /* palette */
             --bg: #0d0f0e;
             --fog: #b8c4b4;
             --pale: #d8e4d2;
@@ -19,7 +20,32 @@
             --stamp: #8b2222;
             --border: rgba(155, 180, 160, 0.12);
             --border-hi: rgba(155, 180, 160, 0.28);
-            --surface: rgba(155, 180, 160, 0.025);
+
+            /* engine vars */
+            --qe-font-serif: 'Vollkorn', serif;
+            --qe-font-body: 'Special Elite', monospace;
+            --qe-font-label: 'Special Elite', monospace;
+            --qe-surface: rgba(155, 180, 160, 0.025);
+            --qe-border: var(--border);
+            --qe-border-hi: var(--border-hi);
+            --qe-text: var(--pale);
+            --qe-text-muted: var(--dim);
+            --qe-accent: var(--file);
+            --qe-accent-lo: rgba(61, 96, 80, 0.07);
+            --qe-btn-bg: var(--file);
+            --qe-btn-text: var(--pale);
+            --qe-btn-hover-bg: var(--file-hi);
+            --qe-btn-hover-text: var(--pale);
+            --qe-correct: #92c0a0;
+            --qe-correct-bg: rgba(61, 96, 80, 0.07);
+            --qe-wrong: #bb7070;
+            --qe-wrong-bg: rgba(139, 34, 34, 0.05);
+            --qe-hero-bg: transparent;
+            --qe-hero-text: var(--pale);
+            --qe-score-color: var(--pale);
+            --qe-denom-color: var(--dim);
+            --qe-bd-bg: var(--qe-surface);
+            --qe-bd-border: var(--border);
         }
 
         * {
@@ -37,7 +63,7 @@
             position: relative;
         }
 
-        /* Bureaucratic dot-grid - graph paper / official forms */
+        /* Bureaucratic dot-grid */
         body::before {
             content: '';
             position: fixed;
@@ -69,12 +95,12 @@
             padding: 60px 24px 80px;
         }
 
-        /* ── Header ── */
+        /* Header */
         header {
             margin-bottom: 60px;
             padding-left: 24px;
             border-left: 2px solid var(--file);
-            animation: fadeDown 0.7s ease both;
+            animation: qe-slide-up 0.7s ease both;
         }
 
         .case-ref {
@@ -99,86 +125,26 @@
             font-style: italic;
             font-size: 1rem;
             color: var(--dim);
-            margin-bottom: 18px;
         }
 
-        .subtitle {
-            font-size: 8px;
-            letter-spacing: 0.35em;
-            text-transform: uppercase;
-            color: var(--mute);
-        }
+        /* ── Engine overrides ── */
 
-        /* ── Progress ── */
-        .meta-bar {
-            display: flex;
-            justify-content: space-between;
-            font-size: 8px;
-            letter-spacing: 0.35em;
-            text-transform: uppercase;
-            color: var(--dim);
-            margin-bottom: 8px;
-            animation: fadeIn 0.8s 0.3s both;
-        }
-
-        .progress-track {
-            height: 1px;
-            background: rgba(155, 180, 160, 0.1);
-            margin-bottom: 48px;
-            animation: fadeIn 0.8s 0.3s both;
-            overflow: visible;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--file);
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 0%;
-        }
-
-        /* ── Question card ── */
+        /* Question card: left file border */
         .question-card {
-            border: 1px solid var(--border);
             border-left: 2px solid var(--file);
-            background: var(--surface);
-            padding: 32px 36px;
-            margin-bottom: 16px;
-            animation: slideUp 0.35s ease both;
-            position: relative;
-            overflow: hidden;
         }
 
-        /* Ghost case number */
-        .question-card::before {
-            content: attr(data-num);
-            position: absolute;
-            bottom: -20px;
-            right: 12px;
-            font-family: 'Special Elite', monospace;
-            font-size: 110px;
-            color: rgba(155, 180, 160, 0.03);
-            line-height: 1;
-            pointer-events: none;
-            letter-spacing: -0.04em;
-        }
-
-        .q-meta {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .q-exhibit {
-            font-size: 7px;
-            letter-spacing: 0.5em;
-            text-transform: uppercase;
+        /* q-tag → styled as .q-exhibit */
+        .q-tag {
             color: var(--file-hi);
             border: 1px solid rgba(61, 96, 80, 0.35);
+            display: inline-block;
             padding: 3px 8px;
+            font-size: 7px;
+            letter-spacing: 0.5em;
         }
 
+        /* Diff badges */
         .diff-badge {
             font-size: 7px;
             letter-spacing: 0.3em;
@@ -187,309 +153,57 @@
             border: 1px solid;
         }
 
-        .diff-easy {
-            color: #70b070;
-            border-color: rgba(100, 180, 100, 0.3);
-        }
+        .diff-easy   { color: #70b070; border-color: rgba(100, 180, 100, 0.3); }
+        .diff-medium { color: #c0a060; border-color: rgba(200, 160, 80, 0.3); }
+        .diff-hard   { color: #b85858; border-color: rgba(180, 80, 80, 0.3); }
 
-        .diff-medium {
-            color: #c0a060;
-            border-color: rgba(200, 160, 80, 0.3);
-        }
-
-        .diff-hard {
-            color: #b85858;
-            border-color: rgba(180, 80, 80, 0.3);
-        }
-
-        .q-text {
-            font-family: 'Vollkorn', serif;
-            font-size: 1.12rem;
-            line-height: 1.65;
-            color: var(--pale);
-            margin-bottom: 28px;
-        }
-
-        /* ── Options ── */
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .option {
-            background: transparent;
-            border: 1px solid var(--border);
-            padding: 12px 16px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            font-family: 'Special Elite', monospace;
-            font-size: 0.82rem;
-            color: rgba(184, 196, 180, 0.7);
-            text-align: left;
-            display: grid;
-            grid-template-columns: 22px 1fr;
-            gap: 8px;
-            align-items: start;
-        }
-
-        .option:hover:not(.disabled) {
-            border-color: var(--file);
-            background: rgba(61, 96, 80, 0.07);
-            color: var(--pale);
-        }
-
+        /* Option letter: muted */
         .opt-letter {
-            font-size: 8px;
-            letter-spacing: 0.06em;
             color: var(--dim);
-            padding-top: 3px;
-            font-family: 'Special Elite', monospace;
         }
 
-        .opt-text {
-            line-height: 1.55;
-        }
-
-        .option.correct {
-            border-color: rgba(61, 96, 80, 0.6);
-            background: rgba(61, 96, 80, 0.07);
-            color: #92c0a0;
-        }
-
+        /* Correct option letter: institutional green */
         .option.correct .opt-letter {
             color: #92c0a0;
         }
 
-        .option.wrong {
-            border-color: rgba(139, 34, 34, 0.4);
-            background: rgba(139, 34, 34, 0.05);
-            color: rgba(184, 196, 180, 0.3);
-            text-decoration: line-through;
-            text-decoration-color: rgba(139, 34, 34, 0.45);
-        }
-
-        .option.disabled {
-            cursor: default;
-            pointer-events: none;
-        }
-
-        /* ── Explanation ── */
+        /* Explanation: Vollkorn serif */
         .explanation {
-            display: none;
-            margin-top: 20px;
-            padding: 14px 18px;
-            border-left: 2px solid var(--file);
-            background: rgba(61, 96, 80, 0.05);
             font-family: 'Vollkorn', serif;
-            font-size: 0.85rem;
-            line-height: 1.75;
-            color: rgba(184, 196, 180, 0.8);
-            animation: fadeIn 0.3s ease both;
         }
 
-        .explanation.show {
-            display: block;
-        }
-
-        .explanation strong {
-            color: var(--pale);
-        }
-
-        /* ── Nav ── */
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 28px;
-            animation: fadeIn 0.5s 0.2s both;
-        }
-
-        .live-score {
-            font-size: 8px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--dim);
-        }
-
-        .btn {
+        /* Score screen: left-border style instead of dark panel */
+        .score-hero {
             background: transparent;
-            border: 1px solid var(--border-hi);
-            color: var(--fog);
-            font-family: 'Special Elite', monospace;
-            font-size: 10px;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            padding: 11px 22px;
-            cursor: pointer;
-            transition: all 0.18s ease;
-        }
-
-        .btn:hover {
-            border-color: var(--file-hi);
-            color: var(--pale);
-        }
-
-        .btn.primary {
-            background: var(--file);
-            border-color: var(--file);
-            color: var(--pale);
-        }
-
-        .btn.primary:hover {
-            background: var(--file-hi);
-            border-color: var(--file-hi);
-        }
-
-        .btn:disabled {
-            opacity: 0.25;
-            cursor: default;
-            pointer-events: none;
-        }
-
-        /* ── Score screen ── */
-        .score-screen {
-            display: none;
-            animation: slideUp 0.6s ease both;
-        }
-
-        .score-screen.show {
-            display: block;
-        }
-
-        .verdict-header {
+            padding: 0 0 0 24px;
             border-left: 2px solid var(--file);
-            padding-left: 24px;
+            text-align: left;
             margin-bottom: 48px;
         }
 
-        .verdict-pre {
-            font-size: 8px;
-            letter-spacing: 0.45em;
-            text-transform: uppercase;
-            color: var(--dim);
-            margin-bottom: 14px;
-        }
-
-        .verdict-score {
-            font-family: 'Special Elite', monospace;
-            font-size: clamp(3.5rem, 14vw, 6rem);
-            color: var(--pale);
-            line-height: 1;
-            margin-bottom: 8px;
-            letter-spacing: 0.04em;
-        }
-
-        .verdict-class {
-            font-family: 'Vollkorn', serif;
-            font-style: italic;
-            font-size: 1.2rem;
+        /* Verdict: italic institutional green */
+        .verdict {
             color: var(--file-hi);
-            margin-bottom: 10px;
+            font-style: italic;
         }
 
+        /* Verdict note: Vollkorn, muted */
         .verdict-note {
             font-family: 'Vollkorn', serif;
-            font-size: 0.88rem;
-            line-height: 1.8;
             color: rgba(184, 196, 180, 0.7);
-            max-width: 500px;
             margin-top: 10px;
         }
 
+        /* Breakdown: extra top margin */
         .breakdown {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 24px 28px;
-            margin: 40px 0 32px;
-        }
-
-        .bd-title {
-            font-size: 8px;
-            letter-spacing: 0.4em;
-            color: var(--dim);
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .bd-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 9px 0;
-            border-bottom: 1px solid rgba(155, 180, 160, 0.06);
-            font-size: 0.78rem;
-            gap: 12px;
-            font-family: 'Vollkorn', serif;
-        }
-
-        .bd-row:last-child {
-            border-bottom: none;
-        }
-
-        .bd-q {
-            color: rgba(184, 196, 180, 0.6);
-            flex: 1;
-            line-height: 1.4;
-        }
-
-        .tick {
-            color: #92c0a0;
-            font-size: 13px;
-            flex-shrink: 0;
-        }
-
-        .cross {
-            color: #bb7070;
-            font-size: 13px;
-            flex-shrink: 0;
-        }
-
-        /* ── Animations ── */
-        @keyframes fadeDown {
-            from {
-                opacity: 0;
-                transform: translateY(-16px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            margin-top: 40px;
         }
 
         @media (max-width: 580px) {
-            .question-card {
-                padding: 22px 18px;
-            }
-
-            header {
-                padding-left: 16px;
-            }
+            header { padding-left: 16px; }
         }
     </style>
+    <link rel="stylesheet" href="../quiz-engine.css">
 </head>
 
 <body>
@@ -502,7 +216,7 @@
             <div class="title-de">Der Proceß</div>
         </header>
 
-        <div id="quiz-root"> </div>
+        <div id="quiz-root"></div>
 
     </div>
 
@@ -637,9 +351,8 @@
                     n: "You made it out of The Trial alive."
                 },
                 {
-
                     min: 0.75,
-                    v: "Charges reducted.",
+                    v: "Charges reduced.",
                     n: "A strong mastery over the text. Some chapters may be worth a revisit."
                 },
                 {
@@ -651,10 +364,9 @@
                     min: 0.0,
                     v: "Like a dog!",
                     n: "Sometimes giving up is a better choice."
-                },
-            ],
-        }
-
+                }
+            ]
+        };
     </script>
 
     <script src="../quiz-engine.js"></script>

@@ -5,693 +5,385 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Stranger</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
-  :root {
-    --sand: #e8d5b0;
-    --deep: #0f1a2e;
-    --sea: #1a3a5c;
-    --sun: #d4a843;
-    --pale: #f5efe3;
-    --muted: #6a7d8f;
-    --blood: #8b2222;
-    --bg: #0a1520;
-  }
+    :root {
+        /* palette */
+        --sand: #e8d5b0;
+        --deep: #0f1a2e;
+        --sea: #1a3a5c;
+        --sun: #d4a843;
+        --pale: #f5efe3;
+        --muted: #6a7d8f;
+        --blood: #8b2222;
+        --bg: #0a1520;
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* engine vars */
+        --qe-font-serif: 'Playfair Display', serif;
+        --qe-font-body: 'IBM Plex Mono', monospace;
+        --qe-font-label: 'IBM Plex Mono', monospace;
+        --qe-surface: rgba(255, 255, 255, 0.025);
+        --qe-border: rgba(232, 213, 176, 0.08);
+        --qe-border-hi: rgba(212, 168, 67, 0.3);
+        --qe-text: var(--pale);
+        --qe-text-muted: var(--muted);
+        --qe-accent: var(--sun);
+        --qe-accent-lo: rgba(212, 168, 67, 0.04);
+        --qe-btn-bg: var(--blood);
+        --qe-btn-text: var(--pale);
+        --qe-btn-hover-bg: #6a1818;
+        --qe-btn-hover-text: var(--pale);
+        --qe-correct: #e8c96a;
+        --qe-correct-bg: rgba(212, 168, 67, 0.07);
+        --qe-wrong: #c47a7a;
+        --qe-wrong-bg: rgba(139, 34, 34, 0.08);
+        --qe-hero-bg: transparent;
+        --qe-hero-text: var(--pale);
+        --qe-score-color: var(--sun);
+        --qe-denom-color: var(--muted);
+        --qe-bd-bg: rgba(255, 255, 255, 0.02);
+        --qe-bd-border: rgba(232, 213, 176, 0.07);
+    }
 
-  body {
-    background: var(--bg);
-    color: var(--pale);
-    font-family: 'IBM Plex Mono', monospace;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* Algerian sun atmosphere */
-  body::before {
-    content: '';
-    position: fixed;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 400px;
-    background: radial-gradient(ellipse, rgba(212,168,67,0.12) 0%, rgba(212,168,67,0.04) 40%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
+    body {
+        background: var(--bg);
+        color: var(--pale);
+        font-family: 'IBM Plex Mono', monospace;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
 
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 100%, rgba(26,58,92,0.3) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-  }
+    /* Algerian sun atmosphere */
+    body::before {
+        content: '';
+        position: fixed;
+        top: -200px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 400px;
+        background: radial-gradient(ellipse, rgba(212,168,67,0.12) 0%, rgba(212,168,67,0.04) 40%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+    }
 
-  /* Noise overlay */
-  .noise {
-    position: fixed;
-    inset: 0;
-    opacity: 0.025;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 256px;
-    pointer-events: none;
-    z-index: 1;
-  }
+    body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(ellipse at 50% 100%, rgba(26,58,92,0.3) 0%, transparent 60%);
+        pointer-events: none;
+        z-index: 0;
+    }
 
-  .container {
-    position: relative;
-    z-index: 2;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 56px 24px 80px;
-  }
+    /* Noise overlay */
+    .noise {
+        position: fixed;
+        inset: 0;
+        opacity: 0.025;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 256px;
+        pointer-events: none;
+        z-index: 1;
+    }
 
-  /* Header */
-  header {
-    margin-bottom: 56px;
-    animation: fadeDown 0.7s ease both;
-  }
+    .container {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 56px 24px 80px;
+    }
 
-  .header-inner {
-    border-left: 3px solid var(--sun);
-    padding-left: 20px;
-  }
+    /* Header */
+    header {
+        margin-bottom: 56px;
+        animation: qe-slide-up 0.7s ease both;
+    }
 
-  .eyebrow {
-    font-size: 9px;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
+    .header-inner {
+        border-left: 3px solid var(--sun);
+        padding-left: 20px;
+    }
 
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 7vw, 3.5rem);
-    font-style: italic;
-    color: var(--pale);
-    line-height: 1.05;
-    margin-bottom: 6px;
-  }
+    .eyebrow {
+        font-size: 9px;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 10px;
+    }
 
-  .title-en {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
-    color: var(--muted);
-    font-style: normal;
-    letter-spacing: 0.08em;
-  }
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.2rem, 7vw, 3.5rem);
+        font-style: italic;
+        color: var(--pale);
+        line-height: 1.05;
+        margin-bottom: 6px;
+    }
 
-  .subtitle {
-    margin-top: 14px;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
+    .title-en {
+        font-family: 'Playfair Display', serif;
+        font-size: 0.9rem;
+        color: var(--muted);
+        font-style: normal;
+        letter-spacing: 0.08em;
+    }
 
-  /* Progress */
-  .meta-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-    animation: fadeIn 0.8s 0.4s both;
-  }
+    .subtitle {
+        margin-top: 14px;
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        color: var(--muted);
+        text-transform: uppercase;
+    }
 
-  .meta-label {
-    font-size: 9px;
-    letter-spacing: 0.25em;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
+    /* ── Engine overrides ── */
 
-  .progress-track {
-    height: 1px;
-    background: rgba(255,255,255,0.08);
-    margin-bottom: 40px;
-    animation: fadeIn 0.8s 0.4s both;
-  }
+    /* q-tag: bordered inline-block */
+    .q-tag {
+        display: inline-block;
+        border: 1px solid rgba(212, 168, 67, 0.25);
+        padding: 3px 8px;
+        font-size: 8px;
+        letter-spacing: 0.3em;
+        opacity: 0.85;
+    }
 
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--blood), var(--sun));
-    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-    width: 0%;
-  }
+    /* Option: sweep hover effect */
+    .option {
+        position: relative;
+        overflow: hidden;
+        color: var(--sand);
+    }
 
-  /* Question card */
-  .question-card {
-    background: rgba(255,255,255,0.025);
-    border: 1px solid rgba(232,213,176,0.08);
-    padding: 32px 36px;
-    margin-bottom: 20px;
-    animation: slideUp 0.35s ease both;
-    position: relative;
-  }
+    .option::after {
+        content: '';
+        position: absolute;
+        left: 0; top: 0; bottom: 0;
+        width: 0;
+        background: var(--sun);
+        opacity: 0.05;
+        transition: width 0.15s;
+    }
 
-  .q-num {
-    position: absolute;
-    top: 16px;
-    right: 20px;
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    color: rgba(232,213,176,0.04);
-    line-height: 1;
-    font-style: italic;
-  }
+    .option:hover:not(.disabled)::after { width: 100%; }
 
-  .q-tag {
-    display: inline-block;
-    font-size: 8px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--sun);
-    border: 1px solid rgba(212,168,67,0.25);
-    padding: 3px 8px;
-    margin-bottom: 18px;
-    opacity: 0.85;
-  }
+    .opt-text {
+        position: relative;
+        z-index: 1;
+    }
 
-  .q-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    line-height: 1.65;
-    color: var(--pale);
-    margin-bottom: 26px;
-  }
+    /* Score screen: left-border style instead of dark panel */
+    .score-hero {
+        background: transparent;
+        padding: 0 0 0 20px;
+        border-left: 3px solid var(--sun);
+        text-align: left;
+        margin-bottom: 40px;
+    }
 
-  /* Options */
-  .options { display: flex; flex-direction: column; gap: 9px; }
-
-  .option {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(232,213,176,0.1);
-    padding: 13px 16px;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.83rem;
-    color: var(--sand);
-    text-align: left;
-    display: grid;
-    grid-template-columns: 20px 1fr;
-    gap: 10px;
-    align-items: start;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .option::after {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 0;
-    background: var(--sun);
-    opacity: 0.05;
-    transition: width 0.15s;
-  }
-
-  .option:hover:not(.disabled)::after { width: 100%; }
-  .option:hover:not(.disabled) { border-color: rgba(212,168,67,0.3); color: var(--pale); }
-
-  .opt-letter {
-    font-size: 9px;
-    color: var(--muted);
-    padding-top: 2px;
-    letter-spacing: 0.05em;
-  }
-
-  .opt-text { line-height: 1.55; position: relative; z-index: 1; }
-
-  .option.correct {
-    border-color: rgba(212,168,67,0.6);
-    background: rgba(212,168,67,0.07);
-    color: #e8c96a;
-  }
-  .option.correct .opt-letter { color: #e8c96a; }
-
-  .option.wrong {
-    border-color: rgba(139,34,34,0.5);
-    background: rgba(139,34,34,0.08);
-    color: #c47a7a;
-    text-decoration: line-through;
-    text-decoration-color: rgba(139,34,34,0.4);
-  }
-
-  .option.disabled { cursor: default; pointer-events: none; }
-
-  /* Explanation */
-  .explanation {
-    margin-top: 20px;
-    padding: 14px 18px;
-    border-left: 2px solid var(--sun);
-    background: rgba(212,168,67,0.04);
-    font-size: 0.82rem;
-    line-height: 1.75;
-    color: rgba(232,213,176,0.75);
-    display: none;
-    animation: fadeIn 0.3s ease both;
-  }
-
-  .explanation.show { display: block; }
-  .explanation strong { color: var(--pale); }
-
-  /* Nav */
-  .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 28px;
-    animation: fadeIn 0.5s 0.2s both;
-  }
-
-  .running-score {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-  }
-
-  .btn {
-    background: transparent;
-    border: 1px solid rgba(232,213,176,0.18);
-    color: var(--sand);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 11px 22px;
-    cursor: pointer;
-    transition: all 0.18s ease;
-  }
-
-  .btn:hover { border-color: var(--sun); color: var(--pale); }
-  .btn.primary { background: var(--blood); border-color: var(--blood); color: var(--pale); }
-  .btn.primary:hover { background: #6a1818; border-color: #6a1818; }
-  .btn:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
-
-  /* Score screen */
-  .score-screen {
-    display: none;
-    animation: slideUp 0.6s ease both;
-  }
-  .score-screen.show { display: block; }
-
-  .score-hero {
-    border-left: 3px solid var(--sun);
-    padding-left: 20px;
-    margin-bottom: 40px;
-  }
-
-  .score-num {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3.5rem, 14vw, 6.5rem);
-    font-style: italic;
-    color: var(--sun);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .score-denom {
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
-
-  .verdict {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
-    font-style: italic;
-    color: var(--pale);
-    margin-top: 16px;
-    margin-bottom: 10px;
-  }
-
-  .verdict-note {
-    font-size: 0.83rem;
-    line-height: 1.8;
-    color: rgba(232,213,176,0.65);
-    max-width: 480px;
-    margin-bottom: 40px;
-  }
-
-  .breakdown {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(232,213,176,0.07);
-    padding: 20px 24px;
-    margin-bottom: 28px;
-  }
-
-  .bd-title {
-    font-size: 8px;
-    letter-spacing: 0.3em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-
-  .bd-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 9px 0;
-    border-bottom: 1px solid rgba(232,213,176,0.05);
-    font-size: 0.8rem;
-    gap: 12px;
-  }
-
-  .bd-row:last-child { border-bottom: none; }
-  .bd-q { color: rgba(232,213,176,0.6); flex: 1; line-height: 1.4; }
-  .bd-mark { font-size: 13px; flex-shrink: 0; }
-  .tick { color: var(--sun); }
-  .cross { color: var(--blood); }
-
-  /* Animations */
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-18px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @media (max-width: 580px) {
-    .question-card { padding: 22px 18px; }
-  }
+    /* Verdict note */
+    .verdict-note {
+        color: rgba(232, 213, 176, 0.65);
+        margin-bottom: 40px;
+    }
 </style>
+<link rel="stylesheet" href="../quiz-engine.css">
 </head>
 <body>
 <div class="noise"></div>
 
 <div class="container">
 
-  <header>
-    <div class="header-inner">
-      <div class="eyebrow">Albert Camus · 1942</div>
-      <h1>L'Étranger</h1>
-      <div class="title-en">The Stranger / The Outsider</div>
-      <div class="subtitle">A comprehension quiz</div>
-    </div>
-  </header>
+    <header>
+        <div class="header-inner">
+            <div class="eyebrow">Albert Camus · 1942</div>
+            <h1>L'Étranger</h1>
+            <div class="title-en">The Stranger / The Outsider</div>
+            <div class="subtitle">A comprehension quiz</div>
+        </div>
+    </header>
 
-  <div id="quiz-section">
-    <div class="meta-bar">
-      <span class="meta-label" id="q-label">Question 1 of 12</span>
-      <span class="meta-label" id="score-tally">- / -</span>
-    </div>
-    <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
-
-    <div id="q-area"></div>
-
-    <div class="nav">
-      <span class="running-score" id="live-score"></span>
-      <button class="btn primary" id="next-btn" disabled onclick="next()">Next →</button>
-    </div>
-  </div>
-
-  <div class="score-screen" id="score-screen">
-    <div class="score-hero">
-      <div class="score-num" id="final-num"></div>
-      <div class="score-denom">correct answers out of 12</div>
-      <div class="verdict" id="verdict"></div>
-      <div class="verdict-note" id="verdict-note"></div>
-    </div>
-    <div class="breakdown">
-      <div class="bd-title">Question breakdown</div>
-      <div id="bd-list"></div>
-    </div>
-    <button class="btn primary" onclick="restart()">Retake Quiz</button>
-  </div>
+    <div id="quiz-root"></div>
 
 </div>
 
 <script>
-const qs = [
-  {
-    tag: "Opening",
-    text: "The novel's famous first line is one of literature's most studied openings. What does Meursault report on the first page?",
-    opts: [
-      "He has been arrested and does not know why",
-      "His mother died today - or maybe yesterday, he isn't sure",
-      "He is standing on a beach, staring at the sea",
-      "He has just been fired from his job"
+window.QUIZ = {
+    questions: [
+        {
+            tag: "Opening",
+            text: "The novel's famous first line is one of literature's most studied openings. What does Meursault report on the first page?",
+            opts: [
+                "He has been arrested and does not know why",
+                "His mother died today - or maybe yesterday, he isn't sure",
+                "He is standing on a beach, staring at the sea",
+                "He has just been fired from his job"
+            ],
+            ans: 1,
+            exp: "<strong>Correct.</strong> 'Maman died today. Or yesterday maybe, I don't know.' The line immediately establishes Meursault's detachment - not grief, not certainty, just a flat report of uncertain fact. It is the novel's thesis in miniature."
+        },
+        {
+            tag: "Character",
+            text: "At his mother's funeral, what draws the most attention - and later, legal condemnation - about Meursault's behavior?",
+            opts: [
+                "He arrives late and leaves before the burial",
+                "He argues with the funeral director about costs",
+                "He does not cry, drinks coffee, smokes, and shows no visible grief",
+                "He gives a speech praising his own indifference"
+            ],
+            ans: 2,
+            exp: "<strong>Correct.</strong> Meursault's emotional flatness at the funeral - the coffee, the cigarettes, the absence of tears - becomes the prosecution's central evidence of his monstrous character. To the court, grief's absence proves a soul's absence."
+        },
+        {
+            tag: "Plot",
+            text: "What is the immediate physical cause of Meursault shooting the Arab on the beach?",
+            opts: [
+                "The Arab attacks him with a knife",
+                "Raymond orders him to shoot",
+                "The sun's blinding glare off the Arab's knife overwhelms him",
+                "He mistakes the Arab for someone else"
+            ],
+            ans: 2,
+            exp: "<strong>Correct.</strong> Camus's prose makes the sun and heat almost a character. Meursault describes the dazzling light off the blade, the heat pressing on him - and then the trigger. The act is presented as a response to physical sensation as much as anything else."
+        },
+        {
+            tag: "The Trial",
+            text: "What does the prosecution argue is the true evidence of Meursault's guilt - more damning than the killing itself?",
+            opts: [
+                "That he planned the murder in advance",
+                "That he had a prior criminal record",
+                "That he showed no remorse and no grief at his mother's funeral",
+                "That he tried to flee the country after the shooting"
+            ],
+            ans: 2,
+            exp: "<strong>Correct.</strong> The prosecutor uses Meursault's character - his emotional blankness at his mother's funeral, his starting a relationship with Marie the next day - to paint him as a moral monster. The trial becomes about who Meursault is, not what he did."
+        },
+        {
+            tag: "Absurdism",
+            text: "Meursault is often read as an absurd hero. Which of the following best captures what makes him 'absurd' in Camus's sense?",
+            opts: [
+                "He commits a senseless crime with no motive",
+                "He refuses to lie or perform emotions he doesn't feel, maintaining radical honesty with his own experience",
+                "He is an outcast who society has always rejected",
+                "He believes life has no meaning and acts accordingly through nihilism"
+            ],
+            ans: 1,
+            exp: "<strong>Correct.</strong> Meursault's absurdism is not nihilism - it's a refusal to pretend. He will not say he loves Marie if he doesn't know what that means, won't perform grief he doesn't feel, won't claim ambition he lacks. This honesty, not crime, is what society ultimately cannot forgive."
+        },
+        {
+            tag: "Relationships",
+            text: "Marie asks Meursault if he wants to marry her. What is his response?",
+            opts: [
+                "He proposes enthusiastically",
+                "He says he doesn't love her and refuses",
+                "He says it doesn't matter to him but he'll do it if she wants",
+                "He says he needs time to think"
+            ],
+            ans: 2,
+            exp: "<strong>Correct.</strong> 'It didn't mean anything, but if she wanted to, we could get married.' This is quintessential Meursault - not cruelty, but indifference to social ritual. He is not incapable of attachment, but conventional labels and ceremonies feel hollow to him."
+        },
+        {
+            tag: "Minor Characters",
+            text: "What role does Raymond Sintès play in the events leading to the killing?",
+            opts: [
+                "He is Meursault's employer who fires him before the beach incident",
+                "He is a neighbor and pimp whose conflict with an Arab man draws Meursault into the fatal confrontation",
+                "He is the lawyer who defends Meursault at trial",
+                "He is the magistrate who first interviews Meursault after the arrest"
+            ],
+            ans: 1,
+            exp: "<strong>Correct.</strong> Raymond is a neighbor of dubious character who has a violent dispute with his Arab mistress and her brother. He draws Meursault into the conflict, lends him his gun, and it is Raymond's enemies Meursault encounters on the beach - making the killing almost accidental in its origin."
+        },
+        {
+            tag: "The Chaplain",
+            text: "In the novel's climax, Meursault has a furious confrontation with the prison chaplain. What does the chaplain want from Meursault, and why does Meursault explode?",
+            opts: [
+                "The chaplain wants Meursault to confess to premeditated murder; Meursault insists it was self-defense",
+                "The chaplain wants Meursault to turn to God and hope; Meursault rejects this as false comfort and insists on the certainty of death and the indifference of the universe",
+                "The chaplain offers to help with his appeal; Meursault refuses to accept help from the church",
+                "The chaplain tells him Marie has stopped visiting; Meursault attacks him in grief"
+            ],
+            ans: 1,
+            exp: "<strong>Correct.</strong> This is the novel's philosophical core. The chaplain represents the leap Camus describes in <em>Myth of Sisyphus</em> - turning to God to escape mortality's weight. Meursault erupts because he finds this dishonest. He has certainty: death is certain, the universe is indifferent. That is enough. He doesn't want false hope."
+        },
+        {
+            tag: "Themes",
+            text: "After his outburst at the chaplain, Meursault reaches what Camus considers an awakening. How does Meursault describe his state of mind?",
+            opts: [
+                "Terrified and desperate for meaning",
+                "Emptied out and finally open to the 'gentle indifference of the world', feeling a strange peace",
+                "Consumed by regret for the Arab he killed",
+                "Angry at the injustice of his trial"
+            ],
+            ans: 1,
+            exp: "<strong>Correct.</strong> 'I laid my heart open to the gentle indifference of the world.' This is Meursault's absurd awakening - not despair, but a kind of liberation. In fully accepting that the universe feels nothing for him, he feels curiously at peace, even brotherly toward it."
+        },
+        {
+            tag: "Narrative Style",
+            text: "Camus writes Meursault in first-person present tense with flat, declarative sentences. What effect does this prose style create?",
+            opts: [
+                "It makes the reader sympathize deeply with Meursault's suffering",
+                "It mirrors Meursault's consciousness - a series of sensory impressions and facts, with minimal emotional interpretation",
+                "It creates suspense by withholding information from the reader",
+                "It reflects the judicial record of Meursault's case"
+            ],
+            ans: 1,
+            exp: "<strong>Correct.</strong> The style is famously 'white writing' (écriture blanche) - stripped of ornament and emotion. Sentences report events and sensations without hierarchy: sun, death, coffee, and murder are described in the same neutral register. The prose itself enacts Meursault's relationship to experience."
+        },
+        {
+            tag: "Context",
+            text: "The Arab victim killed by Meursault is never given a name in the novel. What has been the main critical conversation around this?",
+            opts: [
+                "Critics argue it was a deliberate stylistic choice to highlight the arbitrary nature of violence",
+                "Many postcolonial critics argue the namelessness reflects and reproduces the dehumanization of Algerians under French colonialism, raising questions about Camus's political blind spots",
+                "The name was known but removed by Camus's editor for brevity",
+                "Camus intended to add the name in a revision that was never completed"
+            ],
+            ans: 1,
+            exp: "<strong>Correct.</strong> This is the central postcolonial critique of <em>The Stranger</em> - most associated with scholars like Conor Cruise O'Brien and later Edward Said. The Arab's anonymity is read as symptomatic of the colonial gaze: Algerians exist as backdrop, not as people with histories. It complicates Meursault's status as an 'honest' hero."
+        },
+        {
+            tag: "Synthesis",
+            text: "Camus said that Meursault is 'in love with truth that is still negative.' What did he mean by this?",
+            opts: [
+                "Meursault tells the truth even when it harms him - this is a kind of integrity, but it is not yet the full absurd revolt of a man who also affirms life",
+                "Meursault is a nihilist who believes nothing has value",
+                "Meursault lies throughout the trial but tells the truth in prison",
+                "Meursault's negative emotions - indifference, boredom - are the only authentic feelings available to modern man"
+            ],
+            ans: 0,
+            exp: "<strong>Correct.</strong> In his preface to an American edition, Camus described Meursault as someone who refuses to lie - and that refusal is heroic. But it's a passive heroism: honesty without rebellion. In <em>The Myth of Sisyphus</em>, written at the same time, Camus goes further - revolt requires not just accepting the absurd, but living passionately in spite of it."
+        }
     ],
-    ans: 1,
-    exp: "<strong>Correct.</strong> 'Maman died today. Or yesterday maybe, I don't know.' The line immediately establishes Meursault's detachment - not grief, not certainty, just a flat report of uncertain fact. It is the novel's thesis in miniature."
-  },
-  {
-    tag: "Character",
-    text: "At his mother's funeral, what draws the most attention - and later, legal condemnation - about Meursault's behavior?",
-    opts: [
-      "He arrives late and leaves before the burial",
-      "He argues with the funeral director about costs",
-      "He does not cry, drinks coffee, smokes, and shows no visible grief",
-      "He gives a speech praising his own indifference"
-    ],
-    ans: 2,
-    exp: "<strong>Correct.</strong> Meursault's emotional flatness at the funeral - the coffee, the cigarettes, the absence of tears - becomes the prosecution's central evidence of his monstrous character. To the court, grief's absence proves a soul's absence."
-  },
-  {
-    tag: "Plot",
-    text: "What is the immediate physical cause of Meursault shooting the Arab on the beach?",
-    opts: [
-      "The Arab attacks him with a knife",
-      "Raymond orders him to shoot",
-      "The sun's blinding glare off the Arab's knife overwhelms him",
-      "He mistakes the Arab for someone else"
-    ],
-    ans: 2,
-    exp: "<strong>Correct.</strong> Camus's prose makes the sun and heat almost a character. Meursault describes the dazzling light off the blade, the heat pressing on him - and then the trigger. The act is presented as a response to physical sensation as much as anything else."
-  },
-  {
-    tag: "The Trial",
-    text: "What does the prosecution argue is the true evidence of Meursault's guilt - more damning than the killing itself?",
-    opts: [
-      "That he planned the murder in advance",
-      "That he had a prior criminal record",
-      "That he showed no remorse and no grief at his mother's funeral",
-      "That he tried to flee the country after the shooting"
-    ],
-    ans: 2,
-    exp: "<strong>Correct.</strong> The prosecutor uses Meursault's character - his emotional blankness at his mother's funeral, his starting a relationship with Marie the next day - to paint him as a moral monster. The trial becomes about who Meursault is, not what he did."
-  },
-  {
-    tag: "Absurdism",
-    text: "Meursault is often read as an absurd hero. Which of the following best captures what makes him 'absurd' in Camus's sense?",
-    opts: [
-      "He commits a senseless crime with no motive",
-      "He refuses to lie or perform emotions he doesn't feel, maintaining radical honesty with his own experience",
-      "He is an outcast who society has always rejected",
-      "He believes life has no meaning and acts accordingly through nihilism"
-    ],
-    ans: 1,
-    exp: "<strong>Correct.</strong> Meursault's absurdism is not nihilism - it's a refusal to pretend. He will not say he loves Marie if he doesn't know what that means, won't perform grief he doesn't feel, won't claim ambition he lacks. This honesty, not crime, is what society ultimately cannot forgive."
-  },
-  {
-    tag: "Relationships",
-    text: "Marie asks Meursault if he wants to marry her. What is his response?",
-    opts: [
-      "He proposes enthusiastically",
-      "He says he doesn't love her and refuses",
-      "He says it doesn't matter to him but he'll do it if she wants",
-      "He says he needs time to think"
-    ],
-    ans: 2,
-    exp: "<strong>Correct.</strong> 'It didn't mean anything, but if she wanted to, we could get married.' This is quintessential Meursault - not cruelty, but indifference to social ritual. He is not incapable of attachment, but conventional labels and ceremonies feel hollow to him."
-  },
-  {
-    tag: "Minor Characters",
-    text: "What role does Raymond Sintès play in the events leading to the killing?",
-    opts: [
-      "He is Meursault's employer who fires him before the beach incident",
-      "He is a neighbor and pimp whose conflict with an Arab man draws Meursault into the fatal confrontation",
-      "He is the lawyer who defends Meursault at trial",
-      "He is the magistrate who first interviews Meursault after the arrest"
-    ],
-    ans: 1,
-    exp: "<strong>Correct.</strong> Raymond is a neighbor of dubious character who has a violent dispute with his Arab mistress and her brother. He draws Meursault into the conflict, lends him his gun, and it is Raymond's enemies Meursault encounters on the beach - making the killing almost accidental in its origin."
-  },
-  {
-    tag: "The Chaplain",
-    text: "In the novel's climax, Meursault has a furious confrontation with the prison chaplain. What does the chaplain want from Meursault, and why does Meursault explode?",
-    opts: [
-      "The chaplain wants Meursault to confess to premeditated murder; Meursault insists it was self-defense",
-      "The chaplain wants Meursault to turn to God and hope; Meursault rejects this as false comfort and insists on the certainty of death and the indifference of the universe",
-      "The chaplain offers to help with his appeal; Meursault refuses to accept help from the church",
-      "The chaplain tells him Marie has stopped visiting; Meursault attacks him in grief"
-    ],
-    ans: 1,
-    exp: "<strong>Correct.</strong> This is the novel's philosophical core. The chaplain represents the leap Camus describes in <em>Myth of Sisyphus</em> - turning to God to escape mortality's weight. Meursault erupts because he finds this dishonest. He has certainty: death is certain, the universe is indifferent. That is enough. He doesn't want false hope."
-  },
-  {
-    tag: "Themes",
-    text: "After his outburst at the chaplain, Meursault reaches what Camus considers an awakening. How does Meursault describe his state of mind?",
-    opts: [
-      "Terrified and desperate for meaning",
-      "Emptied out and finally open to the 'gentle indifference of the world', feeling a strange peace",
-      "Consumed by regret for the Arab he killed",
-      "Angry at the injustice of his trial"
-    ],
-    ans: 1,
-    exp: "<strong>Correct.</strong> 'I laid my heart open to the gentle indifference of the world.' This is Meursault's absurd awakening - not despair, but a kind of liberation. In fully accepting that the universe feels nothing for him, he feels curiously at peace, even brotherly toward it."
-  },
-  {
-    tag: "Narrative Style",
-    text: "Camus writes Meursault in first-person present tense with flat, declarative sentences. What effect does this prose style create?",
-    opts: [
-      "It makes the reader sympathize deeply with Meursault's suffering",
-      "It mirrors Meursault's consciousness - a series of sensory impressions and facts, with minimal emotional interpretation",
-      "It creates suspense by withholding information from the reader",
-      "It reflects the judicial record of Meursault's case"
-    ],
-    ans: 1,
-    exp: "<strong>Correct.</strong> The style is famously 'white writing' (écriture blanche) - stripped of ornament and emotion. Sentences report events and sensations without hierarchy: sun, death, coffee, and murder are described in the same neutral register. The prose itself enacts Meursault's relationship to experience."
-  },
-  {
-    tag: "Context",
-    text: "The Arab victim killed by Meursault is never given a name in the novel. What has been the main critical conversation around this?",
-    opts: [
-      "Critics argue it was a deliberate stylistic choice to highlight the arbitrary nature of violence",
-      "Many postcolonial critics argue the namelessness reflects and reproduces the dehumanization of Algerians under French colonialism, raising questions about Camus's political blind spots",
-      "The name was known but removed by Camus's editor for brevity",
-      "Camus intended to add the name in a revision that was never completed"
-    ],
-    ans: 1,
-    exp: "<strong>Correct.</strong> This is the central postcolonial critique of <em>The Stranger</em> - most associated with scholars like Conor Cruise O'Brien and later Edward Said. The Arab's anonymity is read as symptomatic of the colonial gaze: Algerians exist as backdrop, not as people with histories. It complicates Meursault's status as an 'honest' hero."
-  },
-  {
-    tag: "Synthesis",
-    text: "Camus said that Meursault is 'in love with truth that is still negative.' What did he mean by this?",
-    opts: [
-      "Meursault tells the truth even when it harms him - this is a kind of integrity, but it is not yet the full absurd revolt of a man who also affirms life",
-      "Meursault is a nihilist who believes nothing has value",
-      "Meursault lies throughout the trial but tells the truth in prison",
-      "Meursault's negative emotions - indifference, boredom - are the only authentic feelings available to modern man"
-    ],
-    ans: 0,
-    exp: "<strong>Correct.</strong> In his preface to an American edition, Camus described Meursault as someone who refuses to lie - and that refusal is heroic. But it's a passive heroism: honesty without rebellion. In <em>The Myth of Sisyphus</em>, written at the same time, Camus goes further - revolt requires not just accepting the absurd, but living passionately in spite of it."
-  }
-];
-
-let cur = 0, score = 0, answered = [], userAns = [];
-
-function render() {
-  const q = qs[cur];
-  const total = qs.length;
-  document.getElementById('q-label').textContent = `Question ${cur + 1} of ${total}`;
-  document.getElementById('score-tally').textContent = cur > 0 ? `${score} / ${cur}` : '- / -';
-  document.getElementById('prog').style.width = (cur / total * 100) + '%';
-  document.getElementById('next-btn').disabled = true;
-  document.getElementById('next-btn').textContent = cur === total - 1 ? 'See Results →' : 'Next →';
-
-  document.getElementById('q-area').innerHTML = `
-    <div class="question-card">
-      <div class="q-num">${cur + 1}</div>
-      <div class="q-tag">${q.tag}</div>
-      <div class="q-text">${q.text}</div>
-      <div class="options">
-        ${q.opts.map((o, i) => `
-          <button class="option" onclick="pick(${i})" data-i="${i}">
-            <span class="opt-letter">${String.fromCharCode(65+i)}.</span>
-            <span class="opt-text">${o}</span>
-          </button>
-        `).join('')}
-      </div>
-      <div class="explanation" id="exp"></div>
-    </div>
-  `;
-}
-
-function pick(idx) {
-  if (document.querySelector('.option.correct')) return;
-  const q = qs[cur];
-  const opts = document.querySelectorAll('.option');
-  opts.forEach(o => o.classList.add('disabled'));
-
-  if (idx === q.ans) {
-    opts[idx].classList.add('correct');
-    score++;
-  } else {
-    opts[idx].classList.add('wrong');
-    opts[q.ans].classList.add('correct');
-  }
-
-  userAns[cur] = idx;
-  answered[cur] = idx === q.ans;
-
-  const exp = document.getElementById('exp');
-  exp.innerHTML = q.exp;
-  exp.classList.add('show');
-
-  document.getElementById('next-btn').disabled = false;
-  document.getElementById('score-tally').textContent = `${score} / ${cur + 1}`;
-}
-
-function next() {
-  cur++;
-  if (cur >= qs.length) {
-    finish();
-  } else {
-    render();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-}
-
-function finish() {
-  document.getElementById('quiz-section').style.display = 'none';
-  const ss = document.getElementById('score-screen');
-  ss.classList.add('show');
-
-  const pct = score / qs.length;
-  document.getElementById('final-num').textContent = `${score}/12`;
-
-  let v, n;
-  if (pct === 1) {
-    v = "You laid your heart open to it.";
-    n = "A perfect score. You have the novel in your bones - its prose, its philosophy, its contradictions. Camus would probably shrug and offer you a cigarette.";
-  } else if (pct >= 0.75) {
-    v = "A stranger, but not estranged.";
-    n = "Strong work. You understand Meursault's character and the novel's philosophical stakes. Consider revisiting the chaplain scene and Camus's own commentary on what Meursault represents.";
-  } else if (pct >= 0.5) {
-    v = "The sun was in your eyes.";
-    n = "You've got the plot down but some of the philosophical and stylistic dimensions are slipping. Re-read the final chapters and Camus's preface to the American edition - they clarify a lot.";
-  } else {
-    v = "Perhaps yesterday. Maybe today.";
-    n = "A re-read is in order - and it'll be worth it. The novel is short but dense. Pay attention to what Meursault notices and what he ignores; the gaps are where the meaning lives.";
-  }
-
-  document.getElementById('verdict').textContent = v;
-  document.getElementById('verdict-note').textContent = n;
-
-  document.getElementById('bd-list').innerHTML = qs.map((q, i) => `
-    <div class="bd-row">
-      <span class="bd-q">${i+1}. ${q.text.length > 72 ? q.text.slice(0,72) + '…' : q.text}</span>
-      <span class="bd-mark ${answered[i] ? 'tick' : 'cross'}">${answered[i] ? '✓' : '✗'}</span>
-    </div>
-  `).join('');
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function restart() {
-  cur = 0; score = 0; answered = []; userAns = [];
-  document.getElementById('score-screen').classList.remove('show');
-  document.getElementById('quiz-section').style.display = 'block';
-  render();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-render();
+    verdicts: [
+        {
+            min: 1.0,
+            v: "You laid your heart open to it.",
+            n: "A perfect score. You have the novel in your bones - its prose, its philosophy, its contradictions. Camus would probably shrug and offer you a cigarette."
+        },
+        {
+            min: 0.75,
+            v: "A stranger, but not estranged.",
+            n: "Strong work. You understand Meursault's character and the novel's philosophical stakes. Consider revisiting the chaplain scene and Camus's own commentary on what Meursault represents."
+        },
+        {
+            min: 0.5,
+            v: "The sun was in your eyes.",
+            n: "You've got the plot down but some of the philosophical and stylistic dimensions are slipping. Re-read the final chapters and Camus's preface to the American edition - they clarify a lot."
+        },
+        {
+            min: 0,
+            v: "Perhaps yesterday. Maybe today.",
+            n: "A re-read is in order - and it'll be worth it. The novel is short but dense. Pay attention to what Meursault notices and what he ignores; the gaps are where the meaning lives."
+        }
+    ]
+};
 </script>
+<script src="../quiz-engine.js"></script>
 </body>
 </html>
