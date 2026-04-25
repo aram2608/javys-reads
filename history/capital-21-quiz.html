@@ -121,7 +121,6 @@
             text-transform: uppercase;
             font-weight: 500;
         }
-
     </style>
 </head>
 
@@ -138,168 +137,168 @@
     <script>
         window.QUIZ = {
             questions: [
-            {
-                tag: "theory", tagLabel: "Theory",
-                q: "Piketty's central inequality is expressed as <strong>r > g</strong>. What do <em>r</em> and <em>g</em> precisely represent, and what does the inequality predict?",
-                options: [
-                    "r = GDP growth rate; g = wage growth rate. When GDP grows faster than wages, inequality rises.",
-                    "r = rate of return on capital; g = rate of economic growth. When capital returns exceed growth, wealth concentrates among owners of capital.",
-                    "r = return on financial assets only; g = real wage growth. The inequality explains the stagnation of middle-class incomes.",
-                    "r = rate of capital accumulation; g = population growth. When capital accumulates faster than population grows, per capita inequality rises."
-                ],
-                answer: 1,
-                explain: "r is the average rate of return on all forms of capital (real estate, financial assets, business capital) and g is the overall rate of economic growth (output and income). When r > g, capital income compounds faster than the economy grows, causing those who own capital to accumulate a rising share of total wealth over time."
-            },
-            {
-                tag: "data", tagLabel: "Data & Evidence",
-                q: "Piketty's empirical dataset - the backbone of the book - was constructed primarily from which sources?",
-                options: [
-                    "World Bank national accounts and IMF balance of payments data.",
-                    "Tax records (estate and income tax returns) from France, Britain, the US, and other countries, compiled over many years.",
-                    "Corporate filings and stock exchange records going back to the 19th century.",
-                    "Household survey data (like the Survey of Consumer Finances) extended backward using econometric backcasting."
-                ],
-                answer: 1,
-                explain: "The World Inequality Database (then WTID) assembled by Piketty, Saez, Atkinson and others relies centrally on fiscal records - income tax returns and especially estate/inheritance tax records - which provide long historical series. Surveys are too recent and too subject to top-coding to capture long-run wealth dynamics."
-            },
-            {
-                tag: "theory", tagLabel: "Theory",
-                q: "Piketty introduces the \"First Fundamental Law of Capitalism\": <strong>α = r × β</strong>. What does this express?",
-                options: [
-                    "The capital share of income (α) equals the rate of return on capital (r) times the capital-to-income ratio (β). It is an accounting identity, not a behavioral law.",
-                    "The growth rate of capital (α) equals the profit rate (r) divided by the savings rate (β), predicting capital accumulation speed.",
-                    "Income inequality (α) is a function of returns to capital (r) and the wage-to-profit ratio (β).",
-                    "National savings (α) equal the return on capital (r) times the investment-to-GDP ratio (β), determining steady-state growth."
-                ],
-                answer: 0,
-                explain: "This is a pure accounting identity: if the capital/income ratio is β and capital earns a return r, then capital's share of national income α must equal r × β. Piketty stresses it is definitional, not causal - but it allows him to link trends in capital accumulation to factor shares of income."
-            },
-            {
-                tag: "data", tagLabel: "Data & Evidence",
-                q: "According to Piketty's data, what happened to the capital-to-income ratio in Western Europe between roughly 1914 and 1950, and what primarily explains this?",
-                options: [
-                    "It rose sharply, driven by wartime industrial investment and post-war reconstruction.",
-                    "It remained roughly stable at around 5–6 times national income throughout the period.",
-                    "It fell dramatically - from around 6–7 times national income to around 2–3 times - due to physical destruction, inflation, capital controls, and depressed asset prices.",
-                    "It declined modestly from 4 to 3 times national income, mainly due to redistributive taxation."
-                ],
-                answer: 2,
-                explain: "This is one of the book's key empirical findings. The capital/income ratio in France and Britain plunged from roughly 6–7× in 1910 to around 2–3× by 1950. Physical destruction of capital in WWI and WWII was one factor, but Piketty emphasizes inflation, nationalization, capital controls, and depressed asset prices as equally or more important in compressing wealth."
-            },
-            {
-                tag: "history", tagLabel: "Historical",
-                q: "Piketty describes the period 1914–1970 as historically anomalous. What term does he use, and why does he argue this period should not be taken as a baseline for thinking about capitalism?",
-                options: [
-                    "He calls it the \"Golden Age of Labor\" and argues it was produced by uniquely strong union movements that cannot be replicated.",
-                    "He calls it the \"Great Compression\" and argues it resulted from specific shocks - wars, the Depression, capital destruction - not from a natural tendency of capitalism.",
-                    "He calls it the \"Kuznets Phase\" and argues it reflects the temporary inequality-reducing effect of industrialization, not a permanent structural change.",
-                    "He calls it the \"Social Democratic Exception\" and attributes it entirely to the expansion of the welfare state."
-                ],
-                answer: 1,
-                explain: "Piketty explicitly argues against treating the mid-20th century as the natural state of capitalism. The compression of inequality in this period was a product of catastrophic shocks (wars, depression) and the exceptional g > r conditions they created. As growth slows and r > g reasserts itself, patrimonial capitalism tends to return to Belle Époque levels of concentration."
-            },
-            {
-                tag: "theory", tagLabel: "Theory",
-                q: "Piketty's \"Second Fundamental Law of Capitalism\" states β = s/g. What is the implication when economic growth g is very low?",
-                options: [
-                    "Low growth forces savings rates down, which stabilizes the capital-to-income ratio.",
-                    "Low growth causes the capital-to-income ratio to rise toward very high levels (since β = s/g, a small g with any positive savings rate produces a large β).",
-                    "Low growth reduces the return on capital r, offsetting the rise in β and preventing further inequality.",
-                    "Low growth pushes the economy toward a steady-state where capital and labor shares equalize."
-                ],
-                answer: 1,
-                explain: "This is one of Piketty's most important structural points. β = s/g is a long-run equilibrium condition. With, say, a savings rate of 10% and growth of 1%, the capital/income ratio converges to 10 - far above historical averages. Slow-growth economies naturally accumulate vast capital stocks relative to income, intensifying the logic of r > g."
-            },
-            {
-                tag: "policy", tagLabel: "Policy",
-                q: "Piketty's signature policy proposal is a progressive global wealth tax. What is his primary argument for why it must be <em>global</em>, and what does he acknowledge about its feasibility?",
-                options: [
-                    "It must be global to prevent capital flight to tax havens; Piketty calls it a \"useful utopia\" and acknowledges it is politically very difficult but not economically incoherent.",
-                    "It must be global because wealth inequality is fundamentally a global phenomenon driven by trade imbalances between rich and poor countries.",
-                    "It must be global to ensure that developing nations receive transfers from wealthy ones; he believes it is achievable through existing international institutions.",
-                    "It must be global because domestic wealth taxes would distort investment; he presents it as an immediately actionable proposal for the EU."
-                ],
-                answer: 0,
-                explain: "Piketty's argument for a global wealth tax rests on capital mobility: a national wealth tax would drive capital offshore. He explicitly calls it a \"utopie utile\" - a useful utopia - acknowledging it requires international cooperation that doesn't currently exist, while arguing it is economically coherent and worth orienting policy toward."
-            },
-            {
-                tag: "data", tagLabel: "Data & Evidence",
-                q: "When Piketty analyzes the United States, what distinctive feature does he identify about American inequality compared to European inequality?",
-                options: [
-                    "American wealth inequality is lower than European because of higher social mobility and broader asset ownership.",
-                    "American inequality is driven more by extreme labor income concentration at the top (\"supermanager\" salaries) than by inherited wealth, unlike in Europe where inherited wealth dominates.",
-                    "American inequality is primarily driven by racial wealth gaps that have no European parallel.",
-                    "American capital-to-income ratios are consistently higher than European ones, making r > g more acute."
-                ],
-                answer: 1,
-                explain: "Piketty notes that the US has developed a novel form of inequality partly driven by extreme divergence in labor income - the rise of \"supermanagers\" earning extraordinary compensation. He contrasts this with the European tradition of rentier inequality based in inherited wealth, while arguing both mechanisms lead to problematic concentration. He does predict inherited wealth will grow in importance in the US as well."
-            },
-            {
-                tag: "theory", tagLabel: "Theory",
-                q: "Piketty discusses the elasticity of substitution between capital and labor. What value of this elasticity is critical to his argument, and why?",
-                options: [
-                    "An elasticity equal to exactly 1 (Cobb-Douglas), which ensures capital and labor shares remain constant regardless of the capital stock.",
-                    "An elasticity greater than 1, which means capital and labor are highly substitutable - so as capital accumulates, its marginal product doesn't fall fast enough to prevent r from staying high, allowing the capital share α to rise.",
-                    "An elasticity less than 1, which means capital quickly becomes less productive as it accumulates, ensuring returns fall and inequality self-corrects.",
-                    "An elasticity of 0 (Leontief), meaning capital and labor must be combined in fixed proportions, making substitution irrelevant."
-                ],
-                answer: 1,
-                explain: "Standard theory might suggest capital abundance would drive r down (diminishing returns), automatically correcting inequality. But Piketty argues the long-run elasticity of substitution is likely above 1, meaning capital and labor substitute easily enough that even as capital/income ratios rise, the return r stays relatively high - allowing the capital share α to increase. This is what makes r > g a durable tendency rather than a self-correcting one."
-            },
-            {
-                tag: "history", tagLabel: "Historical",
-                q: "Piketty uses the example of \"Père Goriot\" and other 19th-century novels to make a methodological point. What is that point?",
-                options: [
-                    "That literary sources are unreliable for economic history and should be discarded in favor of archival data.",
-                    "That novelists like Balzac and Austen depicted the capital-income ratios and return-on-wealth of their era with remarkable accuracy - illustrating that contemporaries understood inherited wealth as the only viable path to comfort, not labor.",
-                    "That 19th-century fiction exaggerated inequality for dramatic purposes, and real wealth distributions were more equal than portrayed.",
-                    "That the rentier class in 19th-century France was less dominant than commonly believed, since most wealth was held by the state."
-                ],
-                answer: 1,
-                explain: "Piketty uses Balzac and Austen deliberately - not just as color but as evidence that the logic of patrimonial society was widely understood. In Père Goriot, Vautrin's famous speech to Rastignac lays out the math explicitly: a career in law will never match a wealthy marriage. Piketty treats this as confirmation that r > g in the 19th century was not obscure - it was lived reality, encoded in culture."
-            },
-            {
-                tag: "policy", tagLabel: "Policy",
-                q: "Piketty is critical of the \"Kuznets curve\" hypothesis. What does the Kuznets curve predict, and why does Piketty reject it as a general law?",
-                options: [
-                    "The Kuznets curve predicts inequality rises with industrialization then falls; Piketty rejects it because it ignores the role of capital returns.",
-                    "The Kuznets curve predicts that inequality first rises then falls as countries develop economically. Piketty argues the mid-20th century data that seemed to confirm it were a product of specific historical shocks, not a general developmental law.",
-                    "The Kuznets curve predicts that free trade reduces inequality globally; Piketty rejects it on the grounds that capital mobility offsets trade gains.",
-                    "The Kuznets curve predicts a stable long-run capital share; Piketty shows capital shares have trended upward since 1980."
-                ],
-                answer: 1,
-                explain: "Kuznets formulated his inverted-U hypothesis in the 1950s, largely based on data from the post-war compression. Piketty argues this was a case of misleading historical coincidence: the decline in inequality during that period was caused by wars and the Depression, not by a natural developmental process. The subsequent rise of inequality since the 1980s has largely falsified the Kuznets curve as a general prediction."
-            },
-            {
-                tag: "data", tagLabel: "Data & Evidence",
-                q: "According to Piketty's data, the top 10% income share in the United States reached what approximate level by the 2010s, and how does this compare to the early 20th century?",
-                options: [
-                    "Around 35%, similar to the levels seen in the 1920s peak.",
-                    "Around 50%, roughly matching or slightly exceeding the 1920s peak - reversing the entire mid-century compression.",
-                    "Around 60%, significantly above the 1920s and representing an all-time high in the historical record.",
-                    "Around 40%, modestly below the 1920s peak, suggesting incomplete but meaningful reconcentration."
-                ],
-                answer: 1,
-                explain: "Piketty and Saez's data show the top 10% income share in the US approaching or exceeding 50% of national income by the early 2010s, roughly matching the 1920s peak. This is a key empirical anchor of the book: the mid-century compression has been almost entirely reversed, and the US now resembles the inequality levels of the Gilded Age."
-            }
-        ],
+                {
+                    tag: "theory", tagLabel: "Theory",
+                    q: "Piketty's central inequality is expressed as <strong>r > g</strong>. What do <em>r</em> and <em>g</em> precisely represent, and what does the inequality predict?",
+                    options: [
+                        "r = GDP growth rate; g = wage growth rate. When GDP grows faster than wages, inequality rises.",
+                        "r = rate of return on capital; g = rate of economic growth. When capital returns exceed growth, wealth concentrates among owners of capital.",
+                        "r = return on financial assets only; g = real wage growth. The inequality explains the stagnation of middle-class incomes.",
+                        "r = rate of capital accumulation; g = population growth. When capital accumulates faster than population grows, per capita inequality rises."
+                    ],
+                    answer: 1,
+                    explain: "r is the average rate of return on all forms of capital (real estate, financial assets, business capital) and g is the overall rate of economic growth (output and income). When r > g, capital income compounds faster than the economy grows, causing those who own capital to accumulate a rising share of total wealth over time."
+                },
+                {
+                    tag: "data", tagLabel: "Data & Evidence",
+                    q: "Piketty's empirical dataset, the backbone of the book, was constructed primarily from which sources?",
+                    options: [
+                        "World Bank national accounts and IMF balance of payments data.",
+                        "Tax records (estate and income tax returns) from France, Britain, the US, and other countries, compiled over many years.",
+                        "Corporate filings and stock exchange records going back to the 19th century.",
+                        "Household survey data (like the Survey of Consumer Finances) extended backward using econometric backcasting."
+                    ],
+                    answer: 1,
+                    explain: "The World Inequality Database (then WTID) assembled by Piketty, Saez, Atkinson and others relies centrally on fiscal records - income tax returns and especially estate/inheritance tax records, which provide long historical series. Surveys are too recent and too subject to top-coding to capture long-run wealth dynamics."
+                },
+                {
+                    tag: "theory", tagLabel: "Theory",
+                    q: "Piketty introduces the \"First Fundamental Law of Capitalism\": <strong>α = r × β</strong>. What does this express?",
+                    options: [
+                        "The capital share of income (α) equals the rate of return on capital (r) times the capital-to-income ratio (β). It is an accounting identity, not a behavioral law.",
+                        "The growth rate of capital (α) equals the profit rate (r) divided by the savings rate (β), predicting capital accumulation speed.",
+                        "Income inequality (α) is a function of returns to capital (r) and the wage-to-profit ratio (β).",
+                        "National savings (α) equal the return on capital (r) times the investment-to-GDP ratio (β), determining steady-state growth."
+                    ],
+                    answer: 0,
+                    explain: "This is a pure accounting identity: if the capital/income ratio is β and capital earns a return r, then capital's share of national income α must equal r × β. Piketty stresses it is definitional, not causal, but it allows him to link trends in capital accumulation to factor shares of income."
+                },
+                {
+                    tag: "data", tagLabel: "Data & Evidence",
+                    q: "According to Piketty's data, what happened to the capital-to-income ratio in Western Europe between roughly 1914 and 1950, and what primarily explains this?",
+                    options: [
+                        "It rose sharply, driven by wartime industrial investment and post-war reconstruction.",
+                        "It remained roughly stable at around 5–6 times national income throughout the period.",
+                        "It fell dramatically, from around 6–7 times national income to around 2–3 times, due to physical destruction, inflation, capital controls, and depressed asset prices.",
+                        "It declined modestly from 4 to 3 times national income, mainly due to redistributive taxation."
+                    ],
+                    answer: 2,
+                    explain: "This is one of the book's key empirical findings. The capital/income ratio in France and Britain plunged from roughly 6–7× in 1910 to around 2–3× by 1950. Physical destruction of capital in WWI and WWII was one factor, but Piketty emphasizes inflation, nationalization, capital controls, and depressed asset prices as equally or more important in compressing wealth."
+                },
+                {
+                    tag: "history", tagLabel: "Historical",
+                    q: "Piketty describes the period 1914–1970 as historically anomalous. What term does he use, and why does he argue this period should not be taken as a baseline for thinking about capitalism?",
+                    options: [
+                        "He calls it the \"Golden Age of Labor\" and argues it was produced by uniquely strong union movements that cannot be replicated.",
+                        "He calls it the \"Great Compression\" and argues it resulted from specific shocks, wars, the Depression, capital destruction - not from a natural tendency of capitalism.",
+                        "He calls it the \"Kuznets Phase\" and argues it reflects the temporary inequality-reducing effect of industrialization, not a permanent structural change.",
+                        "He calls it the \"Social Democratic Exception\" and attributes it entirely to the expansion of the welfare state."
+                    ],
+                    answer: 1,
+                    explain: "Piketty explicitly argues against treating the mid-20th century as the natural state of capitalism. The compression of inequality in this period was a product of catastrophic shocks (wars, depression) and the exceptional g > r conditions they created. As growth slows and r > g reasserts itself, patrimonial capitalism tends to return to Belle Époque levels of concentration."
+                },
+                {
+                    tag: "theory", tagLabel: "Theory",
+                    q: "Piketty's \"Second Fundamental Law of Capitalism\" states β = s/g. What is the implication when economic growth g is very low?",
+                    options: [
+                        "Low growth forces savings rates down, which stabilizes the capital-to-income ratio.",
+                        "Low growth causes the capital-to-income ratio to rise toward very high levels (since β = s/g, a small g with any positive savings rate produces a large β).",
+                        "Low growth reduces the return on capital r, offsetting the rise in β and preventing further inequality.",
+                        "Low growth pushes the economy toward a steady-state where capital and labor shares equalize."
+                    ],
+                    answer: 1,
+                    explain: "This is one of Piketty's most important structural points. β = s/g is a long-run equilibrium condition. With, say, a savings rate of 10% and growth of 1%, the capital/income ratio converges to 10 - far above historical averages. Slow-growth economies naturally accumulate vast capital stocks relative to income, intensifying the logic of r > g."
+                },
+                {
+                    tag: "policy", tagLabel: "Policy",
+                    q: "Piketty's signature policy proposal is a progressive global wealth tax. What is his primary argument for why it must be <em>global</em>, and what does he acknowledge about its feasibility?",
+                    options: [
+                        "It must be global to prevent capital flight to tax havens; Piketty calls it a \"useful utopia\" and acknowledges it is politically very difficult but not economically incoherent.",
+                        "It must be global because wealth inequality is fundamentally a global phenomenon driven by trade imbalances between rich and poor countries.",
+                        "It must be global to ensure that developing nations receive transfers from wealthy ones; he believes it is achievable through existing international institutions.",
+                        "It must be global because domestic wealth taxes would distort investment; he presents it as an immediately actionable proposal for the EU."
+                    ],
+                    answer: 0,
+                    explain: "Piketty's argument for a global wealth tax rests on capital mobility: a national wealth tax would drive capital offshore. He explicitly calls it a \"utopie utile\", a useful utopia, acknowledging it requires international cooperation that doesn't currently exist, while arguing it is economically coherent and worth orienting policy toward."
+                },
+                {
+                    tag: "data", tagLabel: "Data & Evidence",
+                    q: "When Piketty analyzes the United States, what distinctive feature does he identify about American inequality compared to European inequality?",
+                    options: [
+                        "American wealth inequality is lower than European because of higher social mobility and broader asset ownership.",
+                        "American inequality is driven more by extreme labor income concentration at the top (\"supermanager\" salaries) than by inherited wealth, unlike in Europe where inherited wealth dominates.",
+                        "American inequality is primarily driven by racial wealth gaps that have no European parallel.",
+                        "American capital-to-income ratios are consistently higher than European ones, making r > g more acute."
+                    ],
+                    answer: 1,
+                    explain: "Piketty notes that the US has developed a novel form of inequality partly driven by extreme divergence in labor income - the rise of \"supermanagers\" earning extraordinary compensation. He contrasts this with the European tradition of rentier inequality based in inherited wealth, while arguing both mechanisms lead to problematic concentration. He does predict inherited wealth will grow in importance in the US as well."
+                },
+                {
+                    tag: "theory", tagLabel: "Theory",
+                    q: "Piketty discusses the elasticity of substitution between capital and labor. What value of this elasticity is critical to his argument, and why?",
+                    options: [
+                        "An elasticity equal to exactly 1 (Cobb-Douglas), which ensures capital and labor shares remain constant regardless of the capital stock.",
+                        "An elasticity greater than 1, which means capital and labor are highly substitutable, so as capital accumulates, its marginal product doesn't fall fast enough to prevent r from staying high, allowing the capital share α to rise.",
+                        "An elasticity less than 1, which means capital quickly becomes less productive as it accumulates, ensuring returns fall and inequality self-corrects.",
+                        "An elasticity of 0 (Leontief), meaning capital and labor must be combined in fixed proportions, making substitution irrelevant."
+                    ],
+                    answer: 1,
+                    explain: "Standard theory might suggest capital abundance would drive r down (diminishing returns), automatically correcting inequality. But Piketty argues the long-run elasticity of substitution is likely above 1, meaning capital and labor substitute easily enough that even as capital/income ratios rise, the return r stays relatively high, allowing the capital share α to increase. This is what makes r > g a durable tendency rather than a self-correcting one."
+                },
+                {
+                    tag: "history", tagLabel: "Historical",
+                    q: "Piketty uses the example of \"Père Goriot\" and other 19th-century novels to make a methodological point. What is that point?",
+                    options: [
+                        "That literary sources are unreliable for economic history and should be discarded in favor of archival data.",
+                        "That novelists like Balzac and Austen depicted the capital-income ratios and return-on-wealth of their era with remarkable accuracy - illustrating that contemporaries understood inherited wealth as the only viable path to comfort, not labor.",
+                        "That 19th-century fiction exaggerated inequality for dramatic purposes, and real wealth distributions were more equal than portrayed.",
+                        "That the rentier class in 19th-century France was less dominant than commonly believed, since most wealth was held by the state."
+                    ],
+                    answer: 1,
+                    explain: "Piketty uses Balzac and Austen deliberately, not just as color but as evidence that the logic of patrimonial society was widely understood. In Père Goriot, Vautrin's famous speech to Rastignac lays out the math explicitly: a career in law will never match a wealthy marriage. Piketty treats this as confirmation that r > g in the 19th century was not obscure, it was lived reality, encoded in culture."
+                },
+                {
+                    tag: "policy", tagLabel: "Policy",
+                    q: "Piketty is critical of the \"Kuznets curve\" hypothesis. What does the Kuznets curve predict, and why does Piketty reject it as a general law?",
+                    options: [
+                        "The Kuznets curve predicts inequality rises with industrialization then falls; Piketty rejects it because it ignores the role of capital returns.",
+                        "The Kuznets curve predicts that inequality first rises then falls as countries develop economically. Piketty argues the mid-20th century data that seemed to confirm it were a product of specific historical shocks, not a general developmental law.",
+                        "The Kuznets curve predicts that free trade reduces inequality globally; Piketty rejects it on the grounds that capital mobility offsets trade gains.",
+                        "The Kuznets curve predicts a stable long-run capital share; Piketty shows capital shares have trended upward since 1980."
+                    ],
+                    answer: 1,
+                    explain: "Kuznets formulated his inverted-U hypothesis in the 1950s, largely based on data from the post-war compression. Piketty argues this was a case of misleading historical coincidence: the decline in inequality during that period was caused by wars and the Depression, not by a natural developmental process. The subsequent rise of inequality since the 1980s has largely falsified the Kuznets curve as a general prediction."
+                },
+                {
+                    tag: "data", tagLabel: "Data & Evidence",
+                    q: "According to Piketty's data, the top 10% income share in the United States reached what approximate level by the 2010s, and how does this compare to the early 20th century?",
+                    options: [
+                        "Around 35%, similar to the levels seen in the 1920s peak.",
+                        "Around 50%, roughly matching or slightly exceeding the 1920s peak, reversing the entire mid-century compression.",
+                        "Around 60%, significantly above the 1920s and representing an all-time high in the historical record.",
+                        "Around 40%, modestly below the 1920s peak, suggesting incomplete but meaningful reconcentration."
+                    ],
+                    answer: 1,
+                    explain: "Piketty and Saez's data show the top 10% income share in the US approaching or exceeding 50% of national income by the early 2010s, roughly matching the 1920s peak. This is a key empirical anchor of the book: the mid-century compression has been almost entirely reversed, and the US now resembles the inequality levels of the Gilded Age."
+                }
+            ],
             verdicts: [
-                {   
+                {
                     min: 1.0,
                     v: "Magnifique",
                     n: "Excellent command of the material. Piketty would approve of the rigor.",
                 },
-                {   
+                {
                     min: 0.75,
                     v: "Petit à petit, l'oiseau fait son nid.",
                     n: "Rather good. A solid understanding of this tome of inequality and graphs.",
                 },
-                {   
+                {
                     min: 0.5,
                     v: "Tabarnak!",
                     n: "You seem to have a general grasp of the material. Solidfying your understanding of Picketty's equations may help.",
                 },
-                {   
+                {
                     min: 0,
                     v: "Non bien.",
                     n: "It's a tough book, if you didn't read it all I understand.",

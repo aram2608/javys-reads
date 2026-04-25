@@ -1,0 +1,21 @@
+@STYLE
+    --bg: red;
+STYLE@
+
+$TITLE The Brothers Karamazov
+$AUTHOR Dostoevsky
+
+
+{
+    ? What is my favorite color
+    % Red, Blue, White, Green
+    ! 0
+    > Indeed, red is my favorite color
+}
+
+{
+    ? What is the color of the sky
+    % Blue, Yellow, Green, Purple
+    ! 0
+    > Yep.
+}
