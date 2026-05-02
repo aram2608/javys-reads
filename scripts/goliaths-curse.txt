@@ -1,184 +1,229 @@
 $TITLE Goliath's Curse
 
 @STYLE
-@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&family=Crimson+Pro&family=Courier+Prime&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
 :root {
-    --qe-font-serif:       'Spectral', Georgia, serif;
-    --qe-font-body:        'Crimson Pro', Georgia, serif;
-    --qe-font-label:       'Courier Prime', monospace;
-    --qe-surface:          rgba(255,255,255,0.04);
-    --qe-border:           rgba(226,208,176,0.12);
-    --qe-border-hi:        rgba(226,208,176,0.28);
-    --qe-text:             #e2d0b0;
-    --qe-text-muted:       #957e62;
-    --qe-accent:           #c07a30;
-    --qe-accent-lo:        rgba(192,122,48,0.08);
-    --qe-btn-bg:           rgba(192,122,48,0.12);
-    --qe-btn-text:         #e2d0b0;
-    --qe-btn-hover-bg:     rgba(192,122,48,0.24);
-    --qe-btn-hover-text:   #f0e4c8;
-    --qe-correct:          #7ebb8a;
-    --qe-correct-bg:       rgba(126,187,138,0.08);
-    --qe-wrong:            #c87e7e;
-    --qe-wrong-bg:         rgba(200,126,126,0.08);
+    --qe-font-serif:       'Cormorant Garamond', Georgia, serif;
+    --qe-font-body:        'EB Garamond', Georgia, serif;
+    --qe-font-label:       'JetBrains Mono', monospace;
+    --qe-surface:          rgba(232,210,170,0.03);
+    --qe-border:           rgba(232,210,170,0.10);
+    --qe-border-hi:        rgba(212,148,82,0.45);
+    --qe-text:             #e8d2aa;
+    --qe-text-muted:       #8a7559;
+    --qe-accent:           #d49452;
+    --qe-accent-lo:        rgba(212,148,82,0.07);
+    --qe-btn-bg:           rgba(212,148,82,0.08);
+    --qe-btn-text:         #e8d2aa;
+    --qe-btn-hover-bg:     rgba(212,148,82,0.18);
+    --qe-btn-hover-text:   #f5e6c4;
+    --qe-correct:          #8fb87a;
+    --qe-correct-bg:       rgba(143,184,122,0.10);
+    --qe-wrong:            #b8634f;
+    --qe-wrong-bg:         rgba(184,99,79,0.10);
     --qe-hero-bg:          transparent;
-    --qe-hero-text:        #e2d0b0;
-    --qe-score-color:      #c07a30;
-    --qe-denom-color:      #957e62;
-    --qe-bd-bg:            rgba(255,255,255,0.02);
-    --qe-bd-border:        rgba(226,208,176,0.07);
+    --qe-hero-text:        #e8d2aa;
+    --qe-score-color:      #d49452;
+    --qe-denom-color:      #8a7559;
+    --qe-bd-bg:            rgba(232,210,170,0.015);
+    --qe-bd-border:        rgba(232,210,170,0.06);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-    background-color: #0d0905;
-    background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(226,208,176,0.035) 39px, rgba(226,208,176,0.035) 40px);
-    color: #e2d0b0;
-    font-family: 'Crimson Pro', Georgia, serif;
-    font-size: 1.1rem;
+    background-color: #0a0704;
+    background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(212,148,82,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(184,99,79,0.04) 0%, transparent 50%),
+        repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(232,210,170,0.025) 31px, rgba(232,210,170,0.025) 32px);
+    color: #e8d2aa;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.15rem;
+    line-height: 1.55;
     min-height: 100vh;
+    position: relative;
 }
-.container { max-width: 700px; margin: 0 auto; padding: 56px 24px 80px; }
-header { margin-bottom: 56px; }
-h1 { font-family: 'Spectral', Georgia, serif; font-size: clamp(2rem,6vw,3rem); font-weight: 600; letter-spacing: 0.01em; margin-bottom: 6px; color: #e2d0b0; }
-.subtitle { font-size: 0.78rem; color: #957e62; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 8px; font-family: 'Courier Prime', monospace; }
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 1px 1px, rgba(232,210,170,0.04) 1px, transparent 1px);
+    background-size: 3px 3px;
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 0;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 72px 28px 96px; position: relative; z-index: 1; }
+header { margin-bottom: 64px; padding-bottom: 32px; border-bottom: 1px solid rgba(232,210,170,0.08); position: relative; }
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 64px;
+    height: 1px;
+    background: #d49452;
+}
+h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: #f5e6c4;
+    font-style: italic;
+}
+.subtitle {
+    font-size: 0.72rem;
+    color: #8a7559;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-top: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+}
+.subtitle::before { content: '— '; color: #d49452; }
+.subtitle::after { content: ' —'; color: #d49452; }
 STYLE@
 
 {
     ? What is a "Goliath" as defined in the book?
-    % A city-state ruled by a single priest-king, A collection of dominance hierarchies organized through authority and violence, A mythological enemy of egalitarian societies, An agricultural empire that controls food surpluses
+    % A city-state governed by a single priest-king, A hierarchy that dominates others through authority and violence, A mythological foe of egalitarian societies, An agricultural empire built on food surpluses
     ! 1
-    > A Goliath is a collection of dominance hierarchies where individuals dominate others to control energy and labor through authority and violence.
+    > Goliaths concentrate energy and labor through coercion. They combine political, violent, informational, and economic power to extract from a population.
 }
 
 {
-    ? Which three simultaneous collapses drive full societal collapse?
-    % Political / military / religious, Agricultural / industrial / technological, State / economic / population, Cultural / linguistic / ecological
+    ? Which three simultaneous collapses define a full societal collapse?
+    % Political, military, and religious collapse, Agricultural, industrial, and technological collapse, State, economic, and population collapse, Cultural, linguistic, and ecological collapse
     ! 2
-    > The book opens with state collapse combined with economic and population collapse as the triple threat that brings societies down.
+    > When the state, the economy, and the population all crumble at once, society itself unravels. Cahokia is one example the book opens with.
 }
 
 {
     ? What is "lamentation literature"?
-    % Ancient myths about heroic defeats, Elite accounts lamenting state collapse because the powerful relied on hierarchy to extract wealth, Folk songs mourning drought and famine, Religious texts grieving the deaths of kings
+    % Ancient myths recounting heroic defeats, Elite writings mourning collapse since elites lost the most, Folk songs grieving drought and famine, Religious texts mourning the deaths of kings
     ! 1
-    > History was often written by elites who depended on hierarchical relationships to extract wealth and power so they mourned collapse most loudly.
+    > History was largely written by the literate 1%, who depended on hierarchy for their wealth. Their bias makes collapse sound worse than it often was for everyone else.
 }
 
 {
     ? What does Hobbes' social contract propose?
-    % People give up some liberty in exchange for security, People give up religion in exchange for law, People give up mobility in exchange for trade, People give up wealth in exchange for territory
+    % Trading some liberty for security, Trading religion for the rule of law, Trading mobility for trade, Trading wealth for territory
     ! 0
-    > Hobbes argued that life without authority is rife with war so people surrender some freedom for the security a state provides.
+    > Writing during the English Civil War, Hobbes argued that life without authority is rife with war, so people surrender freedom for the security a state provides.
 }
 
 {
     ? What is "veneer theory"?
-    % Elites conceal power behind bureaucracy and ritual, A thin veneer of civilization shields us from a brutish state of nature, Cultural practices spread superficially without deep roots, States inevitably form once populations reach a threshold
+    % Elites mask power behind bureaucracy and ritual, A thin layer of civilization hides a brutish state of nature, Cultural practices spread shallowly without deep roots, States inevitably form once populations cross a threshold
     ! 1
-    > Veneer theory holds that civilization is a thin surface hiding our natural brutishness underneath. The book challenges this view using paleolithic evidence.
+    > The book pushes back on this Hobbesian view. Paleolithic peoples were intensely social, traded across long distances, and were often deeply egalitarian.
 }
 
 {
     ? Why do the Ju/hoansi swap arrows before a hunt?
-    % To equalize skill levels among hunters, To perform a ritual honoring the prey, To prevent accidents from misidentified arrows, The arrow owner allocates the meat regardless of who fired the shot
+    % To equalize skill among the hunters, To perform a ritual honoring the prey, To prevent accidents from misidentified arrows, So the arrow's owner allocates the meat, not the shooter
     ! 3
-    > By giving away the arrow the shooter cedes allocation rights to the owner, distributing power away from the strongest individual.
+    > By giving away the arrow, the shooter cedes credit for the kill. Allocation power moves away from the strongest hunter, keeping the group flat.
 }
 
 {
-    ? The "dark triad" most associated with power-seeking contains which traits?
-    % Psychopathy / narcissism / Machiavellianism, Aggression / greed / dishonesty, Dominance / status-seeking / authoritarianism, Violence / deception / manipulation
+    ? The "dark triad" of power-seeking traits contains which three?
+    % Psychopathy, narcissism, and Machiavellianism, Aggression, greed, and dishonesty, Dominance, status-seeking, and authoritarianism, Violence, deception, and manipulation
     ! 0
-    > Men exhibiting psychopathy / narcissism / and Machiavellianism are most likely to pursue and sustain dominance over others.
+    > Men exhibiting these traits are most likely to pursue and sustain dominance. The book treats them as a recurring driver of Goliath formation.
 }
 
 {
     ? What are the three "Goliath fuels"?
-    % Gold / slaves / territory, Trade / technology / ideology, Agriculture / religion / warfare, Lootable resources / monopolized violence / caged lands
+    % Gold, slaves, and territory, Trade, technology, and ideology, Agriculture, religion, and warfare, Lootable resources, monopolized violence, and caged lands
     ! 3
-    > Lootable resources / monopolized violence (horses and bronze) / and caged lands that trap populations are the core inputs that power Goliaths.
+    > Resources you can seize, weapons only elites can wield, and populations that cannot easily flee. Together, these inputs let a Goliath form and persist.
 }
 
 {
     ? Which crop type is most correlated with state formation?
-    % Grains and cereals, Tubers like potatoes and taro, Legumes like lentils and beans, Fruits and nuts
+    % Grains and cereals, Tubers like potato and taro, Legumes like lentils and beans, Fruits and nuts
     ! 0
-    > Grains are visible / storable / and easily taxed making them ideal for state extraction. Tubers are harder to seize and thus correlate with less hierarchy.
+    > Grains ripen on a schedule, sit visibly above ground, and store well. That makes them perfect for tax collectors, which makes them perfect fuel for states.
 }
 
 {
     ? "Escape crops" help populations evade Goliaths because they are...
-    % Easily traded across long distances, High-yield and self-sufficient crops grown far from settlements, Perishable and easy to hide underground, Crops requiring specialized knowledge to cultivate
+    % Easily traded across long distances, Self-sufficient and grown far from settlements, Storable underground and quick to spoil, Reliant on specialized cultivation knowledge
     ! 2
-    > Tubers like potatoes and taro can be left in the ground and spoil quickly making them nearly impossible for tax collectors to seize.
+    > Tubers like potato and taro can be left in the soil and rot quickly once dug up. A tax collector cannot seize what he cannot find or store.
 }
 
 {
-    ? "Goliath's Curse" refers to which core weakness of hierarchical societies?
-    % The tendency for Goliaths to generate runaway inequality over generations, The inability of unequal and extractive societies to handle disasters, The moral corruption that comes with concentrated power, The cycle of elite competition leading to civil war
+    ? "Goliath's Curse" refers to which weakness of hierarchical societies?
+    % A drift toward runaway inequality across generations, A failure of unequal societies to absorb shocks and disasters, The moral corruption that follows concentrated power, A cycle of elite competition leading to civil war
     ! 1
-    > More unequal and extractive societies have worse decision-making / less social cohesion / and heightened elite competition that makes them fragile in crises.
+    > Top-heavy societies make brittle decisions, lose social cohesion, and burn energy on elite infighting. When a shock arrives, they have nothing left in reserve.
 }
 
 {
     ? What is "population immiseration"?
-    % A decline in population caused by warfare, Forced migration of peoples during state collapse, Reduction in birth rates under authoritarian rule, The impoverishment of the masses by an extractive elite class
+    % Population decline driven by warfare, Forced migration during state collapse, Falling birth rates under authoritarian rule, Mass impoverishment driven by an extractive elite
     ! 3
-    > Population immiseration describes how extractive elites systematically impoverish the broader population through a wealth pump that flows upward rather than trickling down.
+    > Rather than wealth trickling down, a wealth pump siphons it up. Piketty's observation that capital outpaces labor sits underneath this idea.
 }
 
 {
-    ? Who was the king of the first state in the world according to the book?
+    ? Who is named as the king of the world's first state?
     % King Narmer of Egypt, Sargon of Akkad, Hong Xiuquan of China, Moctezuma of the Aztecs
     ! 0
-    > King Narmer unified Egypt and is considered the ruler of the world's first state. Warlords like Narmer built the first states through conquest.
+    > Narmer unified Upper and Lower Egypt through conquest. Like most early state-builders, he was essentially a successful warlord.
 }
 
 {
-    ? The book argues "War made the state and the state made war." What does this mean?
-    % States are fundamentally peaceful institutions that redirect aggression, War eventually destroys every state that wages it, War and states mutually reinforce each other in a feedback loop, States emerge only after war destroys earlier societies
+    ? What does "war made the state and the state made war" mean?
+    % States are peaceful institutions that absorb aggression, War eventually ruins every state that wages it, War and states create and sustain each other, States only emerge after war destroys earlier societies
     ! 2
-    > Warlords form states and states then wage war to expand / creating a cycle where military power and political structure co-produce each other.
+    > Warlords build states to wage war, and the states they build need war to expand. The two evolve together in a feedback loop.
 }
 
 {
-    ? Sargon of Akkad was described as a "marcher king" because he...
-    % Went city to city conquering through military campaigns, Established the first march (border region) system in Mesopotamia, Led ritual processions to legitimize his rule, Marched armies across continents to build a vast empire
+    ? Sargon of Akkad is called a "marcher king" because he...
+    % Conquered city after city on military campaigns, Established the first border-march system in Mesopotamia, Led ritual processions to legitimize his rule, Marched armies across continents to build an empire
     ! 0
-    > Sargon conquered city after city but struggled to maintain control due to dominance aversion and elite competition within his own ranks.
+    > Sargon kept conquering but struggled to hold what he took. Dominance aversion and elite rivalry inside his own ranks dogged him throughout.
 }
 
 {
-    ? What does "mors ex machina" mean in the context of the book?
-    % A Roman myth about death caused by mechanical failure, The collapse of civilization caused by advanced weaponry, Death from out-of-control technology or tech-driven threats, A god-like machine that decides the fates of civilizations
+    ? What does "mors ex machina" mean in the book's context?
+    % A Roman myth about death by mechanical failure, Civilizational collapse caused by advanced weaponry, Death or catastrophe arising from technology we no longer control, A god-like machine that decides civilizational fates
     ! 2
-    > Contrasted with "deus ex machina" (a god saving the day) / mors ex machina describes death or catastrophe arising from technology we can no longer control.
+    > A play on "deus ex machina." Instead of a god descending to save us, our own runaway tech becomes the thing that ends us.
 }
 
 {
-    ? What is "termination shock" in the context of solar geoengineering?
-    % Equipment failure causing geoengineering deployment to stop suddenly, Rapid and severe warming if geoengineering halts while carbon levels remain high, The cooling shock to ecosystems from reduced sunlight, A political crisis triggered by unilateral geoengineering
+    ? What is "termination shock" in solar geoengineering?
+    % Equipment failure halting deployment unexpectedly, Severe whiplash warming if cooling halts while emissions remain, Cooling damage to ecosystems from reduced sunlight, A political crisis from unilateral geoengineering
     ! 1
-    > If geoengineering cools the earth but is then stopped while emissions remain high / all the accumulated carbon would cause sudden whiplash warming far faster than gradual change.
+    > If we mask warming with aerosols but never cut emissions, any disruption removes the mask all at once. Decades of warming arrive in months.
 }
 
 {
-    ? "Death Star syndrome" describes which vulnerability?
-    % Global systems are resilient overall but catastrophically vulnerable to specific shocks, The tendency for large empires to collapse under their own bureaucratic weight, Modern states hold the power to destroy entire civilizations in an instant, Interconnected supply chains amplify military power to destructive levels
+    ? "Death Star syndrome" describes which kind of vulnerability?
+    % Resilient overall but catastrophic single points of failure, Empires collapsing under bureaucratic weight, States holding power to destroy civilizations instantly, Supply chains amplifying military power dangerously
     ! 0
-    > Like the Death Star / our global systems are impressive and robust against most threats but carry single-point vulnerabilities that can trigger cascading collapse.
+    > Modern global systems shrug off many shocks but break catastrophically at chokepoints, like the Strait of Hormuz, BGP routing, or four agrochemical firms.
 }
 
 {
-    ? The "Somalia-Denmark rule" highlights which concern about welfare states?
-    % Failed states tend to stay failed while prosperous states remain prosperous, Wealthy nations must fund poor nations to prevent global instability, The gap in governance quality between nations is inherently self-perpetuating, Dependence on an egalitarian welfare state may leave people unable to cope if it collapses
+    ? The "Somalia-Denmark rule" raises which concern about welfare states?
+    % Failed states stay failed while prosperous states stay prosperous, Wealthy nations must fund poor ones to prevent instability, Governance gaps between nations are self-perpetuating, Total dependence on a welfare state leaves people fragile if it collapses
     ! 3
-    > If we become fully dependent on sophisticated welfare and infrastructure / a collapse could leave us without the skills or resilience needed to recover.
+    > A sophisticated safety net is wonderful while it works. The worry is that if it fails, citizens may lack the skills and networks needed to cope.
 }
 
 {
-    ? The book proposes four ways to "kill a Goliath." Which set is correct?
-    % Revolution / sanctions / democratic elections / free press, Redistribution / disarmament / cultural reform / environmental law, Decentralizing power / global governance / abolishing private property / green energy, Making resources less lootable / easier exit options / tech for the many / spreading knowledge
+    ? What are the four ways the book proposes to "kill a Goliath"?
+    % Revolution, sanctions, elections, and free press, Redistribution, disarmament, cultural reform, and law, Decentralization, global governance, abolition, and green energy, Delootable resources, easier exit, democratic tech, and shared knowledge
     ! 3
-    > The four paths: make lootable resources harder to monopolize / loosen borders and exit options / use technology democratically / and use knowledge to prevent history from repeating.
+    > Make resources hard to seize, give people the means to leave, put technology in the hands of the many, and remember history so it stops rhyming.
 }
