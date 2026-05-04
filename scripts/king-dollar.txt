@@ -1,0 +1,230 @@
+$TITLE King Dollar
+$AUTHOR Paul Blustein
+
+@STYLE
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap');
+:root {
+    --qe-font-serif:       'Newsreader', Georgia, serif;
+    --qe-font-body:        'Newsreader', Georgia, serif;
+    --qe-font-label:       'IBM Plex Mono', monospace;
+    --qe-surface:          rgba(180,220,195,0.03);
+    --qe-border:           rgba(180,220,195,0.09);
+    --qe-border-hi:        rgba(74,164,114,0.40);
+    --qe-text:             #c2d4c8;
+    --qe-text-muted:       #5a7a65;
+    --qe-accent:           #4aa472;
+    --qe-accent-lo:        rgba(74,164,114,0.07);
+    --qe-btn-bg:           rgba(74,164,114,0.07);
+    --qe-btn-text:         #c2d4c8;
+    --qe-btn-hover-bg:     rgba(74,164,114,0.16);
+    --qe-btn-hover-text:   #ddeee5;
+    --qe-correct:          #7ab88a;
+    --qe-correct-bg:       rgba(122,184,138,0.09);
+    --qe-wrong:            #b8735a;
+    --qe-wrong-bg:         rgba(184,115,90,0.09);
+    --qe-hero-bg:          transparent;
+    --qe-hero-text:        #c2d4c8;
+    --qe-score-color:      #4aa472;
+    --qe-denom-color:      #5a7a65;
+    --qe-bd-bg:            rgba(180,220,195,0.015);
+    --qe-bd-border:        rgba(180,220,195,0.05);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    background-color: #060e09;
+    background-image:
+        radial-gradient(ellipse at 15% 0%, rgba(74,164,114,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 100%, rgba(40,100,65,0.04) 0%, transparent 55%),
+        repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(180,220,195,0.022) 27px, rgba(180,220,195,0.022) 28px);
+    color: #c2d4c8;
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.15rem;
+    line-height: 1.58;
+    min-height: 100vh;
+    position: relative;
+}
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 1px 1px, rgba(180,220,195,0.035) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 0;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 72px 28px 96px; position: relative; z-index: 1; }
+header { margin-bottom: 64px; padding-bottom: 32px; border-bottom: 1px solid rgba(180,220,195,0.08); position: relative; }
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 56px;
+    height: 1px;
+    background: #4aa472;
+}
+h1 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: clamp(2.4rem, 7vw, 3.5rem);
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: #daeee4;
+}
+.subtitle {
+    font-size: 0.68rem;
+    color: #5a7a65;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-top: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+}
+.subtitle::before { content: '-- '; color: #4aa472; }
+.subtitle::after { content: ' --'; color: #4aa472; }
+STYLE@
+
+{
+    ? What 1944 agreement established the U.S. dollar as the anchor of the international monetary system?
+    % The GATT treaty, The Bretton Woods Conference, The Plaza Accord, The Smithsonian Agreement
+    ! 1
+    > The Bretton Woods Conference tied the dollar to gold at $35 per ounce and made all other currencies pegged to the dollar, positioning the U.S. at the center of postwar finance.
+}
+
+{
+    ? Why did President Nixon end the dollar's convertibility to gold in 1971?
+    % To fund the Vietnam War directly, To punish European trade partners, The U.S. lacked enough gold to cover its overseas dollar liabilities, Congress passed legislation requiring it
+    ! 2
+    > By 1971 the U.S. held far fewer gold reserves than the dollar claims held abroad. Closing the gold window prevented a run on Fort Knox.
+}
+
+{
+    ? Treasury Secretary John Connally's remark to G10 counterparts after the 1971 Nixon Shock was:
+    % Gold is finished as a monetary instrument, The dollar must float or fail, The dollar is our currency but it's your problem, America will never devalue its currency
+    ! 2
+    > Connally's blunt statement captured the asymmetry of dollar dominance. The U.S. sets policy for domestic reasons; the rest of the world absorbs the consequences.
+}
+
+{
+    ? Approximately what share of global gold reserves did the United States hold at the time of the Bretton Woods conference?
+    % 30%, 50%, 65%, 80%
+    ! 3
+    > Holding roughly 80% of world gold stocks gave the dollar unrivaled credibility as the postwar anchor currency. That commanding position eroded over the following decades.
+}
+
+{
+    ? Paul Volcker's aggressive interest rate increases in the early 1980s are described in the book as establishing which pillar of dollar dominance?
+    % Treasury market liquidity, Central bank independence, Open capital accounts, Petrodollar recycling
+    ! 1
+    > By accepting deep recession to kill inflation, Volcker proved the Fed would defend price stability at real cost. That institutional credibility became foundational to global trust in the dollar.
+}
+
+{
+    ? What percentage of global foreign exchange reserves is denominated in dollars according to the book?
+    % 71%, 64%, 59%, 45%
+    ! 2
+    > The dollar's reserve share declined from over 70% in 2000 to roughly 59%, but it still dwarfs every other reserve currency by a large margin.
+}
+
+{
+    ? What share of all foreign exchange transactions involves the dollar?
+    % 62%, 75%, 88%, 95%
+    ! 2
+    > Because most forex deals are intermediated through the dollar, the greenback anchors global trade and finance even in transactions that do not directly involve the United States.
+}
+
+{
+    ? In the 1970s Saudi Arabia recycled its oil revenues primarily into which asset?
+    % Gold bullion, U.S. Treasury bonds, IMF special drawing rights, European sovereign debt
+    ! 1
+    > The Treasury market's unmatched depth and liquidity made it the only place Saudi Arabia could invest billions without moving prices against itself. No other market offered comparable scale.
+}
+
+{
+    ? What action did the Federal Reserve take on March 15, 2020 in response to the COVID-19 crisis?
+    % Raised rates to curb expected inflation, Cut rates to zero and began large-scale asset purchases, Suspended dollar swap lines with foreign central banks, Pegged the dollar to a basket of currencies
+    ! 1
+    > The Fed cut the federal funds rate to zero and purchased roughly two trillion dollars in Treasuries within two months, acting as dealer of last resort in seized markets.
+}
+
+{
+    ? The primary reason the euro cannot replace the dollar as a global reserve currency is that the eurozone:
+    % Is too small economically to matter at scale, Invoices most of its own trade in dollars, Lacks a single unified safe asset comparable to U.S. Treasuries, Has a central bank that lacks political independence
+    ! 2
+    > German bunds and Greek bonds carry different sovereign risk. Without one deep pool of safe assets, foreign central banks cannot accumulate euros at the scale required for reserve purposes.
+}
+
+{
+    ? What structural obstacle prevents the Chinese renminbi from becoming a dominant reserve currency?
+    % China's economy is too small, Capital controls limit international use of the currency, The renminbi is pegged too rigidly to the dollar, China lacks a functioning bond market
+    ! 1
+    > Reserve currencies require capital to flow in and out freely. China's capital controls make the renminbi unsuitable for large-scale reserve accumulation by foreign central banks.
+}
+
+{
+    ? The CHIPS system, which handles more than 90% of large-value cross-border dollar transactions, is located in:
+    % Washington D.C., Chicago, San Francisco, Midtown Manhattan
+    ! 3
+    > The Clearing House Interbank Payments System routes the vast majority of international dollar settlements through a single node in New York, concentrating dollar clearing in one city.
+}
+
+{
+    ? Economist Helene Rey's "global financial cycle" concept describes how:
+    % The dollar's value moves in long cycles tied to commodity prices, Fed policy creates capital flows that destabilize other countries regardless of their own choices, Reserve currency status rotates among great powers over historical cycles, Global interest rates converge toward a single equilibrium over time
+    ! 1
+    > When the Fed tightens or eases, capital surges into or out of emerging markets worldwide, leaving those countries with little effective monetary autonomy of their own.
+}
+
+{
+    ? According to the book the daily trading volume in the U.S. Treasury market grew from about $30 billion in the mid-1970s to roughly how much by the time of writing?
+    % $150 billion, $300 billion, $450 billion, $600 billion
+    ! 3
+    > The Treasury market's growth in depth and liquidity is central to why the dollar remains dominant. No rival sovereign bond market approaches this scale of daily turnover.
+}
+
+{
+    ? The Federal Reserve Act that created the institution underpinning dollar dominance was passed in:
+    % 1900, 1907, 1913, 1920
+    ! 2
+    > The 1913 Federal Reserve Act established the central bank that would eventually anchor U.S. monetary credibility and support the dollar's global role through the twentieth century.
+}
+
+{
+    ? Blustein warns that overusing the dollar as a financial weapon through sanctions risks:
+    % Triggering a revival of the gold standard, Encouraging rival payment systems that bypass the dollar, Forcing the IMF to issue a competing reserve asset, Weakening the Fed's domestic mandate
+    ! 1
+    > When secondary sanctions forced European companies out of Iran, it signaled to many governments that dollar access could be cut off arbitrarily, giving them incentive to build alternatives.
+}
+
+{
+    ? What does Blustein identify as the primary condition that could unseat the dollar?
+    % China surpassing the U.S. in total GDP, Completion of a European fiscal union, Catastrophic missteps by the U.S. government, A new multilateral gold standard agreement
+    ! 2
+    > The dollar's structural advantages are deep enough that only self-inflicted damage to U.S. institutions, rule of law, or Federal Reserve independence could plausibly end its dominance.
+}
+
+{
+    ? The "Flexible Average Inflation Targeting" framework introduced by Fed Chair Jerome Powell in August 2020 prioritizes:
+    % Preemptively raising rates before inflation appears, Employment over preemptive inflation prevention, A strict 2% inflation ceiling at all times, Dollar depreciation as a tool for export competitiveness
+    ! 1
+    > FAIT allows inflation to run above 2% temporarily in order to achieve maximum employment, a significant departure from the more hawkish doctrine that defined the Fed in earlier decades.
+}
+
+{
+    ? Barry Eichengreen's book "Exorbitant Privilege," referenced by Blustein, describes the advantage of:
+    % Issuing the world's reserve currency and borrowing cheaply in your own money, Controlling the largest share of global gold supply, Setting global interest rates without international coordination, Running sustained trade surpluses to accumulate foreign claims
+    ! 0
+    > The phrase was coined by French officials to describe how the U.S. borrows internationally at low cost because the world needs dollars for trade settlement and reserve holdings.
+}
+
+{
+    ? Dollar-pegged stablecoins are viewed in the book as potentially:
+    % Replacing the dollar in international trade within a decade, Reinforcing dollar dominance by embedding it in digital finance, Enabling China to circumvent U.S. financial sanctions, Undermining the liquidity of the Treasury market
+    ! 1
+    > Rather than challenging the greenback, dollar-pegged stablecoins extend its reach into new digital payment systems, deepening global dependence on the dollar rather than reducing it.
+}

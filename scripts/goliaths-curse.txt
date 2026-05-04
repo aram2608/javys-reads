@@ -1,4 +1,5 @@
 $TITLE Goliath's Curse
+$AUTHOR Luke Kemp
 
 @STYLE
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
