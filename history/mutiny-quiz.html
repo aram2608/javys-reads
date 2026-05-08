@@ -1,14 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mutiny</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap');:root {--qe-font-serif:       'Oswald', sans-serif;--qe-font-body:        'Lora', Georgia, serif;--qe-font-label:       'Space Mono', monospace;--qe-surface:          rgba(224,216,208,0.03);--qe-border:           rgba(224,216,208,0.10);--qe-border-hi:        rgba(200,54,42,0.45);--qe-text:             #e0d8d0;--qe-text-muted:       #7a6e68;--qe-accent:           #c8362a;--qe-accent-lo:        rgba(200,54,42,0.07);--qe-btn-bg:           rgba(200,54,42,0.08);--qe-btn-text:         #e0d8d0;--qe-btn-hover-bg:     rgba(200,54,42,0.20);--qe-btn-hover-text:   #f5ede8;--qe-correct:          #7aaa6a;--qe-correct-bg:       rgba(122,170,106,0.10);--qe-wrong:            #c8362a;--qe-wrong-bg:         rgba(200,54,42,0.10);--qe-hero-bg:          transparent;--qe-hero-text:        #e0d8d0;--qe-score-color:      #c8362a;--qe-denom-color:      #7a6e68;--qe-bd-bg:            rgba(224,216,208,0.015);--qe-bd-border:        rgba(224,216,208,0.06);}* { margin: 0; padding: 0; box-sizing: border-box; }html { scroll-behavior: smooth; }body {background-color: #0c0909;background-image:radial-gradient(ellipse at 15% 0%, rgba(200,54,42,0.07) 0%, transparent 45%),radial-gradient(ellipse at 85% 100%, rgba(200,54,42,0.04) 0%, transparent 45%),repeating-linear-gradient(0deg, transparent, transparent 23px, rgba(224,216,208,0.028) 23px, rgba(224,216,208,0.028) 24px);color: #e0d8d0;font-family: 'Lora', Georgia, serif;font-size: 1.1rem;line-height: 1.6;min-height: 100vh;position: relative;}body::before {content: '';position: fixed;inset: 0;background-image:repeating-linear-gradient(90deg, transparent, transparent 47px, rgba(224,216,208,0.018) 47px, rgba(224,216,208,0.018) 48px);pointer-events: none;z-index: 0;}.container { max-width: 720px; margin: 0 auto; padding: 72px 28px 96px; position: relative; z-index: 1; }header { margin-bottom: 64px; padding-bottom: 32px; border-bottom: 2px solid rgba(224,216,208,0.10); position: relative; }header::after {content: '';position: absolute;bottom: -2px;left: 0;width: 80px;height: 2px;background: #c8362a;}h1 {font-family: 'Oswald', sans-serif;font-size: clamp(3rem, 9vw, 5rem);font-weight: 700;letter-spacing: 0.04em;line-height: 1.0;margin-bottom: 12px;color: #f2ece6;text-transform: uppercase;}.subtitle {font-size: 0.68rem;color: #7a6e68;letter-spacing: 0.28em;text-transform: uppercase;margin-top: 16px;font-family: 'Space Mono', monospace;font-weight: 400;}.subtitle::before { content: '// '; color: #c8362a; }
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap');
+
+        :root {
+            --qe-font-serif: 'Oswald', sans-serif;
+            --qe-font-body: 'Lora', Georgia, serif;
+            --qe-font-label: 'Space Mono', monospace;
+            --qe-surface: rgba(224, 216, 208, 0.03);
+            --qe-border: rgba(224, 216, 208, 0.10);
+            --qe-border-hi: rgba(200, 54, 42, 0.45);
+            --qe-text: #e0d8d0;
+            --qe-text-muted: #7a6e68;
+            --qe-accent: #c8362a;
+            --qe-accent-lo: rgba(200, 54, 42, 0.07);
+            --qe-btn-bg: rgba(200, 54, 42, 0.08);
+            --qe-btn-text: #e0d8d0;
+            --qe-btn-hover-bg: rgba(200, 54, 42, 0.20);
+            --qe-btn-hover-text: #f5ede8;
+            --qe-correct: #7aaa6a;
+            --qe-correct-bg: rgba(122, 170, 106, 0.10);
+            --qe-wrong: #c8362a;
+            --qe-wrong-bg: rgba(200, 54, 42, 0.10);
+            --qe-hero-bg: transparent;
+            --qe-hero-text: #e0d8d0;
+            --qe-score-color: #c8362a;
+            --qe-denom-color: #7a6e68;
+            --qe-bd-bg: rgba(224, 216, 208, 0.015);
+            --qe-bd-border: rgba(224, 216, 208, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0c0909;
+            background-image: radial-gradient(ellipse at 15% 0%, rgba(200, 54, 42, 0.07) 0%, transparent 45%), radial-gradient(ellipse at 85% 100%, rgba(200, 54, 42, 0.04) 0%, transparent 45%), repeating-linear-gradient(0deg, transparent, transparent 23px, rgba(224, 216, 208, 0.028) 23px, rgba(224, 216, 208, 0.028) 24px);
+            color: #e0d8d0;
+            font-family: 'Lora', Georgia, serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: repeating-linear-gradient(90deg, transparent, transparent 47px, rgba(224, 216, 208, 0.018) 47px, rgba(224, 216, 208, 0.018) 48px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 72px 28px 96px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            margin-bottom: 64px;
+            padding-bottom: 32px;
+            border-bottom: 2px solid rgba(224, 216, 208, 0.10);
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: #c8362a;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 9vw, 5rem);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            line-height: 1.0;
+            margin-bottom: 12px;
+            color: #f2ece6;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 0.68rem;
+            color: #7a6e68;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            margin-top: 16px;
+            font-family: 'Space Mono', monospace;
+            font-weight: 400;
+        }
+
+        .subtitle::before {
+            content: '// ';
+            color: #c8362a;
+        }
     </style>
     <link rel="stylesheet" href="../quiz-engine.css">
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -21,196 +131,189 @@
     <script>
         window.QUIZ = {
             questions: [
-    {
-        "text": "What percent of workers must sign authorization cards before a union can file for an election?",
-        "opts": [
-            "10 percent",
-            "20 percent",
-            "30 percent",
-            "50 percent"
-        ],
-        "ans": 2,
-        "exp": "30 percent is the legal floor, but most unions wait until they have two-thirds to withstand corporate pressure."
-    },
-    {
-        "text": "Reagan's mass firing of 11,000 workers in 1981 marked a turning point in anti-union hostility. Which workforce did he fire?",
-        "opts": [
-            "Coal miners",
-            "air traffic controllers",
-            "postal workers",
-            "auto workers"
-        ],
-        "ans": 1,
-        "exp": "The PATCO strike firing signaled to corporations that breaking unions was not only acceptable but politically rewarded."
-    },
-    {
-        "text": "What is a \"salt\" in union organizing?",
-        "opts": [
-            "A senior union officer who mediates disputes",
-            "A college-educated organizer who infiltrates a workplace as a regular employee",
-            "A spy hired by management to report on workers",
-            "A labor lawyer who negotiates contracts"
-        ],
-        "ans": 1,
-        "exp": "The term comes from gold mining: salters sprinkled gold flakes in a mine to inflate its perceived value before a sale."
-    },
-    {
-        "text": "Jas Brisack was a Rhodes scholar who salted which company?",
-        "opts": [
-            "Apple",
-            "Amazon",
-            "Walmart",
-            "Starbucks"
-        ],
-        "ans": 3,
-        "exp": "Brisack took a part-time barista job specifically to organize, part of a broader coordinated effort by young educated organizers."
-    },
-    {
-        "text": "What event fully radicalized Chaya and pushed her toward organizing at Apple?",
-        "opts": [
-            "A thermal battery event that forced an evacuation",
-            "Being denied a promotion after three years",
-            "Tim Cook selling $750 million in stock while she lived in a mouse-infested apartment",
-            "Apple cutting health benefits during the pandemic"
-        ],
-        "ans": 2,
-        "exp": "The contrast between Cook's windfall and her circumstances made abstract inequality feel personal."
-    },
-    {
-        "text": "What were the three phases of Starbucks' anti-union playbook?",
-        "opts": [
-            "Spy",
-            "discipline",
-            "fire",
-            "Warn",
-            "bribe",
-            "terminate",
-            "High touch",
-            "rule book",
-            "conditional love",
-            "Mediate",
-            "incentivize",
-            "litigate"
-        ],
-        "ans": 2,
-        "exp": "First executives flooded stores with attention, then the discipline policy tightened, then wages rose at non-union locations only."
-    },
-    {
-        "text": "Tim Cook built Apple around which supply chain philosophy?",
-        "opts": [
-            "Scale fast and store more",
-            "Inventory is evil",
-            "Quality over speed",
-            "Vertical integration above all"
-        ],
-        "ans": 1,
-        "exp": "Cook's just-in-time model slashed storage costs but also reshaped the retail culture, shifting Apple Stores toward sales throughput over customer experience."
-    },
-    {
-        "text": "Teddy Hoffman was radicalized when Starbucks denied leave to sick employees during which event?",
-        "opts": [
-            "The 2008 financial crisis",
-            "The George Floyd protests",
-            "Covid",
-            "The 2022 inflation spike"
-        ],
-        "ans": 2,
-        "exp": "Watching management refuse basic protections to workers who could get seriously ill pushed Teddy from sympathizer to organizer."
-    },
-    {
-        "text": "The Bread and Puppet Theater, where Teddy apprenticed one summer, was founded by whom?",
-        "opts": [
-            "Howard Zinn",
-            "Angela Davis",
-            "Peter Schumann",
-            "Noam Chomsky"
-        ],
-        "ans": 2,
-        "exp": "Schumann's German activist arts group was about 60 years old and operated out of a Vermont farm, with minimal amenities and weekly showers."
-    },
-    {
-        "text": "What three things did the WGA demand regarding AI during their strike?",
-        "opts": [
-            "Royalties from AI outputs",
-            "transparency",
-            "and attribution",
-            "A ban on AI writing scripts",
-            "source material",
-            "and training on studio IP",
-            "AI profit-sharing",
-            "credit disclosure",
-            "and human approval for all AI content",
-            "A moratorium on AI tools pending federal review"
-        ],
-        "ans": 1,
-        "exp": "Writers feared studios would use AI to generate scripts from existing IP indefinitely, eliminating the need for human writers."
-    },
-    {
-        "text": "Before Shawn Fain, UAW bargaining followed which tradition?",
-        "opts": [
-            "A secret ballot among all members before any negotiation",
-            "Rotating strikes across all three automakers simultaneously",
-            "A photo-op with the CEO followed by choosing one company to negotiate with",
-            "Binding arbitration handled by a federal mediator"
-        ],
-        "ans": 2,
-        "exp": "Once a deal was struck, the other two automakers signed similar agreements. The ritual shielded both sides from public scrutiny."
-    },
-    {
-        "text": "What did Shawn Fain do that broke UAW tradition?",
-        "opts": [
-            "Filed suit against all three automakers at once",
-            "Demanded a seat on the GM board of directors",
-            "Publicly released and mocked the companies' proposals and called targeted strikes",
-            "Resigned then ran again to force a democratic vote"
-        ],
-        "ans": 2,
-        "exp": "Fain used transparency as a weapon, inflaming his members and embarrassing the companies rather than guarding negotiations in secrecy."
-    },
-    {
-        "text": "Kevin Gallagher's distrust of authority traces back to which event involving his father?",
-        "opts": [
-            "His father was dishonorably discharged for union activity",
-            "His father's ship exploded killing 47 sailors after he was transferred following a complaint",
-            "His father lost his pension when the auto plant closed",
-            "His father was arrested during a labor demonstration"
-        ],
-        "ans": 1,
-        "exp": "After filing a complaint, his father was reassigned. The ship he left blew up. That story made Kevin skeptical of any institution claiming to protect you."
-    },
-    {
-        "text": "What economic analogy does the book use to explain the glut of graduate students?",
-        "opts": [
-            "Supply and demand curves shifting left",
-            "Too many workers chasing too few jobs",
-            "like too many dollars chasing too few goods",
-            "A prisoner's dilemma where all students lose by competing",
-            "A race to the bottom identical to currency devaluation"
-        ],
-        "ans": 1,
-        "exp": "Universities admitted as many grad students as possible, creating a talent surplus that depressed wages and handed power to employers."
-    },
-    {
-        "text": "What did Howard Schultz do that backfired and intensified the Starbucks union effort?",
-        "opts": [
-            "Publicly called organizers Marxists in a shareholder letter",
-            "Closed unionized stores and blamed low sales",
-            "Leaked union store addresses to the public",
-            "causing harassment",
-            "Hired a strike-breaking firm to staff union locations"
-        ],
-        "ans": 2,
-        "exp": "The harassment that followed the leaked list angered workers who had been on the fence, pushing them further into the union camp."
-    }
-],
+                {
+                    "text": "What percent of workers must sign authorization cards before a union can file for an election?",
+                    "opts": [
+                        "10 percent",
+                        "20 percent",
+                        "30 percent",
+                        "50 percent"
+                    ],
+                    "ans": 2,
+                    "exp": "30 percent is the legal floor, but most unions wait until they have two-thirds to withstand corporate pressure."
+                },
+                {
+                    "text": "Reagan's mass firing of 11,000 workers in 1981 marked a turning point in anti-union hostility. Which workforce did he fire?",
+                    "opts": [
+                        "Coal miners",
+                        "air traffic controllers",
+                        "postal workers",
+                        "auto workers"
+                    ],
+                    "ans": 1,
+                    "exp": "The PATCO strike firing signaled to corporations that breaking unions was not only acceptable but politically rewarded."
+                },
+                {
+                    "text": "What is a \"salt\" in union organizing?",
+                    "opts": [
+                        "A senior union officer who mediates disputes",
+                        "A college-educated organizer who infiltrates a workplace as a regular employee",
+                        "A spy hired by management to report on workers",
+                        "A labor lawyer who negotiates contracts"
+                    ],
+                    "ans": 1,
+                    "exp": "The term comes from gold mining: salters sprinkled gold flakes in a mine to inflate its perceived value before a sale."
+                },
+                {
+                    "text": "Jas Brisack was a Rhodes scholar who salted which company?",
+                    "opts": [
+                        "Apple",
+                        "Amazon",
+                        "Walmart",
+                        "Starbucks"
+                    ],
+                    "ans": 3,
+                    "exp": "Brisack took a part-time barista job specifically to organize, part of a broader coordinated effort by young educated organizers."
+                },
+                {
+                    "text": "What event fully radicalized Chaya and pushed her toward organizing at Apple?",
+                    "opts": [
+                        "A thermal battery event that forced an evacuation",
+                        "Being denied a promotion after three years",
+                        "Tim Cook selling $750 million in stock while she lived in a mouse-infested apartment",
+                        "Apple cutting health benefits during the pandemic"
+                    ],
+                    "ans": 2,
+                    "exp": "The contrast between Cook's windfall and her circumstances made abstract inequality feel personal."
+                },
+                {
+                    "text": "What were the three phases of Starbucks' anti-union playbook?",
+                    "opts": [
+                        "Spy, discipline, fire",
+                        "Warn, bribe, terminate",
+                        "High touch, rule book, conditional love",
+                        "Mediate, incentivize, litigate"
+                    ],
+                    "ans": 2,
+                    "exp": "First executives flooded stores with attention, then the discipline policy tightened, then wages rose at non-union locations only."
+                },
+                {
+                    "text": "Tim Cook built Apple around which supply chain philosophy?",
+                    "opts": [
+                        "Scale fast and store more",
+                        "Inventory is evil",
+                        "Quality over speed",
+                        "Vertical integration above all"
+                    ],
+                    "ans": 1,
+                    "exp": "Cook's just-in-time model slashed storage costs but also reshaped the retail culture, shifting Apple Stores toward sales throughput over customer experience."
+                },
+                {
+                    "text": "Teddy Hoffman was radicalized when Starbucks denied leave to sick employees during which event?",
+                    "opts": [
+                        "The 2008 financial crisis",
+                        "The George Floyd protests",
+                        "Covid",
+                        "The 2022 inflation spike"
+                    ],
+                    "ans": 2,
+                    "exp": "Watching management refuse basic protections to workers who could get seriously ill pushed Teddy from sympathizer to organizer."
+                },
+                {
+                    "text": "The Bread and Puppet Theater, where Teddy apprenticed one summer, was founded by whom?",
+                    "opts": [
+                        "Howard Zinn",
+                        "Angela Davis",
+                        "Peter Schumann",
+                        "Noam Chomsky"
+                    ],
+                    "ans": 2,
+                    "exp": "Schumann's German activist arts group was about 60 years old and operated out of a Vermont farm, with minimal amenities and weekly showers."
+                },
+                {
+                    "text": "What three things did the WGA demand regarding AI during their strike?",
+                    "opts": [
+                        "Royalties from AI outputs",
+                        "transparency",
+                        "and attribution",
+                        "A ban on AI writing scripts",
+                        "source material",
+                        "and training on studio IP",
+                        "AI profit-sharing",
+                        "credit disclosure",
+                        "and human approval for all AI content",
+                        "A moratorium on AI tools pending federal review"
+                    ],
+                    "ans": 1,
+                    "exp": "Writers feared studios would use AI to generate scripts from existing IP indefinitely, eliminating the need for human writers."
+                },
+                {
+                    "text": "Before Shawn Fain, UAW bargaining followed which tradition?",
+                    "opts": [
+                        "A secret ballot among all members before any negotiation",
+                        "Rotating strikes across all three automakers simultaneously",
+                        "A photo-op with the CEO followed by choosing one company to negotiate with",
+                        "Binding arbitration handled by a federal mediator"
+                    ],
+                    "ans": 2,
+                    "exp": "Once a deal was struck, the other two automakers signed similar agreements. The ritual shielded both sides from public scrutiny."
+                },
+                {
+                    "text": "What did Shawn Fain do that broke UAW tradition?",
+                    "opts": [
+                        "Filed suit against all three automakers at once",
+                        "Demanded a seat on the GM board of directors",
+                        "Publicly released and mocked the companies' proposals and called targeted strikes",
+                        "Resigned then ran again to force a democratic vote"
+                    ],
+                    "ans": 2,
+                    "exp": "Fain used transparency as a weapon, inflaming his members and embarrassing the companies rather than guarding negotiations in secrecy."
+                },
+                {
+                    "text": "Kevin Gallagher's distrust of authority traces back to which event involving his father?",
+                    "opts": [
+                        "His father was dishonorably discharged for union activity",
+                        "His father's ship exploded killing 47 sailors after he was transferred following a complaint",
+                        "His father lost his pension when the auto plant closed",
+                        "His father was arrested during a labor demonstration"
+                    ],
+                    "ans": 1,
+                    "exp": "After filing a complaint, his father was reassigned. The ship he left blew up. That story made Kevin skeptical of any institution claiming to protect you."
+                },
+                {
+                    "text": "What economic analogy does the book use to explain the glut of graduate students?",
+                    "opts": [
+                        "Supply and demand curves shifting left",
+                        "Too many workers chasing too few jobs",
+                        "like too many dollars chasing too few goods",
+                        "A prisoner's dilemma where all students lose by competing",
+                        "A race to the bottom identical to currency devaluation"
+                    ],
+                    "ans": 1,
+                    "exp": "Universities admitted as many grad students as possible, creating a talent surplus that depressed wages and handed power to employers."
+                },
+                {
+                    "text": "What did Howard Schultz do that backfired and intensified the Starbucks union effort?",
+                    "opts": [
+                        "Publicly called organizers Marxists in a shareholder letter",
+                        "Closed unionized stores and blamed low sales",
+                        "Leaked union store addresses to the public",
+                        "causing harassment",
+                        "Hired a strike-breaking firm to staff union locations"
+                    ],
+                    "ans": 2,
+                    "exp": "The harassment that followed the leaked list angered workers who had been on the fence, pushing them further into the union camp."
+                }
+            ],
             verdicts: [
-                { min: 0.8, v: "Excellent",  n: "Outstanding recall." },
-                { min: 0.6, v: "Good",       n: "Solid understanding." },
-                { min: 0.4, v: "Fair",       n: "Worth revisiting." },
-                { min: 0.0, v: "Try again",  n: "Time for a reread." }
+                {min: 0.8, v: "Excellent", n: "Outstanding recall."},
+                {min: 0.6, v: "Good", n: "Solid understanding."},
+                {min: 0.4, v: "Fair", n: "Worth revisiting."},
+                {min: 0.0, v: "Try again", n: "Time for a reread."}
             ]
         };
     </script>
     <script src="../quiz-engine.js"></script>
 </body>
+
 </html>
