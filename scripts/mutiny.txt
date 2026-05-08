@@ -108,7 +108,7 @@ STYLE@
 }
 
 {
-    ? Has Brisack was a Rhodes scholar who salted which company?
+    ? Jas Brisack was a Rhodes scholar who salted which company?
     % Apple, Amazon, Walmart, Starbucks
     ! 3
     > Brisack took a part-time barista job specifically to organize, part of a broader coordinated effort by young educated organizers.
