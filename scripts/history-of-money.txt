@@ -130,14 +130,14 @@ STYLE@
 }
 
 {
-    ? Florence minted the florin in 1252. Why did its status as medieval Europe's reserve currency confer what McWilliams calls an "exorbitant privilege"?
+    ? Florence minted the florin in 1252. Why did its status as medieval Europe's reserve currency confer an "exorbitant privilege"?
     % Florentine guilds controlled all overland trade routes into the Levant, The high demand for florins kept its value elevated - giving Florence cheap imports and cheap overseas investment, The florin was the only coin the papacy accepted for indulgences, Florence's military dominance forced rival cities to hold florin reserves
     ! 1
     > When the world wants your currency you accumulate the coin while everyone else supplies goods and services. Florence got cheap plentiful goods and inexpensive capital investment abroad. The florin influenced currencies for centuries - Hungary's forint and Aruba's florin both derive from it.
 }
 
 {
-    ? Leonardo Fibonacci's Liber Abaci (1202) introduced Arabic numerals and algebra to European merchants. Which financial concept did it most crucially unlock for commerce?
+    ? Leonardo da Pisa's (Fibonacci) Liber Abaci (1202) introduced Arabic numerals and algebra to European merchants. Which financial concept did it most crucially unlock for commerce?
     % Double-entry bookkeeping for guilds, The time value of money - today's egg is worth more than tomorrow's chicken, The concept of limited liability for trading partnerships, Letters of credit as a substitute for coins
     ! 1
     > Fibonacci showed merchants how to think about opportunity cost: every time you lend money you forgo using it yourself. Dividing money received back by the prevailing interest rate tells you its present value. This insight underpins every modern discounted cash flow calculation.
@@ -191,3 +191,5 @@ STYLE@
     ! 2
     > Launched in Kenya in 2007, M-Pesa gave banking access to populations with no banks. Phone credit has inherent value and high liquidity - the two prerequisites for something to function as money - making it a natural monetary proxy in low-infrastructure economies.
 }
+
+

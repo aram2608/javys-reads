@@ -4,7 +4,7 @@ quiz_writer.py: parse a .txt quiz definition and emit a standalone HTML quiz.
 Grammar:
     @STYLE
         Style block. Run program with --styles to see all available quiz-engine
-        styles. Defaults to a predefined style if now used.
+        styles. Defaults to a predefined style if not used.
     STYLE@
 
     $TITLE  My Book Title
