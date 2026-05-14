@@ -1,14 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History of Money</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap');:root {--qe-font-serif:       'Cormorant Garamond', Georgia, serif;--qe-font-body:        'Crimson Text', Georgia, serif;--qe-font-label:       'Space Mono', monospace;--qe-surface:          rgba(202,176,100,0.04);--qe-border:           rgba(202,176,100,0.12);--qe-border-hi:        rgba(185,155,78,0.50);--qe-text:             #ede4d0;--qe-text-muted:       #72654c;--qe-accent:           #b89b4e;--qe-accent-lo:        rgba(184,155,78,0.07);--qe-btn-bg:           rgba(184,155,78,0.08);--qe-btn-text:         #ede4d0;--qe-btn-hover-bg:     rgba(184,155,78,0.22);--qe-btn-hover-text:   #f5ecd8;--qe-correct:          #7aaa6a;--qe-correct-bg:       rgba(122,170,106,0.10);--qe-wrong:            #b84040;--qe-wrong-bg:         rgba(184,64,64,0.10);--qe-hero-bg:          transparent;--qe-hero-text:        #ede4d0;--qe-score-color:      #b89b4e;--qe-denom-color:      #72654c;--qe-bd-bg:            rgba(202,176,100,0.025);--qe-bd-border:        rgba(202,176,100,0.08);}* { margin: 0; padding: 0; box-sizing: border-box; }html { scroll-behavior: smooth; }body {background-color: #060a0c;background-image:radial-gradient(ellipse at 18% 0%, rgba(184,155,78,0.09) 0%, transparent 50%),radial-gradient(ellipse at 82% 100%, rgba(184,155,78,0.06) 0%, transparent 50%),repeating-linear-gradient(45deg,  transparent, transparent 22px, rgba(202,176,100,0.016) 22px, rgba(202,176,100,0.016) 23px),repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(202,176,100,0.010) 22px, rgba(202,176,100,0.010) 23px);color: #ede4d0;font-family: 'Crimson Text', Georgia, serif;font-size: 1.15rem;line-height: 1.65;min-height: 100vh;position: relative;}body::before {content: '';position: fixed;inset: 0;background-image:repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(202,176,100,0.014) 47px, rgba(202,176,100,0.014) 48px);pointer-events: none;z-index: 0;}.container { max-width: 720px; margin: 0 auto; padding: 72px 28px 96px; position: relative; z-index: 1; }header { margin-bottom: 64px; padding-bottom: 32px; border-bottom: 1px solid rgba(202,176,100,0.18); position: relative; }header::after {content: '';position: absolute;bottom: -1px;left: 0;width: 130px;height: 1px;background: linear-gradient(90deg, #b89b4e, transparent);}h1 {font-family: 'Cormorant Garamond', Georgia, serif;font-size: clamp(2.8rem, 8vw, 5rem);font-weight: 700;font-style: italic;letter-spacing: 0.01em;line-height: 1.05;margin-bottom: 12px;color: #f0e8d0;}.subtitle {font-size: 0.67rem;color: #72654c;letter-spacing: 0.30em;text-transform: uppercase;margin-top: 16px;font-family: 'Space Mono', monospace;font-weight: 400;}.subtitle::before { content: '// '; color: #b89b4e; }
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap');
+
+        :root {
+            --qe-font-serif: 'Cormorant Garamond', Georgia, serif;
+            --qe-font-body: 'Crimson Text', Georgia, serif;
+            --qe-font-label: 'Space Mono', monospace;
+            --qe-surface: rgba(202, 176, 100, 0.04);
+            --qe-border: rgba(202, 176, 100, 0.12);
+            --qe-border-hi: rgba(185, 155, 78, 0.50);
+            --qe-text: #ede4d0;
+            --qe-text-muted: #72654c;
+            --qe-accent: #b89b4e;
+            --qe-accent-lo: rgba(184, 155, 78, 0.07);
+            --qe-btn-bg: rgba(184, 155, 78, 0.08);
+            --qe-btn-text: #ede4d0;
+            --qe-btn-hover-bg: rgba(184, 155, 78, 0.22);
+            --qe-btn-hover-text: #f5ecd8;
+            --qe-correct: #7aaa6a;
+            --qe-correct-bg: rgba(122, 170, 106, 0.10);
+            --qe-wrong: #b84040;
+            --qe-wrong-bg: rgba(184, 64, 64, 0.10);
+            --qe-hero-bg: transparent;
+            --qe-hero-text: #ede4d0;
+            --qe-score-color: #b89b4e;
+            --qe-denom-color: #72654c;
+            --qe-bd-bg: rgba(202, 176, 100, 0.025);
+            --qe-bd-border: rgba(202, 176, 100, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #060a0c;
+            background-image: radial-gradient(ellipse at 18% 0%, rgba(184, 155, 78, 0.09) 0%, transparent 50%), radial-gradient(ellipse at 82% 100%, rgba(184, 155, 78, 0.06) 0%, transparent 50%), repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(202, 176, 100, 0.016) 22px, rgba(202, 176, 100, 0.016) 23px), repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(202, 176, 100, 0.010) 22px, rgba(202, 176, 100, 0.010) 23px);
+            color: #ede4d0;
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 1.15rem;
+            line-height: 1.65;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(202, 176, 100, 0.014) 47px, rgba(202, 176, 100, 0.014) 48px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 72px 28px 96px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            margin-bottom: 64px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(202, 176, 100, 0.18);
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 130px;
+            height: 1px;
+            background: linear-gradient(90deg, #b89b4e, transparent);
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2.8rem, 8vw, 5rem);
+            font-weight: 700;
+            font-style: italic;
+            letter-spacing: 0.01em;
+            line-height: 1.05;
+            margin-bottom: 12px;
+            color: #f0e8d0;
+        }
+
+        .subtitle {
+            font-size: 0.67rem;
+            color: #72654c;
+            letter-spacing: 0.30em;
+            text-transform: uppercase;
+            margin-top: 16px;
+            font-family: 'Space Mono', monospace;
+            font-weight: 400;
+        }
+
+        .subtitle::before {
+            content: '// ';
+            color: #b89b4e;
+        }
     </style>
     <link rel="stylesheet" href="../quiz-engine.css">
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -21,188 +131,189 @@
     <script>
         window.QUIZ = {
             questions: [
-    {
-        "text": "The Ishango bone is one of the earliest objects thought to record numerical or transactional data, now housed in Brussels. Where was it physically found?",
-        "opts": [
-            "Belgium",
-            "the Belgian Congo (present-day DR Congo)",
-            "Egypt",
-            "Ethiopia"
-        ],
-        "ans": 1,
-        "exp": "The bone was unearthed near Lake Edward in what was then the Belgian Congo (now the DRC), not in Belgium itself. It is a baboon fibula, not a femur as sometimes misreported, and now lives in the Royal Belgian Institute of Natural Sciences."
-    },
-    {
-        "text": "McWilliams argues that the first name recorded in all of human history belongs not to a king or a god but to a Mesopotamian borrower of barley. What was his name?",
-        "opts": [
-            "Hammurabi",
-            "Gilgamesh",
-            "Kushim",
-            "Ur-Nammu"
-        ],
-        "ans": 2,
-        "exp": "The Kushim tablet (~3200 BCE) records a barley loan, making Kushim the earliest named individual in the written record. McWilliams finds it telling that humanity first wrote not about gods or rulers but about money."
-    },
-    {
-        "text": "The Lydians are credited with inventing coinage. According to McWilliams what was the most socially radical consequence of this innovation?",
-        "opts": [
-            "It allowed states to fund larger armies",
-            "It flattened economic hierarchy - a coin in a pauper's hand was worth the same as one in a prince's",
-            "It created the first central banks",
-            "It replaced barter and eliminated the need for credit"
-        ],
-        "ans": 1,
-        "exp": "Before coinage the favors you could obtain depended on your status and connections. Coins severed that link: ten cents belonged equally to anyone who held it. McWilliams sees this as a slow but powerful force for freedom and social mobility."
-    },
-    {
-        "text": "Xenophon wrote what McWilliams calls the world's first economics book. What does its title - Oeconomicus - literally mean?",
-        "opts": [
-            "The art of profitable exchange",
-            "Household management",
-            "The law of the market",
-            "The measure of all things"
-        ],
-        "ans": 1,
-        "exp": "\"Oikos\" (home) + \"nemein\" (to manage) = household management. The word \"economics\" descends directly from this title. Xenophon's attention to use value, exchange value, and resource allocation makes it a founding text of the discipline."
-    },
-    {
-        "text": "In 33 CE Rome was gripped by a credit crisis after Emperor Tiberius forced senators to liquidate speculative land holdings. How did he ultimately resolve it?",
-        "opts": [
-            "He debased the silver content of the denarius by half",
-            "He released 100 million sesterces into the credit markets as lender of last resort",
-            "He imposed a debt jubilee cancelling all private loans",
-            "He seized the assets of the wealthiest equestrian families"
-        ],
-        "ans": 1,
-        "exp": "Tiberius injected 100 million sesterces - demanding double the loan value as collateral - in what McWilliams calls an early form of quantitative easing a la Romana. The episode shows that the lender-of-last-resort role is far older than modern central banking."
-    },
-    {
-        "text": "Emperor Vespasian taxed the collection of urine in Rome. When his son Titus objected to the indignity of it what did Vespasian reply?",
-        "opts": [
-            "Romulus did not blush to tax the Tiber",
-            "The empire asks nothing more of its subjects than they already produce",
-            "Pecunia non olet - money does not smell",
-            "A light tax on many is worth more than a heavy tax on few"
-        ],
-        "ans": 2,
-        "exp": "\"Pecunia non olet\" became one of antiquity's most durable maxims about revenue. Vespasian's genius was taxing many things lightly rather than a few things heavily, keeping the treasury solvent without provoking revolt."
-    },
-    {
-        "text": "Florence minted the florin in 1252. Why did its status as medieval Europe's reserve currency confer what McWilliams calls an \"exorbitant privilege\"?",
-        "opts": [
-            "Florentine guilds controlled all overland trade routes into the Levant",
-            "The high demand for florins kept its value elevated - giving Florence cheap imports and cheap overseas investment",
-            "The florin was the only coin the papacy accepted for indulgences",
-            "Florence's military dominance forced rival cities to hold florin reserves"
-        ],
-        "ans": 1,
-        "exp": "When the world wants your currency you accumulate the coin while everyone else supplies goods and services. Florence got cheap plentiful goods and inexpensive capital investment abroad. The florin influenced currencies for centuries - Hungary's forint and Aruba's florin both derive from it."
-    },
-    {
-        "text": "Leonardo Fibonacci's Liber Abaci (1202) introduced Arabic numerals and algebra to European merchants. Which financial concept did it most crucially unlock for commerce?",
-        "opts": [
-            "Double-entry bookkeeping for guilds",
-            "The time value of money - today's egg is worth more than tomorrow's chicken",
-            "The concept of limited liability for trading partnerships",
-            "Letters of credit as a substitute for coins"
-        ],
-        "ans": 1,
-        "exp": "Fibonacci showed merchants how to think about opportunity cost: every time you lend money you forgo using it yourself. Dividing money received back by the prevailing interest rate tells you its present value. This insight underpins every modern discounted cash flow calculation."
-    },
-    {
-        "text": "Johannes Gutenberg's first commercial use of his printing press was not the Bible. What did he print for the Archbishop of Mainz?",
-        "opts": [
-            "Papal decrees condemning Hussite heresy",
-            "Illuminated psalters for wealthy patrons",
-            "Letters of indulgence - essentially tickets to heaven sold at mass scale",
-            "The first printed tax registers for the Holy Roman Empire"
-        ],
-        "ans": 2,
-        "exp": "Indulgences were a staggeringly profitable racket: you paid for forgiveness of sins. Gutenberg saw that a press could produce them far faster and cheaper than scribes. The Bible came later and earned him the papal moniker \"God's Printer.\""
-    },
-    {
-        "text": "John Law's Mississippi Company scheme collapsed in 1720. McWilliams provocatively asks whether Law's monetary chaos contributed to which later upheavals?",
-        "opts": [
-            "The Napoleonic Wars and the Congress of Vienna",
-            "The French Revolution and the American Revolution",
-            "The Industrial Revolution and the Corn Laws repeal",
-            "The Glorious Revolution and the War of Spanish Succession"
-        ],
-        "ans": 1,
-        "exp": "Law left France bedevilled with monetary dysfunction and an unsustainable tax system - conditions McWilliams links to the Revolutionary crisis decades later. Americans cited the parallel South Sea bubble as evidence of British rot that justified independence."
-    },
-    {
-        "text": "The Dutch invented the perpetual bond: the lender never receives the principal back but collects interest forever. Which institution famously still owns one from 1648?",
-        "opts": [
-            "The Bank of England",
-            "The Dutch Royal Family",
-            "Yale University",
-            "The Vatican"
-        ],
-        "ans": 2,
-        "exp": "Yale acquired a 1648 water-authority bond and it still pays interest today - well over 375 years after issuance. The Dutch capacity for financial abstraction and long-term trust made this imaginable when no other country could conceive of it."
-    },
-    {
-        "text": "Hamilton's plan to stabilise the new American republic's finances rested on three pillars. Which combination is correct?",
-        "opts": [
-            "Issue a new silver-backed dollar",
-            "cut military spending",
-            "and impose a land tax",
-            "Assume all state debts federally",
-            "repay them in full to build creditworthiness",
-            "and create a central bank with a sinking fund",
-            "Tie the dollar to Spanish silver",
-            "privatise the post office",
-            "and issue war bonds to Britain",
-            "Print continental dollars to retire debt",
-            "charter state banks",
-            "and negotiate reparations from Britain"
-        ],
-        "ans": 1,
-        "exp": "Hamilton's masterstroke was making the federal government the guarantor of all state debts - signalling credibility to lenders and welding fractured state finances into one sovereign balance sheet. The central bank and sinking fund gave him the tools to act as lender of last resort."
-    },
-    {
-        "text": "L. Frank Baum's The Wizard of Oz is read by McWilliams as a monetary allegory about the gold-versus-silver debate. What does the yellow brick road represent?",
-        "opts": [
-            "The railroad network enriching eastern financiers at farmers' expense",
-            "The gold standard",
-            "The path from rural poverty to Wall Street opportunity",
-            "The transcontinental telegraph line that spread commodity prices"
-        ],
-        "ans": 1,
-        "exp": "\"Oz\" is the abbreviation for ounce; the yellow brick road is the gold standard. The Scarecrow represents the indebted farmer; the Tin Man the industrial worker; both crushed by a deflationary system that kept money scarce. Baum was a disappointed Populist journalist."
-    },
-    {
-        "text": "By the reign of Emperor Gallienus (~260 CE) the silver content of Roman coins had been debased to roughly what percentage?",
-        "opts": [
-            "60 percent",
-            "40 percent",
-            "20 percent",
-            "4 percent"
-        ],
-        "ans": 3,
-        "exp": "Gallienus dropped silver content to around 4% - coins were essentially worthless. The antoninianus he introduced was supposedly worth two denarii but contained far less silver than one and was so fragile only one side could be stamped. It is a textbook case of debasement as a last resort."
-    },
-    {
-        "text": "M-Pesa is McWilliams' example of a genuinely novel monetary innovation. What does \"pesa\" mean?",
-        "opts": [
-            "Credit in Arabic",
-            "Mobile in Somali",
-            "Money in Swahili",
-            "Transfer in Kikuyu"
-        ],
-        "ans": 2,
-        "exp": "Launched in Kenya in 2007, M-Pesa gave banking access to populations with no banks. Phone credit has inherent value and high liquidity - the two prerequisites for something to function as money - making it a natural monetary proxy in low-infrastructure economies."
-    }
-],
+                {
+                    "text": "The Ishango bone is one of the earliest objects thought to record numerical or transactional data, now housed in Brussels. Where was it physically found?",
+                    "opts": [
+                        "Belgium",
+                        "the Belgian Congo (present-day DR Congo)",
+                        "Egypt",
+                        "Ethiopia"
+                    ],
+                    "ans": 1,
+                    "exp": "The bone was unearthed near Lake Edward in what was then the Belgian Congo (now the DRC), not in Belgium itself. It is a baboon fibula, not a femur as sometimes misreported, and now lives in the Royal Belgian Institute of Natural Sciences."
+                },
+                {
+                    "text": "McWilliams argues that the first name recorded in all of human history belongs not to a king or a god but to a Mesopotamian borrower of barley. What was his name?",
+                    "opts": [
+                        "Hammurabi",
+                        "Gilgamesh",
+                        "Kushim",
+                        "Ur-Nammu"
+                    ],
+                    "ans": 2,
+                    "exp": "The Kushim tablet (~3200 BCE) records a barley loan, making Kushim the earliest named individual in the written record. McWilliams finds it telling that humanity first wrote not about gods or rulers but about money."
+                },
+                {
+                    "text": "The Lydians are credited with inventing coinage. According to McWilliams what was the most socially radical consequence of this innovation?",
+                    "opts": [
+                        "It allowed states to fund larger armies",
+                        "It flattened economic hierarchy - a coin in a pauper's hand was worth the same as one in a prince's",
+                        "It created the first central banks",
+                        "It replaced barter and eliminated the need for credit"
+                    ],
+                    "ans": 1,
+                    "exp": "Before coinage the favors you could obtain depended on your status and connections. Coins severed that link: ten cents belonged equally to anyone who held it. McWilliams sees this as a slow but powerful force for freedom and social mobility."
+                },
+                {
+                    "text": "Xenophon wrote what McWilliams calls the world's first economics book. What does its title - Oeconomicus - literally mean?",
+                    "opts": [
+                        "The art of profitable exchange",
+                        "Household management",
+                        "The law of the market",
+                        "The measure of all things"
+                    ],
+                    "ans": 1,
+                    "exp": "\"Oikos\" (home) + \"nemein\" (to manage) = household management. The word \"economics\" descends directly from this title. Xenophon's attention to use value, exchange value, and resource allocation makes it a founding text of the discipline."
+                },
+                {
+                    "text": "In 33 CE Rome was gripped by a credit crisis after Emperor Tiberius forced senators to liquidate speculative land holdings. How did he ultimately resolve it?",
+                    "opts": [
+                        "He debased the silver content of the denarius by half",
+                        "He released 100 million sesterces into the credit markets as lender of last resort",
+                        "He imposed a debt jubilee cancelling all private loans",
+                        "He seized the assets of the wealthiest equestrian families"
+                    ],
+                    "ans": 1,
+                    "exp": "Tiberius injected 100 million sesterces - demanding double the loan value as collateral - in what McWilliams calls an early form of quantitative easing a la Romana. The episode shows that the lender-of-last-resort role is far older than modern central banking."
+                },
+                {
+                    "text": "Emperor Vespasian taxed the collection of urine in Rome. When his son Titus objected to the indignity of it what did Vespasian reply?",
+                    "opts": [
+                        "Romulus did not blush to tax the Tiber",
+                        "The empire asks nothing more of its subjects than they already produce",
+                        "Pecunia non olet - money does not smell",
+                        "A light tax on many is worth more than a heavy tax on few"
+                    ],
+                    "ans": 2,
+                    "exp": "\"Pecunia non olet\" became one of antiquity's most durable maxims about revenue. Vespasian's genius was taxing many things lightly rather than a few things heavily, keeping the treasury solvent without provoking revolt."
+                },
+                {
+                    "text": "Florence minted the florin in 1252. Why did its status as medieval Europe's reserve currency confer an \"exorbitant privilege\"?",
+                    "opts": [
+                        "Florentine guilds controlled all overland trade routes into the Levant",
+                        "The high demand for florins kept its value elevated - giving Florence cheap imports and cheap overseas investment",
+                        "The florin was the only coin the papacy accepted for indulgences",
+                        "Florence's military dominance forced rival cities to hold florin reserves"
+                    ],
+                    "ans": 1,
+                    "exp": "When the world wants your currency you accumulate the coin while everyone else supplies goods and services. Florence got cheap plentiful goods and inexpensive capital investment abroad. The florin influenced currencies for centuries - Hungary's forint and Aruba's florin both derive from it."
+                },
+                {
+                    "text": "Leonardo Fibonacci's Liber Abaci (1202) introduced Arabic numerals and algebra to European merchants. Which financial concept did it most crucially unlock for commerce?",
+                    "opts": [
+                        "Double-entry bookkeeping for guilds",
+                        "The time value of money - today's egg is worth more than tomorrow's chicken",
+                        "The concept of limited liability for trading partnerships",
+                        "Letters of credit as a substitute for coins"
+                    ],
+                    "ans": 1,
+                    "exp": "Fibonacci showed merchants how to think about opportunity cost: every time you lend money you forgo using it yourself. Dividing money received back by the prevailing interest rate tells you its present value. This insight underpins every modern discounted cash flow calculation."
+                },
+                {
+                    "text": "Johannes Gutenberg's first commercial use of his printing press was not the Bible. What did he print for the Archbishop of Mainz?",
+                    "opts": [
+                        "Papal decrees condemning Hussite heresy",
+                        "Illuminated psalters for wealthy patrons",
+                        "Letters of indulgence - essentially tickets to heaven sold at mass scale",
+                        "The first printed tax registers for the Holy Roman Empire"
+                    ],
+                    "ans": 2,
+                    "exp": "Indulgences were a staggeringly profitable racket: you paid for forgiveness of sins. Gutenberg saw that a press could produce them far faster and cheaper than scribes. The Bible came later and earned him the papal moniker \"God's Printer.\""
+                },
+                {
+                    "text": "John Law's Mississippi Company scheme collapsed in 1720. McWilliams provocatively asks whether Law's monetary chaos contributed to which later upheavals?",
+                    "opts": [
+                        "The Napoleonic Wars and the Congress of Vienna",
+                        "The French Revolution and the American Revolution",
+                        "The Industrial Revolution and the Corn Laws repeal",
+                        "The Glorious Revolution and the War of Spanish Succession"
+                    ],
+                    "ans": 1,
+                    "exp": "Law left France bedevilled with monetary dysfunction and an unsustainable tax system - conditions McWilliams links to the Revolutionary crisis decades later. Americans cited the parallel South Sea bubble as evidence of British rot that justified independence."
+                },
+                {
+                    "text": "The Dutch invented the perpetual bond: the lender never receives the principal back but collects interest forever. Which institution famously still owns one from 1648?",
+                    "opts": [
+                        "The Bank of England",
+                        "The Dutch Royal Family",
+                        "Yale University",
+                        "The Vatican"
+                    ],
+                    "ans": 2,
+                    "exp": "Yale acquired a 1648 water-authority bond and it still pays interest today - well over 375 years after issuance. The Dutch capacity for financial abstraction and long-term trust made this imaginable when no other country could conceive of it."
+                },
+                {
+                    "text": "Hamilton's plan to stabilise the new American republic's finances rested on three pillars. Which combination is correct?",
+                    "opts": [
+                        "Issue a new silver-backed dollar",
+                        "cut military spending",
+                        "and impose a land tax",
+                        "Assume all state debts federally",
+                        "repay them in full to build creditworthiness",
+                        "and create a central bank with a sinking fund",
+                        "Tie the dollar to Spanish silver",
+                        "privatise the post office",
+                        "and issue war bonds to Britain",
+                        "Print continental dollars to retire debt",
+                        "charter state banks",
+                        "and negotiate reparations from Britain"
+                    ],
+                    "ans": 1,
+                    "exp": "Hamilton's masterstroke was making the federal government the guarantor of all state debts - signalling credibility to lenders and welding fractured state finances into one sovereign balance sheet. The central bank and sinking fund gave him the tools to act as lender of last resort."
+                },
+                {
+                    "text": "L. Frank Baum's The Wizard of Oz is read by McWilliams as a monetary allegory about the gold-versus-silver debate. What does the yellow brick road represent?",
+                    "opts": [
+                        "The railroad network enriching eastern financiers at farmers' expense",
+                        "The gold standard",
+                        "The path from rural poverty to Wall Street opportunity",
+                        "The transcontinental telegraph line that spread commodity prices"
+                    ],
+                    "ans": 1,
+                    "exp": "\"Oz\" is the abbreviation for ounce; the yellow brick road is the gold standard. The Scarecrow represents the indebted farmer; the Tin Man the industrial worker; both crushed by a deflationary system that kept money scarce. Baum was a disappointed Populist journalist."
+                },
+                {
+                    "text": "By the reign of Emperor Gallienus (~260 CE) the silver content of Roman coins had been debased to roughly what percentage?",
+                    "opts": [
+                        "60 percent",
+                        "40 percent",
+                        "20 percent",
+                        "4 percent"
+                    ],
+                    "ans": 3,
+                    "exp": "Gallienus dropped silver content to around 4% - coins were essentially worthless. The antoninianus he introduced was supposedly worth two denarii but contained far less silver than one and was so fragile only one side could be stamped. It is a textbook case of debasement as a last resort."
+                },
+                {
+                    "text": "M-Pesa is McWilliams' example of a genuinely novel monetary innovation. What does \"pesa\" mean?",
+                    "opts": [
+                        "Credit in Arabic",
+                        "Mobile in Somali",
+                        "Money in Swahili",
+                        "Transfer in Kikuyu"
+                    ],
+                    "ans": 2,
+                    "exp": "Launched in Kenya in 2007, M-Pesa gave banking access to populations with no banks. Phone credit has inherent value and high liquidity - the two prerequisites for something to function as money - making it a natural monetary proxy in low-infrastructure economies."
+                }
+            ],
             verdicts: [
-                { min: 0.8, v: "Excellent",  n: "Outstanding recall." },
-                { min: 0.6, v: "Good",       n: "Solid understanding." },
-                { min: 0.4, v: "Fair",       n: "Worth revisiting." },
-                { min: 0.0, v: "Try again",  n: "Time for a reread." }
+                {min: 0.8, v: "Excellent", n: "Outstanding recall."},
+                {min: 0.6, v: "Good", n: "Solid understanding."},
+                {min: 0.4, v: "Fair", n: "Worth revisiting."},
+                {min: 0.0, v: "Try again", n: "Time for a reread."}
             ]
         };
     </script>
     <script src="../quiz-engine.js"></script>
 </body>
+
 </html>
