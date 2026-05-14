@@ -24,6 +24,15 @@ Grammar:
         > Explanation
     }
 
+Options that themselves contain commas must be wrapped in parentheses:
+
+    {
+        ? Which three things did X do?
+        % (step one, step two, and step three), (a, b, and c), Other, None
+        ! 0
+        > Explanation
+    }
+
 Run:
     python scripts/quiz_writer.py dummy.txt
     python scripts/quiz_writer.py dummy.txt -o out/my-quiz.html
@@ -175,6 +184,33 @@ TEMPLATE = """\
 """
 
 
+def parse_opts(raw: str) -> list[str]:
+    """Split on commas at depth 0; strip outer parens from grouped options."""
+    opts: list[str] = []
+    current: list[str] = []
+    depth = 0
+    for ch in raw:
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth -= 1
+        elif ch == "," and depth == 0:
+            opts.append("".join(current).strip())
+            current = []
+            continue
+        current.append(ch)
+    if current:
+        opts.append("".join(current).strip())
+    result = []
+    for opt in opts:
+        s = opt.strip()
+        if s.startswith("(") and s.endswith(")"):
+            result.append(s[1:-1].strip())
+        else:
+            result.append(s)
+    return result
+
+
 class ParseError(Exception):
     def __init__(self, line_no: int, msg: str):
         super().__init__(f"line {line_no}: {msg}")
@@ -243,7 +279,7 @@ def parse(text: str) -> QuizData:
                 if line.startswith("?"):
                     q_text = line[1:].strip()
                 elif line.startswith("%"):
-                    opts = [o.strip() for o in line[1:].split(",")]
+                    opts = parse_opts(line[1:])
                 elif line.startswith("!"):
                     answer_text = line[1:].strip()
                 elif line.startswith(">"):
