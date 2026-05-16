@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tequila Wars</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Josefin+Slab:wght@300;400;600&display=swap');:root {--qe-font-serif: 'Playfair Display', Georgia, serif;--qe-font-body: 'Lora', Georgia, serif;--qe-font-label: 'Josefin Slab', serif;--qe-surface: rgba(45,142,88,0.05);--qe-border: rgba(45,142,88,0.15);--qe-border-hi: rgba(45,142,88,0.48);--qe-text: #dde8d5;--qe-text-muted: #4a6852;--qe-accent: #2d8e58;--qe-accent-lo: rgba(45,142,88,0.07);--qe-btn-bg: rgba(45,142,88,0.09);--qe-btn-text: #dde8d5;--qe-btn-hover-bg: rgba(45,142,88,0.25);--qe-btn-hover-text: #eaf2e4;--qe-correct: #4aaa7a;--qe-correct-bg: rgba(74,170,122,0.10);--qe-wrong: #b82030;--qe-wrong-bg: rgba(184,32,48,0.10);--qe-hero-bg: transparent;--qe-hero-text: #dde8d5;--qe-score-color: #2d8e58;--qe-denom-color: #4a6852;--qe-bd-bg: rgba(45,142,88,0.03);--qe-bd-border: rgba(45,142,88,0.09);}* { margin: 0; padding: 0; box-sizing: border-box; }html { scroll-behavior: smooth; }body {background-color: #060d08;background-image:radial-gradient(ellipse at 6% 0%, rgba(45,142,88,0.14) 0%, transparent 48%),radial-gradient(ellipse at 94% 100%, rgba(184,32,48,0.11) 0%, transparent 48%),repeating-linear-gradient(155deg, transparent, transparent 20px, rgba(45,142,88,0.017) 20px, rgba(45,142,88,0.017) 21px),repeating-linear-gradient(65deg, transparent, transparent 38px, rgba(45,142,88,0.010) 38px, rgba(45,142,88,0.010) 39px);color: #dde8d5;font-family: 'Lora', Georgia, serif;font-size: 1.12rem;line-height: 1.68;min-height: 100vh;position: relative;}body::before {content: '';position: fixed;inset: 0;background-image: repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(45,142,88,0.011) 47px, rgba(45,142,88,0.011) 48px);pointer-events: none;z-index: 0;}body::after {content: '';position: fixed;top: 0; left: 0; right: 0;height: 4px;background: linear-gradient(to right, #006847 33.33%, rgba(221,232,213,0.12) 33.33%, rgba(221,232,213,0.12) 66.66%, #ce1126 66.66%);z-index: 100;}.container { max-width: 720px; margin: 0 auto; padding: 72px 28px 96px; position: relative; z-index: 1; }header { margin-bottom: 64px; padding-bottom: 32px; border-bottom: 1px solid rgba(45,142,88,0.22); position: relative; }header::after {content: '';position: absolute;bottom: -1px; left: 0;width: 90px; height: 2px;background: linear-gradient(to right, #2d8e58 60%, #b82030);}h1 {font-family: 'Playfair Display', Georgia, serif;font-size: clamp(2.8rem, 8vw, 4.8rem);font-weight: 900;font-style: italic;letter-spacing: 0.01em;line-height: 1.05;margin-bottom: 12px;color: #eaf2e4;}.subtitle {font-size: 0.67rem;color: #4a6852;letter-spacing: 0.30em;text-transform: uppercase;margin-top: 16px;font-family: 'Josefin Slab', serif;font-weight: 400;}.subtitle::before { content: '// '; color: #2d8e58; }
+    </style>
+    <link rel="stylesheet" href="../quiz-engine.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tequila Wars</h1>
+            <div class="subtitle">Ted Genoways</div>
+        </header>
+        <div id="quiz-root"></div>
+    </div>
+
+    <script>
+        window.QUIZ = {
+            questions: [
+    {
+        "text": "When tequila producers cut off the agave's wooden flower stalk, what two things happened?",
+        "opts": [
+            "Sugars concentrated in the bulb and the plant produced offshoots (hijuelos) instead of reproducing sexually",
+            "The plant died immediately allowing for earlier harvest",
+            "Sugars moved into the leaves improving the spirit's flavor",
+            "The plant sent up a second stronger flower stalk"
+        ],
+        "ans": 0,
+        "exp": "Cutting the stalk kept sugars in the pina while forcing the plant to produce hijuelos. Replanting those offshoots trimmed roughly three years from the maturation cycle."
+    },
+    {
+        "text": "Why were blue agave crops in Tequila uniquely vulnerable to blight and disease?",
+        "opts": [
+            "The soil was too acidic from centuries of distillation runoff",
+            "River irrigation spread waterborne fungus across the valley",
+            "Producers harvested plants too young before immunity developed",
+            "The entire crop was propagated as clones with almost no genetic diversity"
+        ],
+        "ans": 3,
+        "exp": "With no sexual reproduction and no seed variation, one pathogen could sweep the whole region's harvest. The lack of diversity made a bad blight catastrophic."
+    },
+    {
+        "text": "Who built La Rojenia, and who was it named for?",
+        "opts": [
+            "Jose Antonio Cuervo, named for the family's coat of arms",
+            "Maria Magdalena Cuervo, named for her husband Vicente Rojas Jimenez",
+            "Malaquias Cuervo, named after a local saint's feast day",
+            "Florentino Cuervo, named for a battlefield victory"
+        ],
+        "ans": 1,
+        "exp": "Maria Magdalena -- Jose Antonio's granddaughter -- married Vicente Rojas Jimenez and built the new distillery, naming it La Rojenia in her husband's honor."
+    },
+    {
+        "text": "How did Benito Juarez secure Florentino Cuervo's military loyalty during the French intervention?",
+        "opts": [
+            "Granted him 35 additional acres of agave farmland near San Martin",
+            "Appointed him governor of Guadalajara",
+            "Made him a colonel and allowed him to seize a Catholic monastery to convert its sugar still into a distillery",
+            "Promised him a future railway concession through the Tequila valley"
+        ],
+        "ans": 2,
+        "exp": "Juarez made Florentino a colonel and let him convert a seized monastery's sugar still into a large distillery. The lucrative prize bought his allegiance."
+    },
+    {
+        "text": "What was the French occupiers' attitude toward tequila during their time in Mexico?",
+        "opts": [
+            "They had a distaste for it and let the agave fields rot",
+            "They taxed it heavily as a luxury good",
+            "They tried to export it to France as mezcal brandy",
+            "They replaced local production with wine and cognac imports"
+        ],
+        "ans": 0,
+        "exp": "The French had no use for tequila, and the fields rotted during the occupation. The agave's decade-long growth cycle meant recovery would take years."
+    },
+    {
+        "text": "What agricultural innovation allowed Cenobio Sauza to grow healthier agave and fight the fungal blight?",
+        "opts": [
+            "Importing blight-resistant varieties from central Mexico",
+            "Rotating agave crops with corn to break the fungal cycle",
+            "Treating hijuelos with sulfur compounds before replanting",
+            "Growing agave shoots in cold dry mountain air or on sun-drenched hillside slopes"
+        ],
+        "ans": 3,
+        "exp": "Sauza found that highland conditions protected shoots from the fungus. He raced to buy farmland in the eastern highlands ahead of the railway opening in 1888."
+    },
+    {
+        "text": "How did Cenobio Sauza deliver Jalisco's electoral delegates to Manuel Gonzalez?",
+        "opts": [
+            "He organized rallies and persuaded landowners through legitimate means",
+            "He bribed the national election commission in Mexico City directly",
+            "He threatened Ignacio Vallarta's family personally with his militia",
+            "He scared off rival supporters, bribed soldiers, stuffed ballots, and rigged the count -- giving Gonzalez unanimous support from Jalisco"
+        ],
+        "ans": 3,
+        "exp": "A full toolkit: intimidation, bribery, stuffing, and manipulation. Gonzalez won Jalisco unanimously and three-quarters of the national vote."
+    },
+    {
+        "text": "What happened to Malaquias Cuervo's estate when he died deep in debt?",
+        "opts": [
+            "Cenobio Sauza forgave the debts in exchange for a stake in El Pasito",
+            "The state auctioned the estate and split proceeds among creditors",
+            "His brother Florentino assumed the debts and kept the hacienda together",
+            "His entire estate of roughly 186,000 pesos was not enough to cover what he owed; the debts fell to his wife and 13 children who had to keep producing tequila without taking any profits"
+        ],
+        "ans": 3,
+        "exp": "Malaquias had also taken on back taxes in his own name, pushing his total debts past his estate's value. When his wife later got cancer, Orendain sold his half of the property to Sauza."
+    },
+    {
+        "text": "After masked men stripped Malaquias Cuervo naked and robbed him on the road to Guadalajara, what did they give him when he invoked his dignity as mayor?",
+        "opts": [
+            "A napkin",
+            "A blanket from their horses",
+            "His rosary",
+            "the only item of no monetary value",
+            "A spare sombrero from their saddlebags"
+        ],
+        "ans": 0,
+        "exp": "His attackers were unimpressed by civic rank. They provided a napkin -- a memorable humiliation for a man who wielded real political power in Tequila."
+    },
+    {
+        "text": "How did Jose Cuervo come to marry Ana Gonzalez Rubio?",
+        "opts": [
+            "She was the daughter of his political patron Cuesta Gallardo",
+            "She was the widow of his great-uncle Jesus Flores; he initially declined but she forced the marriage through anyway",
+            "He courted her at the 1904 St. Louis World's Fair",
+            "The union was arranged by Porfirio Diaz as a peace deal with the Rojas family"
+        ],
+        "ans": 1,
+        "exp": "Ana was the widow of Jesus Flores, who had purchased La Rojenia. Cuervo turned her down first -- a running joke in the family -- but she pushed the deal through regardless."
+    },
+    {
+        "text": "What issue forced spirit producers at the 1904 St. Louis World's Fair to change their bottling practices?",
+        "opts": [
+            "New Missouri laws banning unlabeled foreign alcohol",
+            "Persistent product adulteration -- they were required to label bottles and seal them with tamper-proof wax or sealant",
+            "Temperance groups demanding full ingredient disclosures",
+            "New customs rules requiring country-of-origin markings on imports"
+        ],
+        "ans": 1,
+        "exp": "Adulteration was rampant. Producers were forced to label and seal their bottles with tamper-proof wax or sealant -- an early push toward protecting product authenticity."
+    },
+    {
+        "text": "What made Francisco Madero's rallying cry against Porfirio Diaz particularly cutting?",
+        "opts": [
+            "It accused Diaz of having Spanish blood and therefore lacking legitimacy",
+            "It was published in the New York Times embarrassing Diaz before foreign investors",
+            "It was Diaz's own old revolutionary slogan turned against him: \"sufragio efectivo, no reeleccion\"",
+            "It called out Zapata and Villa by name forcing them into the opposition"
+        ],
+        "ans": 2,
+        "exp": "Madero used Diaz's own phrase -- fair balloting, no re-election -- to hold the aging dictator to the democratic ideals he had championed decades earlier as a young revolutionary."
+    },
+    {
+        "text": "What document did Jose Cuervo receive for financing Leopoldo Leal's uprising?",
+        "opts": [
+            "A deed granting provisional ownership of the Tequila customs post",
+            "A letter of introduction to Madero's cabinet",
+            "A certificate of revolutionary service exempting him from land redistribution",
+            "A promissory note for 200 pesos payable one month after the revolution ended per the Plan de San Luis Potosi"
+        ],
+        "ans": 3,
+        "exp": "The note read: \"The Provisional Government of President Francisco I. Madero will pay Mr. Jose Cuervo one month after the end of the revolution... the sum of 200 pesos.\" A modest paper receipt for a very dangerous wager."
+    },
+    {
+        "text": "What was Victoriano Huerta's \"La Mano Dura\" crackdown?",
+        "opts": [
+            "A new 50 percent tariff on all alcohol imports and exports",
+            "A mass arrest of newspaper editors who had criticized the coup",
+            "A forced conscription drive drafting all men between 18 and 40",
+            "Seizure of all hacendado property, elimination of elections, and a decree that governors who opposed him would be executed"
+        ],
+        "ans": 3,
+        "exp": "\"The Iron Fist\" -- Huerta seized estates, ended elections, and threatened execution for resistant governors. It forced Cuervo into an uneasy collaboration just to protect La Rojenia."
+    },
+    {
+        "text": "Where did Jose Cuervo hide when word spread that the secret police were coming for him?",
+        "opts": [
+            "At Juan Beckmann's estate on the edge of Guadalajara",
+            "In a Mexico City safe house arranged by Cuesta Gallardo",
+            "Near Leon Aguirre's small distillery in Agua Caliente, 4 miles from Tequila, hidden in a gorge ringed by treacherous switchbacks",
+            "Aboard a US-flagged train headed north toward the border"
+        ],
+        "ans": 2,
+        "exp": "After borrowing Beckmann's horse, Cuervo rode to Agua Caliente -- a remote village surrounded by forbidding terrain where his old friend Aguirre's estate provided ideal cover."
+    },
+    {
+        "text": "What made Eladio Sauza's testimony at Cuervo's revolutionary tribunal so effective?",
+        "opts": [
+            "He produced forged receipts showing Cuervo had paid taxes under Huerta invalidating the charges",
+            "He argued that Cuervo's donations to Medina either proved he supported the revolution; or if the regime called him a Huerta loyalist the donations were taken under duress -- which violated the constitution either way",
+            "He bribed three of the five judges to vote for acquittal",
+            "He cited Cuervo's role in funding the railway as proof of civic loyalty"
+        ],
+        "ans": 1,
+        "exp": "The trap was elegant: voluntary donations meant Cuervo was a revolutionary; forced donations meant the constitutional army violated the law. Diegues couldn't convict without indicting his own forces."
+    },
+    {
+        "text": "What military tactics did Obregon use against Villa at the Battle of Celaya, and what was the result?",
+        "opts": [
+            "He feigned a retreat to draw Villa into a canyon ambush; Villa lost roughly 3,000 men",
+            "He used artillery from hilltops to shatter Villa's cavalry charges; Villa lost about half his force",
+            "He employed WWI-style German tactics -- trenches, barbed wire, and machine gun nests -- and of Villa's 22,000 men roughly 17,000 were killed, captured, or wounded",
+            "He arranged a false ceasefire then struck at dawn; Villa's army collapsed within hours"
+        ],
+        "ans": 2,
+        "exp": "Obregon had a German officer teach him Western Front trench tactics. Villa's cavalry charges were helpless against machine guns and barbed wire. The battle effectively ended Villa's military dominance."
+    },
+    {
+        "text": "What was Pancho Villa's birth name?",
+        "opts": [
+            "Francisco Javier Villanueva Hernandez",
+            "Miguel Angel Doroteo Villa Guerrero",
+            "Ramon Guadalupe Arango Cisneros",
+            "Jose Doroteo Arango Arambula"
+        ],
+        "ans": 3,
+        "exp": "Villa was born Jose Doroteo Arango Arambula. He took his alias after killing an army officer in 1903 and going on the run."
+    },
+    {
+        "text": "How did the Zimmermann Telegram connect to Jose Cuervo ending up on the US Enemy Trading List?",
+        "opts": [
+            "His train cars were found carrying encrypted German documents near the US border",
+            "A Cuervo employee was caught smuggling tequila with German military markings on the crates",
+            "His two German nephews Freytag and Beckmann plus his new railway venture raised suspicion he was transporting weapons for a German-backed invasion of the US Southwest",
+            "The US consul intercepted Cuervo's correspondence with Kaiser Wilhelm II via British intelligence"
+        ],
+        "ans": 2,
+        "exp": "Two German nephews deep in Cuervo's business plus a new railway was enough for the American consul to flag him. When he tried to pressure suppliers who dropped him the consul called it interference with US interests -- cementing his place on the list for the rest of the war."
+    },
+    {
+        "text": "What drink was Julian Medina reportedly addicted to, and how did it cost him with Obregon?",
+        "opts": [
+            "Pulque mixed with pomegranate; Obregon suspected it clouded his judgment before battles",
+            "Mescal with tobacco; Obregon was a teetotaler who banned it in his ranks",
+            "Cognac looted from French merchants; Obregon considered it an insult to Mexican culture",
+            "Torito -- tequila, orange juice, and chili peppers -- and his impatient attack during a planned ambush let federal forces escape into Orendain"
+        ],
+        "ans": 3,
+        "exp": "Medina was accused of abusing tequila to make toritos. His undisciplined flank attack blew Obregon's carefully prepared trap. Obregon berated him openly and the estrangement between the two never healed."
+    },
+    {
+        "text": "How did Cuervo protect his Atequiza estate from Villa's land redistribution campaign?",
+        "opts": [
+            "He mortgaged it to a US bank which was exempt from revolutionary seizure",
+            "He donated it to the Catholic Church which Villa had pledged not to expropriate",
+            "He registered it as a foreign business under Beckmann's consular protection",
+            "He had secretly transferred ownership to his brother Carlos and Carlos Cuervo and Company making himself only a tenant"
+        ],
+        "ans": 3,
+        "exp": "Cuervo recognized Villa's pressure was driven by food shortages not ideology. By the time Villa's men came looking Cuervo legally owned nothing at Atequiza. There was nothing to seize."
+    },
+    {
+        "text": "How did Jose Cuervo die, and at what age?",
+        "opts": [
+            "He was shot by a disgruntled worker at La Rojenia at age 63",
+            "He died of pneumonia during a campaign through Jalisco at age 58",
+            "He fell ill after eating with his brother Carlos -- likely poisoned -- and died at 51",
+            "He died of a heart attack during peace negotiations with the Sauza family at age 55"
+        ],
+        "ans": 2,
+        "exp": "Cuervo died at 51 after eating with his brother Carlos under suspicious circumstances. He had survived decades of revolution and intrigue through careful alliances and well-timed retreats. His own heirs called him a weak businessman -- the record suggests otherwise."
+    }
+],
+            verdicts: [
+                { min: 0.9, v: "El Científico", n: "You think like Cuervo himself: reading the terrain, forging alliances, surviving the chaos." },
+                { min: 0.75, v: "La Union de Tequileros", n: "Solid knowledge of the trade and the players. You would have survived most of the Revolution." },
+                { min: 0.6, v: "La Rojeña Regular", n: "You know the distillery but not all of its secrets." },
+                { min: 0.4, v: "Hijuelo", n: "A green shoot. You are just beginning to understand the deep roots of this history." },
+                { min: 0.0, v: "The French Occupation", n: "A distaste for tequila, and for remembering what you read." }
+            ]
+        };
+    </script>
+    <script src="../quiz-engine.js"></script>
+</body>
+</html>
