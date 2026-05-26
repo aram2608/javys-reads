@@ -1,0 +1,99 @@
+$TITLE The Rebel
+$AUTHOR Albert Camus
+
+@STYLE
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap');
+:root { --qe-font-serif: 'Libre Baskerville', Georgia, serif; --qe-font-body: 'Libre Baskerville', Georgia, serif; --qe-font-label: 'Space Mono', monospace; --qe-surface: rgba(176,30,30,0.04); --qe-border: rgba(242,234,216,0.08); --qe-border-hi: rgba(176,30,30,0.45); --qe-text: #f2ead8; --qe-text-muted: #6a6050; --qe-accent: #b01e1e; --qe-accent-lo: rgba(176,30,30,0.06); --qe-btn-bg: rgba(176,30,30,0.08); --qe-btn-text: #f2ead8; --qe-btn-hover-bg: rgba(176,30,30,0.22); --qe-btn-hover-text: #f2ead8; --qe-correct: #c8b87a; --qe-correct-bg: rgba(200,184,122,0.09); --qe-wrong: #b01e1e; --qe-wrong-bg: rgba(176,30,30,0.10); --qe-hero-bg: transparent; --qe-hero-text: #f2ead8; --qe-score-color: #b01e1e; --qe-denom-color: #6a6050; --qe-bd-bg: rgba(176,30,30,0.03); --qe-bd-border: rgba(242,234,216,0.06); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background-color: #111008; background-image: repeating-linear-gradient(180deg, transparent, transparent 59px, rgba(242,234,216,0.025) 59px, rgba(242,234,216,0.025) 60px); color: #f2ead8; font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.05rem; line-height: 1.72; min-height: 100vh; position: relative; }
+.container { max-width: 720px; margin: 0 auto; padding: 72px 28px 96px; position: relative; z-index: 1; }
+header { margin-bottom: 64px; padding-bottom: 32px; border-bottom: 1px solid rgba(242,234,216,0.08); position: relative; }
+header::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 50px; height: 1px; background: #b01e1e; }
+h1 { font-family: 'Space Mono', monospace; font-size: clamp(2rem, 7vw, 3.5rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; margin-bottom: 10px; color: #f2ead8; text-transform: uppercase; }
+.subtitle { font-family: 'Space Mono', monospace; font-size: 0.62rem; color: #6a6050; letter-spacing: 0.28em; text-transform: uppercase; margin-top: 14px; }
+STYLE@
+
+{
+    ? Camus opens The Rebel with a question analogous to the one he asked in The Myth of Sisyphus. What is it?
+    % Is political revolution ever justified?, (If nothing is true, is everything permitted? What does rebellion tell us about the answer?), Can a just society be built without God?, Is history moving toward freedom or toward tyranny?
+    ! 1
+    > Just as Sisyphus asks about suicide, The Rebel asks: if nothing is sacred, does murder become permissible? Rebellion turns out to contain its own answer.
+}
+
+{
+    ? When a slave rises up and says no to the master, Camus argues the act implies something positive. What?
+    % A desire to seize power for himself, (A recognition that some value -- some limit -- exists that must not be violated and which the slave shares with all humanity), A rational calculation that submission costs more than rebellion, A Nietzschean will to power asserting itself
+    ! 1
+    > Saying "this far and no further" implicitly affirms something worth defending. Rebellion creates solidarity: I rebel, therefore we are.
+}
+
+{
+    ? Camus distinguishes historical rebellion from metaphysical rebellion. What is metaphysical rebellion?
+    % Revolution aimed at overthrowing capitalism and economic structures, (The revolt of man against the conditions of his existence -- against death, suffering, and a creation that seems unjust), The attempt to build a utopian society based on reason alone, Nietzsche's proclamation of the death of God
+    ! 1
+    > Not revolt against a specific master but against existence itself and the fact of mortality. It is the deeper temptation haunting all political rebellion.
+}
+
+{
+    ? Camus argues that modern revolutions betray their origins and become murderous. What is the key mechanism?
+    % Revolutionary leaders are inevitably corrupted by power, (Rebellion, which begins by affirming a limit, gets infected by nihilism and sacrifices present lives for an abstract future ideal), The masses are too uneducated to sustain revolutionary principles, Economic pressures force revolutions to become authoritarian
+    ! 1
+    > Rebellion affirms a limit. When it becomes total revolution, it begins killing in the name of the future. The limit disappears and murder follows.
+}
+
+{
+    ? Camus coins a phrase for the ideology that treats History itself as the supreme judge of all action. What is it?
+    % Historical materialism, Totalitarian rationalism, The religion of history, Revolutionary consequentialism
+    ! 2
+    > Stalinist Marxism functions as a secular religion in which History plays God: the final arbiter that vindicates all sacrifices. Since the endpoint is guaranteed, any means become permissible.
+}
+
+{
+    ? Camus credits Nietzsche with diagnosing nihilism, but what does he accuse Nietzsche of enabling?
+    % Providing the intellectual foundation for fascism through the will to power, (Clearing the way for a nihilistic worship of historical destiny and power that others then annexed), Undermining political solidarity through radical individualism, Failing to develop a positive ethics to replace Christian morality
+    ! 1
+    > Camus does not blame Nietzsche for Nazism crudely. His charge is that Nietzsche's thought cleared the way for divinizing power and fate. The death of God left a vacuum that history rushed to fill.
+}
+
+{
+    ? Why does Camus hold the 19th-century Russian revolutionary terrorists -- figures like Kaliayev -- up with a kind of admiration?
+    % Because their violence was effective in bringing down the Tsar, (Because they killed for a principle but felt the full weight of that killing, willing to die themselves as the price), Because they were atheists who rejected all metaphysical comfort, Because they represent the purest form of anarchist thought
+    ! 1
+    > Kaliayev assassinated a Grand Duke and then accepted his own execution as the price. This moral seriousness sharply contrasts with 20th-century totalitarian murder, which kills without scruple in the name of abstraction.
+}
+
+{
+    ? Camus does not reject socialism. What is his specific philosophical objection to Marxism-Leninism?
+    % That it misunderstands economics and the market, That it is atheist and therefore cannot ground genuine ethics, (That it treats history as a science with guaranteed outcomes, which licenses present violence for a future that may never arrive), That it ignores individual psychology in favor of class analysis
+    ! 2
+    > Claiming history obeys scientific laws licenses unlimited present violence. For Camus this certainty is metaphysical arrogance that turns revolution into terror.
+}
+
+{
+    ? Camus draws a sharp distinction between revolt and revolution. How does he characterize the difference?
+    % Revolt is spontaneous; revolution is organized and planned, (Revolt maintains the tension between yes and no, preserving limits; revolution seeks total transformation and abolishes limits in pursuit of an absolute end), Revolt is individual; revolution is collective, Revolt is romantic and impractical; revolution is the mature form of political action
+    ! 1
+    > Revolt lives in ongoing tension, never resolving. Revolution claims to end history. That totalizing ambition is the seed of terror.
+}
+
+{
+    ? In the final section, Camus contrasts Mediterranean thought with the Germanic/historical tradition. What does he mean?
+    % A preference for classical Greek democracy over modern parliamentary systems, (A sensibility rooted in nature, limits, and the noon-time sun -- embracing present concrete life over historical abstractions), A regionalist political program for Southern European nations, A literary style opposed to German Romanticism
+    ! 1
+    > Against cold historical necessity and total revolution, Camus invokes the Mediterranean: sun, sea, measure, the present tense over abstract futures.
+}
+
+{
+    ? The Rebel sparked a public rupture between Camus and Sartre. What was the core of Sartre's criticism?
+    % That Camus's writing was aesthetically inferior to existentialist literature, (That Camus's critique of revolution was politically irresponsible, effectively providing cover for anti-communist Cold War politics), That Camus plagiarized ideas from Hegel and Marx, That Camus's Mediterranean ethics was a form of French imperialism
+    ! 1
+    > Sartre argued that anti-Soviet critique aligned Camus with American imperialism. Camus responded that intellectual honesty required criticizing terror everywhere.
+}
+
+{
+    ? If The Myth of Sisyphus ends with "one must imagine Sisyphus happy," what is the equivalent affirmation of The Rebel?
+    % One must imagine the revolutionary victorious, (One must choose between being a victim or an executioner, there is no third option), (Rebellion is the refusal to be either executioner or victim -- solidarity in shared limits is the only ground for a human ethics), History will ultimately vindicate those who rebel with pure motives
+    ! 2
+    > Neither resigned victim nor revolutionary executioner. Rebellion affirms human dignity without becoming murder. Solidarity in shared human limits is Camus's nearest approach to a political ethics.
+}

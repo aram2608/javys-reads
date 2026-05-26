@@ -1,14 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Goliath's Curse</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap');:root {--qe-font-serif:       'Cormorant Garamond', Georgia, serif;--qe-font-body:        'EB Garamond', Georgia, serif;--qe-font-label:       'JetBrains Mono', monospace;--qe-surface:          rgba(232,210,170,0.03);--qe-border:           rgba(232,210,170,0.10);--qe-border-hi:        rgba(212,148,82,0.45);--qe-text:             #e8d2aa;--qe-text-muted:       #8a7559;--qe-accent:           #d49452;--qe-accent-lo:        rgba(212,148,82,0.07);--qe-btn-bg:           rgba(212,148,82,0.08);--qe-btn-text:         #e8d2aa;--qe-btn-hover-bg:     rgba(212,148,82,0.18);--qe-btn-hover-text:   #f5e6c4;--qe-correct:          #8fb87a;--qe-correct-bg:       rgba(143,184,122,0.10);--qe-wrong:            #b8634f;--qe-wrong-bg:         rgba(184,99,79,0.10);--qe-hero-bg:          transparent;--qe-hero-text:        #e8d2aa;--qe-score-color:      #d49452;--qe-denom-color:      #8a7559;--qe-bd-bg:            rgba(232,210,170,0.015);--qe-bd-border:        rgba(232,210,170,0.06);}* { margin: 0; padding: 0; box-sizing: border-box; }html { scroll-behavior: smooth; }body {background-color: #0a0704;background-image:radial-gradient(ellipse at 20% 0%, rgba(212,148,82,0.06) 0%, transparent 50%),radial-gradient(ellipse at 80% 100%, rgba(184,99,79,0.04) 0%, transparent 50%),repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(232,210,170,0.025) 31px, rgba(232,210,170,0.025) 32px);color: #e8d2aa;font-family: 'EB Garamond', Georgia, serif;font-size: 1.15rem;line-height: 1.55;min-height: 100vh;position: relative;}body::before {content: '';position: fixed;inset: 0;background-image:radial-gradient(circle at 1px 1px, rgba(232,210,170,0.04) 1px, transparent 1px);background-size: 3px 3px;pointer-events: none;opacity: 0.5;z-index: 0;}.container { max-width: 720px; margin: 0 auto; padding: 72px 28px 96px; position: relative; z-index: 1; }header { margin-bottom: 64px; padding-bottom: 32px; border-bottom: 1px solid rgba(232,210,170,0.08); position: relative; }header::after {content: '';position: absolute;bottom: -1px;left: 0;width: 64px;height: 1px;background: #d49452;}h1 {font-family: 'Cormorant Garamond', Georgia, serif;font-size: clamp(2.4rem, 7vw, 3.6rem);font-weight: 500;letter-spacing: 0.02em;line-height: 1.1;margin-bottom: 12px;color: #f5e6c4;font-style: italic;}.subtitle {font-size: 0.72rem;color: #8a7559;letter-spacing: 0.28em;text-transform: uppercase;margin-top: 14px;font-family: 'JetBrains Mono', monospace;font-weight: 400;}.subtitle::before { content: '[ '; color: #d49452; }.subtitle::after { content: ' ]'; color: #d49452; }
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --qe-font-serif: 'Cormorant Garamond', Georgia, serif;
+            --qe-font-body: 'EB Garamond', Georgia, serif;
+            --qe-font-label: 'JetBrains Mono', monospace;
+            --qe-surface: rgba(232, 210, 170, 0.03);
+            --qe-border: rgba(232, 210, 170, 0.10);
+            --qe-border-hi: rgba(212, 148, 82, 0.45);
+            --qe-text: #e8d2aa;
+            --qe-text-muted: #8a7559;
+            --qe-accent: #d49452;
+            --qe-accent-lo: rgba(212, 148, 82, 0.07);
+            --qe-btn-bg: rgba(212, 148, 82, 0.08);
+            --qe-btn-text: #e8d2aa;
+            --qe-btn-hover-bg: rgba(212, 148, 82, 0.18);
+            --qe-btn-hover-text: #f5e6c4;
+            --qe-correct: #8fb87a;
+            --qe-correct-bg: rgba(143, 184, 122, 0.10);
+            --qe-wrong: #b8634f;
+            --qe-wrong-bg: rgba(184, 99, 79, 0.10);
+            --qe-hero-bg: transparent;
+            --qe-hero-text: #e8d2aa;
+            --qe-score-color: #d49452;
+            --qe-denom-color: #8a7559;
+            --qe-bd-bg: rgba(232, 210, 170, 0.015);
+            --qe-bd-border: rgba(232, 210, 170, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0a0704;
+            background-image: radial-gradient(ellipse at 20% 0%, rgba(212, 148, 82, 0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 100%, rgba(184, 99, 79, 0.04) 0%, transparent 50%), repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(232, 210, 170, 0.025) 31px, rgba(232, 210, 170, 0.025) 32px);
+            color: #e8d2aa;
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.15rem;
+            line-height: 1.55;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle at 1px 1px, rgba(232, 210, 170, 0.04) 1px, transparent 1px);
+            background-size: 3px 3px;
+            pointer-events: none;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 72px 28px 96px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            margin-bottom: 64px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(232, 210, 170, 0.08);
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 64px;
+            height: 1px;
+            background: #d49452;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2.4rem, 7vw, 3.6rem);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            color: #f5e6c4;
+            font-style: italic;
+        }
+
+        .subtitle {
+            font-size: 0.72rem;
+            color: #8a7559;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            margin-top: 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 400;
+        }
+
+        .subtitle::before {
+            content: '[ ';
+            color: #d49452;
+        }
+
+        .subtitle::after {
+            content: ' ]';
+            color: #d49452;
+        }
     </style>
     <link rel="stylesheet" href="../quiz-engine.css">
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -21,357 +138,358 @@
     <script>
         window.QUIZ = {
             questions: [
-    {
-        "text": "What is a \"Goliath\" as defined in the book?",
-        "opts": [
-            "A city-state governed by a single priest-king",
-            "A hierarchy that dominates others through authority and violence",
-            "A mythological foe of egalitarian societies",
-            "An agricultural empire built on food surpluses"
-        ],
-        "ans": 1,
-        "exp": "Goliaths concentrate energy and labor through coercion. They combine political, violent, informational, and economic power to extract from a population."
-    },
-    {
-        "text": "Which three simultaneous collapses define a full societal collapse?",
-        "opts": [
-            "Political, military, and religious collapse",
-            "Agricultural, industrial, and technological collapse",
-            "State, economic, and population collapse",
-            "Cultural, linguistic, and ecological collapse"
-        ],
-        "ans": 2,
-        "exp": "When the state, the economy, and the population all crumble at once, society itself unravels. Cahokia is one example the book opens with."
-    },
-    {
-        "text": "What is \"lamentation literature\"?",
-        "opts": [
-            "Ancient myths recounting heroic defeats",
-            "Elite writings mourning collapse since elites lost the most",
-            "Folk songs grieving drought and famine",
-            "Religious texts mourning the deaths of kings"
-        ],
-        "ans": 1,
-        "exp": "History was largely written by the literate 1%, who depended on hierarchy for their wealth. Their bias makes collapse sound worse than it often was for everyone else."
-    },
-    {
-        "text": "What does Hobbes' social contract propose?",
-        "opts": [
-            "Trading some liberty for security",
-            "Trading religion for the rule of law",
-            "Trading mobility for trade",
-            "Trading wealth for territory"
-        ],
-        "ans": 0,
-        "exp": "Writing during the English Civil War, Hobbes argued that life without authority is rife with war, so people surrender freedom for the security a state provides."
-    },
-    {
-        "text": "What is \"veneer theory\"?",
-        "opts": [
-            "Elites mask power behind bureaucracy and ritual",
-            "A thin layer of civilization hides a brutish state of nature",
-            "Cultural practices spread shallowly without deep roots",
-            "States inevitably form once populations cross a threshold"
-        ],
-        "ans": 1,
-        "exp": "The book pushes back on this Hobbesian view. Paleolithic peoples were intensely social, traded across long distances, and were often deeply egalitarian."
-    },
-    {
-        "text": "Why do the Ju/hoansi swap arrows before a hunt?",
-        "opts": [
-            "To equalize skill among the hunters",
-            "To perform a ritual honoring the prey",
-            "To prevent accidents from misidentified arrows",
-            "So the arrow's owner allocates the meat, not the shooter"
-        ],
-        "ans": 3,
-        "exp": "By giving away the arrow, the shooter cedes credit for the kill. Allocation power moves away from the strongest hunter, keeping the group flat."
-    },
-    {
-        "text": "The \"dark triad\" of power-seeking traits contains which three?",
-        "opts": [
-            "Psychopathy, narcissism, and Machiavellianism",
-            "Aggression, greed, and dishonesty",
-            "Dominance, status-seeking, and authoritarianism",
-            "Violence, deception, and manipulation"
-        ],
-        "ans": 0,
-        "exp": "Men exhibiting these traits are most likely to pursue and sustain dominance. The book treats them as a recurring driver of Goliath formation."
-    },
-    {
-        "text": "What does the \"fission-fusion\" cycle describe in the book?",
-        "opts": [
-            "The economic cycles of boom and bust in early trading economies",
-            "Societies alternating between dispersed egalitarian bands and concentrated hierarchical gatherings",
-            "How states form from tribal fusions then collapse back into fragments",
-            "Population movements driven by seasonal food availability"
-        ],
-        "ans": 1,
-        "exp": "Many early societies would split into small flat groups and then reunite for seasonal hunts or rituals. This fluidity made it much harder for a Goliath to take permanent hold."
-    },
-    {
-        "text": "Around 8,000 to 4,000 years ago, roughly one man reproduced for every seventeen women. What does the book argue caused this collapse in male genetic diversity?",
-        "opts": [
-            "Widespread male deaths from sustained intergroup warfare",
-            "A catastrophic plague that selectively killed adult men",
-            "Patrilineal clan competition allowing elite males to monopolize reproduction",
-            "A voluntary celibacy practice spreading through early religious movements"
-        ],
-        "ans": 2,
-        "exp": "Populations were growing, not shrinking, so mass male death is ruled out. Dominant men within patrilineal clans outcompeted others for mates, making the tendency toward dominance hereditary and baked into later patriarchal societies."
-    },
-    {
-        "text": "What are the three \"Goliath fuels\"?",
-        "opts": [
-            "Gold, slaves, and territory",
-            "Trade, technology, and ideology",
-            "Agriculture, religion, and warfare",
-            "Lootable resources, monopolized violence, and caged lands"
-        ],
-        "ans": 3,
-        "exp": "Resources you can seize, weapons only elites can wield, and populations that cannot easily flee. Together, these inputs let a Goliath form and persist."
-    },
-    {
-        "text": "The book's \"recipe for a Goliath\" names five sources of power. Which combination is correct?",
-        "opts": [
-            "Military, financial, territorial, cultural, and administrative power",
-            "Political, violent, informational, economic, and demographic power",
-            "Judicial, executive, legislative, financial, and propaganda power",
-            "Coercive, agricultural, technological, religious, and bureaucratic power"
-        ],
-        "ans": 1,
-        "exp": "Authoritative hierarchy (political), backed by force (violent), with rituals and stories to justify rule (informational), claiming resources (economic), and extracting from a population (demographic). All five work together."
-    },
-    {
-        "text": "Which crop type is most correlated with state formation?",
-        "opts": [
-            "Grains and cereals",
-            "Tubers like potato and taro",
-            "Legumes like lentils and beans",
-            "Fruits and nuts"
-        ],
-        "ans": 0,
-        "exp": "Grains ripen on a schedule, sit visibly above ground, and store well. That makes them perfect for tax collectors, which makes them perfect fuel for states."
-    },
-    {
-        "text": "\"Escape crops\" help populations evade Goliaths because they are...",
-        "opts": [
-            "Easily traded across long distances",
-            "Self-sufficient and grown far from settlements",
-            "Storable underground and quick to spoil",
-            "Reliant on specialized cultivation knowledge"
-        ],
-        "ans": 2,
-        "exp": "Tubers like potato and taro can be left in the soil and rot quickly once dug up. A tax collector cannot seize what he cannot find or store."
-    },
-    {
-        "text": "\"Goliath's Curse\" refers to which weakness of hierarchical societies?",
-        "opts": [
-            "A drift toward runaway inequality across generations",
-            "A failure of unequal societies to absorb shocks and disasters",
-            "The moral corruption that follows concentrated power",
-            "A cycle of elite competition leading to civil war"
-        ],
-        "ans": 1,
-        "exp": "Top-heavy societies make brittle decisions, lose social cohesion, and burn energy on elite infighting. When a shock arrives, they have nothing left in reserve."
-    },
-    {
-        "text": "What is \"population immiseration\"?",
-        "opts": [
-            "Population decline driven by warfare",
-            "Forced migration during state collapse",
-            "Falling birth rates under authoritarian rule",
-            "Mass impoverishment driven by an extractive elite"
-        ],
-        "ans": 3,
-        "exp": "Rather than wealth trickling down, a wealth pump siphons it up. Piketty's observation that capital outpaces labor sits underneath this idea."
-    },
-    {
-        "text": "Who is named as the king of the world's first state?",
-        "opts": [
-            "King Narmer of Egypt",
-            "Sargon of Akkad",
-            "Hong Xiuquan of China",
-            "Moctezuma of the Aztecs"
-        ],
-        "ans": 0,
-        "exp": "Narmer unified Upper and Lower Egypt through conquest. Like most early state-builders, he was essentially a successful warlord."
-    },
-    {
-        "text": "What does \"war made the state and the state made war\" mean?",
-        "opts": [
-            "States are peaceful institutions that absorb aggression",
-            "War eventually ruins every state that wages it",
-            "War and states create and sustain each other",
-            "States only emerge after war destroys earlier societies"
-        ],
-        "ans": 2,
-        "exp": "Warlords build states to wage war, and the states they build need war to expand. The two evolve together in a feedback loop."
-    },
-    {
-        "text": "Sargon of Akkad is called a \"marcher king\" because he...",
-        "opts": [
-            "Conquered city after city on military campaigns",
-            "Established the first border-march system in Mesopotamia",
-            "Led ritual processions to legitimize his rule",
-            "Marched armies across continents to build an empire"
-        ],
-        "ans": 0,
-        "exp": "Sargon kept conquering but struggled to hold what he took. Dominance aversion and elite rivalry inside his own ranks dogged him throughout."
-    },
-    {
-        "text": "What does \"Structural Demographic Theory\" predict about societies?",
-        "opts": [
-            "Rapid population growth leads inevitably to technological innovation",
-            "Elite overproduction, wealth inequality, and popular immiseration together drive political collapse",
-            "States formed by military conquest are inherently unstable within three generations",
-            "Democracies outlast autocracies during ecological or economic stress"
-        ],
-        "ans": 1,
-        "exp": "The theory identifies how too many elites competing for too few positions, combined with mass immiseration, builds pressure that ends in revolution, civil war, or state collapse. China's recurring dynastic cycle is the book's prime example."
-    },
-    {
-        "text": "Which Chinese dynasty introduced the \"Mandate of Heaven\" to legitimize rule?",
-        "opts": [
-            "The Xia dynasty",
-            "The Shang dynasty",
-            "The Zhou dynasty",
-            "The Qin dynasty"
-        ],
-        "ans": 2,
-        "exp": "The Zhou introduced the concept after overthrowing the Shang. Heaven granted rulers authority but could withdraw it from the incompetent or corrupt, providing ideological justification for revolt and regime change."
-    },
-    {
-        "text": "What does the book highlight as an upside of the so-called \"dark age\" that followed the Late Bronze Age collapse?",
-        "opts": [
-            "Egypt unified into its most powerful dynasty during this period",
-            "The Phoenician alphabet, Greek democracy, Homeric poetry, and iron working all emerged",
-            "Trade networks expanded dramatically across the Mediterranean",
-            "A return to egalitarian forager societies spread across the Near East"
-        ],
-        "ans": 1,
-        "exp": "The collapse of massive polities cleared space for decentralized innovation. The Phoenician alphabet seeded Greek and Latin scripts; iron replaced bronze; Homer composed his epics; and Athens experimented with democracy."
-    },
-    {
-        "text": "What was \"enclosure\" in British history, as the book describes it?",
-        "opts": [
-            "The legal fencing of urban commons for public sanitation projects",
-            "British elites evicting peasants from common lands to funnel cheap labor into industrial cities",
-            "A land reform program granting peasants ownership of small individual plots",
-            "A policy of fortifying British coastal towns against potential invasion"
-        ],
-        "ans": 1,
-        "exp": "Elites kicked peasants off the commons they relied on, forcing them into cities as cheap factory labor. Combined with coal-powered industry, this fueled the Industrial Revolution's brutal early phase -- a classic Goliath move wrapped in the language of improvement."
-    },
-    {
-        "text": "The Taiping Rebellion, one of history's deadliest civil wars, was led by a man who claimed to be the...",
-        "opts": [
-            "Rightful emperor descended from the Han dynasty",
-            "Reincarnation of Confucius sent to restore virtue",
-            "Younger brother of Jesus Christ",
-            "A divine messenger sent to purge China of Manchu corruption"
-        ],
-        "ans": 2,
-        "exp": "Hong Xiuquan, after a vision he believed to be divine, declared himself the younger brother of Jesus. The Taiping Rebellion killed tens of millions and exemplifies China's recurring cycle of immiseration, elite competition, and violent collapse."
-    },
-    {
-        "text": "What does \"mors ex machina\" mean in the book's context?",
-        "opts": [
-            "A Roman myth about death by mechanical failure",
-            "Civilizational collapse caused by advanced weaponry",
-            "Death or catastrophe arising from technology we no longer control",
-            "A god-like machine that decides civilizational fates"
-        ],
-        "ans": 2,
-        "exp": "A play on \"deus ex machina.\" Instead of a god descending to save us, our own runaway tech becomes the thing that ends us."
-    },
-    {
-        "text": "What is \"termination shock\" in solar geoengineering?",
-        "opts": [
-            "Equipment failure halting deployment unexpectedly",
-            "Severe whiplash warming if cooling halts while emissions remain",
-            "Cooling damage to ecosystems from reduced sunlight",
-            "A political crisis from unilateral geoengineering"
-        ],
-        "ans": 1,
-        "exp": "If we mask warming with aerosols but never cut emissions, any disruption removes the mask all at once. Decades of warming arrive in months."
-    },
-    {
-        "text": "\"Death Star syndrome\" describes which kind of vulnerability?",
-        "opts": [
-            "Resilient overall but catastrophic single points of failure",
-            "Empires collapsing under bureaucratic weight",
-            "States holding power to destroy civilizations instantly",
-            "Supply chains amplifying military power dangerously"
-        ],
-        "ans": 0,
-        "exp": "Modern global systems shrug off many shocks but break catastrophically at chokepoints, like the Strait of Hormuz, BGP routing, or four agrochemical firms controlling 62% of all agrochemicals."
-    },
-    {
-        "text": "The \"Somalia-Denmark rule\" raises which concern about welfare states?",
-        "opts": [
-            "Failed states stay failed while prosperous states stay prosperous",
-            "Wealthy nations must fund poor ones to prevent instability",
-            "Governance gaps between nations are self-perpetuating",
-            "Total dependence on a welfare state leaves people fragile if it collapses"
-        ],
-        "ans": 3,
-        "exp": "A sophisticated safety net is wonderful while it works. The worry is that if it fails, citizens may lack the skills and networks needed to cope."
-    },
-    {
-        "text": "What does the book mean by \"nuclear monarchy\"?",
-        "opts": [
-            "Countries that combine monarchical government with nuclear weapons",
-            "The principle that nuclear weapons serve only as deterrence and are never used",
-            "The concentration of nuclear launch authority in a single person with no democratic check",
-            "The idea that nuclear-armed states inevitably drift toward autocratic rule"
-        ],
-        "ans": 2,
-        "exp": "Only one person has to decide whether to launch a nuclear weapon: the president. No parliament, court, or committee must agree. The author sees this as a Goliath's most extreme concentration of power."
-    },
-    {
-        "text": "Russia's \"Dead Hand\" (Perimeter) system is designed to do what?",
-        "opts": [
-            "Automatically disable enemy missiles before they can be launched",
-            "Ensure nuclear forces are launched even if the entire military command has been destroyed",
-            "Track incoming warheads and activate ground-based missile defenses",
-            "Prevent unauthorized nuclear launches through multi-person encrypted authorization"
-        ],
-        "ans": 1,
-        "exp": "If Russian leadership is wiped out and conditions are met, Perimeter sends commands via specialized missiles to remaining nuclear forces. The book cites it as proof we have built systems that can end civilization without any surviving human decision-maker."
-    },
-    {
-        "text": "In 1983, Soviet officer Stanislav Petrov chose not to report an apparent incoming nuclear strike. What was his key reasoning?",
-        "opts": [
-            "The radar system was known to be faulty and had malfunctioned that same week",
-            "He lacked the authorization codes required to escalate the report",
-            "A genuine first strike would involve hundreds of missiles, not just five",
-            "He recognized the signatures as high-altitude cloud reflections rather than warheads"
-        ],
-        "ans": 2,
-        "exp": "The system showed five inbound ICBMs. Petrov reasoned that a real American first strike would require massive simultaneous launches to disable Soviet defenses. It turned out to be a satellite error caused by rare sunlight angles on clouds."
-    },
-    {
-        "text": "What are the four ways the book proposes to \"kill a Goliath\"?",
-        "opts": [
-            "Revolution, sanctions, elections, and free press",
-            "Redistribution, disarmament, cultural reform, and law",
-            "Decentralization, global governance, abolition, and green energy",
-            "Delootable resources, easier exit, democratic tech, and shared knowledge"
-        ],
-        "ans": 3,
-        "exp": "Make resources hard to seize, give people the means to leave, put technology in the hands of the many, and remember history so it stops rhyming."
-    }
-],
+                {
+                    "text": "What is a \"Goliath\" as defined in the book?",
+                    "opts": [
+                        "A city-state governed by a single priest-king",
+                        "A hierarchy that dominates others through authority and violence",
+                        "A mythological foe of egalitarian societies",
+                        "An agricultural empire built on food surpluses"
+                    ],
+                    "ans": 1,
+                    "exp": "Goliaths concentrate energy and labor through coercion. They combine political, violent, informational, and economic power to extract from a population."
+                },
+                {
+                    "text": "Which three simultaneous collapses define a full societal collapse?",
+                    "opts": [
+                        "Political, military, and religious collapse",
+                        "Agricultural, industrial, and technological collapse",
+                        "State, economic, and population collapse",
+                        "Cultural, linguistic, and ecological collapse"
+                    ],
+                    "ans": 2,
+                    "exp": "When the state, the economy, and the population all crumble at once, society itself unravels. Cahokia is one example the book opens with."
+                },
+                {
+                    "text": "What is \"lamentation literature\"?",
+                    "opts": [
+                        "Ancient myths recounting heroic defeats",
+                        "Elite writings mourning collapse since elites lost the most",
+                        "Folk songs grieving drought and famine",
+                        "Religious texts mourning the deaths of kings"
+                    ],
+                    "ans": 1,
+                    "exp": "History was largely written by the literate 1%, who depended on hierarchy for their wealth. Their bias makes collapse sound worse than it often was for everyone else."
+                },
+                {
+                    "text": "What does Hobbes' social contract propose?",
+                    "opts": [
+                        "Trading some liberty for security",
+                        "Trading religion for the rule of law",
+                        "Trading mobility for trade",
+                        "Trading wealth for territory"
+                    ],
+                    "ans": 0,
+                    "exp": "Writing during the English Civil War, Hobbes argued that life without authority is rife with war, so people surrender freedom for the security a state provides."
+                },
+                {
+                    "text": "What is \"veneer theory\"?",
+                    "opts": [
+                        "Elites mask power behind bureaucracy and ritual",
+                        "A thin layer of civilization hides a brutish state of nature",
+                        "Cultural practices spread shallowly without deep roots",
+                        "States inevitably form once populations cross a threshold"
+                    ],
+                    "ans": 1,
+                    "exp": "The book pushes back on this Hobbesian view. Paleolithic peoples were intensely social, traded across long distances, and were often deeply egalitarian."
+                },
+                {
+                    "text": "Why do the Ju/hoansi swap arrows before a hunt?",
+                    "opts": [
+                        "To equalize skill among the hunters",
+                        "To perform a ritual honoring the prey",
+                        "To prevent accidents from misidentified arrows",
+                        "So the arrow's owner allocates the meat, not the shooter"
+                    ],
+                    "ans": 3,
+                    "exp": "By giving away the arrow, the shooter cedes credit for the kill. Allocation power moves away from the strongest hunter, keeping the group flat."
+                },
+                {
+                    "text": "The \"dark triad\" of power-seeking traits contains which three?",
+                    "opts": [
+                        "Psychopathy, narcissism, and Machiavellianism",
+                        "Aggression, greed, and dishonesty",
+                        "Dominance, status-seeking, and authoritarianism",
+                        "Violence, deception, and manipulation"
+                    ],
+                    "ans": 0,
+                    "exp": "Men exhibiting these traits are most likely to pursue and sustain dominance. The book treats them as a recurring driver of Goliath formation."
+                },
+                {
+                    "text": "What does the \"fission-fusion\" cycle describe in the book?",
+                    "opts": [
+                        "The economic cycles of boom and bust in early trading economies",
+                        "Societies alternating between dispersed egalitarian bands and concentrated hierarchical gatherings",
+                        "How states form from tribal fusions then collapse back into fragments",
+                        "Population movements driven by seasonal food availability"
+                    ],
+                    "ans": 1,
+                    "exp": "Many early societies would split into small flat groups and then reunite for seasonal hunts or rituals. This fluidity made it much harder for a Goliath to take permanent hold."
+                },
+                {
+                    "text": "Around 8,000 to 4,000 years ago, roughly one man reproduced for every seventeen women. What does the book argue caused this collapse in male genetic diversity?",
+                    "opts": [
+                        "Widespread male deaths from sustained intergroup warfare",
+                        "A catastrophic plague that selectively killed adult men",
+                        "Patrilineal clan competition allowing elite males to monopolize reproduction",
+                        "A voluntary celibacy practice spreading through early religious movements"
+                    ],
+                    "ans": 2,
+                    "exp": "Populations were growing, not shrinking, so mass male death is ruled out. Dominant men within patrilineal clans outcompeted others for mates, making the tendency toward dominance hereditary and baked into later patriarchal societies."
+                },
+                {
+                    "text": "What are the three \"Goliath fuels\"?",
+                    "opts": [
+                        "Gold, slaves, and territory",
+                        "Trade, technology, and ideology",
+                        "Agriculture, religion, and warfare",
+                        "Lootable resources, monopolized violence, and caged lands"
+                    ],
+                    "ans": 3,
+                    "exp": "Resources you can seize, weapons only elites can wield, and populations that cannot easily flee. Together, these inputs let a Goliath form and persist."
+                },
+                {
+                    "text": "The book's \"recipe for a Goliath\" names five sources of power. Which combination is correct?",
+                    "opts": [
+                        "Military, financial, territorial, cultural, and administrative power",
+                        "Political, violent, informational, economic, and demographic power",
+                        "Judicial, executive, legislative, financial, and propaganda power",
+                        "Coercive, agricultural, technological, religious, and bureaucratic power"
+                    ],
+                    "ans": 1,
+                    "exp": "Authoritative hierarchy (political), backed by force (violent), with rituals and stories to justify rule (informational), claiming resources (economic), and extracting from a population (demographic). All five work together."
+                },
+                {
+                    "text": "Which crop type is most correlated with state formation?",
+                    "opts": [
+                        "Grains and cereals",
+                        "Tubers like potato and taro",
+                        "Legumes like lentils and beans",
+                        "Fruits and nuts"
+                    ],
+                    "ans": 0,
+                    "exp": "Grains ripen on a schedule, sit visibly above ground, and store well. That makes them perfect for tax collectors, which makes them perfect fuel for states."
+                },
+                {
+                    "text": "\"Escape crops\" help populations evade Goliaths because they are...",
+                    "opts": [
+                        "Easily traded across long distances",
+                        "Self-sufficient and grown far from settlements",
+                        "Storable underground and quick to spoil",
+                        "Reliant on specialized cultivation knowledge"
+                    ],
+                    "ans": 2,
+                    "exp": "Tubers like potato and taro can be left in the soil and rot quickly once dug up. A tax collector cannot seize what he cannot find or store."
+                },
+                {
+                    "text": "\"Goliath's Curse\" refers to which weakness of hierarchical societies?",
+                    "opts": [
+                        "A drift toward runaway inequality across generations",
+                        "A failure of unequal societies to absorb shocks and disasters",
+                        "The moral corruption that follows concentrated power",
+                        "A cycle of elite competition leading to civil war"
+                    ],
+                    "ans": 1,
+                    "exp": "Top-heavy societies make brittle decisions, lose social cohesion, and burn energy on elite infighting. When a shock arrives, they have nothing left in reserve."
+                },
+                {
+                    "text": "What is \"population immiseration\"?",
+                    "opts": [
+                        "Population decline driven by warfare",
+                        "Forced migration during state collapse",
+                        "Falling birth rates under authoritarian rule",
+                        "Mass impoverishment driven by an extractive elite"
+                    ],
+                    "ans": 3,
+                    "exp": "Rather than wealth trickling down, a wealth pump siphons it up. Piketty's observation that capital outpaces labor sits underneath this idea."
+                },
+                {
+                    "text": "Who is named as the king of the world's first state?",
+                    "opts": [
+                        "King Narmer of Egypt",
+                        "Sargon of Akkad",
+                        "Hong Xiuquan of China",
+                        "Moctezuma of the Aztecs"
+                    ],
+                    "ans": 0,
+                    "exp": "Narmer unified Upper and Lower Egypt through conquest. Like most early state-builders, he was essentially a successful warlord."
+                },
+                {
+                    "text": "What does \"war made the state and the state made war\" mean?",
+                    "opts": [
+                        "States are peaceful institutions that absorb aggression",
+                        "War eventually ruins every state that wages it",
+                        "War and states create and sustain each other",
+                        "States only emerge after war destroys earlier societies"
+                    ],
+                    "ans": 2,
+                    "exp": "Warlords build states to wage war, and the states they build need war to expand. The two evolve together in a feedback loop."
+                },
+                {
+                    "text": "Sargon of Akkad is called a \"marcher king\" because he...",
+                    "opts": [
+                        "Conquered city after city on military campaigns",
+                        "Established the first border-march system in Mesopotamia",
+                        "Led ritual processions to legitimize his rule",
+                        "Marched armies across continents to build an empire"
+                    ],
+                    "ans": 0,
+                    "exp": "Sargon kept conquering but struggled to hold what he took. Dominance aversion and elite rivalry inside his own ranks dogged him throughout."
+                },
+                {
+                    "text": "What does \"Structural Demographic Theory\" predict about societies?",
+                    "opts": [
+                        "Rapid population growth leads inevitably to technological innovation",
+                        "Elite overproduction, wealth inequality, and popular immiseration together drive political collapse",
+                        "States formed by military conquest are inherently unstable within three generations",
+                        "Democracies outlast autocracies during ecological or economic stress"
+                    ],
+                    "ans": 1,
+                    "exp": "The theory identifies how too many elites competing for too few positions, combined with mass immiseration, builds pressure that ends in revolution, civil war, or state collapse. China's recurring dynastic cycle is the book's prime example."
+                },
+                {
+                    "text": "Which Chinese dynasty introduced the \"Mandate of Heaven\" to legitimize rule?",
+                    "opts": [
+                        "The Xia dynasty",
+                        "The Shang dynasty",
+                        "The Zhou dynasty",
+                        "The Qin dynasty"
+                    ],
+                    "ans": 2,
+                    "exp": "The Zhou introduced the concept after overthrowing the Shang. Heaven granted rulers authority but could withdraw it from the incompetent or corrupt, providing ideological justification for revolt and regime change."
+                },
+                {
+                    "text": "What does the book highlight as an upside of the so-called \"dark age\" that followed the Late Bronze Age collapse?",
+                    "opts": [
+                        "Egypt unified into its most powerful dynasty during this period",
+                        "The Phoenician alphabet, Greek democracy, Homeric poetry, and iron working all emerged",
+                        "Trade networks expanded dramatically across the Mediterranean",
+                        "A return to egalitarian forager societies spread across the Near East"
+                    ],
+                    "ans": 1,
+                    "exp": "The collapse of massive polities cleared space for decentralized innovation. The Phoenician alphabet seeded Greek and Latin scripts; iron replaced bronze; Homer composed his epics; and Athens experimented with democracy."
+                },
+                {
+                    "text": "What was \"enclosure\" in British history, as the book describes it?",
+                    "opts": [
+                        "The legal fencing of urban commons for public sanitation projects",
+                        "British elites evicting peasants from common lands to funnel cheap labor into industrial cities",
+                        "A land reform program granting peasants ownership of small individual plots",
+                        "A policy of fortifying British coastal towns against potential invasion"
+                    ],
+                    "ans": 1,
+                    "exp": "Elites kicked peasants off the commons they relied on, forcing them into cities as cheap factory labor. Combined with coal-powered industry, this fueled the Industrial Revolution's brutal early phase -- a classic Goliath move wrapped in the language of improvement."
+                },
+                {
+                    "text": "The Taiping Rebellion, one of history's deadliest civil wars, was led by a man who claimed to be the...",
+                    "opts": [
+                        "Rightful emperor descended from the Han dynasty",
+                        "Reincarnation of Confucius sent to restore virtue",
+                        "Younger brother of Jesus Christ",
+                        "A divine messenger sent to purge China of Manchu corruption"
+                    ],
+                    "ans": 2,
+                    "exp": "Hong Xiuquan, after a vision he believed to be divine, declared himself the younger brother of Jesus. The Taiping Rebellion killed tens of millions and exemplifies China's recurring cycle of immiseration, elite competition, and violent collapse."
+                },
+                {
+                    "text": "What does \"mors ex machina\" mean in the book's context?",
+                    "opts": [
+                        "A Roman myth about death by mechanical failure",
+                        "Civilizational collapse caused by advanced weaponry",
+                        "Death or catastrophe arising from technology we no longer control",
+                        "A god-like machine that decides civilizational fates"
+                    ],
+                    "ans": 2,
+                    "exp": "A play on \"deus ex machina.\" Instead of a god descending to save us, our own runaway tech becomes the thing that ends us."
+                },
+                {
+                    "text": "What is \"termination shock\" in solar geoengineering?",
+                    "opts": [
+                        "Equipment failure halting deployment unexpectedly",
+                        "Severe whiplash warming if cooling halts while emissions remain",
+                        "Cooling damage to ecosystems from reduced sunlight",
+                        "A political crisis from unilateral geoengineering"
+                    ],
+                    "ans": 1,
+                    "exp": "If we mask warming with aerosols but never cut emissions, any disruption removes the mask all at once. Decades of warming arrive in months."
+                },
+                {
+                    "text": "\"Death Star syndrome\" describes which kind of vulnerability?",
+                    "opts": [
+                        "Resilient overall but catastrophic single points of failure",
+                        "Empires collapsing under bureaucratic weight",
+                        "States holding power to destroy civilizations instantly",
+                        "Supply chains amplifying military power dangerously"
+                    ],
+                    "ans": 0,
+                    "exp": "Modern global systems shrug off many shocks but break catastrophically at chokepoints, like the Strait of Hormuz, BGP routing, or four agrochemical firms controlling 62% of all agrochemicals."
+                },
+                {
+                    "text": "The \"Somalia-Denmark rule\" raises which concern about welfare states?",
+                    "opts": [
+                        "Failed states stay failed while prosperous states stay prosperous",
+                        "Wealthy nations must fund poor ones to prevent instability",
+                        "Governance gaps between nations are self-perpetuating",
+                        "Total dependence on a welfare state leaves people fragile if it collapses"
+                    ],
+                    "ans": 3,
+                    "exp": "A sophisticated safety net is wonderful while it works. The worry is that if it fails, citizens may lack the skills and networks needed to cope."
+                },
+                {
+                    "text": "What does the book mean by \"nuclear monarchy\"?",
+                    "opts": [
+                        "Countries that combine monarchical government with nuclear weapons",
+                        "The principle that nuclear weapons serve only as deterrence and are never used",
+                        "The concentration of nuclear launch authority in a single person with no democratic check",
+                        "The idea that nuclear-armed states inevitably drift toward autocratic rule"
+                    ],
+                    "ans": 2,
+                    "exp": "Only one person has to decide whether to launch a nuclear weapon: the president. No parliament, court, or committee must agree. The author sees this as a Goliath's most extreme concentration of power."
+                },
+                {
+                    "text": "Russia's \"Dead Hand\" (Perimeter) system is designed to do what?",
+                    "opts": [
+                        "Automatically disable enemy missiles before they can be launched",
+                        "Ensure nuclear forces are launched even if the entire military command has been destroyed",
+                        "Track incoming warheads and activate ground-based missile defenses",
+                        "Prevent unauthorized nuclear launches through multi-person encrypted authorization"
+                    ],
+                    "ans": 1,
+                    "exp": "If Russian leadership is wiped out and conditions are met, Perimeter sends commands via specialized missiles to remaining nuclear forces. The book cites it as proof we have built systems that can end civilization without any surviving human decision-maker."
+                },
+                {
+                    "text": "In 1983, Soviet officer Stanislav Petrov chose not to report an apparent incoming nuclear strike. What was his key reasoning?",
+                    "opts": [
+                        "The radar system was known to be faulty and had malfunctioned that same week",
+                        "He lacked the authorization codes required to escalate the report",
+                        "A genuine first strike would involve hundreds of missiles, not just five",
+                        "He recognized the signatures as high-altitude cloud reflections rather than warheads"
+                    ],
+                    "ans": 2,
+                    "exp": "The system showed five inbound ICBMs. Petrov reasoned that a real American first strike would require massive simultaneous launches to disable Soviet defenses. It turned out to be a satellite error caused by rare sunlight angles on clouds."
+                },
+                {
+                    "text": "What are the four ways the book proposes to \"kill a Goliath\"?",
+                    "opts": [
+                        "Revolution, sanctions, elections, and free press",
+                        "Redistribution, disarmament, cultural reform, and law",
+                        "Decentralization, global governance, abolition, and green energy",
+                        "Delootable resources, easier exit, democratic tech, and shared knowledge"
+                    ],
+                    "ans": 3,
+                    "exp": "Make resources hard to seize, give people the means to leave, put technology in the hands of the many, and remember history so it stops rhyming."
+                }
+            ],
             verdicts: [
-                { min: 0.8, v: "Excellent",  n: "Outstanding recall." },
-                { min: 0.6, v: "Good",       n: "Solid understanding." },
-                { min: 0.4, v: "Fair",       n: "Worth revisiting." },
-                { min: 0.0, v: "Try again",  n: "Time for a reread." }
+                {min: 0.8, v: "Excellent", n: "Outstanding recall."},
+                {min: 0.6, v: "Good", n: "Solid understanding."},
+                {min: 0.4, v: "Fair", n: "Worth revisiting."},
+                {min: 0.0, v: "Try again", n: "Time for a reread."}
             ]
         };
     </script>
     <script src="../components.js"></script>
     <script src="../quiz-engine.js"></script>
 </body>
+
 </html>

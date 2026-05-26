@@ -1,0 +1,225 @@
+$TITLE Gravity's Rainbow
+$AUTHOR Thomas Pynchon
+
+@STYLE
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+:root { --qe-font-serif: 'IM Fell English', serif; --qe-font-body: 'Courier Prime', monospace; --qe-font-label: 'Courier Prime', monospace; --qe-surface: rgba(212,160,23,0.04); --qe-border: rgba(90,60,20,0.20); --qe-border-hi: rgba(212,160,23,0.45); --qe-text: #f5f0e8; --qe-text-muted: #7a6040; --qe-accent: #d4a017; --qe-accent-lo: rgba(212,160,23,0.06); --qe-btn-bg: rgba(212,160,23,0.08); --qe-btn-text: #f5f0e8; --qe-btn-hover-bg: rgba(212,160,23,0.22); --qe-btn-hover-text: #f5f0e8; --qe-correct: #4a8a4a; --qe-correct-bg: rgba(74,138,74,0.10); --qe-wrong: #8b2020; --qe-wrong-bg: rgba(139,32,32,0.08); --qe-hero-bg: transparent; --qe-hero-text: #f5f0e8; --qe-score-color: #d4a017; --qe-denom-color: #7a6040; --qe-bd-bg: rgba(212,160,23,0.03); --qe-bd-border: rgba(90,60,20,0.15); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background-color: #1a1208; background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(90,60,20,0.08) 39px, rgba(90,60,20,0.08) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(90,60,20,0.05) 39px, rgba(90,60,20,0.05) 40px); color: #f5f0e8; font-family: 'Courier Prime', monospace; font-size: 1.05rem; line-height: 1.68; min-height: 100vh; position: relative; }
+.container { max-width: 720px; margin: 0 auto; padding: 72px 28px 96px; position: relative; z-index: 1; }
+header { margin-bottom: 64px; padding-bottom: 32px; border-bottom: 1px solid rgba(90,60,20,0.3); position: relative; }
+header::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 80px; height: 2px; background: #d4a017; }
+h1 { font-family: 'IM Fell English', serif; font-size: clamp(2.4rem, 7vw, 4rem); font-style: italic; font-weight: 400; letter-spacing: 0.02em; line-height: 1.1; margin-bottom: 10px; color: #f5f0e8; }
+.subtitle { font-family: 'Courier Prime', monospace; font-size: 0.65rem; color: #7a6040; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 14px; }
+STYLE@
+
+{
+    ? What statistical anomaly first draws military intelligence to Tyrone Slothrop?
+    % His dreams predict weather patterns that affect V-2 trajectory, (His map of sexual conquests correlates with V-2 rocket strike sites, with erections preceding strikes), He is the only soldier whose fear responses are absent under conditioning, His body temperature spikes whenever a rocket launches within 50 miles
+    ! 1
+    > Slothrop's sexual star-map precedes rocket strikes (effect before cause), inverting Pavlovian logic and drawing PISCES to study him.
+}
+
+{
+    ? Pirate Prentice opens the novel with a peculiar psychic talent. What is it?
+    % He can decode enemy signals by touching radio equipment, He can smell incoming rockets before radar detection, He can enter and experience other people's fantasies as if they were his own, He has perfect recall of every conversation he has ever witnessed
+    ! 2
+    > The novel opens with Pirate inhabiting someone else's dream: a giant adenoid over London. His gift is inhabiting others' fantasies.
+}
+
+{
+    ? What fictional substance allegedly used in Slothrop's infant conditioning later becomes central to the rocket program?
+    % Sodium amytal, Imipolex A, Oneirine hydrate, Imipolex G
+    ! 3
+    > Imipolex G, a fictional thermoplastic, links infant Slothrop's conditioning to the S-Gerat rocket structure.
+}
+
+{
+    ? What are the titles of the novel's first and final parts?
+    % Beyond the Zero and The Counterforce, The Rocket and The Rainbow, Zero and Gravity, London and The Zone
+    ! 0
+    > The four parts are: Beyond the Zero, Un Perm au Casino Hermann Goering, In the Zone, and The Counterforce.
+}
+
+{
+    ? Who is Octopus Grigori and what does his presence satirize?
+    % A Soviet double agent embedded in PISCES, (A Pavlovian-conditioned octopus, a parody of behaviorist science run parallel to Slothrop's own conditioning), A German marine engineer who designed the rocket's guidance fins, A hallucination Slothrop experiences under sodium amytal
+    ! 1
+    > Grigori is a conditioned octopus, a comic mirror of the behaviorism applied to Slothrop himself.
+}
+
+{
+    ? In the French Riviera section, Slothrop begins tracking which specific rocket designation?
+    % The V-1 pulse-jet engine specifications, The A-4 prototype blueprints, (The S-Gerat (Schwarzgerat): Rocket 00000), The Schwarzkommando guidance computer
+    ! 2
+    > The mysterious S-Gerat assembled into Rocket 00000 is what Slothrop traces throughout the Zone.
+}
+
+{
+    ? PISCES is the intelligence organization studying Slothrop. What does the acronym stand for?
+    % Psychological Intelligence Schemes for Expediting Surrender, Pavlovian Institute for Studying Conditioned Effects on Soldiers, Paranoia Induction Schemes for Counter-Espionage Section, Psychological Integration Study Center for European Surrender
+    ! 0
+    > PISCES = Psychological Intelligence Schemes for Expediting Surrender.
+}
+
+{
+    ? The White Visitation is:
+    % A prophetic hallucination recurring across several characters' drug experiences, (The commandeered English seaside estate housing PISCES researchers -- psychics, behaviorists, and statisticians), Pirate Prentice's rooftop banana plantation used as cover for intelligence work, A ghost ship in Slothrop's childhood memories
+    ! 1
+    > The White Visitation is the commandeered seaside English estate where PISCES operates, formerly a mental hospital.
+}
+
+{
+    ? Roger Mexico is best described as:
+    % A German rocket engineer who defects to British intelligence in 1944, A cynical MI6 operative tasked with surveilling Slothrop throughout the Zone, A jazz musician who provides Slothrop with forged identity documents, (A statistician whose Poisson distribution work reveals only randomness where others demand cause and effect)
+    ! 3
+    > Mexico's statistics describe a Poisson distribution that denies the causal logic the war apparatus depends on.
+}
+
+{
+    ? The romance between Roger Mexico and Jessica Swanlake is primarily associated with what atmosphere?
+    % (Wartime English winter: blackouts, freezing churches, borrowed intimacy dependent on the War's continuation), (The Riviera in high summer: gambling, German spies, and moral dissolution), (Post-war Berlin: rubble, jazz cellars, and black market romance), (Rural France: escape from the Zone and hope of peacetime)
+    ! 0
+    > The Roger-Jessica romance is inseparable from wartime English winter imagery: borrowed intimacy that cannot survive peace.
+}
+
+{
+    ? The Zone is best understood as:
+    % A classified Allied weapons research facility in Switzerland, (Post-war Germany as a liminal space where nations, identities, and certainties have collapsed -- a condition as much as a geography), The psychological interior Slothrop inhabits during prolonged drug episodes, The airspace above London targeted by the V-2 program
+    ! 1
+    > The Zone is post-war Germany as both physical and metaphysical space: maps dissolved, authorities gone, identities in flux.
+}
+
+{
+    ? The Schwarzkommando are rocket technicians in the Zone. Who are they?
+    % Former SS officers who defected to Soviet intelligence, Austrian engineers from the Peenemunde team who went underground after the war, (Herero Africans, descendants of survivors of Germany's colonial genocide in South West Africa, pursuing their own rocket), A fictional Soviet unit recovering V-2 components for the Red Army
+    ! 2
+    > The Schwarzkommando are Herero Africans, survivors of Germany's first 20th-century genocide, now in Europe building their own rocket.
+}
+
+{
+    ? While wandering the Zone, Slothrop adopts the costume of what folk hero?
+    % Rocketman (Rocketmann), Der Platzchen (The Cookie Man), Ian Scuffling war correspondent, Max Schlepzig
+    ! 0
+    > Rocketman is Slothrop's most sustained identity in the Zone.
+}
+
+{
+    ? Franz Pokler is subjected to a psychologically devastating annual arrangement. What is it?
+    % He must ride unmanned rocket test flights as a condition of continued employment, He must file annual denunciations of fellow engineers to the SS, (He is permitted one annual visit with a girl presented as his daughter Ilse, with no certainty it is the same girl each year), He must watch propaganda films featuring his imprisoned wife
+    ! 2
+    > Pokler is granted one visit per year with a girl who may or may not be his daughter. He can never know, and the uncertainty ensures his cooperation.
+}
+
+{
+    ? Enzian, leader of the Schwarzkommando, shares which surprising familial connection that drives pursuit across the Zone?
+    % He is the biological son of Walter Rathenau, (He is the half-brother of Vaslav Tchitcherine, the Soviet intelligence officer, through a Russian sailor father who passed through Central Asia and German South West Africa), He is the illegitimate son of Captain Blicero, He is Franz Pokler's estranged son
+    ! 1
+    > Enzian and Tchitcherine are half-brothers through a Russian sailor father. This fuels Tchitcherine's racially charged obsession with hunting Enzian across the Zone.
+}
+
+{
+    ? Which real African people's genocide is invoked as a moral parallel to both the Holocaust and the rocket program?
+    % The Nama people of South Africa, (The Herero people of German South West Africa, exterminated 1904-1908), The Mau Mau of Kenya, The Zulu people under Boer and British colonial repression
+    ! 1
+    > The Herero genocide (1904-1908) is Pynchon's historical mirror: Germany's first industrialized mass killing and the template for what followed.
+}
+
+{
+    ? The historical industrialist Walter Rathenau appears in a seance. Why is he a resonant figure?
+    % He was the engineer who first proposed liquid-fueled rocketry, He was a Weimar composer whose music plays over key war sequences, He was the architect of the modern cartelized state, (As a Jewish German Foreign Minister and industrialist assassinated in 1922, he embodies the lethal nexus of capitalism, statecraft, and systemic death)
+    ! 3
+    > Rathenau, murdered Jewish industrialist-statesman, crystallizes the novel's thesis that capital and death are one system.
+}
+
+{
+    ? What happens to Slothrop's identity by the novel's final movement?
+    % He is captured by Soviet intelligence and executed off-page, He confronts Blicero and destroys the S-Gerat, He escapes to Argentina and is assigned a new identity by Springer, (He gradually disperses: his identity fragments across personas and he ceases to cohere as a unified character)
+    ! 3
+    > Slothrop does not die or escape; his identity fragments until he ceases to exist as a coherent entity.
+}
+
+{
+    ? Captain Blicero fires Rocket 00000 near the novel's end. Who is inside it?
+    % Enzian as a willing sacrificial offering for the Herero, An encrypted final surrender transmission of the German high command, (Gottfried, Blicero's young German lover, encased in an Imipolex G shroud), A decoy warhead designed to misdirect Allied radar
+    ! 2
+    > Gottfried enclosed in the Imipolex G shroud is Blicero's offering: a fusion of eros, technology, and death that is the novel's central image.
+}
+
+{
+    ? The Counterforce's deepest problem, as the novel presents it, is:
+    % Lack of resources to challenge the military-industrial apparatus, Any opposition inevitably absorbs the structure of what it resists and becomes the system it opposes, PISCES infiltration before the Counterforce can effectively organize, Internal disagreement between violent and non-violent factions
+    ! 1
+    > Any opposition replicates the system's structure. There is no clean outside. The Counterforce becomes a mirror of what it fights.
+}
+
+{
+    ? The novel ends with a rocket descending toward a movie theater. Which reading best captures this image?
+    % It represents Hollywood escapism being destroyed by wartime reality, (It collapses the divide between fiction and reality: we have been the audience, and the rocket arrives to destroy even that refuge, implicating us in the violence), It mirrors the novel's London opening to create structural symmetry, It represents Gottfried's consciousness as the rocket descends
+    ! 1
+    > The theater ending collapses the novel's central conceit: we were watching a movie, and the rocket arrives to destroy even that refuge. The final line invites us to sing together at the threshold of annihilation.
+}
+
+{
+    ? The parabolic arc of the rocket is the novel's governing symbol. Which reading best captures its meaning?
+    % (It embodies the cause-and-consequence logic that Western rationality refuses to accept; every launch already contains its own impact), It is primarily a phallic symbol representing masculine violence and imperial control, It represents the Allied strategic bombing campaign's civilian targeting, It is a metaphor for the rise and fall of the Nazi regime
+    ! 0
+    > The parabola integrates cause and effect -- the shape of accountability the novel's characters refuse to compute. Every launch already contains its own impact.
+}
+
+{
+    ? "They," the unnamed controlling power, is best understood as:
+    % The Soviet NKVD running a network of agents throughout the Zone, The specific Allied commanders who directed strategic bombing, (The diffuse systemic forces of capitalism, bureaucracy, and technology that no individual commands but everyone serves -- power as an emergent property of interlocking institutions), IG Farben executives coordinating secretly with both Allied and Axis governments
+    ! 2
+    > "They" is deliberately diffuse: systemic power, not a specific conspiratorial group. It is emergent, impersonal, and not reducible to any individual or organization.
+}
+
+{
+    ? Pynchon connects which real industrial corporation to his vision of a cartel that transcended national allegiances during wartime?
+    % (IG Farben, the German chemical conglomerate that produced Zyklon B, used slave labor, and maintained wartime ties with Allied firms), Standard Oil of New Jersey, Krupp Steel Works, Siemens AG
+    ! 0
+    > IG Farben (Zyklon B, slave labor, trans-national wartime dealings) is Pynchon's central real-world exhibit for capitalism operating above national allegiances.
+}
+
+{
+    ? How does entropy manifest structurally and thematically in Gravity's Rainbow?
+    % Entropy serves as physical backdrop only and does not operate as a structural principle of the novel, Entropy is primarily thermodynamic: the rocket's energy expenditure represents pure economic waste, (Entropy operates at every level: Slothrop's identity disperses, the Zone dissolves order, information degrades into paranoid noise, and the Counterforce itself collapses), Entropy represents the decay of human empathy under industrial capitalism
+    ! 2
+    > Entropy operates everywhere: Slothrop fragments, the Zone dissolves order, signals degrade. Even the Counterforce dissolves. The rocket, a brief engineered order, returns to earth as entropy's final say.
+}
+
+{
+    ? Slothrop's Harvard education and American background serves what satirical function?
+    % It explains his mathematical facility and lends plausibility to the statistical anomaly, Pynchon makes Slothrop's background incoherent on purpose, It contrasts his naive innocence with Europe's moral sophistication, (It implicates American capitalism and Puritan inheritance in the same genealogy of control as European fascism -- America is not outside the system but one of its architects)
+    ! 3
+    > Slothrop's American background implicates the U.S.: its Puritan logic of election and its capitalism share the same genealogy as European control systems. American innocence is a fiction.
+}
+
+{
+    ? The novel shifts jarringly between slapstick comedy, horror, lyrical beauty, and technical prose. What is the effect?
+    % Pynchon acknowledged these tonal shifts as a structural flaw he could not resolve, It mirrors soldiers' psychological oscillation between comedy and horror as a coping mechanism, It creates aesthetic distance allowing analysis of fascism without emotional implication, (It is itself an argument: denying stable genre orientation and insisting that comedy and tragedy are inseparable in lived experience)
+    ! 3
+    > The tonal chaos is an argument. It refuses stable genre comfort and insists that comedy and tragedy are inseparable. The reader's disorientation is the point.
+}
+
+{
+    ? Pynchon presents paranoia as:
+    % A clear symptom of trauma and shell shock affecting veterans, (Tragically ambiguous: potentially the only rational response to a world that is actually conspiring, yet also a trap that produces its own prison -- and the alternative, anti-paranoia, is equally unlivable), A delusion specific to Slothrop while other characters perceive reality accurately, A political tool deployed by PISCES to keep Slothrop pliable
+    ! 1
+    > Paranoia may be correct perception or self-imprisoning mania, and the novel offers no resolution. Anti-paranoia, the refusal to connect, is equally unlivable.
+}
+
+{
+    ? Slothrop's New England Puritan ancestry is connected thematically to what modern phenomenon?
+    % American isolationism in the early years of World War II, The Protestant work ethic as analyzed by Max Weber, (The rocket itself: both represent a theology of election and predestination, the rocket as a secular Puritan arrow aimed at heaven), The U.S. military's refusal to prosecute Operation Paperclip scientists
+    ! 2
+    > The Puritan thread connects to the rocket: both involve election, predestination, and a chosen trajectory toward transcendence or annihilation.
+}
+
+{
+    ? What is Pynchon arguing through the novel's pervasive sadomasochism and the Blicero-Gottfried relationship?
+    % (In modern technological culture, Eros and Thanatos have collapsed into one circuit -- sexual desire and the death-drive are inseparable, and the rocket is their monument), The sadomasochism functions as shock technique to create alienating distance from the characters, It illustrates the failure of European social norms to contain masculine aggression, (It represents the specific psychology of fascist ideology -- the eroticization of submission and domination that enabled the Nazi war machine)
+    ! 0
+    > Imipolex G links infant conditioning, rocket construction, and sexual fetish into one circuit. Pynchon argues modern technology converts Eros into Thanatos: desire and death are the same drive.
+}

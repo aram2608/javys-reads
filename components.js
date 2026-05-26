@@ -45,6 +45,7 @@
         'display:flex;align-items:center;gap:0.45rem;margin-bottom:24px;' +
         'font-family:var(--qe-font-label,monospace);font-size:0.64rem;' +
         'letter-spacing:0.2em;text-transform:uppercase;' +
+        'position:relative;z-index:1;' +
       '}' +
       '.qe-bc-link{' +
         'color:var(--qe-text-muted,#888);text-decoration:none;transition:color 0.15s;' +
