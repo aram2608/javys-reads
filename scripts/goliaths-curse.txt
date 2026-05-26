@@ -85,8 +85,8 @@ h1 {
     font-family: 'JetBrains Mono', monospace;
     font-weight: 400;
 }
-.subtitle::before { content: '— '; color: #d49452; }
-.subtitle::after { content: ' —'; color: #d49452; }
+.subtitle::before { content: '[ '; color: #d49452; }
+.subtitle::after { content: ' ]'; color: #d49452; }
 STYLE@
 
 {
@@ -98,7 +98,7 @@ STYLE@
 
 {
     ? Which three simultaneous collapses define a full societal collapse?
-    % Political, military, and religious collapse, Agricultural, industrial, and technological collapse, State, economic, and population collapse, Cultural, linguistic, and ecological collapse
+    % (Political, military, and religious collapse), (Agricultural, industrial, and technological collapse), (State, economic, and population collapse), (Cultural, linguistic, and ecological collapse)
     ! 2
     > When the state, the economy, and the population all crumble at once, society itself unravels. Cahokia is one example the book opens with.
 }
@@ -126,23 +126,44 @@ STYLE@
 
 {
     ? Why do the Ju/hoansi swap arrows before a hunt?
-    % To equalize skill among the hunters, To perform a ritual honoring the prey, To prevent accidents from misidentified arrows, So the arrow's owner allocates the meat, not the shooter
+    % To equalize skill among the hunters, To perform a ritual honoring the prey, To prevent accidents from misidentified arrows, (So the arrow's owner allocates the meat, not the shooter)
     ! 3
     > By giving away the arrow, the shooter cedes credit for the kill. Allocation power moves away from the strongest hunter, keeping the group flat.
 }
 
 {
     ? The "dark triad" of power-seeking traits contains which three?
-    % Psychopathy, narcissism, and Machiavellianism, Aggression, greed, and dishonesty, Dominance, status-seeking, and authoritarianism, Violence, deception, and manipulation
+    % (Psychopathy, narcissism, and Machiavellianism), (Aggression, greed, and dishonesty), (Dominance, status-seeking, and authoritarianism), (Violence, deception, and manipulation)
     ! 0
     > Men exhibiting these traits are most likely to pursue and sustain dominance. The book treats them as a recurring driver of Goliath formation.
 }
 
 {
+    ? What does the "fission-fusion" cycle describe in the book?
+    % The economic cycles of boom and bust in early trading economies, (Societies alternating between dispersed egalitarian bands and concentrated hierarchical gatherings), How states form from tribal fusions then collapse back into fragments, Population movements driven by seasonal food availability
+    ! 1
+    > Many early societies would split into small flat groups and then reunite for seasonal hunts or rituals. This fluidity made it much harder for a Goliath to take permanent hold.
+}
+
+{
+    ? Around 8,000 to 4,000 years ago, roughly one man reproduced for every seventeen women. What does the book argue caused this collapse in male genetic diversity?
+    % Widespread male deaths from sustained intergroup warfare, A catastrophic plague that selectively killed adult men, (Patrilineal clan competition allowing elite males to monopolize reproduction), A voluntary celibacy practice spreading through early religious movements
+    ! 2
+    > Populations were growing, not shrinking, so mass male death is ruled out. Dominant men within patrilineal clans outcompeted others for mates, making the tendency toward dominance hereditary and baked into later patriarchal societies.
+}
+
+{
     ? What are the three "Goliath fuels"?
-    % Gold, slaves, and territory, Trade, technology, and ideology, Agriculture, religion, and warfare, Lootable resources, monopolized violence, and caged lands
+    % (Gold, slaves, and territory), (Trade, technology, and ideology), (Agriculture, religion, and warfare), (Lootable resources, monopolized violence, and caged lands)
     ! 3
     > Resources you can seize, weapons only elites can wield, and populations that cannot easily flee. Together, these inputs let a Goliath form and persist.
+}
+
+{
+    ? The book's "recipe for a Goliath" names five sources of power. Which combination is correct?
+    % (Military, financial, territorial, cultural, and administrative power), (Political, violent, informational, economic, and demographic power), (Judicial, executive, legislative, financial, and propaganda power), (Coercive, agricultural, technological, religious, and bureaucratic power)
+    ! 1
+    > Authoritative hierarchy (political), backed by force (violent), with rituals and stories to justify rule (informational), claiming resources (economic), and extracting from a population (demographic). All five work together.
 }
 
 {
@@ -195,6 +216,41 @@ STYLE@
 }
 
 {
+    ? What does "Structural Demographic Theory" predict about societies?
+    % Rapid population growth leads inevitably to technological innovation, (Elite overproduction, wealth inequality, and popular immiseration together drive political collapse), States formed by military conquest are inherently unstable within three generations, Democracies outlast autocracies during ecological or economic stress
+    ! 1
+    > The theory identifies how too many elites competing for too few positions, combined with mass immiseration, builds pressure that ends in revolution, civil war, or state collapse. China's recurring dynastic cycle is the book's prime example.
+}
+
+{
+    ? Which Chinese dynasty introduced the "Mandate of Heaven" to legitimize rule?
+    % The Xia dynasty, The Shang dynasty, The Zhou dynasty, The Qin dynasty
+    ! 2
+    > The Zhou introduced the concept after overthrowing the Shang. Heaven granted rulers authority but could withdraw it from the incompetent or corrupt, providing ideological justification for revolt and regime change.
+}
+
+{
+    ? What does the book highlight as an upside of the so-called "dark age" that followed the Late Bronze Age collapse?
+    % Egypt unified into its most powerful dynasty during this period, (The Phoenician alphabet, Greek democracy, Homeric poetry, and iron working all emerged), Trade networks expanded dramatically across the Mediterranean, A return to egalitarian forager societies spread across the Near East
+    ! 1
+    > The collapse of massive polities cleared space for decentralized innovation. The Phoenician alphabet seeded Greek and Latin scripts; iron replaced bronze; Homer composed his epics; and Athens experimented with democracy.
+}
+
+{
+    ? What was "enclosure" in British history, as the book describes it?
+    % The legal fencing of urban commons for public sanitation projects, (British elites evicting peasants from common lands to funnel cheap labor into industrial cities), A land reform program granting peasants ownership of small individual plots, A policy of fortifying British coastal towns against potential invasion
+    ! 1
+    > Elites kicked peasants off the commons they relied on, forcing them into cities as cheap factory labor. Combined with coal-powered industry, this fueled the Industrial Revolution's brutal early phase -- a classic Goliath move wrapped in the language of improvement.
+}
+
+{
+    ? The Taiping Rebellion, one of history's deadliest civil wars, was led by a man who claimed to be the...
+    % Rightful emperor descended from the Han dynasty, Reincarnation of Confucius sent to restore virtue, Younger brother of Jesus Christ, A divine messenger sent to purge China of Manchu corruption
+    ! 2
+    > Hong Xiuquan, after a vision he believed to be divine, declared himself the younger brother of Jesus. The Taiping Rebellion killed tens of millions and exemplifies China's recurring cycle of immiseration, elite competition, and violent collapse.
+}
+
+{
     ? What does "mors ex machina" mean in the book's context?
     % A Roman myth about death by mechanical failure, Civilizational collapse caused by advanced weaponry, Death or catastrophe arising from technology we no longer control, A god-like machine that decides civilizational fates
     ! 2
@@ -212,7 +268,7 @@ STYLE@
     ? "Death Star syndrome" describes which kind of vulnerability?
     % Resilient overall but catastrophic single points of failure, Empires collapsing under bureaucratic weight, States holding power to destroy civilizations instantly, Supply chains amplifying military power dangerously
     ! 0
-    > Modern global systems shrug off many shocks but break catastrophically at chokepoints, like the Strait of Hormuz, BGP routing, or four agrochemical firms.
+    > Modern global systems shrug off many shocks but break catastrophically at chokepoints, like the Strait of Hormuz, BGP routing, or four agrochemical firms controlling 62% of all agrochemicals.
 }
 
 {
@@ -223,8 +279,29 @@ STYLE@
 }
 
 {
+    ? What does the book mean by "nuclear monarchy"?
+    % Countries that combine monarchical government with nuclear weapons, The principle that nuclear weapons serve only as deterrence and are never used, The concentration of nuclear launch authority in a single person with no democratic check, The idea that nuclear-armed states inevitably drift toward autocratic rule
+    ! 2
+    > Only one person has to decide whether to launch a nuclear weapon: the president. No parliament, court, or committee must agree. The author sees this as a Goliath's most extreme concentration of power.
+}
+
+{
+    ? Russia's "Dead Hand" (Perimeter) system is designed to do what?
+    % Automatically disable enemy missiles before they can be launched, (Ensure nuclear forces are launched even if the entire military command has been destroyed), Track incoming warheads and activate ground-based missile defenses, (Prevent unauthorized nuclear launches through multi-person encrypted authorization)
+    ! 1
+    > If Russian leadership is wiped out and conditions are met, Perimeter sends commands via specialized missiles to remaining nuclear forces. The book cites it as proof we have built systems that can end civilization without any surviving human decision-maker.
+}
+
+{
+    ? In 1983, Soviet officer Stanislav Petrov chose not to report an apparent incoming nuclear strike. What was his key reasoning?
+    % The radar system was known to be faulty and had malfunctioned that same week, He lacked the authorization codes required to escalate the report, (A genuine first strike would involve hundreds of missiles, not just five), He recognized the signatures as high-altitude cloud reflections rather than warheads
+    ! 2
+    > The system showed five inbound ICBMs. Petrov reasoned that a real American first strike would require massive simultaneous launches to disable Soviet defenses. It turned out to be a satellite error caused by rare sunlight angles on clouds.
+}
+
+{
     ? What are the four ways the book proposes to "kill a Goliath"?
-    % Revolution, sanctions, elections, and free press, Redistribution, disarmament, cultural reform, and law, Decentralization, global governance, abolition, and green energy, Delootable resources, easier exit, democratic tech, and shared knowledge
+    % (Revolution, sanctions, elections, and free press), (Redistribution, disarmament, cultural reform, and law), (Decentralization, global governance, abolition, and green energy), (Delootable resources, easier exit, democratic tech, and shared knowledge)
     ! 3
     > Make resources hard to seize, give people the means to leave, put technology in the hands of the many, and remember history so it stops rhyming.
 }

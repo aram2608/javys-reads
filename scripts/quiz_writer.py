@@ -178,6 +178,7 @@ TEMPLATE = """\
             ]
         }};
     </script>
+    <script src="../components.js"></script>
     <script src="../quiz-engine.js"></script>
 </body>
 </html>
