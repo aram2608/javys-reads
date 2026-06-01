@@ -102,14 +102,14 @@ STYLE@
 
 {
     ? What was Felix Hoenikker doing on the day the atomic bomb was dropped on Hiroshima?
-    % Watching the test footage at the lab in Ilium, Playing with a toy turtle on his lab bench, Playing cat's cradle with string pulled from a novelist's manuscript, then dangling it in front of his son Newt, Drafting equations for ice-nine on the back of an envelope at home
+    % Watching the test footage at the lab in Ilium, Playing with a toy turtle on his lab bench, (Playing cat's cradle with string pulled from a novelist's manuscript, then dangling it in front of his son Newt), Drafting equations for ice-nine on the back of an envelope at home
     ! 2
     > A novelist had sent Felix a manuscript begging him not to release the bomb. Felix used the binding string for a cat's cradle and chased terrified Newt around the house with it.
 }
 
 {
     ? Ice-nine was developed at the request of a Marine general who wanted Felix to solve which battlefield problem?
-    % Frostbite among troops fighting in the Aleutians, Mud, which immobilized vehicles and exhausted infantry, Salt corrosion of weaponry on Pacific island campaigns, Contamination of drinking water by enemy sabotage
+    % Frostbite among troops fighting in the Aleutians, (Mud, which immobilized vehicles and exhausted infantry), Salt corrosion of weaponry on Pacific island campaigns, Contamination of drinking water by enemy sabotage
     ! 1
     > Marines were sick of slogging through mud. Felix calmly described a seed of ice-nine that, dropped in a puddle, would freeze it solid, and freeze every drop of water it touched after that.
 }
@@ -151,7 +151,7 @@ STYLE@
 
 {
     ? What are foma?
-    % Bokonon's ritual prayers, recited before any boko-maru, Pebbles thrown at the feet of the dying to ease the soul's passage, (Harmless untruths; the lies that, in Bokonon's view, make people brave, kind, healthy, and happy), Sacred texts that may only be written on stones, never on paper
+    % (Bokonon's ritual prayers, recited before any boko-maru), Pebbles thrown at the feet of the dying to ease the soul's passage, (Harmless untruths; the lies that, in Bokonon's view, make people brave, kind, healthy, and happy), (Sacred texts that may only be written on stones, never on paper)
     ! 2
     > The epigraph reads: "Live by the foma that make you brave and kind and healthy and happy." Every Book of Bokonon is signed by the same disclaimer that none of it is true.
 }
@@ -179,7 +179,7 @@ STYLE@
 
 {
     ? Who was Mona Aamons Monzano, and what role did she play in San Lorenzan succession?
-    % Papa's biological daughter, betrothed to the leader of the largest fishing village, (The adopted daughter of Papa Monzano, prescribed by tradition to marry whoever became the next president of San Lorenzo), A foreign missionary's widow who had become Papa's spiritual advisor, A Bokononist nun sworn to celibacy until the next pool-pah passed
+    % (Papa's biological daughter, betrothed to the leader of the largest fishing village), (The adopted daughter of Papa Monzano, prescribed by tradition to marry whoever became the next president of San Lorenzo), A foreign missionary's widow who had become Papa's spiritual advisor, A Bokononist nun sworn to celibacy until the next pool-pah passed
     ! 1
     > Mona is the biological daughter of a Finnish architect, Nestor Aamons. Her hand passes with the presidency, which is how the dying Papa first tries to hand the office to John.
 }
@@ -193,7 +193,7 @@ STYLE@
 
 {
     ? How did Papa Monzano die?
-    % Old age, in his sleep, the night before the air show, A bullet from a Bokononist sympathizer in his bodyguard, (He swallowed a chip of ice-nine to escape the pain of his terminal cancer, instantly turning himself into a blue-white statue), Poisoning, ordered by Frank Hoenikker to clear the way for the succession
+    % (Old age, in his sleep, the night before the air show), A bullet from a Bokononist sympathizer in his bodyguard, (He swallowed a chip of ice-nine to escape the pain of his terminal cancer, instantly turning himself into a blue-white statue), (Poisoning, ordered by Frank Hoenikker to clear the way for the succession)
     ! 2
     > Papa had purchased the ice-nine from Frank as part of the bargain that made Frank a Major General. When his cancer became unbearable, he used it on himself.
 }
@@ -214,35 +214,35 @@ STYLE@
 
 {
     ? What does Newt say about the cat's cradle, while pointing at his abstract painting of one?
-    % It is the only honest mathematical object, since every knot is visible, (No damn cat, no damn cradle; adults hold a tangle of X's in front of a child's face and tell him to see things that simply are not there), It is the shape his father's mind made when it tried to love him, A diagram of the way ice-nine bonds water molecules together
+    % (It is the only honest mathematical object, since every knot is visible), (No damn cat, no damn cradle; adults hold a tangle of X's in front of a child's face and tell him to see things that simply are not there), It is the shape his father's mind made when it tried to love him, A diagram of the way ice-nine bonds water molecules together
     ! 1
     > Newt sees the cat's cradle as the original lie children are taught to accept. The image is the book's case against all comforting nonsense, including, perhaps, Bokononism itself.
 }
 
 {
     ? Bokonon's calypso about the human predicament begins, "Tiger got to hunt, bird got to fly; man got to sit and wonder, why, why, why?" How does the verse end?
-    % Tiger got to sleep, bird got to land; man got to fall down, understand, (Tiger got to sleep, bird got to land; man got to tell himself he understand), Tiger got to roam, bird got to nest; man got to ask himself, what is best, Tiger got to rest, bird got to know; man got to fool himself and go
+    % (Tiger got to sleep, bird got to land; man got to fall down, understand), (Tiger got to sleep, bird got to land; man got to tell himself he understand), (Tiger got to roam, bird got to nest; man got to ask himself, what is best), Tiger got to rest, bird got to know; man got to fool himself and go
     ! 1
     > The joke is theological. The animals get to do what they are made for, while humans are stuck performing comprehension. The calypso is one of the cleanest statements of Vonnegut's view of consciousness.
 }
 
 {
     ? Who is Julian Castle, and what does he run on San Lorenzo?
-    % A British missionary who founded the only school on the island, (An American sugar millionaire who, in middle age, became a humanitarian doctor and runs the House of Hope and Mercy in the Jungle), The captain of Papa Monzano's bodyguard, a former French legionnaire, A retired admiral who built and operates the radio station that broadcasts Papa's speeches
+    % A British missionary who founded the only school on the island, (An American sugar millionaire who, in middle age, became a humanitarian doctor and runs the House of Hope and Mercy in the Jungle), (The captain of Papa Monzano's bodyguard, a former French legionnaire), A retired admiral who built and operates the radio station that broadcasts Papa's speeches
     ! 1
     > Castle was a notorious playboy before reinventing himself as a Schweitzer-style doctor. His son Philip owns the Casa Mona and has written a history of the island.
 }
 
 {
     ? What does a Bokononist whisper when struck by the maddening complexity and unlikeliness of life?
-    % Saroon, saroon, saroon, As it was meant to be, as it was meant to be, Busy, busy, busy, Foma, foma, foma
+    % (Saroon, saroon, saroon), (As it was meant to be, as it was meant to be), (Busy, busy, busy), (Foma, foma, foma)
     ! 2
     > "Busy, busy, busy" is the verbal shrug at the workings of God or the world. It is what one murmurs at the recognition that one cannot possibly understand what is going on.
 }
 
 {
     ? In the closing pages John meets Bokonon, who tells him the final sentence he would write for the Books of Bokonon. What is it?
-    % That every Bokononist should remember the day the world ended and live as if it might end again tomorrow, (That if he were a younger man, he would write a history of human stupidity, climb Mount McCabe, lie down with the book as a pillow, take some ice-nine, and turn himself into a statue grinning and thumbing his nose at You Know Who), That the only sin left to humanity was to keep on living, and the only sacrament was the boko-maru, That he would forgive McCabe and lie beside him on the summit of Mount McCabe in a final duprass
+    % That every Bokononist should remember the day the world ended and live as if it might end again tomorrow, (That if he were a younger man, he would write a history of human stupidity, climb Mount McCabe, lie down with the book as a pillow, take some ice-nine, and turn himself into a statue grinning and thumbing his nose at You Know Who), (That the only sin left to humanity was to keep on living, and the only sacrament was the boko-maru), That he would forgive McCabe and lie beside him on the summit of Mount McCabe in a final duprass
     ! 1
     > He is sitting by the road, barefoot, contemplating exactly that. The grin and the thumbed nose are Bokonon's final commentary on a Creator who would permit such an ending.
 }
