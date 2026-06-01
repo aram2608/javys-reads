@@ -1,0 +1,248 @@
+$TITLE Cat's Cradle
+$AUTHOR Kurt Vonnegut
+
+@STYLE
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap');
+:root {
+--qe-font-serif: 'Special Elite', 'Courier New', serif;
+--qe-font-body: 'Spectral', Georgia, serif;
+--qe-font-label: 'Space Mono', monospace;
+--qe-surface: rgba(141,183,210,0.04);
+--qe-border: rgba(141,183,210,0.14);
+--qe-border-hi: rgba(141,183,210,0.42);
+--qe-text: #d5dde5;
+--qe-text-muted: #5d6b78;
+--qe-accent: #8db7d2;
+--qe-accent-lo: rgba(141,183,210,0.06);
+--qe-btn-bg: rgba(141,183,210,0.06);
+--qe-btn-text: #d5dde5;
+--qe-btn-hover-bg: rgba(141,183,210,0.22);
+--qe-btn-hover-text: #eaf2f8;
+--qe-correct: #8acdb7;
+--qe-correct-bg: rgba(138,205,183,0.10);
+--qe-wrong: #c8755a;
+--qe-wrong-bg: rgba(200,117,90,0.10);
+--qe-hero-bg: transparent;
+--qe-hero-text: #eaf2f8;
+--qe-score-color: #8db7d2;
+--qe-denom-color: #5d6b78;
+--qe-bd-bg: rgba(141,183,210,0.025);
+--qe-bd-border: rgba(141,183,210,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+background-color: #060a10;
+background-image:
+radial-gradient(ellipse at 12% 0%, rgba(141,183,210,0.14) 0%, transparent 52%),
+radial-gradient(ellipse at 88% 100%, rgba(141,183,210,0.07) 0%, transparent 50%),
+repeating-linear-gradient(60deg, transparent, transparent 26px, rgba(141,183,210,0.014) 26px, rgba(141,183,210,0.014) 27px),
+repeating-linear-gradient(120deg, transparent, transparent 26px, rgba(141,183,210,0.014) 26px, rgba(141,183,210,0.014) 27px),
+repeating-linear-gradient(0deg, transparent, transparent 26px, rgba(141,183,210,0.012) 26px, rgba(141,183,210,0.012) 27px);
+color: #d5dde5;
+font-family: 'Spectral', Georgia, serif;
+font-size: 1.10rem;
+line-height: 1.72;
+min-height: 100vh;
+position: relative;
+}
+body::before {
+content: '';
+position: fixed;
+inset: 0;
+background-image:
+repeating-linear-gradient(0deg, transparent, transparent 72px, rgba(141,183,210,0.015) 72px, rgba(141,183,210,0.015) 73px);
+pointer-events: none;
+z-index: 0;
+}
+body::after {
+content: '';
+position: fixed;
+top: 0; left: 0; right: 0;
+height: 1px;
+background: linear-gradient(to right, transparent, rgba(141,183,210,0.55), rgba(234,242,248,0.90), rgba(141,183,210,0.55), transparent);
+z-index: 100;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 76px 28px 96px; position: relative; z-index: 1; }
+header { margin-bottom: 60px; padding-bottom: 32px; border-bottom: 1px solid rgba(141,183,210,0.18); position: relative; }
+header::after {
+content: '';
+position: absolute;
+bottom: -1px; left: 0;
+width: 110px; height: 2px;
+background: linear-gradient(to right, #8db7d2, transparent);
+}
+h1 {
+font-family: 'Special Elite', 'Courier New', serif;
+font-size: clamp(2.6rem, 7.6vw, 4.2rem);
+font-weight: 400;
+letter-spacing: 0.02em;
+line-height: 1.05;
+margin-bottom: 14px;
+color: #eaf2f8;
+}
+.subtitle {
+font-size: 0.66rem;
+color: #5d6b78;
+letter-spacing: 0.34em;
+text-transform: uppercase;
+margin-top: 14px;
+font-family: 'Space Mono', monospace;
+font-weight: 400;
+}
+.subtitle::before { content: '// from the books of bokonon // '; color: #8db7d2; }
+STYLE@
+
+{
+    ? The narrator opens the book with which Biblical reference, and what book is he trying to write?
+    % (Call me Lazarus; he is writing "The Resurrection of Common Decency"), (Call me Jonah; he is writing "The Day the World Ended," a book about what important people did on the day of the Hiroshima bombing), (Call me Ishmael; he is writing "Whale and Wormwood," a parody of Melville), (Call me Job; he is writing "The Patience of Hoosiers")
+    ! 1
+    > He drops the Jonah reference in the first sentence: forces beyond his understanding keep dragging him to where he must be. The Hiroshima book eventually becomes the manuscript we are reading.
+}
+
+{
+    ? What was Felix Hoenikker doing on the day the atomic bomb was dropped on Hiroshima?
+    % Watching the test footage at the lab in Ilium, Playing with a toy turtle on his lab bench, Playing cat's cradle with string pulled from a novelist's manuscript, then dangling it in front of his son Newt, Drafting equations for ice-nine on the back of an envelope at home
+    ! 2
+    > A novelist had sent Felix a manuscript begging him not to release the bomb. Felix used the binding string for a cat's cradle and chased terrified Newt around the house with it.
+}
+
+{
+    ? Ice-nine was developed at the request of a Marine general who wanted Felix to solve which battlefield problem?
+    % Frostbite among troops fighting in the Aleutians, Mud, which immobilized vehicles and exhausted infantry, Salt corrosion of weaponry on Pacific island campaigns, Contamination of drinking water by enemy sabotage
+    ! 1
+    > Marines were sick of slogging through mud. Felix calmly described a seed of ice-nine that, dropped in a puddle, would freeze it solid, and freeze every drop of water it touched after that.
+}
+
+{
+    ? How did each of Felix Hoenikker's three children dispose of their share of the ice-nine he left behind?
+    % All three turned their shares over to the Atomic Energy Commission for safekeeping, (Frank gave his to Papa Monzano of San Lorenzo in exchange for the rank of Major General; Angela gave hers to her husband Harrison Conners, a defense contractor; Newt gave his to a Soviet midget dancer named Zinka), Frank sold his to General Electric; Angela donated hers to her university; Newt buried his under his mother's tombstone, They poured all three shares into a single sealed lead container and left it in Felix's old laboratory
+    ! 1
+    > Each used the substance to buy something they wanted: rank, love, intimacy. The bargain price was the certainty that ice-nine was now loose in the world.
+}
+
+{
+    ? In Bokononism, what is a karass?
+    % A spiritual contract a Bokononist signs after the boko-maru ritual, (A team of people God uses to do His will, whose members are tangled together for reasons that are never logical), A list of one hundred and forty-six harmless untruths a Bokononist must memorize, A unit of suffering measured in pool-pah
+    ! 1
+    > Members of a karass have no idea what they are working on or who else is in it. Bokonon writes that humanity is organized into karasses without regard to nation, class, or family.
+}
+
+{
+    ? In Bokononism, what is a granfalloon?
+    % A holy site recognized by Bokonon as the dwelling place of a wampeter, (A false karass; a team that seems meaningful but exists only in the imagination, such as Hoosiers, Communists, or the General Electric Corporation), A grand calypso recited at the death of a Bokononist saint, A circle of seven Bokononists who share a single duprass
+    ! 1
+    > Hazel Crosby insists John must be her fellow Hoosier and that all Hoosiers share something cosmic. Bokonon's verse for granfalloons: "If you wish to study a granfalloon, just remove the skin of a toy balloon."
+}
+
+{
+    ? What is a duprass, and what is true of its members?
+    % A karass of three siblings who share one common purpose, (A karass of exactly two people, who almost always die within a week of each other), A Bokononist marriage blessed publicly by Bokonon himself, A pair of granfalloons that have collided and merged into one
+    ! 1
+    > Horlick and Claire Minton are the duprass example in the book. They love each other so completely that the rest of the world cannot really reach them.
+}
+
+{
+    ? What is a wampeter, in Bokonon's vocabulary?
+    % A Bokononist apostate who has renounced his calypsos, (The pivot of a karass; an object, idea, or person around which the lives of the karass revolve), A traveler who unknowingly carries the seed of a vin-dit to a stranger, The patron saint of a particular calypso
+    ! 1
+    > Ice-nine itself becomes a wampeter of John's karass. At any given time a karass actually has two wampeters, one waxing in importance, one waning.
+}
+
+{
+    ? What are foma?
+    % Bokonon's ritual prayers, recited before any boko-maru, Pebbles thrown at the feet of the dying to ease the soul's passage, (Harmless untruths; the lies that, in Bokonon's view, make people brave, kind, healthy, and happy), Sacred texts that may only be written on stones, never on paper
+    ! 2
+    > The epigraph reads: "Live by the foma that make you brave and kind and healthy and happy." Every Book of Bokonon is signed by the same disclaimer that none of it is true.
+}
+
+{
+    ? What is boko-maru?
+    % A funeral rite involving the burning of a calypso scroll, (The mingling of two souls accomplished by pressing the bare soles of one's feet against another's), A vow of silence taken by a Bokononist on the eve of execution, A pilgrimage circling Mount McCabe seven times barefoot
+    ! 1
+    > John performs boko-maru with Mona near the end of the book. She is willing to perform it with anyone, which scandalizes him and is, in her view, exactly the point.
+}
+
+{
+    ? How did Bokononism become both the official faith and the official crime of San Lorenzo?
+    % Bokonon converted McCabe at gunpoint; McCabe outlawed his own faith out of shame, (After their utopian reforms failed to make anyone happier, McCabe and Bokonon agreed Bokonon would invent a forbidden religion and McCabe would persecute it, to give the islanders' lives drama and meaning), Papa Monzano outlawed Bokononism after Bokonon refused to marry his daughter, The British colonial governor outlawed it before independence; the new government kept the ban
+    ! 1
+    > McCabe and Bokonon called it dynamic tension. Both men were destroyed by the play they staged: McCabe went mad with cruelty, Bokonon with sainthood.
+}
+
+{
+    ? What punishment did San Lorenzo prescribe for being caught practicing Bokononism?
+    % Public flogging and exile to the surrounding reef, Being impaled on a great iron hook, Conscription into Papa Monzano's bodyguard for life, Forced labor in the cane fields above Bolivar
+    ! 1
+    > The hook stood as a permanent threat in the capital. The penalty was real but, by long custom, almost never carried out. Everyone on the island practiced Bokononism in secret, including Papa.
+}
+
+{
+    ? Who was Mona Aamons Monzano, and what role did she play in San Lorenzan succession?
+    % Papa's biological daughter, betrothed to the leader of the largest fishing village, (The adopted daughter of Papa Monzano, prescribed by tradition to marry whoever became the next president of San Lorenzo), A foreign missionary's widow who had become Papa's spiritual advisor, A Bokononist nun sworn to celibacy until the next pool-pah passed
+    ! 1
+    > Mona is the biological daughter of a Finnish architect, Nestor Aamons. Her hand passes with the presidency, which is how the dying Papa first tries to hand the office to John.
+}
+
+{
+    ? How did John end up being offered the presidency of San Lorenzo?
+    % He won it in a poker game with Frank Hoenikker at Casa Mona, (Frank Hoenikker, named as Papa's successor, did not want the public role and gave the office to John, who accepted partly because the post came with Mona), Papa named him in a final delirium after John saved his life, He bought the office from H. Lowe Crosby for a single share of ice-nine
+    ! 1
+    > Frank wanted to remain a behind-the-scenes engineer. John, dazzled by Mona and the prospect of power, took the title. He was president for only a few hours.
+}
+
+{
+    ? How did Papa Monzano die?
+    % Old age, in his sleep, the night before the air show, A bullet from a Bokononist sympathizer in his bodyguard, (He swallowed a chip of ice-nine to escape the pain of his terminal cancer, instantly turning himself into a blue-white statue), Poisoning, ordered by Frank Hoenikker to clear the way for the succession
+    ! 2
+    > Papa had purchased the ice-nine from Frank as part of the bargain that made Frank a Major General. When his cancer became unbearable, he used it on himself.
+}
+
+{
+    ? What single event triggered the end of the world?
+    % A bomb that Bokonon's followers detonated under Castle Mount McCabe, (A plane in the memorial air show clipped the cliffside castle, dislodging Papa's frozen body, which slid into the sea and froze every drop of water on Earth), Ice-nine seeping out of a cracked container in the cellar of the Casa Mona, A typhoon that dragged the ice-nine vials in Frank's lab into the surf
+    ! 1
+    > Cuban-built fighter planes were performing a low pass when one crashed into the castle. Papa's corpse tumbled into the ocean. The sea solidified. Tornadoes followed.
+}
+
+{
+    ? Mona Aamons Monzano dies in the aftermath of the apocalypse. How?
+    % She is killed by a falling beam in the oubliette where the survivors take shelter, (Walking among the thousands of San Lorenzans who have killed themselves by touching ice-nine to their tongues, she does the same, smiling at the absurdity of being asked to live on), She drowns trying to wade through the frozen sea to reach Bokonon, She is murdered by Frank in a jealous rage after John takes the presidency
+    ! 1
+    > She mocks John's grief, observing that the people had been given an easy way out of a world they no longer wanted, and she takes the same way out. Her death wrecks John more than the end of civilization does.
+}
+
+{
+    ? What does Newt say about the cat's cradle, while pointing at his abstract painting of one?
+    % It is the only honest mathematical object, since every knot is visible, (No damn cat, no damn cradle; adults hold a tangle of X's in front of a child's face and tell him to see things that simply are not there), It is the shape his father's mind made when it tried to love him, A diagram of the way ice-nine bonds water molecules together
+    ! 1
+    > Newt sees the cat's cradle as the original lie children are taught to accept. The image is the book's case against all comforting nonsense, including, perhaps, Bokononism itself.
+}
+
+{
+    ? Bokonon's calypso about the human predicament begins, "Tiger got to hunt, bird got to fly; man got to sit and wonder, why, why, why?" How does the verse end?
+    % Tiger got to sleep, bird got to land; man got to fall down, understand, (Tiger got to sleep, bird got to land; man got to tell himself he understand), Tiger got to roam, bird got to nest; man got to ask himself, what is best, Tiger got to rest, bird got to know; man got to fool himself and go
+    ! 1
+    > The joke is theological. The animals get to do what they are made for, while humans are stuck performing comprehension. The calypso is one of the cleanest statements of Vonnegut's view of consciousness.
+}
+
+{
+    ? Who is Julian Castle, and what does he run on San Lorenzo?
+    % A British missionary who founded the only school on the island, (An American sugar millionaire who, in middle age, became a humanitarian doctor and runs the House of Hope and Mercy in the Jungle), The captain of Papa Monzano's bodyguard, a former French legionnaire, A retired admiral who built and operates the radio station that broadcasts Papa's speeches
+    ! 1
+    > Castle was a notorious playboy before reinventing himself as a Schweitzer-style doctor. His son Philip owns the Casa Mona and has written a history of the island.
+}
+
+{
+    ? What does a Bokononist whisper when struck by the maddening complexity and unlikeliness of life?
+    % Saroon, saroon, saroon, As it was meant to be, as it was meant to be, Busy, busy, busy, Foma, foma, foma
+    ! 2
+    > "Busy, busy, busy" is the verbal shrug at the workings of God or the world. It is what one murmurs at the recognition that one cannot possibly understand what is going on.
+}
+
+{
+    ? In the closing pages John meets Bokonon, who tells him the final sentence he would write for the Books of Bokonon. What is it?
+    % That every Bokononist should remember the day the world ended and live as if it might end again tomorrow, (That if he were a younger man, he would write a history of human stupidity, climb Mount McCabe, lie down with the book as a pillow, take some ice-nine, and turn himself into a statue grinning and thumbing his nose at You Know Who), That the only sin left to humanity was to keep on living, and the only sacrament was the boko-maru, That he would forgive McCabe and lie beside him on the summit of Mount McCabe in a final duprass
+    ! 1
+    > He is sitting by the road, barefoot, contemplating exactly that. The grin and the thumbed nose are Bokonon's final commentary on a Creator who would permit such an ending.
+}
