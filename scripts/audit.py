@@ -20,13 +20,10 @@ Usage:
     python scripts/audit.py scripts/foo.txt ...   # audits specific files
 """
 
-from __future__ import annotations
-
 import sys
 from pathlib import Path
 
 from quiz_writer import ParseError, parse
-
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 EXPECTED_OPT_COUNT = 4
@@ -59,16 +56,14 @@ def audit_file(path: Path) -> list[str]:
         if n != EXPECTED_OPT_COUNT:
             issues.append(f"{loc}: has {n} option(s), expected {EXPECTED_OPT_COUNT}")
         if not (0 <= q["ans"] < n):
-            issues.append(f"{loc}: answer index {q['ans']} out of range for {n} options")
-
+            issues.append(
+                f"{loc}: answer index {q['ans']} out of range for {n} options"
+            )
         for j, opt in enumerate(opts):
             if not opt:
                 issues.append(f"{loc} opt[{j}]: empty")
             if odd_quote_count(opt):
-                issues.append(
-                    f"{loc} opt[{j}]: unbalanced quotes — likely split on a comma; "
-                    f"wrap the original option in parentheses. Got: {opt!r}"
-                )
+                issues.append(f"{loc} opt[{j}]: unbalanced quotes. Got: {opt!r}")
 
     return issues
 
