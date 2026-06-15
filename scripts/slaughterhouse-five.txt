@@ -1,0 +1,291 @@
+$TITLE Slaughterhouse-Five
+$AUTHOR Kurt Vonnegut
+
+@STYLE
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap');
+:root {
+--qe-font-serif: 'Cutive Mono', 'Courier New', monospace;
+--qe-font-body: 'Old Standard TT', Georgia, serif;
+--qe-font-label: 'Space Mono', monospace;
+--qe-surface: rgba(217,122,46,0.04);
+--qe-border: rgba(217,122,46,0.16);
+--qe-border-hi: rgba(217,122,46,0.46);
+--qe-text: #d4c8b8;
+--qe-text-muted: #6a5d50;
+--qe-accent: #d97a2e;
+--qe-accent-lo: rgba(217,122,46,0.08);
+--qe-btn-bg: rgba(217,122,46,0.06);
+--qe-btn-text: #d4c8b8;
+--qe-btn-hover-bg: rgba(217,122,46,0.20);
+--qe-btn-hover-text: #f0e6d8;
+--qe-correct: #8acd9e;
+--qe-correct-bg: rgba(138,205,158,0.10);
+--qe-wrong: #b84a3a;
+--qe-wrong-bg: rgba(184,74,58,0.10);
+--qe-hero-bg: transparent;
+--qe-hero-text: #f0e6d8;
+--qe-score-color: #d97a2e;
+--qe-denom-color: #6a5d50;
+--qe-bd-bg: rgba(217,122,46,0.025);
+--qe-bd-border: rgba(217,122,46,0.10);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+background-color: #08070a;
+background-image:
+radial-gradient(ellipse at 50% 105%, rgba(217,122,46,0.16) 0%, transparent 55%),
+radial-gradient(ellipse at 10% 0%, rgba(184,74,58,0.08) 0%, transparent 48%),
+radial-gradient(ellipse at 90% 20%, rgba(217,122,46,0.05) 0%, transparent 40%),
+repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(217,122,46,0.013) 3px, rgba(217,122,46,0.013) 4px);
+color: #d4c8b8;
+font-family: 'Old Standard TT', Georgia, serif;
+font-size: 1.12rem;
+line-height: 1.72;
+min-height: 100vh;
+position: relative;
+}
+body::before {
+content: '';
+position: fixed;
+inset: 0;
+background-image:
+repeating-linear-gradient(90deg, transparent, transparent 96px, rgba(217,122,46,0.014) 96px, rgba(217,122,46,0.014) 97px),
+repeating-linear-gradient(0deg, transparent, transparent 96px, rgba(217,122,46,0.012) 96px, rgba(217,122,46,0.012) 97px);
+pointer-events: none;
+z-index: 0;
+}
+body::after {
+content: '';
+position: fixed;
+bottom: 0; left: 0; right: 0;
+height: 2px;
+background: linear-gradient(to right, transparent, rgba(217,122,46,0.55), rgba(255,200,120,0.85), rgba(217,122,46,0.55), transparent);
+z-index: 100;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 76px 28px 96px; position: relative; z-index: 1; }
+header { margin-bottom: 60px; padding-bottom: 32px; border-bottom: 1px solid rgba(217,122,46,0.22); position: relative; }
+header::after {
+content: '';
+position: absolute;
+bottom: -1px; left: 0;
+width: 140px; height: 2px;
+background: linear-gradient(to right, #d97a2e, transparent);
+}
+h1 {
+font-family: 'Cutive Mono', 'Courier New', monospace;
+font-size: clamp(2.4rem, 7vw, 3.8rem);
+font-weight: 400;
+letter-spacing: 0.01em;
+line-height: 1.05;
+margin-bottom: 14px;
+color: #f0e6d8;
+text-transform: uppercase;
+}
+.subtitle {
+font-size: 0.66rem;
+color: #6a5d50;
+letter-spacing: 0.34em;
+text-transform: uppercase;
+margin-top: 14px;
+font-family: 'Space Mono', monospace;
+font-weight: 400;
+}
+.subtitle::before { content: '// dispatch from dresden, so it goes // '; color: #d97a2e; }
+STYLE@
+
+{
+    ? The novel opens with which authorial statement about its veracity?
+    % (All this happened, more or less, and the war parts are pretty much true), "What follows is the testimony of a man who never once lied to himself or others", "I, Kurt Vonnegut, swear before the firestorm that every line of this book is fact", "This is a work of imagination, in which any resemblance to actual events is coincidental"
+    ! 0
+    > The first sentence is a hedge: "All this happened, more or less. The war parts, anyway, are pretty much true." The book begins by admitting that memory and witness are unreliable.
+}
+
+{
+    ? What is the novel's full subtitle, beneath "Slaughterhouse-Five"?
+    % "A Soldier's Lament for the Dead of Dresden", (The Children's Crusade: A Duty-Dance with Death), "A Tralfamadorian Romance in Four Dimensions", "The Hoosier at War: A True Story"
+    ! 1
+    > The 1213 Children's Crusade is invoked because the soldiers were boys. "Duty-dance with death" is borrowed from Celine, one of the book's epigraphs.
+}
+
+{
+    ? Why does Vonnegut promise Mary O'Hare, his war buddy's wife, that he will subtitle the book "The Children's Crusade"?
+    % She had asked him to dedicate the book to the civilian dead of Dresden, (She was furious because she assumed he would write a war story that made middle-aged men look glamorous, when the actual soldiers had been babies), She wanted the title to expose the Catholic Church's role in financing the war, She had refused to let him interview her husband Bernard unless he agreed to the subtitle
+    ! 1
+    > "You'll pretend you were men instead of babies, and you'll be played in the movies by Frank Sinatra and John Wayne." Her fury reorients the whole book.
+}
+
+{
+    ? In civilian life Billy Pilgrim works as what, in Ilium, New York?
+    % A high school history teacher who coaches the chess team, (An optometrist who married his school's founder's daughter and inherited the practice), A claims adjuster for a midsize insurance firm in Schenectady, The night manager of a small downtown movie theater
+    ! 1
+    > He marries Valencia Merble, daughter of the optometry school's founder. Prescribing lenses becomes a quiet metaphor for prescribing a way of seeing.
+}
+
+{
+    ? Chapter 2 opens with which famous one-line declaration about Billy?
+    % "Billy Pilgrim was born in 1922 and was an only child", (Listen: Billy Pilgrim has come unstuck in time), "Billy Pilgrim, the optometrist, was a man who had given up on all questions", "The first thing to be said of Billy Pilgrim is that he was lucky"
+    ! 1
+    > The single word "Listen:" turns the chapter into oral testimony. "Unstuck" treats time as adhesive, something a person could come loose from.
+}
+
+{
+    ? In what military situation is Billy Pilgrim captured by the Germans?
+    % (Wandering behind enemy lines in the Ardennes after the Battle of the Bulge, separated from his unit, with no helmet, no weapon, and a civilian dance pump on one foot), Surrendering at Bastogne after the relief column fails to reach him, Shot down as a tail gunner during a raid on the Saar oilfields, Trapped in a French farmhouse during the breakout from Normandy
+    ! 0
+    > He is a chaplain's assistant with no combat training. He drifts through the snow in a silver dance pump he had taken from a Belgian theater until German scouts find him.
+}
+
+{
+    ? Who is Roland Weary, and what does he claim about Billy at the moment of his own death?
+    % A British paratrooper who shields Billy in the boxcar and dies saving him, (An anti-tank gunner from Pittsburgh who fancies himself one of "the Three Musketeers" with two scouts; dying of gangrene in a boxcar, he tells everyone Billy is to blame), A German-American sergeant who teaches Billy to play Skat and dies in the firestorm, A Red Cross volunteer who befriends Billy in Stalag IV-B and dies of typhus
+    ! 1
+    > Weary's feet rot inside the wooden clogs the Germans gave him after taking his boots. With his last breath he names Billy as the reason he is dying.
+}
+
+{
+    ? What does Paul Lazzaro tell Billy in the boxcar, and what does Billy come to believe about him?
+    % That he will protect Billy in honor of Weary's last words, (That the sweetest thing in life is revenge, and that he will have Billy shot one day; Billy comes to know the exact date of his own assassination), That he has already poisoned the Germans' food and that only Billy can be saved from it, That he plans to escape with Billy on the first night they reach the camp
+    ! 1
+    > Lazzaro keeps a mental ledger of everyone who has wronged him. Billy claims to know, through Tralfamadorian foreknowledge, that Lazzaro will have him shot.
+}
+
+{
+    ? Who is "Wild Bob," and what is his characteristic refrain to fellow prisoners?
+    % (A dying colonel who insists his men called him "Wild Bob" and invites everyone to look him up in Cody, Wyoming), A Bokononist preacher Billy meets in the boxcar from Luxembourg, The leader of the British POWs in the model compound, A drunken German guard who lets the Americans keep their pillboxes
+    ! 0
+    > "If you're ever in Cody, Wyoming, just ask for Wild Bob." He commands the Four-Fifty-First, has lost nearly all his men, and dies of pneumonia shortly after the speech.
+}
+
+{
+    ? Where in Dresden are Billy and the other American POWs housed, and what does the building's name mean?
+    % An abandoned schoolhouse marked Schule Vier, (A disused stockyard building marked Schlachthof-funf, German for Slaughterhouse Five), A converted scenery warehouse marked Theatersaal Funf, A factory dormitory marked Werk Funf, attached to the malt-syrup plant where they worked
+    ! 1
+    > Slaughterhouse-Funf becomes their literal address, painted on a sign so the guards can march them back. The building gives the novel its title.
+}
+
+{
+    ? On what date does the firebombing of Dresden occur in the novel, the same anniversary on which Billy claims he will be assassinated?
+    % April 1, July 4, (February 13), December 8
+    ! 2
+    > The Allied raid began the night of February 13, 1945. Billy is shot speaking to a crowd in Chicago on February 13, 1976, thirty-one years to the day.
+}
+
+{
+    ? What was the POWs' daily work in Dresden, in the weeks before the raid?
+    % Loading rubble from earlier raids onto freight cars, (Producing a malt syrup fortified with vitamins, intended for pregnant women, in a factory near the Contagious Diseases Hospital), Sorting captured documents for an SS intelligence office, Repairing streetcar lines damaged by stray Allied bombs
+    ! 1
+    > The starving prisoners eat the syrup constantly, hiding the evidence with their tongues. The "vitamin-enriched" detail underscores the bureaucratic absurdity of it all.
+}
+
+{
+    ? Edgar Derby, the middle-aged high school teacher, is executed by the Germans after the raid for what?
+    % Striking a guard while the firestorm raged, (Stealing a teapot from the ruins of Dresden), Reading aloud from a forbidden book in the prison yard, Attempting to escape during the march to the rail yards
+    ! 1
+    > Vonnegut signals this absurd execution from chapter one as the climax he cannot quite reach. The grand horror of a hundred thousand deaths reduces to one schoolteacher and a teapot.
+}
+
+{
+    ? Why do the British officers at the model POW compound feast the arriving Americans?
+    % They are celebrating Christmas and the imminent end of the war, (Years of clerical error had caused the Germans to send them many times the Red Cross parcels they were owed; they were rich in food, soap, and cigarettes), The British colonel is a former hotelier who insists on hospitality as a matter of pride, They are bribing the Americans not to attempt escapes that would compromise the camp
+    ! 1
+    > Each Englishman is described as a fanatic about hygiene and richer than most kings had been. Their candlelit Cinderella production briefly turns the war into a musical.
+}
+
+{
+    ? Who is Howard W. Campbell, Jr., and what does he do when he visits the American POWs?
+    % (An American who became a Nazi propagandist; he arrives in a uniform of his own design to recruit POWs into a "Free American Corps" to fight the Russians), A Quaker chaplain who attempts to convert Billy to pacifism, An American war photographer who later writes the official Air Force history of Dresden, A German-American interpreter who quietly sabotages the SS orders
+    ! 0
+    > Campbell is the protagonist of Vonnegut's earlier novel Mother Night. Edgar Derby rises and denounces him in the speech Vonnegut had been promising himself he would one day write.
+}
+
+{
+    ? How do the Americans survive the firestorm?
+    % By fleeing into the cellars of the Dresden zoo, (Sheltering in a meat locker dug two stories into the ground beneath the slaughterhouse), Hidden by a Dresdener family in the crypt of a Catholic church, By marching out of the city the morning before, on a routine work detail
+    ! 1
+    > The locker holds the prisoners, the guards, and the carcasses of two horses. When they emerge the city is a sea of ash and the moon hangs over it.
+}
+
+{
+    ? How are the Tralfamadorians described physically?
+    % (Two feet high, green, shaped like plumber's friends, with a single hand on top and an eye in the palm of that hand), Tall featureless silver columns with no apparent sensory organs, Translucent invertebrates suspended in clouds of methane gas, Crystalline lattices that exchange thoughts only through ultraviolet light
+    ! 0
+    > The eye in the suction-cup hand sees in four dimensions. The toilet-plunger silhouette is one of the running gags of the book.
+}
+
+{
+    ? How do the Tralfamadorians perceive time, in their own analogy?
+    % (As a range of mountains seen all at once, with every moment always existing; they look at the moments they like, the way humans look at views), As a river they can dam and divert at will, As a single point that holds all past and future events in superposition, As a film reel they can rewind, but only once per lifetime
+    ! 0
+    > Earthlings, in their account, are stuck looking down a long pipe at one moment at a time. The mountain image grounds the novel's resigned cosmology.
+}
+
+{
+    ? When Billy asks how the Tralfamadorians can live peaceably knowing how the universe ends, what do they recommend?
+    % That they constantly meditate on the inevitability of the end, (That one ignore the bad moments and concentrate on the good ones, since every moment exists forever), That they refuse to know the future, treating foreknowledge as a curse, That they put the doomed pilot to death before he can make the fatal mistake
+    ! 1
+    > A Tralfamadorian test pilot will press a button and detonate the universe with a new spacecraft fuel; they have always known it and always will. "There is nothing we can do about it, so we simply don't look at it."
+}
+
+{
+    ? Who is Montana Wildhack?
+    % A Tralfamadorian guide who teaches Billy their flickering language, (A twenty-year-old movie star kidnapped by the Tralfamadorians to share Billy's geodesic-domed zoo enclosure and bear his child), An optometrist's receptionist with whom Billy has an affair in Ilium, A war widow who runs the rooming house where Billy hides after the plane crash
+    ! 1
+    > Initially terrified, she becomes trusting and even tender. She wears a silver locket between her breasts inscribed with the Serenity Prayer.
+}
+
+{
+    ? Where does the Serenity Prayer ("God grant me the serenity to accept the things I cannot change...") appear in Billy's life?
+    % Tattooed on Paul Lazzaro's chest as a private joke, (Framed on the wall of Billy's optometry office, and engraved on Montana Wildhack's locket), Embroidered into the lining of Billy's silver dance pump, Recited by the Tralfamadorian guide who first greets Billy in the dome
+    ! 1
+    > Vonnegut adds the famous dry kicker: "Among the things Billy Pilgrim could not change were the past, the present, and the future." The prayer is sincere, satirical, and Tralfamadorian all at once.
+}
+
+{
+    ? Where does Billy first encounter the writings of Kilgore Trout, and through whom?
+    % In a Dresden bookshop just before the raid, On a used-book stall in Provincetown during his honeymoon, In a German POW library run by the Red Cross, (At a veterans' hospital in Lake Placid, where his ward-mate Eliot Rosewater keeps a stash of Trout paperbacks under his bed)
+    ! 3
+    > Rosewater, also a veteran, has decided science fiction is the only literature that can take the war seriously. Billy meets Trout in person years later in Ilium.
+}
+
+{
+    ? How does Valencia Pilgrim die?
+    % Struck by a hit-and-run driver outside the optometry office, (She drives a damaged Cadillac to the Vermont hospital after Billy's plane crash; the broken exhaust fills the car with carbon monoxide), She dies in the same plane crash as Billy, of a head injury, A blood clot during a cosmetic surgery she undergoes to please Billy
+    ! 1
+    > The exhaust is severed in a fender-bender on the way. She arrives at the hospital "the color of stewed rhubarb" and is dead within the hour.
+}
+
+{
+    ? Billy Pilgrim is the lone survivor of what disaster, the event that precipitates his public claims about Tralfamadore?
+    % (A chartered plane carrying optometrists to a convention crashes into Sugarbush Mountain in Vermont), A propane explosion at the Ilium Lions Club banquet, A pileup on the Tappan Zee Bridge during a January fog, A Lake Placid ski-lift collapse
+    ! 0
+    > Most of the optometrists are killed. After brain surgery Billy begins writing letters to the Ilium News-Leader about his abduction by the saucer.
+}
+
+{
+    ? Bertram Copeland Rumfoord shares a hospital room with Billy after the crash. What is his project?
+    % A novel about the Children's Crusade, A pamphlet defending Edgar Derby's executioners, (A one-volume history of the U.S. Army Air Corps in World War II, including a still-suppressed account of the Dresden raid), The official biography of Howard W. Campbell, Jr.
+    ! 2
+    > Rumfoord, a Harvard professor and Air Force Reserve historian, refuses to believe Billy was at Dresden until forced to. He keeps muttering that the raid had been a military necessity.
+}
+
+{
+    ? What phrase does the narrator append every time a death occurs in the novel, borrowed from the Tralfamadorians?
+    % "Amen, amen, amen", "Busy, busy, busy", "And so to bed", (So it goes)
+    ! 3
+    > "So it goes" appears after every death in the book, from a flat champagne bottle to a hundred thousand civilians. Its evenness is the point.
+}
+
+{
+    ? How do the Tralfamadorians describe their own novels, in a passage many critics read as Vonnegut's description of Slaughterhouse-Five itself?
+    % Long sustained chapters that build toward a single cathartic ending, Sacred cycles of myth retold each generation, in which the small details change but the shape never does, Wordless music played on instruments that no human could hold, (Brief urgent clumps of symbols, no causality, no chronology, no morals, all read at once to produce an image of life that is beautiful, surprising, and deep)
+    ! 3
+    > Slaughterhouse-Five's own form, short paragraphs, time-jumps, no climax, mirrors the description. The Tralfamadorian aesthetic is the book's instruction manual.
+}
+
+{
+    ? The novel ends, amid the rubble of Dresden after the war, with what sound?
+    % (A bird talking to Billy and saying "Poo-tee-weet?"), The boots of Russian soldiers marching into the city square, A single muffled rifle shot, somewhere beyond the wall, Children singing "Lili Marlene" out of an upstairs window
+    ! 0
+    > Vonnegut promises this from chapter one: "There is nothing intelligent to say about a massacre. Everybody is supposed to be dead... And what do the birds say? All there is to say about a massacre, things like Poo-tee-weet?"
+}
