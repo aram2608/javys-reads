@@ -150,7 +150,7 @@ STYLE@
 
 {
     ? After masked men stripped Malaquias Cuervo naked and robbed him on the road to Guadalajara, what did they give him when he invoked his dignity as mayor?
-    % A napkin, A blanket from their horses, His rosary, the only item of no monetary value, A spare sombrero from their saddlebags
+    % A napkin, A blanket from their horses, (His rosary, the only item of no monetary value), A spare sombrero from their saddlebags
     ! 0
     > His attackers were unimpressed by civic rank. They provided a napkin -- a memorable humiliation for a man who wielded real political power in Tequila.
 }

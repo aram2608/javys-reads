@@ -221,7 +221,7 @@ STYLE@
 
 {
     ? Bokonon's calypso about the human predicament begins, "Tiger got to hunt, bird got to fly; man got to sit and wonder, why, why, why?" How does the verse end?
-    % (Tiger got to sleep, bird got to land; man got to fall down, understand), (Tiger got to sleep, bird got to land; man got to tell himself he understand), (Tiger got to roam, bird got to nest; man got to ask himself, what is best), Tiger got to rest, bird got to know; man got to fool himself and go
+    % (Tiger got to sleep, bird got to land; man got to fall down, understand), (Tiger got to sleep, bird got to land; man got to tell himself he understand), (Tiger got to roam, bird got to nest; man got to ask himself, what is best), (Tiger got to rest, bird got to know; man got to fool himself and go)
     ! 1
     > The joke is theological. The animals get to do what they are made for, while humans are stuck performing comprehension. The calypso is one of the cleanest statements of Vonnegut's view of consciousness.
 }

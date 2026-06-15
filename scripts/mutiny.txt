@@ -123,7 +123,7 @@ STYLE@
 
 {
     ? What were the three phases of Starbucks' anti-union playbook?
-    % Spy, discipline, fire, Warn, bribe, terminate, High touch, rule book, conditional love, Mediate, incentivize, litigate
+    % (Spy, discipline, fire), (Warn, bribe, terminate), (High touch, rule book, conditional love), (Mediate, incentivize, litigate)
     ! 2
     > First executives flooded stores with attention, then the discipline policy tightened, then wages rose at non-union locations only.
 }
@@ -151,7 +151,7 @@ STYLE@
 
 {
     ? What three things did the WGA demand regarding AI during their strike?
-    % Royalties from AI outputs, transparency, and attribution, A ban on AI writing scripts, source material, and training on studio IP, AI profit-sharing, credit disclosure, and human approval for all AI content, A moratorium on AI tools pending federal review
+    % (Royalties from AI outputs, transparency, and attribution), (A ban on AI writing scripts, source material, and training on studio IP), (AI profit-sharing, credit disclosure, and human approval for all AI content), A moratorium on AI tools pending federal review
     ! 1
     > Writers feared studios would use AI to generate scripts from existing IP indefinitely, eliminating the need for human writers.
 }
@@ -179,14 +179,14 @@ STYLE@
 
 {
     ? What economic analogy does the book use to explain the glut of graduate students?
-    % Supply and demand curves shifting left, Too many workers chasing too few jobs, like too many dollars chasing too few goods, A prisoner's dilemma where all students lose by competing, A race to the bottom identical to currency devaluation
+    % Supply and demand curves shifting left, (Too many workers chasing too few jobs, like too many dollars chasing too few goods), A prisoner's dilemma where all students lose by competing, A race to the bottom identical to currency devaluation
     ! 1
     > Universities admitted as many grad students as possible, creating a talent surplus that depressed wages and handed power to employers.
 }
 
 {
     ? What did Howard Schultz do that backfired and intensified the Starbucks union effort?
-    % Publicly called organizers Marxists in a shareholder letter, Closed unionized stores and blamed low sales, Leaked union store addresses to the public, causing harassment, Hired a strike-breaking firm to staff union locations
+    % Publicly called organizers Marxists in a shareholder letter, Closed unionized stores and blamed low sales, (Leaked union store addresses to the public, causing harassment), Hired a strike-breaking firm to staff union locations
     ! 2
     > The harassment that followed the leaked list angered workers who had been on the fence, pushing them further into the union camp.
 }
