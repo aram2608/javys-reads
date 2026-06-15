@@ -131,9 +131,9 @@ STYLE@
 
 {
     ? In what military situation is Billy Pilgrim captured by the Germans?
-    % (Wandering behind enemy lines in the Ardennes after the Battle of the Bulge, separated from his unit, with no helmet, no weapon, and a civilian dance pump on one foot), Surrendering at Bastogne after the relief column fails to reach him, Shot down as a tail gunner during a raid on the Saar oilfields, Trapped in a French farmhouse during the breakout from Normandy
+    % (Wandering behind enemy lines in the Ardennes after the Battle of the Bulge, separated from his unit, with no helmet, no weapon, and a shoddy pair of shoes), Surrendering at Bastogne after the relief column fails to reach him, Shot down as a tail gunner during a raid on the Saar oilfields, Trapped in a French farmhouse during the breakout from Normandy
     ! 0
-    > He is a chaplain's assistant with no combat training. He drifts through the snow in a silver dance pump he had taken from a Belgian theater until German scouts find him.
+    > He is a chaplain's assistant with no combat training. He bobs up and down up and down along the way.
 }
 
 {
@@ -144,8 +144,8 @@ STYLE@
 }
 
 {
-    ? What does Paul Lazzaro tell Billy in the boxcar, and what does Billy come to believe about him?
-    % That he will protect Billy in honor of Weary's last words, (That the sweetest thing in life is revenge, and that he will have Billy shot one day; Billy comes to know the exact date of his own assassination), That he has already poisoned the Germans' food and that only Billy can be saved from it, That he plans to escape with Billy on the first night they reach the camp
+    ? What does Paul Lazzaro tell Billy in hospital?
+    % That he will protect Billy in honor of Weary's last words, (That the sweetest thing in life is revenge, and that he will have Billy shot one day), That he has already poisoned the Germans' food and that only Billy can be saved from it, That he plans to escape with Billy on the first night they reach the camp
     ! 1
     > Lazzaro keeps a mental ledger of everyone who has wronged him. Billy claims to know, through Tralfamadorian foreknowledge, that Lazzaro will have him shot.
 }
@@ -154,14 +154,14 @@ STYLE@
     ? Who is "Wild Bob," and what is his characteristic refrain to fellow prisoners?
     % (A dying colonel who insists his men called him "Wild Bob" and invites everyone to look him up in Cody, Wyoming), A Bokononist preacher Billy meets in the boxcar from Luxembourg, The leader of the British POWs in the model compound, A drunken German guard who lets the Americans keep their pillboxes
     ! 0
-    > "If you're ever in Cody, Wyoming, just ask for Wild Bob." He commands the Four-Fifty-First, has lost nearly all his men, and dies of pneumonia shortly after the speech.
+    > "If you're ever in Cody, Wyoming, just ask for Wild Bob."
 }
 
 {
     ? Where in Dresden are Billy and the other American POWs housed, and what does the building's name mean?
     % An abandoned schoolhouse marked Schule Vier, (A disused stockyard building marked Schlachthof-funf, German for Slaughterhouse Five), A converted scenery warehouse marked Theatersaal Funf, (A factory dormitory marked Werk Funf, attached to the malt-syrup plant where they worked)
     ! 1
-    > Slaughterhouse-Funf becomes their literal address, painted on a sign so the guards can march them back. The building gives the novel its title.
+    > Slaughterhouse-Funf becomes their literal address, painted on a sign so the guards can march them back.
 }
 
 {
@@ -175,14 +175,14 @@ STYLE@
     ? What was the POWs' daily work in Dresden, in the weeks before the raid?
     % Loading rubble from earlier raids onto freight cars, (Producing a malt syrup fortified with vitamins, intended for pregnant women, in a factory near the Contagious Diseases Hospital), Sorting captured documents for an SS intelligence office, Repairing streetcar lines damaged by stray Allied bombs
     ! 1
-    > The starving prisoners eat the syrup constantly, hiding the evidence with their tongues. The "vitamin-enriched" detail underscores the bureaucratic absurdity of it all.
+    > The starving prisoners eat the syrup constantly, with spoons hidden throughout the compound.
 }
 
 {
     ? Edgar Derby, the middle-aged high school teacher, is executed by the Germans after the raid for what?
     % Striking a guard while the firestorm raged, (Stealing a teapot from the ruins of Dresden), Reading aloud from a forbidden book in the prison yard, Attempting to escape during the march to the rail yards
     ! 1
-    > Vonnegut signals this absurd execution from chapter one as the climax he cannot quite reach. The grand horror of a hundred thousand deaths reduces to one schoolteacher and a teapot.
+    > Vonnegut signals this absurd execution from chapter one as the climax he cannot quite reach.
 }
 
 {
@@ -196,7 +196,7 @@ STYLE@
     ? Who is Howard W. Campbell, Jr., and what does he do when he visits the American POWs?
     % (An American who became a Nazi propagandist; he arrives in a uniform of his own design to recruit POWs into a "Free American Corps" to fight the Russians), A Quaker chaplain who attempts to convert Billy to pacifism, An American war photographer who later writes the official Air Force history of Dresden, A German-American interpreter who quietly sabotages the SS orders
     ! 0
-    > Campbell is the protagonist of Vonnegut's earlier novel Mother Night. Edgar Derby rises and denounces him in the speech Vonnegut had been promising himself he would one day write.
+    > Campbell happens to be the protagonist of Vonnegut's earlier novel Mother Night.
 }
 
 {
@@ -210,7 +210,7 @@ STYLE@
     ? How are the Tralfamadorians described physically?
     % (Two feet high, green, shaped like plumber's friends, with a single hand on top and an eye in the palm of that hand), Tall featureless silver columns with no apparent sensory organs, Translucent invertebrates suspended in clouds of methane gas, Crystalline lattices that exchange thoughts only through ultraviolet light
     ! 0
-    > The eye in the suction-cup hand sees in four dimensions. The toilet-plunger silhouette is one of the running gags of the book.
+    > They close their little hands when they are unhappy.
 }
 
 {
@@ -221,24 +221,24 @@ STYLE@
 }
 
 {
-    ? When Billy asks how the Tralfamadorians can live peaceably knowing how the universe ends, what do they recommend?
+    ? When Billy asks how the Tralfamadorians can live peacefully knowing how the universe ends, what do they recommend?
     % That they constantly meditate on the inevitability of the end, (That one ignore the bad moments and concentrate on the good ones, since every moment exists forever), (That they refuse to know the future, treating foreknowledge as a curse), That they put the doomed pilot to death before he can make the fatal mistake
     ! 1
-    > A Tralfamadorian test pilot will press a button and detonate the universe with a new spacecraft fuel; they have always known it and always will. "There is nothing we can do about it, so we simply don't look at it."
+    > A Tralfamadorian test pilot will press a button and detonate the universe with a new spacecraft fuel; they have always known it and always will, so it's better to look at happy things instead.
 }
 
 {
     ? Who is Montana Wildhack?
-    % A Tralfamadorian guide who teaches Billy their flickering language, (A twenty-year-old movie star kidnapped by the Tralfamadorians to share Billy's geodesic-domed zoo enclosure and bear his child), An optometrist's receptionist with whom Billy has an affair in Ilium, A war widow who runs the rooming house where Billy hides after the plane crash
+    % A Tralfamadorian guide who teaches Billy their flickering language, (A twenty-year-old movie star kidnapped by the Tralfamadorians to share Billy's geodesic-domed zoo enclosure), An optometrist's receptionist with whom Billy has an affair in Ilium, A war widow who runs the rooming house where Billy hides after the plane crash
     ! 1
-    > Initially terrified, she becomes trusting and even tender. She wears a silver locket between her breasts inscribed with the Serenity Prayer.
+    > Initially terrified, she becomes trusting and even tender. She wears a silver locket between her breasts inscribed with the Serenity prayer.
 }
 
 {
     ? Where does the Serenity Prayer ("God grant me the serenity to accept the things I cannot change...") appear in Billy's life?
     % Tattooed on Paul Lazzaro's chest as a private joke, (Framed on the wall of Billy's optometry office, and engraved on Montana Wildhack's locket), Embroidered into the lining of Billy's silver dance pump, Recited by the Tralfamadorian guide who first greets Billy in the dome
     ! 1
-    > Vonnegut adds the famous dry kicker: "Among the things Billy Pilgrim could not change were the past, the present, and the future." The prayer is sincere, satirical, and Tralfamadorian all at once.
+    > Vonnegut adds rather dryly: "Among the things Billy Pilgrim could not change were the past, the present, and the future." The prayer is sincere, satirical, and Tralfamadorian all at once.
 }
 
 {
@@ -252,7 +252,7 @@ STYLE@
     ? How does Valencia Pilgrim die?
     % Struck by a hit-and-run driver outside the optometry office, (She drives a damaged Cadillac to the Vermont hospital after Billy's plane crash; the broken exhaust fills the car with carbon monoxide), (She dies in the same plane crash as Billy, of a head injury), A blood clot during a cosmetic surgery she undergoes to please Billy
     ! 1
-    > The exhaust is severed in a fender-bender on the way. She arrives at the hospital "the color of stewed rhubarb" and is dead within the hour.
+    > The exhaust is severed in a fender-bender on the way.
 }
 
 {
@@ -264,23 +264,23 @@ STYLE@
 
 {
     ? Bertram Copeland Rumfoord shares a hospital room with Billy after the crash. What is his project?
-    % A novel about the Children's Crusade, A pamphlet defending Edgar Derby's executioners, (A one-volume history of the U.S. Army Air Corps in World War II, including a still-suppressed account of the Dresden raid), (The official biography of Howard W. Campbell, Jr.)
+    % A novel about the Children's Crusade, A pamphlet defending Edgar Derby's executioners, (A one-volume history of the U.S. Army Air Corps in World War II), (The official biography of Howard W. Campbell, Jr.)
     ! 2
-    > Rumfoord, a Harvard professor and Air Force Reserve historian, refuses to believe Billy was at Dresden until forced to. He keeps muttering that the raid had been a military necessity.
+    > Rumfoord, a Harvard professor and Air Force Reserve historian, refuses to believe Billy was at Dresden until forced to. He views Billy as a weakling that deserves to die.
 }
 
 {
     ? What phrase does the narrator append every time a death occurs in the novel, borrowed from the Tralfamadorians?
     % ("Amen, amen, amen"), ("Busy, busy, busy"), "And so to bed", (So it goes)
     ! 3
-    > "So it goes" appears after every death in the book, from a flat champagne bottle to a hundred thousand civilians. Its evenness is the point.
+    > "So it goes" appears after every death in the book, from a flat champagne bottle to a hundred thousand civilians.
 }
 
 {
     ? How do the Tralfamadorians describe their own novels, in a passage many critics read as Vonnegut's description of Slaughterhouse-Five itself?
-    % Long sustained chapters that build toward a single cathartic ending, (Sacred cycles of myth retold each generation, in which the small details change but the shape never does), Wordless music played on instruments that no human could hold, (Brief urgent clumps of symbols, no causality, no chronology, no morals, all read at once to produce an image of life that is beautiful, surprising, and deep)
+    % Long sustained chapters that build toward a single cathartic ending, (Sacred cycles of myth retold each generation, in which the small details change but the shape never does), Wordless music played on instruments that no human could hold, (No beginning, no middle, no end, no suspense, no moral, no causes, no effects)
     ! 3
-    > Slaughterhouse-Five's own form, short paragraphs, time-jumps, no climax, mirrors the description. The Tralfamadorian aesthetic is the book's instruction manual.
+    > Slaughterhouse-Five's own form, short paragraphs, time-jumps, no climax, mirrors the description.
 }
 
 {
