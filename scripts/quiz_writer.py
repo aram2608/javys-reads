@@ -59,6 +59,30 @@ class QuizData(TypedDict):
     style: str
 
 
+SNIPPET = """\
+@STYLE
+    Style block. Run program with --styles to see all available quiz-engine
+    styles. Defaults to a predefined style if not used.
+STYLE@
+
+$TITLE  My Book Title
+$AUTHOR Author Name
+
+{
+    ? Question text
+    % Option A, Option B, Option C, Option D
+    ! 0
+    > Explanation shown after answering
+}
+
+{
+    ? Question two
+    % A, B, C, D
+    ! 3
+    > Explanation
+}
+"""
+
 STYLE_OPTS = """\
     --qe-font-serif:  Georgia, serif;
     --qe-font-body:   system-ui, sans-serif;
@@ -336,6 +360,7 @@ def render(data: QuizData) -> str:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Convert a .txt quiz file to HTML.")
+    _ = ap.add_argument("--init", type=str, help="Initialize a new file")
     _ = ap.add_argument("file", nargs="?", help="Input .txt file")
     _ = ap.add_argument(
         "-o", "--output", help="Output .html file (default: same name as input)"
@@ -350,6 +375,11 @@ def main() -> None:
 
     if args.styles:
         print(STYLE_OPTS)
+        return
+
+    if args.init:
+        src = Path(args.init)
+        _ = src.write_text(SNIPPET, encoding="utf-8")
         return
 
     if not args.file:

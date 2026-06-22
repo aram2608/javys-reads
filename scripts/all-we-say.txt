@@ -1,0 +1,309 @@
+@STYLE
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@500;700;800&display=swap');
+
+:root {
+  --qe-font-serif: 'Playfair Display', Georgia, serif;
+  --qe-font-body: 'EB Garamond', Georgia, serif;
+  --qe-font-label: 'Courier Prime', 'Courier New', monospace;
+  --qe-surface: rgba(201,168,106,0.04);
+  --qe-border: rgba(201,168,106,0.14);
+  --qe-border-hi: rgba(201,168,106,0.42);
+  --qe-text: #e6ddc9;
+  --qe-text-muted: #8a7c63;
+  --qe-accent: #c9a86a;
+  --qe-accent-lo: rgba(201,168,106,0.06);
+  --qe-btn-bg: rgba(201,168,106,0.06);
+  --qe-btn-text: #e6ddc9;
+  --qe-btn-hover-bg: rgba(201,168,106,0.22);
+  --qe-btn-hover-text: #f6efdd;
+  --qe-correct: #6f9ac0;            /* federal blue  — "one story" */
+  --qe-correct-bg: rgba(111,154,192,0.12);
+  --qe-wrong: #c0563f;              /* oxblood red   — "the other"  */
+  --qe-wrong-bg: rgba(192,86,63,0.12);
+  --qe-hero-bg: transparent;
+  --qe-hero-text: #f3ecd9;
+  --qe-score-color: #c9a86a;
+  --qe-denom-color: #8a7c63;
+  --qe-bd-bg: rgba(201,168,106,0.025);
+  --qe-bd-border: rgba(201,168,106,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #0c0a07;
+  background-image:
+    radial-gradient(ellipse at 12% 0%, rgba(201,168,106,0.13) 0%, transparent 52%),
+    radial-gradient(ellipse at 88% 100%, rgba(192,86,63,0.05) 0%, transparent 50%),
+    /* manuscript ruling — the speechwriter's lined draft */
+    repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(201,168,106,0.020) 27px, rgba(201,168,106,0.020) 28px),
+    /* faint laid-paper vertical hairlines */
+    repeating-linear-gradient(90deg, transparent, transparent 5px, rgba(201,168,106,0.008) 5px, rgba(201,168,106,0.008) 6px);
+  color: #e6ddc9;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.16rem;
+  line-height: 1.74;
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  /* wide columnar rules — the feel of a broadside printed in columns */
+  background-image:
+    repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(201,168,106,0.015) 119px, rgba(201,168,106,0.015) 120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  /* gilt edge */
+  background: linear-gradient(to right, transparent, rgba(201,168,106,0.55), rgba(243,236,217,0.90), rgba(201,168,106,0.55), transparent);
+  z-index: 100;
+}
+
+.container { max-width: 720px; margin: 0 auto; padding: 76px 28px 96px; position: relative; z-index: 1; }
+
+header { margin-bottom: 60px; padding-bottom: 32px; border-bottom: 1px solid rgba(201,168,106,0.18); position: relative; }
+header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 110px; height: 2px;
+  background: linear-gradient(to right, #c9a86a, transparent);
+}
+
+h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.6rem, 7.6vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.04;
+  margin-bottom: 14px;
+  color: #f3ecd9;
+}
+
+.subtitle {
+  font-size: 0.66rem;
+  color: #8a7c63;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  margin-top: 14px;
+  font-family: 'Courier Prime', monospace;
+  font-weight: 400;
+}
+.subtitle::before { content: '\201C be true to what you said on paper \201D \00A0\00A0'; color: #c9a86a; }
+STYLE@
+
+$TITLE  All We Say
+$AUTHOR Ben Rhodes
+
+# Benjamin Franklin: Founding Compromise
+# Red Jacket: We have always lived here
+# Maria Stewart: Knowledge is power
+# Alexander Stephens: The cornerstone
+# Abraham Lincoln: Second Inaugural
+
+# Frederick Douglas: Defense of the Chinese
+# Anna Dickinson: Idiots and Woman
+# Mary Lease: Wall Street Owns this country
+# Louis Brandeis: Americanism
+# Franklin Delano Rooselvelt: Four Freedoms
+
+# Martin Luther King and FDR: An American Dream
+# Dolores Huerta: You cannot pretend we do not exist
+# Ronald Reagan: Speech at Evangelical Conference at Florida "evil empire"
+# Barack Obama: Race Speech
+# Donald Trump: I will win for you
+
+{
+    ? Benjamin Franklin is one of the most famous Americans. What "American" notion does he embody?
+    % The imperialist, An aristocratic land owner, A staunch monarchist, The self made man
+    ! 3
+    > Franklin was a self taught polymath that made up his own wealth brick by brick. He espoused a nuanced middle ground with revulsion towards both populism and the snooty elite.
+}
+
+{
+    ? What was the crux of Franklin's argument in his speech?
+    % A compromise was needed to found the country, Imperialism was required to expand the country,The British needed to be fullly routed from the New World, The new government required strong state laws
+    ! 0 
+    > He stated, "For when you assemble a number of men to have the advantage of their joint wisdom, you inevitably assemble with those men, all their prejudices, their passions, their errors of opinion, their local interests, and their selfish views". We needed to put aside and differences to build a future, one we can change.
+}
+
+{
+    ? What was the backdrop prior to Red Jacket's speech? 
+    % The US was becoming stronger; spreading its Christian message, The British were expanding southwards from Canada, President Jefferson had bought land from the French, The Civil War was spreading
+    ! 0
+    > Reverend Cram visited the Native Americans telling them to switch their ways and see the light of God.
+}
+
+#TODO: Finish this question
+
+{
+    ? Who did Red Jacket represent?
+    % (The Haudenosaunee), The Cherokee Federation, The Blackfoot, The Utes
+    ! 0
+    > Particulary, he represented the Seneca Tribe, he got his name from a gifted British "red jacket". He was an imperfect man, often falling for both the bribe and the bottle, however, he was an exemplary orator and represented what his tribe stood for, its stories and culture.
+}
+
+{
+    ? What irony does Red Jacket point out?
+    % The Americans would fall to their own hubris, The American Dream is built of others' nightmares, Native American culture was better than the American culture, (The Great Spirit created us all, yet we all have different beliefs)
+    ! 3
+    > God (The Great Spirit) created us all, yet his white children and red children have different beliefs. Not only that, the red children kindly sheltered and fed the white children, they paid this back with imperialist expansion and demeaning the Natives as Savages. This is a common denominator in American history, a tension between our ideals and who we are.
+}
+
+{
+    ? What injustice did Maria Stewart experience early on?
+    % (She lost all her loved ones, then her inheritance), She was a victim of the "Colonization" scheme of sending African Americans to Liberia in Africa, She was denied work as teacher, She was left blinded in a hate crime attack
+    ! 0
+    > She lost her husband James Stewart then was cheated of her inheritance by white business owners. Shortly after David Walker and Thomas Paul passed due to tuberculosis. In short succession she lost her husband, revolutionary hero, and pastor.
+}
+
+{
+    ? What message did Maria Stewart wish to tell her fellow black compatriots at the African Masonic Hall?
+    % To violently repel the racist forces of America, (That black men should educate themselves, give up the bottle and vice, and to glorify God), To follow the colonization scheme and save themselves from the American enforced suffering, She wanted her black community to use covert operations to undermine white power
+    ! 1
+    > In a meandering speech extolling God and the righteous anger of the jeremiad on the morally corupt American city on a hill, she made the case for her black community members to seek education and bring themselves up. She lamented that Africa's sons were once the premier philosphers and high brow thinkers yet the white man pronounces himself the superior. She argues the country of American could not have been founded without them and that she laments those who do not wish to fight and lift themselves up.
+}
+
+{
+    ? What cornerstone does Alexander Stephens say the new consitution is rooted on?
+    % (Whites are inherantly a superior race), (The pursuit of freedom is imperative), (State's rights are a God gifted right), (Tariffs are harmful, they must be avoided at all costs)
+    ! 0
+    > Alexander Stephens initially makes his speech about typical complaints: tariffs hurting business, government asking for money to build infrastructure, the executive branch has real congressional power, etc. However, the "cornerstone" of the new Southern America relies on the divine and inherent truth that the White is superior to the inferior races. The mask came off at this point and truly explained what the Civil War was really about.
+}
+
+{
+    ? Alexander Stephens cleverly repackaged the Civil War, likely understanding it would not stand the test of time. How did he repackage it and under what name?
+    % (That the battle was over soverignty from foreign actors, The Pax Americana), (That the war was over the ability to operate business without interference, The Invisible Hand of the Market), (That the war was over state's rights and the protection of a Southern way of life, The Lost Cause), (That the North was inherently evil; compromised by Demonic forces, The Great Rapture)
+    ! 2
+    > He was a shrewd politican, matching his mouselike build and demeanor. He very well understood the way the Southern mind worked and how he could wordsmith a cause that could be propelled into the future. It is one of the most succesful rebranding effors, with implications to this day.
+}
+
+{
+    ? Lincoln's Second Inaugural was rather terse, yet he made a profound and radical claim. What was this claim?
+    % He claimed slavery was a British abomination and should be discarded to cast off our old roots, He claimed that the Civil War was the most important war in the era, (He claimed that even if everyone had to die, ending slavery was worth it), He claimed that Frederick Douglas would make for a fine president
+    ! 2
+    > "Yet, if God wills that [the Civil war] continue until all the wealth piled by the bondsman's two hundred and fifty years of unrequited toil shall be sunk and until every drop of blood drawn with the lash shall be paid by another drawn with the sword ... 'the judgements of the Lord are true and righteous altogether'". In a sense Lincoln amounted slavery to America's original sin, the war being God's judgement.
+}
+
+{
+    ? Frederick Douglas defended a peculiar demographic in his speech. Who was this new group making waves in American life?
+    % The Italians, The Arabs, The Mexicans, The Chinese
+    ! 3
+    > Frederick was defending the Chinese, a new group of migrant labor often working through temorary work permits. They were the new target of hatred and racism following the Reconstruction period.
+}
+
+{
+    ? What apt observaton did Frederick Douglas make, one that would resonate in the future backlash against broader globalization?
+    % (That workers required unions, otherwise they would never receive proper wages), (That the South would always require cheap labor for its capitalist ambitions), (The Chinese would become a global super power and need to be taken seriously), (That racism was a sin across all races, not just the white men)
+    ! 1
+    > "... [the South] want Chinamen who, they hope, will work for next to nothing." In a moment of impressive foresight, Frederick predicted a common issue brought up in modern day discourse: the emand for cheap goods requires cheap labor.
+}
+
+{
+    ? What was Frederick Douglas' vision for America?
+    % (A composite nation, a nation of all creeds and hues), (A country dominated by powerful and inteligent black men), (A secular meca, a place where the intelectuals of the world may convene and discuss current events and issues), (A land of repentance, creating a society where whites must never forget their transgressions against the myriad of races)
+    ! 0
+    > Douglas wanted America to be like himself, mixed, diverse, and willing to embrace change.
+}
+
+{
+    ? In Anna Dickinson's typical humorous manner, who does she say is equally as barred to vote as women?
+    % The blind, The poor, The wicked, The idiots
+    ! 3
+    > Idiots and woman are banned from voting. Yet idiots voted in Andrew Johnson, an irony not lost on her.
+}
+
+{
+    ? According to Mary Lease, who owned the country of America?
+    % The British, Wall Street, The Aristocrats, Hate groups
+    ! 1
+    > She decried Wall Street and the politicians serving its interests. An early pioneer of populism, she mixed in more problematic themes into her speeches and writings. Many of the things she championed for were later instated at the turn of the progressive century and populism became mainstream.
+}
+
+{
+    ? How does Louis Brandeis define an American?
+    % (Someone who yearns for American ideals and migrates here to reach the American Dream), War mongering neocons, Someone both rich and wealthy, (A war veteran, only those who served met his gaze)
+    ! 0
+    > While he makes the case that an immigrant must acclimate themselves, learn the language and look the part, the simple fact that a person wishes to reach this "sacred" land of opportunity was enough to qualify themselves as American.
+}
+
+
+{
+    ? Louis Brandeis definition of a liberal exceptionalism that welcomed immigrants had one flaw. What was this flaw?
+    % (That the welcomed immigrants must be wealthy), The welcomed immigrants must be talented, The welcomed immigrants tended to only be European, The welcomed immigrants must serve in the military and help with the Manifest Destiny
+    ! 2
+    > Brandeis' idea of an exceptional immigrant was incredibly narrow, and reflected a future Zionist ideal.
+}
+
+{
+    ? What idea of American jurisprudence did Louis Brandeis have that was exceptionally profound in its tranformation of America?
+    % (The Consitution and Laws could be changed, they were flexible), That the military ought to have its own legislative branch, The Declaration of Independance was incomplete and needed reform, The president had pleniary authority
+    ! 0
+    > The "People's Lawyer" championed for many things - privacy, protections from business, fair wages - yet one of his most impactful contributions was his idea that the Consitution was a flexible entity. It could be morphed and changed to reflect the current era.
+}
+
+{
+    ? What were the four freedoms Franklin Delano Rooselvelt championed in his speech?
+    % (The freedom to liberty, happiness, health, marriage), (The freedom of speech, religion, from want, from fear), (The freedom to wage war, religion, persecute enemies, liberty), (The freedom of the press, religion, speech, to love whoever you wanted)
+    ! 1
+    > You could speak and practice freely, have good material circumstances and be free of the terror of a weaponized world.
+}
+
+{
+    ? What was Delano Rooselvelt's aim in his speech?
+    % (To convince America to get behind a war effort in Europe), (To convice Americans to practice termperance), (To inspire courage in Americans after the Depression), (To campaign for a new election)
+    ! 0
+    > Numerous forces in America were vehemently against the war effort. Through his charasmatic style he honed over his 'fire side' chats, Rooselvelt tried to make the strongest case possible to get involved in WWII. Europe was our collective buffer against tyranny, if they fell we were next. It does not do to bargain with a dictator, the world deserves freedom (as long as they are white or European). From this point onwards, American identity was on an ideal of absolute freedom and democracy, which would be aggressively enforced after the War, for better or for worse.
+}
+
+{
+    ? How is Martin Luther King Jr. claimed by those who do not necessarily share his views?
+    % (He was a moralistic spiritual leader, many wish to take that power for themselves while say his fight is over), (He was a powerful orator, and many read his books to learn how he spoke), (He was a famous person, and like most with fame, he has been over saturated on the media, numbing people's opinions of him), (The discredit him violently, by saying he was a bad person)
+    ! 0
+    > While many of these answers could be true, many leaders (particularly on the right), wish to take his moralistic high ground from him. Speakers such as Reagan and Trump quote him, often times saying his battle is over and that new problems have arised. This often overlooks the justice yet to be served while being blatant self promotion off the words of a dead man.
+}
+
+{
+    ? Who was Reagan speaking to for his speech?
+    % (The Society of Foreign Affairs Experts), (The Moral Majority), (The Heritage Foundation), (The National Association of Evangelicals)
+    ! 3
+    > One of Reagan's most lasting legacies is his marrying of the GOP and the Evangelical community. Conservatism was Evangelicism after him, the separation of Church and State irreparably changed.
+}
+
+{
+    ? Reagan's "evil empire" speech is often attributed as to part of his success in overcoming the Soviets. Why is that misguided at best and disingenuous at worse?
+    % (The fall of the Soviet Union was a mix of Gorbachev's changing stance and softening of Reagan's tone), The fall of the Soviets was ordained in the Bible, The Reagan Administration was too embroiled in the Iran-Contra Affair to have any effect on the Soviets, The Soviets were unphased by the evil empire retoric
+    ! 0
+    > The fall of the Soviet Union is incredibly nuanced and took numerous lucky breaks to get out of the dangerous cycle of escalation. While visiting Russia, Reagan was asked if he still considered the Soviets an "evil empire", and paraphrased, he stated that was not the case anymore.
+}
+
+{
+    ? Dolores Huerta had a famous saying that was later co-opted by Obama. What was it?
+    % (Viva la causa), (Viva la raza), (Si se puede), (Viva America)
+    ! 2
+    > We can do it! Dolores Huerta was the fiery and charming counterpart to Cezar Chavez. She inspired her fellow strikers and left a lasting impact on left-wing American community efforts.
+}
+
+{
+    ? What event forced Obama's hand in giving a "race speech"?
+    % (He had a Holy vision, in which he knew what had to be done), (His former reverend made comments publicly that complicated his compaign), (His wife convinced him to), (His speech writing team begged him to, as it would be a powerful message)
+    ! 1
+    > Reverend Jeremiah Write, made a comment of how Black Americans should be singing "God damn America" rather than "God Bless America" given the injustices they faced. His connection to Obama made the campaign rather tenuous at a time Obama was seen as an outsider without a proper base yet. This moment thus forced his hand in remedying the situation.
+}
+
+{
+    ? Trump makes many audacious claims, yet one is the most startling. Which claim is this?
+    % (God saved his life to lead America), (No other president had ever faced as much hardship as him), (He was going to reinvigorate the fossil fuel industry the likes we have never seen before), (He was starting an agency to cut back government spending headed by a foreign billionare)
+    ! 0
+    > Unfortunately all of these are claims he made, yet the most shocking and jarring one is the claim that God himself played a role in saving his life. He likens this to Divine Favor, a mandate for change and that Americans' jobs were over; he was in charge now. Luke Kemp in his book Goliath's Curse mentions of an "authoritarian impulse", a desire for a strong man to come and fix the world when its uncomfortable. To this end, Trump a direct mirror at America's insecurities and the end of a cycle of progressivism. What comes next is hard to tell, but America will likely never be the same.
+}
