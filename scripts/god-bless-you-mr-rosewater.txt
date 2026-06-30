@@ -151,7 +151,7 @@ STYLE@
 }
 
 {
-    ? What wartime act haunts Eliot and feeds that reverence?
+    ? What wartime act haunts Eliot and feeds his reverence of fire departments?
     % Killing unarmed firemen, Deserting under fire, Sinking a hospital ship, Looting a cathedral
     ! 0
     > He bayoneted three civilian firefighters, one of them a boy, mistaking them for soldiers.
@@ -228,7 +228,7 @@ STYLE@
 }
 
 {
-    ? Eliot's speech for newborns ends with which command?
+    ? Eliot's speech for Moody's newborns ends with which command?
     % "So it goes", "Be fruitful and multiply", "God bless you", "You've got to be kind"
     ! 3
     > "Hello, babies. Welcome to Earth... God damn it, you've got to be kind."
@@ -256,7 +256,7 @@ STYLE@
 }
 
 {
-    ? What instruction does Eliot give about the children, echoing scripture?
+    ? What instruction does Eliot give about "his" children at the end of the book?
     % "Leave Indiana", "Repay the foundation", "Join the fire brigade", "Be fruitful and multiply"
     ! 3
     > A final gesture of uncritical love: let them all be Rosewaters.
@@ -266,7 +266,7 @@ STYLE@
     ? Eliot's collapse is set off by a vision of what?
     % His father's death, A city in a firestorm, Sylvia's ghost, A flying saucer
     ! 1
-    > He sees the town consumed by fire, an echo of the Dresden horror running through Vonnegut.
+    > He sees the town consumed by fire, an echo of the Dresden horror running through Vonnegut, and true main character of Slaughterhouse-Five.
 }
 
 {
@@ -274,4 +274,11 @@ STYLE@
     % Player Piano, Breakfast of Champions, Slaughterhouse-Five, Cat's Cradle
     ! 2
     > In the veterans' hospital he hands Billy Pilgrim his first Kilgore Trout paperback.
+}
+
+{
+    ? Fred learns an important fact about his ancestry while trying to end his life. What was this fact?
+    % His family is royalty, He is related to the Senator, He is the rightful heir of the fortune, His grandfather was a sailor
+    ! 0
+    > He yearns to learn for more but the manuscript his father wrote was eaten out by termites.
 }
