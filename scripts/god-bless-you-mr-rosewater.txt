@@ -1,0 +1,277 @@
+$TITLE God Bless You, Mr. Rosewater
+$AUTHOR Kurt Vonnegut
+
+@STYLE
+@import url('https://fonts.googleapis.com/css2?family=Saira+Stencil+One&family=Bitter:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&display=swap');
+:root {
+--qe-font-serif: 'Bitter', Georgia, serif;
+--qe-font-body: 'Bitter', Georgia, serif;
+--qe-font-label: 'DM Mono', monospace;
+--qe-surface: rgba(199,154,62,0.04);
+--qe-border: rgba(199,154,62,0.16);
+--qe-border-hi: rgba(199,154,62,0.46);
+--qe-text: #ddd0bb;
+--qe-text-muted: #6f6450;
+--qe-accent: #c79a3e;
+--qe-accent-lo: rgba(199,154,62,0.08);
+--qe-btn-bg: rgba(199,154,62,0.06);
+--qe-btn-text: #ddd0bb;
+--qe-btn-hover-bg: rgba(199,154,62,0.20);
+--qe-btn-hover-text: #f1e8d6;
+--qe-correct: #6fae73;
+--qe-correct-bg: rgba(111,174,115,0.10);
+--qe-wrong: #d2402e;
+--qe-wrong-bg: rgba(210,64,46,0.10);
+--qe-hero-bg: transparent;
+--qe-hero-text: #f1e8d6;
+--qe-score-color: #c79a3e;
+--qe-denom-color: #6f6450;
+--qe-bd-bg: rgba(199,154,62,0.025);
+--qe-bd-border: rgba(199,154,62,0.10);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+background-color: #0d0b09;
+background-image:
+radial-gradient(ellipse at 50% -10%, rgba(210,64,46,0.11) 0%, transparent 50%),
+radial-gradient(ellipse at 90% 102%, rgba(111,174,115,0.055) 0%, transparent 45%),
+radial-gradient(ellipse at 8% 30%, rgba(199,154,62,0.04) 0%, transparent 40%),
+repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(199,154,62,0.012) 3px, rgba(199,154,62,0.012) 4px);
+color: #ddd0bb;
+font-family: 'Bitter', Georgia, serif;
+font-size: 1.1rem;
+line-height: 1.72;
+min-height: 100vh;
+position: relative;
+}
+body::before {
+content: '';
+position: fixed;
+inset: 0;
+background-image:
+repeating-linear-gradient(45deg, transparent, transparent 7px, rgba(199,154,62,0.013) 7px, rgba(199,154,62,0.013) 8px),
+repeating-linear-gradient(-45deg, transparent, transparent 7px, rgba(199,154,62,0.013) 7px, rgba(199,154,62,0.013) 8px);
+pointer-events: none;
+z-index: 0;
+}
+body::after {
+content: '';
+position: fixed;
+top: 0; left: 0; right: 0;
+height: 3px;
+background: linear-gradient(to right, transparent, rgba(210,64,46,0.6), rgba(255,160,80,0.9), rgba(210,64,46,0.6), transparent);
+z-index: 100;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 76px 28px 96px; position: relative; z-index: 1; }
+header { margin-bottom: 60px; padding-bottom: 32px; border-bottom: 1px solid rgba(199,154,62,0.22); position: relative; }
+header::after {
+content: '';
+position: absolute;
+bottom: -1px; left: 0;
+width: 150px; height: 2px;
+background: linear-gradient(to right, #d2402e, transparent);
+}
+h1 {
+font-family: 'Saira Stencil One', Impact, sans-serif;
+font-size: clamp(2rem, 6vw, 3.3rem);
+font-weight: 400;
+letter-spacing: 0.005em;
+line-height: 1.08;
+margin-bottom: 14px;
+color: #f1e8d6;
+text-transform: uppercase;
+}
+.subtitle {
+font-size: 0.64rem;
+color: #6f6450;
+letter-spacing: 0.3em;
+text-transform: uppercase;
+margin-top: 14px;
+font-family: 'DM Mono', monospace;
+font-weight: 400;
+}
+.subtitle::before { content: '// rosewater foundation: how can we help you? // '; color: #c79a3e; }
+STYLE@
+
+{
+    ? How does the novel announce its true subject in the first sentence?
+    % ("Call me Eliot, a fireman by temperament"), (A sum of money is a leading character in this tale about people), ("All this happened, more or less"), "It is a truth that fortunes ruin sons"
+    ! 1
+    > "...just as a sum of honey might properly be a leading character in a tale about bees." The Rosewater fortune is the real protagonist.
+}
+
+{
+    ? What is the book's subtitle?
+    % "A Hoosier's Lament", "The Children's Crusade", ("Or, How to Be Kind"), (Pearls Before Swine)
+    ! 3
+    > The proverb frames the rich man's view of charity flung at an undeserving poor.
+}
+
+{
+    ? What position does Eliot Rosewater hold?
+    % President of the Rosewater Foundation, County coroner, Optometrist in Ilium, Insurance adjuster
+    ! 0
+    > He presides over one of the largest private fortunes in America.
+}
+
+{
+    ? Why was the Rosewater Foundation set up in the first place?
+    % To honor the war dead, To fund a museum, (To dodge taxes and shield the fortune), To buy a Senate seat
+    ! 2
+    > It is a tax shelter that Eliot quietly tries to turn into an instrument of mercy.
+}
+
+{
+    ? Who is Eliot's father?
+    % A US senator, A volunteer fire chief, A science-fiction writer, A country doctor
+    ! 0
+    > Senator Lister Ames Rosewater, a hard-right Republican who despises the poor.
+}
+
+{
+    ? Where does Eliot abandon high society to set up his office?
+    % (Pisquontuit, Rhode Island), (Ilium, New York), (Rosewater, Indiana), (Hyannis, Massachusetts)
+    ! 2
+    > He moves to the dingy county that bears the family name and lives among its castoffs.
+}
+
+{
+    ? What does Eliot mainly offer the people who phone his office?
+    % Stock tips, Factory jobs, Free legal defense, Love and small sums of money
+    ! 3
+    > He dispenses aspirin, counsel, and a few dollars to anyone who calls.
+}
+
+{
+    ? Which humble institution does Eliot revere above all others?
+    % The stock exchange, Volunteer fire departments, The Rotary Club, The Marine Corps
+    ! 1
+    > He sees firefighting as one of the few truly unselfish things people do for strangers.
+}
+
+{
+    ? What wartime act haunts Eliot and feeds that reverence?
+    % Killing unarmed firemen, Deserting under fire, Sinking a hospital ship, Looting a cathedral
+    ! 0
+    > He bayoneted three civilian firefighters, one of them a boy, mistaking them for soldiers.
+}
+
+{
+    ? What is the name of Eliot's wife?
+    % Caroline, Diana, Valencia, Sylvia
+    ! 3
+    > Sylvia loves Eliot but cannot survive his mission among the wretched.
+}
+
+{
+    ? The book coins "samaritrophia" for Sylvia's breakdown. What is it?
+    % Compulsive generosity, Fear of money, Indifference to others' suffering, Loss of all memory
+    ! 2
+    > A defensive shutdown of the conscience, "hysterical indifference to the troubles of those less fortunate."
+}
+
+{
+    ? Who is the young lawyer scheming against Eliot?
+    % Norman Mushari, Charley Warmergran, Bunny Weeks, Kilgore Trout
+    ! 0
+    > A junior attorney at the family firm who smells a fortune to be redirected.
+}
+
+{
+    ? What is Mushari's plan?
+    % To marry Sylvia, To burn the foundation's records, To prove Eliot insane, To blackmail the senator
+    ! 2
+    > If Eliot is declared mad, the money jumps to a distant branch of the family.
+}
+
+{
+    ? Who would inherit the fortune if Eliot were removed?
+    % Norman Mushari, The senator, Diana Moon Glampers, Fred Rosewater
+    ! 3
+    > A poor, faraway cousin whose claim Mushari hopes to ride to riches.
+}
+
+{
+    ? How does Fred Rosewater scrape by in Pisquontuit?
+    % A senator, A fisherman, An insurance salesman, A restaurateur
+    ! 2
+    > A defeated door-to-door salesman, the shabby mirror of his wealthy namesake.
+}
+
+{
+    ? Who is Diana Moon Glampers?
+    % Eliot's secretary, A lonely client who calls Eliot, Fred's social-climbing wife, A heroine in Trout's fiction
+    ! 1
+    > A frightened cleaning woman who phones about thunderstorms; the name returns as the Handicapper General in "Harrison Bergeron."
+}
+
+{
+    ? Which writer does Eliot idolize and collect?
+    % Bokonon, Howard Campbell, Kilgore Trout, Kurt Vonnegut
+    ! 2
+    > Eliot calls Trout the greatest prophet alive and hoards his pulp paperbacks.
+}
+
+{
+    ? Why does the senator finally summon Kilgore Trout?
+    % To explain Eliot's behavior respectably, To write a campaign book, To buy the foundation, To court Sylvia
+    ! 0
+    > He needs a credible voice to make Eliot's charity sound sane rather than mad.
+}
+
+{
+    ? Trout says Eliot's experiment confronts which question?
+    % How to win elections, How to love people with no use, How to dodge taxes, How to end war
+    ! 1
+    > He names it the great coming problem of an automated world: loving the useless.
+}
+
+{
+    ? Eliot's speech for newborns ends with which command?
+    % "So it goes", "Be fruitful and multiply", "God bless you", "You've got to be kind"
+    ! 3
+    > "Hello, babies. Welcome to Earth... God damn it, you've got to be kind."
+}
+
+{
+    ? In Pisquontuit, restaurateur Bunny Weeks spies through a telescope on whom?
+    % (Harry Pena, a fisherman), Fred Rosewater, Norman Mushari, Senator Rosewater
+    ! 0
+    > Pena's hard, real labor at sea rebukes the idle gentry watching from the cafe.
+}
+
+{
+    ? How was the Rosewater fortune originally made?
+    % A lottery windfall, Civil War profiteering, An Indiana oil strike, A railroad swindle
+    ! 1
+    > An ancestor bought his way out of the fighting and got rich supplying it.
+}
+
+{
+    ? How does Eliot finally defeat Mushari's claim?
+    % He claims all the children as his heirs, He has himself declared sane, He burns the foundation down, He hands the money to Fred
+    ! 0
+    > Acknowledging every child said to be his, he creates heirs and saves the fortune from Mushari.
+}
+
+{
+    ? What instruction does Eliot give about the children, echoing scripture?
+    % "Leave Indiana", "Repay the foundation", "Join the fire brigade", "Be fruitful and multiply"
+    ! 3
+    > A final gesture of uncritical love: let them all be Rosewaters.
+}
+
+{
+    ? Eliot's collapse is set off by a vision of what?
+    % His father's death, A city in a firestorm, Sylvia's ghost, A flying saucer
+    ! 1
+    > He sees the town consumed by fire, an echo of the Dresden horror running through Vonnegut.
+}
+
+{
+    ? Eliot reappears in which other Vonnegut novel, steering a patient toward Trout?
+    % Player Piano, Breakfast of Champions, Slaughterhouse-Five, Cat's Cradle
+    ! 2
+    > In the veterans' hospital he hands Billy Pilgrim his first Kilgore Trout paperback.
+}

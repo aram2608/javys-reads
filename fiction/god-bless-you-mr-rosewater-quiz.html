@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God Bless You, Mr. Rosewater</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Saira+Stencil+One&family=Bitter:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&display=swap');:root {--qe-font-serif: 'Bitter', Georgia, serif;--qe-font-body: 'Bitter', Georgia, serif;--qe-font-label: 'DM Mono', monospace;--qe-surface: rgba(199,154,62,0.04);--qe-border: rgba(199,154,62,0.16);--qe-border-hi: rgba(199,154,62,0.46);--qe-text: #ddd0bb;--qe-text-muted: #6f6450;--qe-accent: #c79a3e;--qe-accent-lo: rgba(199,154,62,0.08);--qe-btn-bg: rgba(199,154,62,0.06);--qe-btn-text: #ddd0bb;--qe-btn-hover-bg: rgba(199,154,62,0.20);--qe-btn-hover-text: #f1e8d6;--qe-correct: #6fae73;--qe-correct-bg: rgba(111,174,115,0.10);--qe-wrong: #d2402e;--qe-wrong-bg: rgba(210,64,46,0.10);--qe-hero-bg: transparent;--qe-hero-text: #f1e8d6;--qe-score-color: #c79a3e;--qe-denom-color: #6f6450;--qe-bd-bg: rgba(199,154,62,0.025);--qe-bd-border: rgba(199,154,62,0.10);}* { margin: 0; padding: 0; box-sizing: border-box; }html { scroll-behavior: smooth; }body {background-color: #0d0b09;background-image:radial-gradient(ellipse at 50% -10%, rgba(210,64,46,0.11) 0%, transparent 50%),radial-gradient(ellipse at 90% 102%, rgba(111,174,115,0.055) 0%, transparent 45%),radial-gradient(ellipse at 8% 30%, rgba(199,154,62,0.04) 0%, transparent 40%),repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(199,154,62,0.012) 3px, rgba(199,154,62,0.012) 4px);color: #ddd0bb;font-family: 'Bitter', Georgia, serif;font-size: 1.1rem;line-height: 1.72;min-height: 100vh;position: relative;}body::before {content: '';position: fixed;inset: 0;background-image:repeating-linear-gradient(45deg, transparent, transparent 7px, rgba(199,154,62,0.013) 7px, rgba(199,154,62,0.013) 8px),repeating-linear-gradient(-45deg, transparent, transparent 7px, rgba(199,154,62,0.013) 7px, rgba(199,154,62,0.013) 8px);pointer-events: none;z-index: 0;}body::after {content: '';position: fixed;top: 0; left: 0; right: 0;height: 3px;background: linear-gradient(to right, transparent, rgba(210,64,46,0.6), rgba(255,160,80,0.9), rgba(210,64,46,0.6), transparent);z-index: 100;}.container { max-width: 720px; margin: 0 auto; padding: 76px 28px 96px; position: relative; z-index: 1; }header { margin-bottom: 60px; padding-bottom: 32px; border-bottom: 1px solid rgba(199,154,62,0.22); position: relative; }header::after {content: '';position: absolute;bottom: -1px; left: 0;width: 150px; height: 2px;background: linear-gradient(to right, #d2402e, transparent);}h1 {font-family: 'Saira Stencil One', Impact, sans-serif;font-size: clamp(2rem, 6vw, 3.3rem);font-weight: 400;letter-spacing: 0.005em;line-height: 1.08;margin-bottom: 14px;color: #f1e8d6;text-transform: uppercase;}.subtitle {font-size: 0.64rem;color: #6f6450;letter-spacing: 0.3em;text-transform: uppercase;margin-top: 14px;font-family: 'DM Mono', monospace;font-weight: 400;}.subtitle::before { content: '// rosewater foundation: how can we help you? // '; color: #c79a3e; }
+    </style>
+    <link rel="stylesheet" href="../quiz-engine.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>God Bless You, Mr. Rosewater</h1>
+            <div class="subtitle">Kurt Vonnegut</div>
+        </header>
+        <div id="quiz-root"></div>
+    </div>
+
+    <script>
+        window.QUIZ = {
+            questions: [
+    {
+        "text": "How does the novel announce its true subject in the first sentence?",
+        "opts": [
+            "\"Call me Eliot, a fireman by temperament\"",
+            "A sum of money is a leading character in this tale about people",
+            "\"All this happened, more or less\"",
+            "\"It is a truth that fortunes ruin sons\""
+        ],
+        "ans": 1,
+        "exp": "\"...just as a sum of honey might properly be a leading character in a tale about bees.\" The Rosewater fortune is the real protagonist."
+    },
+    {
+        "text": "What is the book's subtitle?",
+        "opts": [
+            "\"A Hoosier's Lament\"",
+            "\"The Children's Crusade\"",
+            "\"Or, How to Be Kind\"",
+            "Pearls Before Swine"
+        ],
+        "ans": 3,
+        "exp": "The proverb frames the rich man's view of charity flung at an undeserving poor."
+    },
+    {
+        "text": "What position does Eliot Rosewater hold?",
+        "opts": [
+            "President of the Rosewater Foundation",
+            "County coroner",
+            "Optometrist in Ilium",
+            "Insurance adjuster"
+        ],
+        "ans": 0,
+        "exp": "He presides over one of the largest private fortunes in America."
+    },
+    {
+        "text": "Why was the Rosewater Foundation set up in the first place?",
+        "opts": [
+            "To honor the war dead",
+            "To fund a museum",
+            "To dodge taxes and shield the fortune",
+            "To buy a Senate seat"
+        ],
+        "ans": 2,
+        "exp": "It is a tax shelter that Eliot quietly tries to turn into an instrument of mercy."
+    },
+    {
+        "text": "Who is Eliot's father?",
+        "opts": [
+            "A US senator",
+            "A volunteer fire chief",
+            "A science-fiction writer",
+            "A country doctor"
+        ],
+        "ans": 0,
+        "exp": "Senator Lister Ames Rosewater, a hard-right Republican who despises the poor."
+    },
+    {
+        "text": "Where does Eliot abandon high society to set up his office?",
+        "opts": [
+            "Pisquontuit, Rhode Island",
+            "Ilium, New York",
+            "Rosewater, Indiana",
+            "Hyannis, Massachusetts"
+        ],
+        "ans": 2,
+        "exp": "He moves to the dingy county that bears the family name and lives among its castoffs."
+    },
+    {
+        "text": "What does Eliot mainly offer the people who phone his office?",
+        "opts": [
+            "Stock tips",
+            "Factory jobs",
+            "Free legal defense",
+            "Love and small sums of money"
+        ],
+        "ans": 3,
+        "exp": "He dispenses aspirin, counsel, and a few dollars to anyone who calls."
+    },
+    {
+        "text": "Which humble institution does Eliot revere above all others?",
+        "opts": [
+            "The stock exchange",
+            "Volunteer fire departments",
+            "The Rotary Club",
+            "The Marine Corps"
+        ],
+        "ans": 1,
+        "exp": "He sees firefighting as one of the few truly unselfish things people do for strangers."
+    },
+    {
+        "text": "What wartime act haunts Eliot and feeds that reverence?",
+        "opts": [
+            "Killing unarmed firemen",
+            "Deserting under fire",
+            "Sinking a hospital ship",
+            "Looting a cathedral"
+        ],
+        "ans": 0,
+        "exp": "He bayoneted three civilian firefighters, one of them a boy, mistaking them for soldiers."
+    },
+    {
+        "text": "What is the name of Eliot's wife?",
+        "opts": [
+            "Caroline",
+            "Diana",
+            "Valencia",
+            "Sylvia"
+        ],
+        "ans": 3,
+        "exp": "Sylvia loves Eliot but cannot survive his mission among the wretched."
+    },
+    {
+        "text": "The book coins \"samaritrophia\" for Sylvia's breakdown. What is it?",
+        "opts": [
+            "Compulsive generosity",
+            "Fear of money",
+            "Indifference to others' suffering",
+            "Loss of all memory"
+        ],
+        "ans": 2,
+        "exp": "A defensive shutdown of the conscience, \"hysterical indifference to the troubles of those less fortunate.\""
+    },
+    {
+        "text": "Who is the young lawyer scheming against Eliot?",
+        "opts": [
+            "Norman Mushari",
+            "Charley Warmergran",
+            "Bunny Weeks",
+            "Kilgore Trout"
+        ],
+        "ans": 0,
+        "exp": "A junior attorney at the family firm who smells a fortune to be redirected."
+    },
+    {
+        "text": "What is Mushari's plan?",
+        "opts": [
+            "To marry Sylvia",
+            "To burn the foundation's records",
+            "To prove Eliot insane",
+            "To blackmail the senator"
+        ],
+        "ans": 2,
+        "exp": "If Eliot is declared mad, the money jumps to a distant branch of the family."
+    },
+    {
+        "text": "Who would inherit the fortune if Eliot were removed?",
+        "opts": [
+            "Norman Mushari",
+            "The senator",
+            "Diana Moon Glampers",
+            "Fred Rosewater"
+        ],
+        "ans": 3,
+        "exp": "A poor, faraway cousin whose claim Mushari hopes to ride to riches."
+    },
+    {
+        "text": "How does Fred Rosewater scrape by in Pisquontuit?",
+        "opts": [
+            "A senator",
+            "A fisherman",
+            "An insurance salesman",
+            "A restaurateur"
+        ],
+        "ans": 2,
+        "exp": "A defeated door-to-door salesman, the shabby mirror of his wealthy namesake."
+    },
+    {
+        "text": "Who is Diana Moon Glampers?",
+        "opts": [
+            "Eliot's secretary",
+            "A lonely client who calls Eliot",
+            "Fred's social-climbing wife",
+            "A heroine in Trout's fiction"
+        ],
+        "ans": 1,
+        "exp": "A frightened cleaning woman who phones about thunderstorms; the name returns as the Handicapper General in \"Harrison Bergeron.\""
+    },
+    {
+        "text": "Which writer does Eliot idolize and collect?",
+        "opts": [
+            "Bokonon",
+            "Howard Campbell",
+            "Kilgore Trout",
+            "Kurt Vonnegut"
+        ],
+        "ans": 2,
+        "exp": "Eliot calls Trout the greatest prophet alive and hoards his pulp paperbacks."
+    },
+    {
+        "text": "Why does the senator finally summon Kilgore Trout?",
+        "opts": [
+            "To explain Eliot's behavior respectably",
+            "To write a campaign book",
+            "To buy the foundation",
+            "To court Sylvia"
+        ],
+        "ans": 0,
+        "exp": "He needs a credible voice to make Eliot's charity sound sane rather than mad."
+    },
+    {
+        "text": "Trout says Eliot's experiment confronts which question?",
+        "opts": [
+            "How to win elections",
+            "How to love people with no use",
+            "How to dodge taxes",
+            "How to end war"
+        ],
+        "ans": 1,
+        "exp": "He names it the great coming problem of an automated world: loving the useless."
+    },
+    {
+        "text": "Eliot's speech for newborns ends with which command?",
+        "opts": [
+            "\"So it goes\"",
+            "\"Be fruitful and multiply\"",
+            "\"God bless you\"",
+            "\"You've got to be kind\""
+        ],
+        "ans": 3,
+        "exp": "\"Hello, babies. Welcome to Earth... God damn it, you've got to be kind.\""
+    },
+    {
+        "text": "In Pisquontuit, restaurateur Bunny Weeks spies through a telescope on whom?",
+        "opts": [
+            "Harry Pena, a fisherman",
+            "Fred Rosewater",
+            "Norman Mushari",
+            "Senator Rosewater"
+        ],
+        "ans": 0,
+        "exp": "Pena's hard, real labor at sea rebukes the idle gentry watching from the cafe."
+    },
+    {
+        "text": "How was the Rosewater fortune originally made?",
+        "opts": [
+            "A lottery windfall",
+            "Civil War profiteering",
+            "An Indiana oil strike",
+            "A railroad swindle"
+        ],
+        "ans": 1,
+        "exp": "An ancestor bought his way out of the fighting and got rich supplying it."
+    },
+    {
+        "text": "How does Eliot finally defeat Mushari's claim?",
+        "opts": [
+            "He claims all the children as his heirs",
+            "He has himself declared sane",
+            "He burns the foundation down",
+            "He hands the money to Fred"
+        ],
+        "ans": 0,
+        "exp": "Acknowledging every child said to be his, he creates heirs and saves the fortune from Mushari."
+    },
+    {
+        "text": "What instruction does Eliot give about the children, echoing scripture?",
+        "opts": [
+            "\"Leave Indiana\"",
+            "\"Repay the foundation\"",
+            "\"Join the fire brigade\"",
+            "\"Be fruitful and multiply\""
+        ],
+        "ans": 3,
+        "exp": "A final gesture of uncritical love: let them all be Rosewaters."
+    },
+    {
+        "text": "Eliot's collapse is set off by a vision of what?",
+        "opts": [
+            "His father's death",
+            "A city in a firestorm",
+            "Sylvia's ghost",
+            "A flying saucer"
+        ],
+        "ans": 1,
+        "exp": "He sees the town consumed by fire, an echo of the Dresden horror running through Vonnegut."
+    },
+    {
+        "text": "Eliot reappears in which other Vonnegut novel, steering a patient toward Trout?",
+        "opts": [
+            "Player Piano",
+            "Breakfast of Champions",
+            "Slaughterhouse-Five",
+            "Cat's Cradle"
+        ],
+        "ans": 2,
+        "exp": "In the veterans' hospital he hands Billy Pilgrim his first Kilgore Trout paperback."
+    }
+],
+            verdicts: [
+                { min: 0.8, v: "Excellent",  n: "Outstanding recall." },
+                { min: 0.6, v: "Good",       n: "Solid understanding." },
+                { min: 0.4, v: "Fair",       n: "Worth revisiting." },
+                { min: 0.0, v: "Try again",  n: "Time for a reread." }
+            ]
+        };
+    </script>
+    <script src="../components.js"></script>
+    <script src="../quiz-engine.js"></script>
+</body>
+</html>
